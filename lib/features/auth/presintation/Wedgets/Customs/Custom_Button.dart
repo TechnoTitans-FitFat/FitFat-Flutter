@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
+// ignore: must_be_immutable
 class CustomBottom extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   CustomBottom({this.ontap, this.text});
 
   VoidCallback? ontap;
@@ -17,7 +20,7 @@ class CustomBottom extends StatelessWidget {
           decoration: BoxDecoration(
               color: Colors.red, borderRadius: BorderRadius.circular(8)),
           child: Center(
-            child: Text(text!, style: TextStyle(color: Colors.white)),
+            child: Text(text!, style: const TextStyle(color: Colors.white)),
           ),
         ),
       ),
