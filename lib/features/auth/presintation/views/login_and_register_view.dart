@@ -39,17 +39,23 @@ class LoginSignUp extends StatelessWidget {
                       const SizedBox(
                         height: 32,
                       ),
-                      const Login(),
+                       Login(),
                       const SizedBox(
                         height: 32,
                       ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Divider(color: Colors.grey, height: 8),
-                          Text('Or signUp with:'),
-                          Divider(color: Colors.grey, height: 8),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(child: Divider(color: Colors.grey, height: 8),width: 100,),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Or signUp with'),
+                            ),
+                            Container(child: Divider(color: Colors.grey, height: 8),width: 100,),
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 16,

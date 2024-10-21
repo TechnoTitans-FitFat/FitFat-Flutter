@@ -1,30 +1,31 @@
-import 'package:fitfat/core/helper/show_snack_bar.dart';
-import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fitfat/features/auth/presintation/wedgets/customs/custom_button.dart';
-import 'package:fitfat/features/auth/presintation/wedgets/customs/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
+import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_Button.dart';
+import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_TextField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Login extends StatelessWidget {
-  const Login({super.key});
+  Login({super.key});
+
+  String? email, password;
+
+  GlobalKey<FormState> formKey = GlobalKey();
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    String? email, password;
-
-    GlobalKey<FormState> formKey = GlobalKey();
-
-    bool isLoading = false;
-    return BlocListener<AuthBloc, authState>(
+    return BlocListener<LoginCubit, LoginStates>(
       listener: (BuildContext context, state) {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSucess) {
-          showSnackBar(context, 'Success');
+          ShowSnackBar(context, 'Success');
           isLoading = false;
         } else if (state is LoginFalier) {
-          showSnackBar(context, state.errorMassage);
+          ShowSnackBar(context, state.errorMassage);
           isLoading = false;
         }
       },
@@ -46,7 +47,7 @@ class Login extends StatelessWidget {
                       hint: 'Email',
                       icon: Icons.email_outlined,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 16,
                     ),
                     CustomTextField(
@@ -56,18 +57,17 @@ class Login extends StatelessWidget {
                       hint: 'Password',
                       icon: Icons.lock_outline,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 16,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 32,
                     ),
                     CustomBottom(
                       text: 'Login',
                       ontap: () async {
                         if (formKey.currentState!.validate()) {
-                          BlocProvider.of<AuthBloc>(context).add(
-                              LoginEvent(email: email!, password: password!));
+                            BlocProvider.of<LoginCubit>(context).LoginUser(email: email!, password: password!);
                         }
                       },
                     ),
@@ -79,5 +79,10 @@ class Login extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void ShowSnackBar(BuildContext context, massage) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(massage)));
   }
 }

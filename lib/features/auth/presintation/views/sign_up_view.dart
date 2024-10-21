@@ -1,7 +1,7 @@
 import 'package:fitfat/core/helper/show_snack_bar.dart';
-import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/auth_bloc.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
+import 'package:fitfat/features/auth/presintation/Wedgets/Customs/custom_textField.dart';
 import 'package:fitfat/features/auth/presintation/wedgets/customs/custom_button.dart';
-import 'package:fitfat/features/auth/presintation/wedgets/customs/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,19 +17,19 @@ class SignUp extends StatelessWidget {
     GlobalKey<FormState> formKey = GlobalKey();
 
     bool isLoading = false;
-    return BlocListener<AuthBloc, authState>(
+    return BlocConsumer<SignUpCubit, SignUpStates>(
       listener: (BuildContext context, state) {
-        if (state is RegisterLoading) {
+        if (state is SignUpLoading) {
           isLoading = true;
-        } else if (state is RegisterSucess) {
+        } else if (state is SignUpSucess) {
           showSnackBar(context, 'Success');
           isLoading = false;
-        } else if (state is RegisterFalier) {
+        } else if (state is SignUpFalier) {
           showSnackBar(context, state.errorMassage);
           isLoading = false;
         }
       },
-      child: ModalProgressHUD(
+      builder: (BuildContext context, SignUpStates state)=>ModalProgressHUD(
         inAsyncCall: isLoading,
         child: Scaffold(
           body: Column(
@@ -81,9 +81,8 @@ class SignUp extends StatelessWidget {
                         ontap: () async {
                           if (formKey.currentState!.validate()) {
                             final siginUpEvent =
-                                BlocProvider.of<AuthBloc>(context);
-                            siginUpEvent.add(RegisterEvent(
-                                email: email!, password: password!));
+                                BlocProvider.of<SignUpCubit>(context);
+                            siginUpEvent.SignupUser(email: email!, password: password!);
                           }
                         },
                       ),
