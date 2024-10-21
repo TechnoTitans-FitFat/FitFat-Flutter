@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -53,7 +52,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   OutlineInputBorder buildBorder() {
     return OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey),
+        borderSide: const BorderSide(color: Colors.grey),
         borderRadius: BorderRadius.circular(8));
   }
 }

@@ -1,14 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
-import 'package:fitfat/features/auth/presintation/Views/login_and_rigister_view.dart';
+import 'package:fitfat/features/splash/presentaion/views/splash.dart';
 import 'package:fitfat/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-void main() async {
+
+void main()  {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
@@ -29,9 +31,9 @@ class MyApp extends StatelessWidget {
           create: (context) => SignUpCubit(),
         )
       ],
-      child: MaterialApp(
+      child: const GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Login_SignUp(),
+        home: SplashPage(),
       ),
     );
   }

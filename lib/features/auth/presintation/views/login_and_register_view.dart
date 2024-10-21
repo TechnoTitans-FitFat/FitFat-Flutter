@@ -1,18 +1,17 @@
 import 'package:fitfat/features/auth/presintation/Views/login_view.dart';
-import 'package:fitfat/features/auth/presintation/Wedgets/Customs/custom_animatedToggle.dart';
+import 'package:fitfat/features/auth/presintation/wedgets/customs/custom_animated_toggle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class Login_SignUp extends StatelessWidget {
-  Login_SignUp({super.key});
-
-  GlobalKey<FormState> formKey = GlobalKey();
-
-  bool isLoading = false;
+class LoginSignUp extends StatelessWidget {
+  const LoginSignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formKey = GlobalKey();
+
+    bool isLoading = false;
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: Scaffold(
@@ -20,12 +19,11 @@ class Login_SignUp extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                  child: Image(
+              const Image(
                 image: AssetImage('imges/img.jpg'),
                 width: double.infinity,
                 fit: BoxFit.cover,
-              )),
+              ),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
@@ -34,15 +32,15 @@ class Login_SignUp extends StatelessWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
-                      AnimatedToggle(),
-                      SizedBox(
+                      const AnimatedToggle(),
+                      const SizedBox(
                         height: 32,
                       ),
-                      Login(),
-                      SizedBox(
+                       Login(),
+                      const SizedBox(
                         height: 32,
                       ),
                       Padding(
@@ -59,7 +57,7 @@ class Login_SignUp extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       Row(
@@ -67,15 +65,22 @@ class Login_SignUp extends StatelessWidget {
                         children: [
                           IconButton(
                               onPressed: () {},
-                              icon: Container(width:25,child: CircleAvatar(child: Image(image: AssetImage('imges/google.png'),),backgroundColor: Colors.white,))),
+                              icon: const SizedBox(
+                                  width: 25,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    child: Image(
+                                      image: AssetImage('imges/google.png'),
+                                    ),
+                                  ))),
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.facebook,
+                            icon: const Icon(Icons.facebook,
                                 color: Colors.blueAccent, size: 30),
                           ),
                           IconButton(
                               onPressed: () {},
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.apple_outlined,
                                 size: 40,
                               ))
