@@ -1,5 +1,7 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'auth_event.dart';
 
@@ -17,8 +19,10 @@ class AuthBloc extends Bloc<AuthEvent, authState> {
       if (event is LoginEvent) {
         emit(LoginLoading());
         try {
+          // ignore: unused_local_variable
           UserCredential users = await FirebaseAuth.instance.signInWithEmailAndPassword(
               email: event.email, password: event.password);
+              await saveLoginStatus(true);
           emit(LoginSucess() );
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
@@ -33,8 +37,10 @@ class AuthBloc extends Bloc<AuthEvent, authState> {
       else if (event is RegisterEvent) {
         emit(RegisterLoading());
         try {
+          // ignore: unused_local_variable
           UserCredential users = await FirebaseAuth.instance.createUserWithEmailAndPassword(
               email: event.email, password: event.password);
+              await saveLoginStatus(true);
           emit(RegisterSucess());
         } on FirebaseAuthException catch (e) {
           if (e.code == 'weak-password') {
@@ -49,4 +55,9 @@ class AuthBloc extends Bloc<AuthEvent, authState> {
       }
     });
   }
+  Future<void> saveLoginStatus(bool isLoggedIn) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', isLoggedIn);
+  }
 }
+
