@@ -42,6 +42,8 @@ dependencies:
   modal_progress_hud_nsn: ^0.5.1
   font_awesome_flutter: ^10.7.0
   firebase_core: ^3.6.0
+  shared_preferences: ^2.3.2
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +71,7 @@ flutter:
   assets:
     - imges/img.jpg
     - imges/google.png
+    - imges/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
