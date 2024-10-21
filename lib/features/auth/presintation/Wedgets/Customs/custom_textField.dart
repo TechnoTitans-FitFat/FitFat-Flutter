@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomField extends StatefulWidget {
-  CustomField(
+class CustomTextField extends StatefulWidget {
+  CustomTextField(
       {this.hint, this.icon, this.onchange, this.sufIcon, this.sufIconNot});
 
   IconData? icon;
@@ -12,10 +12,10 @@ class CustomField extends StatefulWidget {
   Function(String)? onchange;
 
   @override
-  State<CustomField> createState() => _CustomFieldState();
+  State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
-class _CustomFieldState extends State<CustomField> {
+class _CustomTextFieldState extends State<CustomTextField> {
   bool passwordVisible = false;
 
   @override

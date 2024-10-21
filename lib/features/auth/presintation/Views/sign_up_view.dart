@@ -1,15 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_Button.dart';
-import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_TextField.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
+import 'package:fitfat/features/auth/presintation/Wedgets/Customs/custom_button.dart';
+import 'package:fitfat/features/auth/presintation/Wedgets/Customs/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class Login extends StatelessWidget {
-  Login({super.key});
-
+class SignUp extends StatelessWidget {
   String? email, password;
 
   GlobalKey<FormState> formKey = GlobalKey();
@@ -18,19 +15,19 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, authState>(
-      listener: (BuildContext context, state) {
-        if (state is LoginLoading) {
+    return BlocConsumer<SignUpCubit, SignUpStates>(
+      listener: (context, state) {
+        if (state is SignUpLoading) {
           isLoading = true;
-        } else if (state is LoginSucess) {
+        } else if (state is SignUpSucess) {
           ShowSnackBar(context, 'Success');
           isLoading = false;
-        } else if (state is LoginFalier) {
+        } else if (state is SignUpFalier) {
           ShowSnackBar(context, state.errorMassage);
           isLoading = false;
         }
       },
-      child: ModalProgressHUD(
+      builder: (BuildContext context, SignUpStates state)=>ModalProgressHUD(
         inAsyncCall: isLoading,
         child: Column(
           children: [
@@ -41,6 +38,13 @@ class Login extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: [
+                    CustomTextField(
+                      hint: 'Name',
+                      icon: FontAwesomeIcons.user,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
                     CustomTextField(
                       onchange: (data) {
                         email = data;
@@ -57,20 +61,28 @@ class Login extends StatelessWidget {
                       },
                       hint: 'Password',
                       icon: Icons.lock_outline,
+                      sufIcon: Icons.visibility,
+                      sufIconNot: Icons.visibility_off,
                     ),
                     SizedBox(
                       height: 16,
+                    ),
+                    CustomTextField(
+                      hint: 'Confirm Password',
+                      icon: Icons.lock_outline,
+                      sufIcon: Icons.visibility,
+                      sufIconNot: Icons.visibility_off,
                     ),
                     SizedBox(
                       height: 32,
                     ),
                     CustomBottom(
-                      text: 'Login',
+                      text: 'Sign Up',
                       ontap: () async {
                         if (formKey.currentState!.validate()) {
-                            BlocProvider.of<AuthBloc>(context).add(
-                                LoginEvent(
-                                    email: email!, password: password!));
+                          final SiginUpEvent =
+                              BlocProvider.of<SignUpCubit>(context);
+                          SiginUpEvent.SignupUser(email: email!, password: password!);
                         }
                       },
                     ),

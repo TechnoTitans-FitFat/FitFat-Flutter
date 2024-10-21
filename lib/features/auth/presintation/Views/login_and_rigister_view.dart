@@ -1,5 +1,5 @@
-import 'package:fitfat/features/auth/presintation/Views/LoginView.dart';
-import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_AnimatedToggle.dart';
+import 'package:fitfat/features/auth/presintation/Views/login_view.dart';
+import 'package:fitfat/features/auth/presintation/Wedgets/Customs/custom_animatedToggle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -45,13 +45,19 @@ class Login_SignUp extends StatelessWidget {
                       SizedBox(
                         height: 32,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Divider(color: Colors.grey, height: 8),
-                          Text('Or signUp with:'),
-                          Divider(color: Colors.grey, height: 8),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(child: Divider(color: Colors.grey, height: 8),width: 100,),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Or signUp with'),
+                            ),
+                            Container(child: Divider(color: Colors.grey, height: 8),width: 100,),
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: 16,

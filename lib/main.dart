@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fitfat/features/auth/presintation/Views/Login&register.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
+import 'package:fitfat/features/auth/presintation/Views/login_and_rigister_view.dart';
 import 'package:fitfat/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +23,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AuthBloc(),
+          create: (context) => LoginCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SignUpCubit(),
         )
       ],
       child: MaterialApp(
