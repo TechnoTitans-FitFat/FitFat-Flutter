@@ -11,17 +11,17 @@ class AnimatedToggle extends StatefulWidget {
 }
 
 class _AnimatedToggleState extends State<AnimatedToggle> {
-  @override
   bool isSelected = false;
 
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 70),
       child: AnimatedToggleSwitch<bool>.size(
         current: isSelected,
-        values: [true, false],
+        values: const [true, false],
         //iconOpacity: 0.2,
-        indicatorSize: Size.fromWidth(200),
+        indicatorSize: const Size.fromWidth(200),
         customIconBuilder: (context, local, global) => Text(
           local.value ? 'Login' : 'Sign Up',
           style: TextStyle(

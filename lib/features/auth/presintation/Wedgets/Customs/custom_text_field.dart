@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   CustomTextField({this.hint, this.icon, this.onchange});
 
   IconData? icon;
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
           if (data!.isEmpty) {
             return 'Field is required';
           }
+          return null;
         },
         onChanged: onchange,
         decoration: InputDecoration(
@@ -33,7 +35,7 @@ class CustomTextField extends StatelessWidget {
 
   OutlineInputBorder buildBorder() {
     return OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey),
+        borderSide: const BorderSide(color: Colors.grey),
         borderRadius: BorderRadius.circular(8));
   }
 }

@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fitfat/features/auth/presintation/Views/Login&register.dart';
+import 'package:fitfat/features/auth/presintation/views/sign_up_view.dart';
 import 'package:fitfat/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,9 +25,9 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthBloc(),
         )
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Login_SignUp(),
+        home: SignUp(),
       ),
     );
   }
