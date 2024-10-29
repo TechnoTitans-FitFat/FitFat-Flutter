@@ -1,5 +1,5 @@
 import 'package:fitfat/features/auth/presintation/views/login_and_register_view.dart';
-import 'package:fitfat/features/main/presentaion/views/next.dart';
+import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -75,7 +75,7 @@ class _SplashBodyState extends State<SplashBody>
     Future.delayed(const Duration(seconds: 2), () {
       if (isLoggedIn) {
         // Navigate to NextPage if logged in
-        Get.to(() => const NextPage(),
+        Get.to(() => const MainScreen(),
             transition: Transition.circularReveal,
             duration: const Duration(milliseconds: 250));
       } else {
