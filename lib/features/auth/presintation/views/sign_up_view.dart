@@ -42,12 +42,13 @@ class SignUp extends StatelessWidget {
                   key: formKey,
                   child: Column(
                     children: [
+                      SizedBox(height: 32,),
                       CustomTextField(
                         hint: 'Name',
                         icon: FontAwesomeIcons.user,
                       ),
                       const SizedBox(
-                        height: 16,
+                        height: 20,
                       ),
                       CustomTextField(
                         onchange: (data) {
@@ -57,7 +58,7 @@ class SignUp extends StatelessWidget {
                         icon: Icons.email_outlined,
                       ),
                       const SizedBox(
-                        height: 16,
+                        height: 20,
                       ),
                       CustomTextField(
                         onchange: (data) {
@@ -67,7 +68,7 @@ class SignUp extends StatelessWidget {
                         icon: Icons.lock_outline,
                       ),
                       const SizedBox(
-                        height: 16,
+                        height: 20,
                       ),
                       CustomTextField(
                         hint: 'Confirm Password',

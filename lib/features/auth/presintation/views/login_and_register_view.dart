@@ -1,4 +1,3 @@
-import 'package:fitfat/features/auth/presintation/Views/login_view.dart';
 import 'package:fitfat/features/auth/presintation/wedgets/customs/custom_animated_toggle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ class LoginSignUp extends StatelessWidget {
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: Scaffold(
-        backgroundColor: CupertinoColors.white,
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -36,24 +35,25 @@ class LoginSignUp extends StatelessWidget {
                         height: 16,
                       ),
                       const AnimatedToggle(),
-                      const SizedBox(
-                        height: 32,
-                      ),
-                       Login(),
-                      const SizedBox(
-                        height: 32,
-                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(child: Divider(color: Colors.grey, height: 8),width: 100,),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            Container(
+                              width: 100,
+                              child:
+                                  const Divider(color: Colors.grey, height: 8),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text('Or signUp with'),
                             ),
-                            Container(child: Divider(color: Colors.grey, height: 8),width: 100,),
+                            Container(
+                              width: 100,
+                              child:
+                                  const Divider(color: Colors.grey, height: 8),
+                            ),
                           ],
                         ),
                       ),
@@ -83,7 +83,7 @@ class LoginSignUp extends StatelessWidget {
                               icon: const Icon(
                                 Icons.apple_outlined,
                                 size: 40,
-                              ))
+                              )),
                         ],
                       )
                     ],

@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_Button.dart';
 import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_TextField.dart';
+import 'package:fitfat/features/auth/presintation/Wedgets/Customs/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -40,6 +40,7 @@ class Login extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: [
+                    SizedBox(height: 32,),
                     CustomTextField(
                       onchange: (data) {
                         email = data;
@@ -47,8 +48,8 @@ class Login extends StatelessWidget {
                       hint: 'Email',
                       icon: Icons.email_outlined,
                     ),
-                    SizedBox(
-                      height: 16,
+                    const SizedBox(
+                      height: 20,
                     ),
                     CustomTextField(
                       onchange: (data) {
@@ -57,10 +58,7 @@ class Login extends StatelessWidget {
                       hint: 'Password',
                       icon: Icons.lock_outline,
                     ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    SizedBox(
+                    const SizedBox(
                       height: 32,
                     ),
                     CustomBottom(
@@ -71,6 +69,49 @@ class Login extends StatelessWidget {
                         }
                       },
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(width: 100,child: const Divider(color: Colors.grey, height: 8),),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Or signUp with'),
+                          ),
+                          Container(width: 100,child: const Divider(color: Colors.grey, height: 8),),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: const SizedBox(
+                                width: 25,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  child: Image(
+                                    image: AssetImage('imges/google.png'),
+                                  ),
+                                ))),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.facebook,
+                              color: Colors.blueAccent, size: 30),
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.apple_outlined,
+                              size: 40,
+                            )),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -79,10 +120,5 @@ class Login extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void ShowSnackBar(BuildContext context, massage) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(massage)));
   }
 }
