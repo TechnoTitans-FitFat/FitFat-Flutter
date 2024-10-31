@@ -1,4 +1,5 @@
-import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:fitfat/features/auth/presintation/Views/login_view.dart';
+import 'package:fitfat/features/auth/presintation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedToggle extends StatefulWidget {
@@ -10,39 +11,67 @@ class AnimatedToggle extends StatefulWidget {
   State<AnimatedToggle> createState() => _AnimatedToggleState();
 }
 
-class _AnimatedToggleState extends State<AnimatedToggle> {
-  bool isSelected = false;
+class _AnimatedToggleState extends State<AnimatedToggle>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 70),
-      child: AnimatedToggleSwitch<bool>.size(
-        current: isSelected,
-        values: const [true, false],
-        //iconOpacity: 0.2,
-        indicatorSize: const Size.fromWidth(200),
-        customIconBuilder: (context, local, global) => Text(
-          local.value ? 'Login' : 'Sign Up',
-          style: TextStyle(
-            color: Color.lerp(Colors.red, Colors.white, local.animationValue),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 100,vertical: 5),
+          child: Container(
+            decoration: BoxDecoration(
+               borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.black87)
+
+            ),
+            child: TabBar(
+              indicatorSize:TabBarIndicatorSize.tab,
+              controller: _tabController,
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.red,
+              ),
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.red,
+              tabs: [
+                Tab(child: Container(width: double.infinity,child: const Align(
+                  alignment: Alignment.center,
+                  child: Text("Sign Up"),
+                ),)),
+                Tab(child: Container(width: double.infinity,child: const Align(
+                  alignment: Alignment.center,
+                  child: Text("Login"),
+                ),),),
+              ],
+            ),
           ),
         ),
-        borderWidth: 0.5,
-        iconAnimationType: AnimationType.onHover,
-        style: ToggleStyle(
-          indicatorColor: Colors.red,
-          borderColor: Colors.grey,
-          backgroundColor: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.6,
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              const SignUp(),
+              Login(),
+            ],
+          ),
         ),
-        selectedIconScale: 1.0,
-        onChanged: (value) {
-          setState(() {
-            isSelected = value;
-          });
-        },
-      ),
+      ],
     );
   }
 }

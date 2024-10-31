@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
   CustomTextField(
-      {this.hint, this.icon, this.onchange, this.sufIcon, this.sufIconNot});
+      {super.key, this.hint, this.icon, this.onchange, this.sufIcon, this.sufIconNot});
 
   IconData? icon;
   IconData? sufIcon;
@@ -41,7 +41,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   },
                 );
               },
-              icon: Icon(passwordVisible ? widget.sufIcon : widget.sufIconNot)),
+              icon: Icon(passwordVisible ? widget.sufIcon : widget.sufIconNot,color: Colors.grey,)),
           hintText: widget.hint,
           focusedBorder: buildBorder(),
           enabledBorder: buildBorder(),
