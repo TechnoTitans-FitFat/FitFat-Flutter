@@ -40,7 +40,7 @@ class Login extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: [
-                    SizedBox(height: 32,),
+                    const SizedBox(height: 32,),
                     CustomTextField(
                       onchange: (data) {
                         email = data;
@@ -57,6 +57,8 @@ class Login extends StatelessWidget {
                       },
                       hint: 'Password',
                       icon: Icons.lock_outline,
+                      sufIconNot: Icons.visibility_off,
+                      sufIcon:Icons.visibility ,
                     ),
                     const SizedBox(
                       height: 32,
@@ -69,6 +71,7 @@ class Login extends StatelessWidget {
                         }
                       },
                     ),
+
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50),
                       child: Row(
@@ -82,9 +85,6 @@ class Login extends StatelessWidget {
                           Container(width: 100,child: const Divider(color: Colors.grey, height: 8),),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 16,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

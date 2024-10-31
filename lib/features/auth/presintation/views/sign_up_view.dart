@@ -32,6 +32,7 @@ class SignUp extends StatelessWidget {
       builder: (BuildContext context, SignUpStates state)=>ModalProgressHUD(
         inAsyncCall: isLoading,
         child: Scaffold(
+          backgroundColor:Colors.white,
           body: Column(
             children: [
               Container(
@@ -42,7 +43,7 @@ class SignUp extends StatelessWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      SizedBox(height: 32,),
+                      const SizedBox(height: 32,),
                       CustomTextField(
                         hint: 'Name',
                         icon: FontAwesomeIcons.user,
@@ -66,6 +67,8 @@ class SignUp extends StatelessWidget {
                         },
                         hint: 'Password',
                         icon: Icons.lock_outline,
+                        sufIconNot: Icons.visibility_off,
+                        sufIcon:Icons.visibility ,
                       ),
                       const SizedBox(
                         height: 20,
@@ -73,6 +76,8 @@ class SignUp extends StatelessWidget {
                       CustomTextField(
                         hint: 'Confirm Password',
                         icon: Icons.lock_outline,
+                        sufIconNot: Icons.visibility_off,
+                        sufIcon:Icons.visibility ,
                       ),
                       const SizedBox(
                         height: 32,
@@ -87,6 +92,49 @@ class SignUp extends StatelessWidget {
                           }
                         },
                       ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(width: 100,child: const Divider(color: Colors.grey, height: 8),),
+                            const Padding(
+                              padding: EdgeInsets.only(right: 8, left: 8,top: 8),
+                              child: Text('Or signUp with'),
+                            ),
+                            Container(width: 100,child: const Divider(color: Colors.grey, height: 8),),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            child: Container(
+                                  height: 20,
+                                  width: 20,
+                                  child: const CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        child: Image(
+                                          image: AssetImage('imges/google.png'),
+                                        ),
+                                      ),
+                                ),
+                          ),
+                          SizedBox(width: 20,),
+                            GestureDetector(
+                              child: Icon(Icons.facebook,
+                                  color: Colors.blueAccent, size: 27),
+                            ),
+                          SizedBox(width: 20,),
+                          GestureDetector(
+                            child: Icon(
+                                  Icons.apple_outlined,
+                                  size: 35,
+                                ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

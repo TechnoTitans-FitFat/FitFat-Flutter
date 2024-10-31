@@ -40,6 +40,7 @@ class _AnimatedToggleState extends State<AnimatedToggle>
 
             ),
             child: TabBar(
+              indicatorSize:TabBarIndicatorSize.tab,
               controller: _tabController,
               indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
@@ -48,14 +49,14 @@ class _AnimatedToggleState extends State<AnimatedToggle>
               labelColor: Colors.white,
               unselectedLabelColor: Colors.red,
               tabs: [
-                Tab(child: Container(child: Align(
+                Tab(child: Container(width: double.infinity,child: const Align(
                   alignment: Alignment.center,
                   child: Text("Sign Up"),
-                ),width: double.infinity,)),
-                Tab(child: Container(child: Align(
+                ),)),
+                Tab(child: Container(width: double.infinity,child: const Align(
                   alignment: Alignment.center,
                   child: Text("Login"),
-                ),width: double.infinity,),),
+                ),),),
               ],
             ),
           ),
@@ -65,7 +66,7 @@ class _AnimatedToggleState extends State<AnimatedToggle>
           child: TabBarView(
             controller: _tabController,
             children: [
-              SignUp(),
+              const SignUp(),
               Login(),
             ],
           ),
