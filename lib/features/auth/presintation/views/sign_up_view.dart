@@ -1,3 +1,4 @@
+import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presintation/Wedgets/Customs/custom_textField.dart';
@@ -20,9 +21,9 @@ class SignUp extends StatelessWidget {
     return BlocConsumer<SignUpCubit, SignUpStates>(
       listener: (BuildContext context, state) {
         if (state is SignUpLoading) {
-          isLoading = true;
+          isLoading = false;
         } else if (state is SignUpSucess) {
-          showSnackBar(context, 'Success');
+          ShowDialog(context, 'Welcome to the family!\n Your journey starts now');
           isLoading = false;
         } else if (state is SignUpFalier) {
           showSnackBar(context, state.errorMassage);
@@ -32,13 +33,13 @@ class SignUp extends StatelessWidget {
       builder: (BuildContext context, SignUpStates state)=>ModalProgressHUD(
         inAsyncCall: isLoading,
         child: Scaffold(
-          backgroundColor:Colors.white,
+          backgroundColor:AppLightColor.whiteColor,
           body: Column(
             children: [
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: Colors.white),
+                    color: AppLightColor.whiteColor),
                 child: Form(
                   key: formKey,
                   child: Column(
@@ -47,6 +48,7 @@ class SignUp extends StatelessWidget {
                       CustomTextField(
                         hint: 'Name',
                         icon: FontAwesomeIcons.user,
+                        noti: 'please, Enter your name',
                       ),
                       const SizedBox(
                         height: 20,
@@ -57,6 +59,7 @@ class SignUp extends StatelessWidget {
                         },
                         hint: 'Email',
                         icon: Icons.email_outlined,
+                        noti: 'please , Enter your email',
                       ),
                       const SizedBox(
                         height: 20,
@@ -67,8 +70,9 @@ class SignUp extends StatelessWidget {
                         },
                         hint: 'Password',
                         icon: Icons.lock_outline,
-                        sufIconNot: Icons.visibility_off,
-                        sufIcon:Icons.visibility ,
+                        sufIconNot: Icons.visibility,
+                        sufIcon:Icons.visibility_off ,
+                        noti: 'please, Enter the password',
                       ),
                       const SizedBox(
                         height: 20,
@@ -76,8 +80,9 @@ class SignUp extends StatelessWidget {
                       CustomTextField(
                         hint: 'Confirm Password',
                         icon: Icons.lock_outline,
-                        sufIconNot: Icons.visibility_off,
-                        sufIcon:Icons.visibility ,
+                        sufIconNot: Icons.visibility,
+                        sufIcon:Icons.visibility_off ,
+                        noti: 'please, confirm your password',
                       ),
                       const SizedBox(
                         height: 32,
@@ -89,23 +94,26 @@ class SignUp extends StatelessWidget {
                             final siginUpEvent =
                                 BlocProvider.of<SignUpCubit>(context);
                             siginUpEvent.SignupUser(email: email!, password: password!);
+                            return ShowDialog(context, 'Welcome to the family!\n Your journey starts now');
                           }
                         },
                       ),
+                      const SizedBox(height: 16,),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(width: 100,child: const Divider(color: Colors.grey, height: 8),),
+                            Container(width: 100,child: const Divider(color: AppLightColor.greyColor, height: 8),),
                             const Padding(
                               padding: EdgeInsets.only(right: 8, left: 8,top: 8),
                               child: Text('Or signUp with'),
                             ),
-                            Container(width: 100,child: const Divider(color: Colors.grey, height: 8),),
+                            Container(width: 100,child: const Divider(color: AppLightColor.greyColor, height: 8),),
                           ],
                         ),
                       ),
+                      const SizedBox(height: 8,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -114,21 +122,21 @@ class SignUp extends StatelessWidget {
                                   height: 20,
                                   width: 20,
                                   child: const CircleAvatar(
-                                        backgroundColor: Colors.white,
+                                        backgroundColor: AppLightColor.whiteColor,
                                         child: Image(
                                           image: AssetImage('imges/google.png'),
                                         ),
                                       ),
                                 ),
                           ),
-                          SizedBox(width: 20,),
+                          const SizedBox(width: 20,),
                             GestureDetector(
-                              child: Icon(Icons.facebook,
+                              child: const Icon(Icons.facebook,
                                   color: Colors.blueAccent, size: 27),
                             ),
-                          SizedBox(width: 20,),
+                          const SizedBox(width: 20,),
                           GestureDetector(
-                            child: Icon(
+                            child: const Icon(
                                   Icons.apple_outlined,
                                   size: 35,
                                 ),

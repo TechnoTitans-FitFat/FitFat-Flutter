@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
-import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:fitfat/features/splash/presentaion/views/splash.dart';
 import 'package:fitfat/firebase_options.dart';
 import 'package:flutter/material.dart';

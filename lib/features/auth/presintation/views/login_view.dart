@@ -1,7 +1,8 @@
+import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_Button.dart';
 import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_TextField.dart';
-import 'package:fitfat/features/auth/presintation/Wedgets/Customs/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -22,10 +23,10 @@ class Login extends StatelessWidget {
         if (state is LoginLoading) {
           isLoading = true;
         } else if (state is LoginSucess) {
-          ShowSnackBar(context, 'Success');
+          ShowDialog(context, 'Great to see you again');
           isLoading = false;
         } else if (state is LoginFalier) {
-          ShowSnackBar(context, state.errorMassage);
+          showSnackBar(context, state.errorMassage);
           isLoading = false;
         }
       },
@@ -35,7 +36,7 @@ class Login extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16), color: Colors.white),
+                  borderRadius: BorderRadius.circular(16), color:AppLightColor.whiteColor),
               child: Form(
                 key: formKey,
                 child: Column(
@@ -47,6 +48,7 @@ class Login extends StatelessWidget {
                       },
                       hint: 'Email',
                       icon: Icons.email_outlined,
+                      noti: 'please, Enter your email',
                     ),
                     const SizedBox(
                       height: 20,
@@ -57,9 +59,20 @@ class Login extends StatelessWidget {
                       },
                       hint: 'Password',
                       icon: Icons.lock_outline,
-                      sufIconNot: Icons.visibility_off,
-                      sufIcon:Icons.visibility ,
+                      sufIconNot: Icons.visibility,
+                      sufIcon:Icons.visibility_off ,
+                      noti: 'Please, Enter your Password',
                     ),
+                    const SizedBox(height: 16,),
+                    GestureDetector(child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 55),
+                          child: Text('Forgot password',style: TextStyle(color: AppLightColor.greyColor),),
+                        ),
+                      ],
+                    )),
                     const SizedBox(
                       height: 32,
                     ),
@@ -67,25 +80,27 @@ class Login extends StatelessWidget {
                       text: 'Login',
                       ontap: () async {
                         if (formKey.currentState!.validate()) {
-                            BlocProvider.of<LoginCubit>(context).LoginUser(email: email!, password: password!);
+                          BlocProvider.of<LoginCubit>(context).LoginUser(email: email!, password: password!);
+                            return ShowDialog(context, 'Great to see you again');
                         }
                       },
                     ),
-
+                    const SizedBox(height: 16,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(width: 100,child: const Divider(color: Colors.grey, height: 8),),
+                          Container(width: 100,child: const Divider(color: AppLightColor.greyColor, height: 8),),
                           const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text('Or signUp with'),
                           ),
-                          Container(width: 100,child: const Divider(color: Colors.grey, height: 8),),
+                          Container(width: 100,child: const Divider(color: AppLightColor.greyColor, height: 8),),
                         ],
                       ),
                     ),
+                    const SizedBox(height: 8,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -94,7 +109,7 @@ class Login extends StatelessWidget {
                             icon: const SizedBox(
                                 width: 25,
                                 child: CircleAvatar(
-                                  backgroundColor: Colors.white,
+                                  backgroundColor: AppLightColor.whiteColor,
                                   child: Image(
                                     image: AssetImage('imges/google.png'),
                                   ),

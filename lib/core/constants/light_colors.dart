@@ -6,4 +6,5 @@ class AppLightColor {
   static const Color mainColor = Color(0xffe32636);
   static const Color blackColor = Color(0xff000000);
   static const Color greyColor = Color.fromARGB(255, 175, 170, 170);
+  static const Color green = Color(0xff2fe487);
 }
