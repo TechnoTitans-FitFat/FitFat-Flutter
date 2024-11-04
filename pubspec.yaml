@@ -71,6 +71,7 @@ flutter:
     - imges/img.jpg
     - imges/google.png
     - imges/logo.png
+    - imges/Eo_circle_green_checkmark.svg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -1,3 +1,4 @@
+import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -18,9 +19,9 @@ class CustomBottom extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: 55,
           decoration: BoxDecoration(
-              color: Colors.red, borderRadius: BorderRadius.circular(8)),
+              color: AppLightColor.mainColor, borderRadius: BorderRadius.circular(8)),
           child: Center(
-            child: Text(text!, style: const TextStyle(color: Colors.white)),
+            child: Text(text!, style: const TextStyle(color:AppLightColor.whiteColor)),
           ),
         ),
       ),
