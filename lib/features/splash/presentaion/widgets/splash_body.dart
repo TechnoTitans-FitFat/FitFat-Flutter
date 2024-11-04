@@ -1,3 +1,4 @@
+import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/presintation/views/login_and_register_view.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _SplashBodyState extends State<SplashBody>
   late AnimationController animationController;
   late Animation<Offset> slidingAnimation;
 
+  double _opacity = 0.0;
   @override
   void initState() {
     super.initState();
@@ -23,6 +25,11 @@ class _SplashBodyState extends State<SplashBody>
     initSlidingAnimation();
 
     checkLoginStatus();
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        _opacity = 1.0;
+      });
+    });
   }
 
   @override
@@ -43,16 +50,25 @@ class _SplashBodyState extends State<SplashBody>
               builder: (context, _) {
                 return SlideTransition(
                     position: slidingAnimation,
-                    child: Image.asset(
-                      'imges/logo.png',
-                      height: 175,
-                      width: 175,
+                    child: const Text(
+                      'Welcome to',
+                      style: TextStyle(
+                        color:AppLightColor.mainColor,
+                        fontSize: 30,
+                       // fontFamily: 'NunitoSans',
+                        fontWeight: FontWeight.w600,
+                      ),
                     ));
               }),
-          const SizedBox(
-            height: 7,
-          ),
-          // Text('Welcome to our app',style: TextStyle(color:Colors.red),)
+          const SizedBox(height: 30),
+          AnimatedOpacity(
+              opacity: _opacity,
+              duration: const Duration(seconds: 1),
+              child: Image.asset(
+                'imges/logo.png',
+                height: 175,
+                width: 175,
+              )),
         ],
       ),
     );
@@ -63,7 +79,7 @@ class _SplashBodyState extends State<SplashBody>
         AnimationController(vsync: this, duration: const Duration(seconds: 1));
 
     slidingAnimation =
-        Tween<Offset>(begin: const Offset(0, 2), end: Offset.zero)
+        Tween<Offset>(begin: const Offset(-2, 0), end: Offset.zero)
             .animate(animationController);
     animationController.forward();
   }
