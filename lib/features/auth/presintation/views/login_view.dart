@@ -36,12 +36,15 @@ class Login extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16), color:AppLightColor.whiteColor),
+                  borderRadius: BorderRadius.circular(16),
+                  color: AppLightColor.whiteColor),
               child: Form(
                 key: formKey,
                 child: Column(
                   children: [
-                    const SizedBox(height: 32,),
+                    const SizedBox(
+                      height: 32,
+                    ),
                     CustomTextField(
                       onchange: (data) {
                         email = data;
@@ -60,16 +63,22 @@ class Login extends StatelessWidget {
                       hint: 'Password',
                       icon: Icons.lock_outline,
                       sufIconNot: Icons.visibility,
-                      sufIcon:Icons.visibility_off ,
+                      sufIcon: Icons.visibility_off,
                       noti: 'Please, Enter your Password',
                     ),
-                    const SizedBox(height: 16,),
-                    GestureDetector(child: const Row(
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    GestureDetector(
+                        child: const Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(right: 55),
-                          child: Text('Forgot password',style: TextStyle(color: AppLightColor.greyColor),),
+                          child: Text(
+                            'Forgot password',
+                            style: TextStyle(color: AppLightColor.greyColor),
+                          ),
                         ),
                       ],
                     )),
@@ -80,27 +89,40 @@ class Login extends StatelessWidget {
                       text: 'Login',
                       ontap: () async {
                         if (formKey.currentState!.validate()) {
-                          BlocProvider.of<LoginCubit>(context).LoginUser(email: email!, password: password!);
-                            return ShowDialog(context, 'Great to see you again');
+                          BlocProvider.of<LoginCubit>(context)
+                              .LoginUser(email: email!, password: password!);
+                          return ShowDialog(context, 'Great to see you again');
                         }
                       },
                     ),
-                    const SizedBox(height: 16,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(width: 100,child: const Divider(color: AppLightColor.greyColor, height: 8),),
-                          const Padding(
+                          SizedBox(
+                            width: 100,
+                            child: Divider(
+                                color: AppLightColor.greyColor, height: 8),
+                          ),
+                          Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text('Or signUp with'),
                           ),
-                          Container(width: 100,child: const Divider(color: AppLightColor.greyColor, height: 8),),
+                          SizedBox(
+                            width: 100,
+                            child: Divider(
+                                color: AppLightColor.greyColor, height: 8),
+                          ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 8,),
+                    const SizedBox(
+                      height: 8,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

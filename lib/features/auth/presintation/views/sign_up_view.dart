@@ -23,17 +23,18 @@ class SignUp extends StatelessWidget {
         if (state is SignUpLoading) {
           isLoading = false;
         } else if (state is SignUpSucess) {
-          ShowDialog(context, 'Welcome to the family!\n Your journey starts now');
+          ShowDialog(
+              context, 'Welcome to the family!\n Your journey starts now');
           isLoading = false;
         } else if (state is SignUpFalier) {
           showSnackBar(context, state.errorMassage);
           isLoading = false;
         }
       },
-      builder: (BuildContext context, SignUpStates state)=>ModalProgressHUD(
+      builder: (BuildContext context, SignUpStates state) => ModalProgressHUD(
         inAsyncCall: isLoading,
         child: Scaffold(
-          backgroundColor:AppLightColor.whiteColor,
+          backgroundColor: AppLightColor.whiteColor,
           body: Column(
             children: [
               Container(
@@ -44,7 +45,9 @@ class SignUp extends StatelessWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      const SizedBox(height: 32,),
+                      const SizedBox(
+                        height: 32,
+                      ),
                       CustomTextField(
                         hint: 'Name',
                         icon: FontAwesomeIcons.user,
@@ -71,7 +74,7 @@ class SignUp extends StatelessWidget {
                         hint: 'Password',
                         icon: Icons.lock_outline,
                         sufIconNot: Icons.visibility,
-                        sufIcon:Icons.visibility_off ,
+                        sufIcon: Icons.visibility_off,
                         noti: 'please, Enter the password',
                       ),
                       const SizedBox(
@@ -81,7 +84,7 @@ class SignUp extends StatelessWidget {
                         hint: 'Confirm Password',
                         icon: Icons.lock_outline,
                         sufIconNot: Icons.visibility,
-                        sufIcon:Icons.visibility_off ,
+                        sufIcon: Icons.visibility_off,
                         noti: 'please, confirm your password',
                       ),
                       const SizedBox(
@@ -93,53 +96,72 @@ class SignUp extends StatelessWidget {
                           if (formKey.currentState!.validate()) {
                             final siginUpEvent =
                                 BlocProvider.of<SignUpCubit>(context);
-                            siginUpEvent.SignupUser(email: email!, password: password!);
-                            return ShowDialog(context, 'Welcome to the family!\n Your journey starts now');
+                            siginUpEvent.SignupUser(
+                                email: email!, password: password!);
+                            return ShowDialog(context,
+                                'Welcome to the family!\n Your journey starts now');
                           }
                         },
                       ),
-                      const SizedBox(height: 16,),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 50),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(width: 100,child: const Divider(color: AppLightColor.greyColor, height: 8),),
-                            const Padding(
-                              padding: EdgeInsets.only(right: 8, left: 8,top: 8),
+                            SizedBox(
+                              width: 100,
+                              child: Divider(
+                                  color: AppLightColor.greyColor, height: 8),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(right: 8, left: 8, top: 8),
                               child: Text('Or signUp with'),
                             ),
-                            Container(width: 100,child: const Divider(color: AppLightColor.greyColor, height: 8),),
+                            SizedBox(
+                              width: 100,
+                              child: Divider(
+                                  color: AppLightColor.greyColor, height: 8),
+                            ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 8,),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            child: Container(
-                                  height: 20,
-                                  width: 20,
-                                  child: const CircleAvatar(
-                                        backgroundColor: AppLightColor.whiteColor,
-                                        child: Image(
-                                          image: AssetImage('imges/google.png'),
-                                        ),
-                                      ),
+                            child: const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircleAvatar(
+                                backgroundColor: AppLightColor.whiteColor,
+                                child: Image(
+                                  image: AssetImage('imges/google.png'),
                                 ),
-                          ),
-                          const SizedBox(width: 20,),
-                            GestureDetector(
-                              child: const Icon(Icons.facebook,
-                                  color: Colors.blueAccent, size: 27),
+                              ),
                             ),
-                          const SizedBox(width: 20,),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          GestureDetector(
+                            child: const Icon(Icons.facebook,
+                                color: Colors.blueAccent, size: 27),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
                           GestureDetector(
                             child: const Icon(
-                                  Icons.apple_outlined,
-                                  size: 35,
-                                ),
+                              Icons.apple_outlined,
+                              size: 35,
+                            ),
                           ),
                         ],
                       )

@@ -33,15 +33,13 @@ class _AnimatedToggleState extends State<AnimatedToggle>
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 100,vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 5),
           child: Container(
             decoration: BoxDecoration(
-               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppLightColor.backgroundColor)
-
-            ),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppLightColor.backgroundColor)),
             child: TabBar(
-              indicatorSize:TabBarIndicatorSize.tab,
+              indicatorSize: TabBarIndicatorSize.tab,
               controller: _tabController,
               indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
@@ -49,20 +47,29 @@ class _AnimatedToggleState extends State<AnimatedToggle>
               ),
               labelColor: AppLightColor.whiteColor,
               unselectedLabelColor: AppLightColor.mainColor,
-              tabs: [
-                Tab(child: Container(width: double.infinity,child: const Align(
-                  alignment: Alignment.center,
-                  child: Text("Sign Up"),
-                ),)),
-                Tab(child: Container(width: double.infinity,child: const Align(
-                  alignment: Alignment.center,
-                  child: Text("Login"),
-                ),),),
+              tabs: const [
+                Tab(
+                    child: SizedBox(
+                  width: double.infinity,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text("Sign Up"),
+                  ),
+                )),
+                Tab(
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text("Login"),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ),
-        Container(
+        SizedBox(
           height: MediaQuery.of(context).size.height,
           child: TabBarView(
             controller: _tabController,
