@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/features/auth/presintation/Wedgets/Customs/custom_bottom_nav_bar.dart';
 import 'package:fitfat/features/main/presentaion/widgets/categories_list.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_dots.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_suggestion_grid_view.dart';
@@ -68,60 +69,11 @@ class _MainScreenState extends State<MainScreen> {
     const Center(child: Text('Profile Screen')),
   ];
 
-  void onTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppLightColor.backgroundColor,
-      body: screens[selectedIndex],
-      bottomNavigationBar: SizedBox(
-        height: 70,
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-          child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  color: AppLightColor.blackColor,
-                ),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.favorite_border,
-                  color: AppLightColor.blackColor,
-                ),
-                label: 'Favourite',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.book,
-                  color: AppLightColor.blackColor,
-                ),
-                label: 'Book',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.list, color: AppLightColor.blackColor),
-                label: 'List',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person, color: AppLightColor.blackColor),
-                label: 'Profile',
-              ),
-            ],
-            currentIndex: selectedIndex,
-            selectedItemColor: AppLightColor.mainColor,
-            onTap: onTapped,
-          ),
-        ),
-      ),
-    );
+        backgroundColor: AppLightColor.backgroundColor,
+        body: screens[selectedIndex],
+        bottomNavigationBar: const CustomBottomNavBar());
   }
 }

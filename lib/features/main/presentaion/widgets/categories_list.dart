@@ -13,7 +13,7 @@ class CategoriesList extends StatelessWidget {
       children: [
         CustomCardCategory(
           icon: Icons.food_bank,
-          text: 'Diat',
+          text: 'Diet',
         ),
         CustomCardCategory(
           text: 'Diadetes',
