@@ -1,8 +1,8 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextFiled extends StatelessWidget {
-  const CustomTextFiled({
+class CustomTextFiledSearch extends StatelessWidget {
+  const CustomTextFiledSearch({
     super.key,
   });
 
@@ -40,6 +40,12 @@ class CustomTextFiled extends StatelessWidget {
                     color: AppLightColor.whiteColor,
                   ),
                 ),
+                focusedBorder:OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: const BorderSide(
+                    color: AppLightColor.mainColor,
+                  ),
+                ) ,
                 disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
                   borderSide: const BorderSide(

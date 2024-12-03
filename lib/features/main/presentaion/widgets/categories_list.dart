@@ -1,3 +1,6 @@
+import 'package:fitfat/features/main/presentaion/views/allergy_view.dart';
+import 'package:fitfat/features/main/presentaion/views/diabetes_view.dart';
+import 'package:fitfat/features/main/presentaion/views/diet_view.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_card_category.dart';
 import 'package:flutter/material.dart';
 
@@ -8,20 +11,50 @@ class CategoriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        CustomCardCategory(
-          icon: Icons.food_bank,
-          text: 'Diet',
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DietView(),
+              ),
+            );
+          },
+          child:const CustomCardCategory(
+            icon: Icons.food_bank,
+            text: 'Diet',
+          ),
         ),
-        CustomCardCategory(
-          text: 'Diadetes',
-          icon: Icons.food_bank,
+        GestureDetector(
+          onTap: (){
+              Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DiabetesView(),
+              ),
+            );
+          },
+          child:const CustomCardCategory(
+            text: 'Diadetes',
+            icon: Icons.food_bank,
+          ),
         ),
-        CustomCardCategory(
-          text: 'Allergy',
-          icon: Icons.food_bank,
+        GestureDetector(
+          onTap: (){
+              Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AllergyView(),
+              ),
+            );
+          },
+          child: const CustomCardCategory(
+            text: 'Allergy',
+            icon: Icons.food_bank,
+          ),
         ),
       ],
     );
