@@ -73,6 +73,7 @@ flutter:
     - imges/meal1.jpg
     - imges/meal2.png
     - imges/meal3.png
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
