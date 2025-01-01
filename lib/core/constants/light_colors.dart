@@ -7,5 +7,5 @@ class AppLightColor {
   static const Color blackColor = Color(0xff000000);
   static const Color greyColor = Color.fromARGB(255, 175, 170, 170);
   static const Color green = Color(0xff2fe487);
-  static const Color secondColor=Color(0xffFBE0E2);
+  static const Color secondColor = Color(0xffFBE0E2);
 }

@@ -1,20 +1,23 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
-import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_Button.dart';
-import 'package:fitfat/features/auth/presintation/Wedgets/Customs/Custom_TextField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+import '../wedgets/customs/custom_button.dart';
+import '../wedgets/customs/custom_textfield.dart';
+
 class Login extends StatelessWidget {
   Login({super.key});
 
-  String? email, password;
+  late String? email, password;
 
-  GlobalKey<FormState> formKey = GlobalKey();
+  late GlobalKey<FormState> formKey = GlobalKey();
 
-  bool isLoading = false;
+  late bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {

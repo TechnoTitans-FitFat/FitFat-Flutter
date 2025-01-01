@@ -1,4 +1,4 @@
-import 'package:fitfat/features/splash/presentaion/widgets/splash_body.dart';
+import 'package:fitfat/features/splash/presentation/widgets/splash_body.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
@@ -6,8 +6,6 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body:SplashBody()
-    );
+    return const Scaffold(body: SplashBody());
   }
 }

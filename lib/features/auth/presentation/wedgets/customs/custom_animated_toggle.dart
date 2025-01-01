@@ -1,7 +1,8 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/auth/presintation/Views/login_view.dart';
-import 'package:fitfat/features/auth/presintation/views/sign_up_view.dart';
+import 'package:fitfat/features/auth/presentation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
+
+import '../../views/login_view.dart';
 
 class AnimatedToggle extends StatefulWidget {
   const AnimatedToggle({

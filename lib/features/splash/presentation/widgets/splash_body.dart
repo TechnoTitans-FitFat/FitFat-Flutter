@@ -1,5 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/auth/presintation/views/login_and_register_view.dart';
+import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -53,9 +53,9 @@ class _SplashBodyState extends State<SplashBody>
                     child: const Text(
                       'Welcome to',
                       style: TextStyle(
-                        color:AppLightColor.mainColor,
+                        color: AppLightColor.mainColor,
                         fontSize: 30,
-                       // fontFamily: 'NunitoSans',
+                        // fontFamily: 'NunitoSans',
                         fontWeight: FontWeight.w600,
                       ),
                     ));

@@ -1,12 +1,13 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
-import 'package:fitfat/features/auth/presintation/Wedgets/Customs/custom_textField.dart';
-import 'package:fitfat/features/auth/presintation/wedgets/customs/custom_button.dart';
+import 'package:fitfat/features/auth/presentation/wedgets/customs/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
+import '../wedgets/customs/custom_textfield.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
