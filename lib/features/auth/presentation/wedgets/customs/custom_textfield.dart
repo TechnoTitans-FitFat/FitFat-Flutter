@@ -1,8 +1,9 @@
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/constants/light_colors.dart';
+
 class CustomTextField extends StatefulWidget {
-  CustomTextField(
+  const CustomTextField(
       {super.key,
       this.hint,
       this.icon,
@@ -11,12 +12,12 @@ class CustomTextField extends StatefulWidget {
       this.sufIconNot,
       this.noti});
 
-  IconData? icon;
-  IconData? sufIcon;
-  IconData? sufIconNot;
-  String? hint;
-  Function(String)? onchange;
-  String? noti;
+  final IconData? icon;
+  final IconData? sufIcon;
+  final IconData? sufIconNot;
+  final String? hint;
+  final Function(String)? onchange;
+  final String? noti;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
