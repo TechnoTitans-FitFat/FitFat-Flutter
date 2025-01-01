@@ -1,7 +1,7 @@
 import 'package:fitfat/core/widgets/custom_indicator.dart';
-import 'package:fitfat/features/details/presentation/views/current_page_and_next_page_profile_set_up.dart';
-import 'package:fitfat/features/details/presentation/views/personal_information_view.dart';
 import 'package:flutter/material.dart';
+
+import 'current_page_and_next_page_profile_set_up.dart';
 
 class CurrentPageIndicatorSection extends StatelessWidget {
   const CurrentPageIndicatorSection({
