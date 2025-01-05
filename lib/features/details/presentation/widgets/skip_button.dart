@@ -8,7 +8,12 @@ class SkipButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {},
-      child: Row(
+      style: ElevatedButton.styleFrom(
+          backgroundColor: AppLightColor.secondColor,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: const BorderSide(color: AppLightColor.greyColor))),
+      child: const Row(
         children: [
           Text(
             "Skip",
@@ -24,11 +29,6 @@ class SkipButton extends StatelessWidget {
           )
         ],
       ),
-      style: ElevatedButton.styleFrom(
-          backgroundColor: AppLightColor.secondColor,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-              side: BorderSide(color: AppLightColor.greyColor))),
     );
   }
 }

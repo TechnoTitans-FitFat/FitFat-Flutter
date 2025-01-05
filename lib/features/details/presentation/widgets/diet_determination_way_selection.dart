@@ -7,7 +7,7 @@ class DietDeterminationWaySelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Text(
           "How would you like to determine your diet information?",
