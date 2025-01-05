@@ -8,7 +8,8 @@ class CustomButton extends StatelessWidget {
       this.borderColor,
       this.background,
       this.widgetColor,
-      this.size});
+      this.size,
+      this.onPressed});
 
   final String? widget;
   final IconData? icon;
@@ -16,11 +17,12 @@ class CustomButton extends StatelessWidget {
   final Color? borderColor;
   final Color? widgetColor;
   final double? size;
+  final VoidCallback ? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed!,
       style: ElevatedButton.styleFrom(
           backgroundColor: background,
           shape: RoundedRectangleBorder(
