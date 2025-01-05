@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/features/details/presentation/views/calculate_diet_view.dart';
 import 'package:fitfat/features/details/presentation/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
@@ -7,27 +8,33 @@ class DietDeterminationWaySelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        Text(
+        const Text(
           "How would you like to determine your diet information?",
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 24,),
+        const SizedBox(height: 24,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomButton(
+             CustomButton(
               borderColor: AppLightColor.mainColor,
               widget: "Input My Diet",
               widgetColor: AppLightColor.blackColor,
               background: AppLightColor.whiteColor,
+               onPressed: (){},
             ),
             CustomButton(
               borderColor: AppLightColor.mainColor,
               widget: "CalCulate it For Me",
               widgetColor: AppLightColor.blackColor,
               background: AppLightColor.whiteColor,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder:  (context) {
+                  return const CalculateDietView();
+                },));
+              },
             ),
           ],
         )

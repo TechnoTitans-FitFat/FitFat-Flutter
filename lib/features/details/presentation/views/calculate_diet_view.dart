@@ -1,13 +1,14 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/details/presentation/widgets/current_page_indicator_section.dart';
 import 'package:fitfat/features/details/presentation/widgets/custom_container_profile_set_up.dart';
-import 'package:fitfat/features/details/presentation/widgets/diet_determination_way_selection.dart';
+import 'package:fitfat/features/details/presentation/widgets/diet_goals_selection.dart';
+import 'package:fitfat/features/details/presentation/widgets/next_button.dart';
 import 'package:fitfat/features/details/presentation/widgets/skip_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DietInformationView extends StatelessWidget {
-  const DietInformationView({super.key});
+class CalculateDietView extends StatelessWidget {
+  const CalculateDietView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +57,21 @@ class DietInformationView extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const CustomContainerProfileSetUp(
+          CustomContainerProfileSetUp(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-              child: DietDeterminationWaySelection()
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                child: Column(
+                  children: [
+                    const DietGoalsSelection(),
+                    const SizedBox(height: 24,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        NextButton(onPressed: (){},),
+                      ],
+                    )
+                  ],
+                )
             ),
           ),
         ],

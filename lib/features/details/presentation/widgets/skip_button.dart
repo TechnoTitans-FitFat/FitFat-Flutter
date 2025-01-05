@@ -2,12 +2,12 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:flutter/material.dart';
 
 class SkipButton extends StatelessWidget {
-  const SkipButton({super.key});
-
+   const SkipButton({super.key,this.onPressed});
+  final VoidCallback ? onPressed;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
           backgroundColor: AppLightColor.secondColor,
           shape: RoundedRectangleBorder(
