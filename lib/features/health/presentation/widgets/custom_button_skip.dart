@@ -1,0 +1,36 @@
+import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class CustomButtonSkip extends StatelessWidget {
+  const CustomButtonSkip({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 34,
+      width: 77,
+      decoration: BoxDecoration(
+          color: AppLightColor.secondColor,
+          border: Border.all(color: AppLightColor.blackColor.withOpacity(.4),),
+          borderRadius: BorderRadius.circular(16)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            'Skip',
+            style: GoogleFonts.roboto(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: AppLightColor.blackColor.withOpacity(.4),
+            ),
+          ),
+           Icon(
+            Icons.arrow_forward,
+            color: AppLightColor.blackColor.withOpacity(.4),
+            size: 19,
+          )
+        ],
+      ),
+    );
+  }
+}
