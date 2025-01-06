@@ -2,6 +2,8 @@ import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
+import 'package:fitfat/features/details/presentation/views/calculate_diet_view.dart';
+import 'package:fitfat/features/details/presentation/views/diet_information_view.dart';
 import 'package:fitfat/features/details/presentation/views/personal_information_view.dart';
 import 'package:fitfat/features/health/presentation/views/health_info_one.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
