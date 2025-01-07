@@ -1,9 +1,8 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/features/details/presentation/widgets/calculatr_body.dart';
 import 'package:fitfat/features/details/presentation/widgets/current_page_indicator_section.dart';
 import 'package:fitfat/features/details/presentation/widgets/custom_container_profile_set_up.dart';
-import 'package:fitfat/features/details/presentation/widgets/diet_goals_selection.dart';
-import 'package:fitfat/features/details/presentation/widgets/next_button.dart';
-import 'package:fitfat/features/details/presentation/widgets/skip_button.dart';
+import 'package:fitfat/features/health/presentation/widgets/custom_button_skip.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,7 +38,7 @@ class CalculateDietView extends StatelessWidget {
                         color: AppLightColor.mainColor,
                       ),
                     ),
-                    SkipButton(onPressed: (){},)
+                    const CustomButtonSkip()
                   ],
                 ),
                 const SizedBox(
@@ -57,21 +56,14 @@ class CalculateDietView extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          CustomContainerProfileSetUp(
-            child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                child: Column(
-                  children: [
-                    const DietGoalsSelection(),
-                    const SizedBox(height: 24,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        NextButton(onPressed: (){},),
-                      ],
-                    )
-                  ],
-                )
+          const Expanded(
+            child: SingleChildScrollView(
+              child: CustomContainerProfileSetUp(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 35),
+                  child: CalculatrBody(),
+                ),
+              ),
             ),
           ),
         ],
