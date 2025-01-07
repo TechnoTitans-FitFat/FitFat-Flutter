@@ -1,6 +1,7 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/details/presentation/widgets/current_page_indicator_section.dart';
 import 'package:fitfat/features/details/presentation/widgets/custom_container_profile_set_up.dart';
+import 'package:fitfat/features/details/presentation/widgets/date_of_birth_section.dart';
 import 'package:fitfat/features/details/presentation/widgets/gender_section.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,6 +52,7 @@ class PersonalInformationView extends StatelessWidget {
               children: [
                 SizedBox(height: 30),
                 GenderSection(),
+                DateOfBirthSection(),
               ],
             ),
           ),
