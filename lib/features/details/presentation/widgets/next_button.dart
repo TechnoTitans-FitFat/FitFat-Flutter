@@ -15,10 +15,13 @@ class NextButton extends StatelessWidget {
           )),
       child: const Row(
         children: [
-          Text(
-            "Next",
-            style: TextStyle(
-                color: AppLightColor.whiteColor, fontWeight: FontWeight.bold, fontSize: 16),
+          Center(
+            child: Text(
+              "Next",
+              
+              style: TextStyle(
+                  color: AppLightColor.whiteColor, fontWeight: FontWeight.bold, fontSize: 16,),
+            ),
           ),
         ],
       ),

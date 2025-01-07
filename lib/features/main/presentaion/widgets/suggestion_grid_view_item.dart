@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class SuggestionGridViewItem extends StatelessWidget {
@@ -53,15 +54,11 @@ class SuggestionGridViewItem extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                "Egg && Toast",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: AppLightColor.blackColor),
-              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Text("Egg && Toast",
+                  style: AppStyles.textStyle16
+                      .copyWith(color: AppLightColor.blackColor)),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -69,32 +66,18 @@ class SuggestionGridViewItem extends StatelessWidget {
                 color: AppLightColor.mainColor.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: const Text(
-                "350 cal",
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: AppLightColor.blackColor,
-                ),
-              ),
+              child: Text("350 cal",
+                  style: AppStyles.textStyle12
+                      .copyWith(color: AppLightColor.mainColor)),
             ),
             Row(
               children: [
-                const Text(
-                  "170",
-                  style: TextStyle(
-                    color: AppLightColor.mainColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const Text(
-                  "EGP",
-                  style: TextStyle(
-                      color: AppLightColor.blackColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600),
-                ),
+                Text("170",
+                    style: AppStyles.textStyle16
+                        .copyWith(color: AppLightColor.mainColor)),
+                Text("EGP",
+                    style: AppStyles.textStyle16
+                        .copyWith(color: AppLightColor.blackColor)),
                 const Spacer(),
                 Container(
                   decoration: BoxDecoration(
