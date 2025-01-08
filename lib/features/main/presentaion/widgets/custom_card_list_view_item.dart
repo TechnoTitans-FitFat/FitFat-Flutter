@@ -7,7 +7,7 @@ class CustomCardListViewItem extends StatelessWidget {
   final String imagePath;
   final String? type;
   final String calories;
-  final int price; 
+  final int price;
   final bool showType;
 
   const CustomCardListViewItem({
@@ -16,7 +16,7 @@ class CustomCardListViewItem extends StatelessWidget {
     required this.imagePath,
     this.type,
     required this.calories,
-    required this.price, 
+    required this.price,
     this.showType = true,
   });
 
@@ -27,22 +27,26 @@ class CustomCardListViewItem extends StatelessWidget {
       shadowColor: Colors.black,
       color: AppLightColor.whiteColor,
       child: Padding(
-        padding: const EdgeInsets.all(16.0), 
+        padding: const EdgeInsets.all(16.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          
             Container(
               width: 150,
               height: 150,
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppLightColor.blackColor.withOpacity(0.25),
+                      blurRadius: 3,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(15))),
               child: Image.asset(imagePath, fit: BoxFit.cover),
             ),
             const SizedBox(width: 20),
-            
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,10 +58,9 @@ class CustomCardListViewItem extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  
-                    Row(
-                      children: [
-                        if (showType)
+                  Row(
+                    children: [
+                      if (showType)
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 20,
@@ -68,33 +71,32 @@ class CustomCardListViewItem extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
-                            type??'',
+                            type ?? '',
                             style: AppStyles.textStyle12.copyWith(
                               color: AppLightColor.mainColor,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppLightColor.mainColor.withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            '$calories cal',
-                            style: AppStyles.textStyle12.copyWith(
-                              color: AppLightColor.mainColor,
-                            ),
+                      const SizedBox(width: 10),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppLightColor.mainColor.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Text(
+                          '$calories cal',
+                          style: AppStyles.textStyle12.copyWith(
+                            color: AppLightColor.mainColor,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 10),
-                  
                   Row(
                     children: [
                       const Icon(
@@ -113,7 +115,6 @@ class CustomCardListViewItem extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 15),
-                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -134,7 +135,6 @@ class CustomCardListViewItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                      
                       Container(
                         height: 35,
                         width: 35,

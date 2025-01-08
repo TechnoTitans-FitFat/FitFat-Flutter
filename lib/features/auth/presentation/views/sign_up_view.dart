@@ -49,7 +49,7 @@ class SignUp extends StatelessWidget {
                       const SizedBox(
                         height: 32,
                       ),
-                      CustomTextField(
+                      const CustomTextField(
                         hint: 'Name',
                         icon: FontAwesomeIcons.user,
                         noti: 'please, Enter your name',
@@ -81,7 +81,7 @@ class SignUp extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      CustomTextField(
+                      const CustomTextField(
                         hint: 'Confirm Password',
                         icon: Icons.lock_outline,
                         sufIconNot: Icons.visibility,
