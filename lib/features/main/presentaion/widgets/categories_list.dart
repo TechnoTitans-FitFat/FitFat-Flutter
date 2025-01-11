@@ -23,28 +23,28 @@ class CategoriesList extends StatelessWidget {
               ),
             );
           },
-          child:const CustomCardCategory(
+          child: const CustomCardCategory(
             icon: Icons.food_bank,
             text: 'Diet',
           ),
         ),
         GestureDetector(
-          onTap: (){
-              Navigator.push(
+          onTap: () {
+            Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const DiabetesView(),
               ),
             );
           },
-          child:const CustomCardCategory(
-            text: 'Diadetes',
+          child: const CustomCardCategory(
+            text: 'Diabetes',
             icon: Icons.food_bank,
           ),
         ),
         GestureDetector(
-          onTap: (){
-              Navigator.push(
+          onTap: () {
+            Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const AllergyView(),

@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomCardCategory extends StatelessWidget {
@@ -40,14 +41,9 @@ class CustomCardCategory extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                text,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppLightColor.mainColor,
-                ),
-              ),
+              Text(text,
+                  style: AppStyles.textStyle16
+                      .copyWith(color: AppLightColor.mainColor)),
             ],
           ),
         ),
