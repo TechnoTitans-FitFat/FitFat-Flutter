@@ -9,7 +9,7 @@ class NextButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16,right: 24),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
             backgroundColor: AppLightColor.mainColor,
             shape: RoundedRectangleBorder(

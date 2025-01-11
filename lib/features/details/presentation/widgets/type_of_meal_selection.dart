@@ -8,7 +8,7 @@ class TypeOfMealSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding:const EdgeInsets.symmetric(horizontal: 23, vertical: 16),
       child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,6 +27,7 @@ class TypeOfMealSelection extends StatelessWidget {
               background: AppLightColor.whiteColor,
               onPressed: (){},
             ),
+            const SizedBox(width: 15,),
             CustomButton(
               borderColor: AppLightColor.mainColor,
               widget: "Gluten-Free",
@@ -47,6 +48,7 @@ class TypeOfMealSelection extends StatelessWidget {
               background: AppLightColor.whiteColor,
               onPressed: (){},
             ),
+            const SizedBox(width: 15,),
             CustomButton(
               borderColor: AppLightColor.mainColor,
               widget: "Keto",
