@@ -8,7 +8,7 @@ class DietGoalsSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:const EdgeInsets.symmetric(horizontal: 24),
+      padding:const EdgeInsets.symmetric(horizontal: 22),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -27,6 +27,7 @@ class DietGoalsSelection extends StatelessWidget {
                 background: AppLightColor.whiteColor,
                 onPressed: (){},
               ),
+              const SizedBox(width: 15,),
               CustomButton(
                 borderColor: AppLightColor.mainColor,
                 widget: "Weight Gain",
@@ -47,6 +48,7 @@ class DietGoalsSelection extends StatelessWidget {
                 background: AppLightColor.whiteColor,
                 onPressed: (){},
               ),
+              const SizedBox(width: 15,),
                CustomButton(
                 borderColor: AppLightColor.mainColor,
                 widget: "Muscle Gain",

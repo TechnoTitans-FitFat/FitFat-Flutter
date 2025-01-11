@@ -22,6 +22,7 @@ class DietDeterminationWaySelection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomButton(
+              flex:10,
               borderColor: AppLightColor.mainColor,
               widget: "Input My Diet",
               widgetColor: AppLightColor.blackColor,
@@ -30,7 +31,9 @@ class DietDeterminationWaySelection extends StatelessWidget {
                 Navigator.push(context,MaterialPageRoute(builder: (context)=>  const InputMyDietView()));
               },
             ),
+            const Spacer(flex: 1,),
             CustomButton(
+              flex:13,
               borderColor: AppLightColor.mainColor,
               widget: "CalCulate it For Me",
               widgetColor: AppLightColor.blackColor,
