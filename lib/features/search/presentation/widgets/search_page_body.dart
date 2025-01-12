@@ -22,23 +22,32 @@ class SearchPageBody extends StatelessWidget {
                 fontSize: 20,
                 color: AppLightColor.mainColor,
               )),
-             const LatestSearch(),
-             const SizedBox(height: 25,),
-             Text('Meal Dishes',
+          const LatestSearch(),
+          const SizedBox(
+            height: 25,
+          ),
+          Text('Meal Dishes',
               style: AppStyles.textStyle24.copyWith(
                 fontSize: 20,
                 color: AppLightColor.mainColor,
               )),
-              const SizedBox(height: 10,), 
-              const MealDishes(),
-               const SizedBox(height: 25,),
-             Text('Most Popular Search',
+          const SizedBox(
+            height: 10,
+          ),
+          const MealDishes(),
+          const SizedBox(
+            height: 25,
+          ),
+          Text('Most Popular Search',
               style: AppStyles.textStyle24.copyWith(
                 fontSize: 20,
                 color: AppLightColor.mainColor,
-              )), 
-              const SizedBox(height: 10,),
-              const MostPopularSearch()         
+              )),
+          const SizedBox(
+            height: 10,
+          ),
+          const MostPopularSearch(),
+          const SizedBox()
         ],
       ),
     );
