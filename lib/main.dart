@@ -41,7 +41,8 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: const DietInformationView()),
+        home: const SearchPage(),
+      ),
     );
   }
 }
