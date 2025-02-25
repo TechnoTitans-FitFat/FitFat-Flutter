@@ -49,50 +49,50 @@ class HealthInfoOneBody extends StatelessWidget {
           height: 30,
         ),
         CustomContainerProfileSetUp(
-          child:Padding(
+          child: Padding(
             padding: const EdgeInsets.all(24),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 50,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Text(
+                  'Do you have any food allergies?',
+                  style: GoogleFonts.roboto(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: AppLightColor.blackColor,
                   ),
-                  Text(
-                    'Do you have any food allergies?',
-                    style: GoogleFonts.roboto(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: AppLightColor.blackColor,
-                    ),
+                ),
+                Text(
+                  '“You can choose more than one option”',
+                  style: GoogleFonts.roboto(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: AppLightColor.blackColor.withOpacity(.6),
                   ),
-                  Text(
-                    '“You can choose more than one option”',
-                     style: GoogleFonts.roboto(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: AppLightColor.blackColor.withOpacity(.6),
-                    ),
+                ),
+                const Answers(),
+                const SizedBox(height: 30),
+                Text(
+                  'Do you suffer from type of diabetes?',
+                  style: GoogleFonts.roboto(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: AppLightColor.blackColor,
                   ),
-                  const Answers(),
-                  const SizedBox(height:30),
-                  Text(
-                    'Do you suffer from type of diabetes?',
-                    style: GoogleFonts.roboto(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: AppLightColor.blackColor,
-                    ),
-                  ),
-                  const SizedBox(height:15),
-                  const Row(
-                    children: [
-                      CustomCardAnswer(title: 'Yes'),
-                      SizedBox(width:25),
-                      CustomCardAnswer(title: 'No'),
-                    ],
-                  )
-                ],
-              ),
+                ),
+                const SizedBox(height: 15),
+                const Row(
+                  children: [
+                    CustomCardAnswer(title: 'Yes'),
+                    SizedBox(width: 25),
+                    CustomCardAnswer(title: 'No'),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ],

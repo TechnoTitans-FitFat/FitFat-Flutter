@@ -1,13 +1,13 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/details/presentation/widgets/calculatr_body.dart';
 import 'package:fitfat/features/details/presentation/widgets/current_page_indicator_section.dart';
 import 'package:fitfat/features/details/presentation/widgets/custom_container_profile_set_up.dart';
-import 'package:fitfat/features/health/presentation/widgets/custom_button_skip.dart';
+import 'package:fitfat/features/details/presentation/widgets/input_my_diet_view_body.dart';
+import 'package:fitfat/features/details/presentation/widgets/skip_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CalculateDietView extends StatelessWidget {
-  const CalculateDietView({super.key});
+class InputMyDietView extends StatelessWidget {
+  const InputMyDietView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,9 @@ class CalculateDietView extends StatelessWidget {
                         color: AppLightColor.mainColor,
                       ),
                     ),
-                    const CustomButtonSkip()
+                    SkipButton(
+                      onPressed: () {},
+                    )
                   ],
                 ),
                 const SizedBox(
@@ -56,16 +58,11 @@ class CalculateDietView extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const Expanded(
-            child: SingleChildScrollView(
-              child: CustomContainerProfileSetUp(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 35),
-                  child: CalculatrBody(),
-                ),
-              ),
-            ),
-          ),
+          const CustomContainerProfileSetUp(
+              child:Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                child: InputMyDietViewBody(),
+              ) )
         ],
       ),
     );
