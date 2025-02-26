@@ -5,8 +5,6 @@ import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
 import '../wedgets/customs/custom_button.dart';
 import '../wedgets/customs/custom_textfield.dart';
 
@@ -17,41 +15,34 @@ class Login extends StatelessWidget {
 
   late GlobalKey<FormState> formKey = GlobalKey();
 
-  late bool isLoading = false;
-
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginStates>(
-      listener: (BuildContext context, state) {
-        if (state is LoginLoading) {
-          isLoading = true;
-        } else if (state is LoginSucess) {
-          ShowDialog(context, 'Great to see you again');
-          isLoading = false;
-        } else if (state is LoginFalier) {
-          showSnackBar(context, state.errorMassage);
-          isLoading = false;
-        }
-      },
-      child: ModalProgressHUD(
-        inAsyncCall: isLoading,
-        child: Column(
+    return BlocConsumer<LoginCubit, LoginStates>(
+        listener: (BuildContext context, state) {
+          if (state is LoginLoading) {
+          } else if (state is LoginSucess) {
+            ShowDialog(context, 'Great to see you again');
+          } else if (state is LoginFalier) {
+            showSnackBar(context, state.errorMassage);
+          }
+        }, builder: (context, state) {
+      return Scaffold(
+        backgroundColor: AppLightColor.whiteColor,
+        body: Column(
           children: [
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: AppLightColor.whiteColor),
               child: Form(
-                key: formKey,
+                key: context.read<LoginCubit>().signInFormKey,
                 child: Column(
                   children: [
                     const SizedBox(
                       height: 32,
                     ),
                     CustomTextField(
-                      onchange: (data) {
-                        email = data;
-                      },
+                      controller: context.read<LoginCubit>().signInEmail,
                       hint: 'Email',
                       icon: Icons.email_outlined,
                       noti: 'please, Enter your email',
@@ -60,9 +51,7 @@ class Login extends StatelessWidget {
                       height: 20,
                     ),
                     CustomTextField(
-                      onchange: (data) {
-                        password = data;
-                      },
+                      controller: context.read<LoginCubit>().signInPassword,
                       hint: 'Password',
                       icon: Icons.lock_outline,
                       sufIconNot: Icons.visibility,
@@ -74,27 +63,32 @@ class Login extends StatelessWidget {
                     ),
                     GestureDetector(
                         child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: 55),
-                          child: Text(
-                            'Forgot password',
-                            style: TextStyle(color: AppLightColor.greyColor),
-                          ),
-                        ),
-                      ],
-                    )),
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: 55),
+                              child: Text(
+                                'Forgot password',
+                                style: TextStyle(color: AppLightColor.greyColor),
+                              ),
+                            ),
+                          ],
+                        )),
                     const SizedBox(
                       height: 32,
                     ),
+                    // state is LoginLoading
+                    //     ? const CircularProgressIndicator()
+                    //     :
                     CustomBottom(
-                      text: 'Login',
-                      ontap: () async {
-                        if (formKey.currentState!.validate()) {
-                          BlocProvider.of<LoginCubit>(context)
-                              .LoginUser(email: email!, password: password!);
-                          return ShowDialog(context, 'Great to see you again');
+                      text: 'Sign In',
+                      ontap: () {
+                        if (context
+                            .read<LoginCubit>()
+                            .signInFormKey
+                            .currentState!
+                            .validate()) {
+                          context.read<LoginCubit>().signIn();
                         }
                       },
                     ),
@@ -107,7 +101,7 @@ class Login extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: 100,
+                            width: 80,
                             child: Divider(
                                 color: AppLightColor.greyColor, height: 8),
                           ),
@@ -116,7 +110,7 @@ class Login extends StatelessWidget {
                             child: Text('Or signUp with'),
                           ),
                           SizedBox(
-                            width: 100,
+                            width: 80,
                             child: Divider(
                                 color: AppLightColor.greyColor, height: 8),
                           ),
@@ -158,7 +152,7 @@ class Login extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
+      );
+    });
   }
 }
