@@ -13,9 +13,7 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? email, password;
-
-    GlobalKey<FormState> formKey = GlobalKey();
+    String? email, password,confirm;
 
     bool isLoading = false;
     return BlocConsumer<RegisterCubit, SignUpStates>(
@@ -42,13 +40,14 @@ class SignUp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     color: AppLightColor.whiteColor),
                 child: Form(
-                  key: formKey,
+                  key: context.read<RegisterCubit>().signUpFormKey,
                   child: Column(
                     children: [
                       const SizedBox(
                         height: 32,
                       ),
-                      const CustomTextField(
+                      CustomTextField(
+                        controller: context.read<RegisterCubit>().signUpName,
                         hint: 'Name',
                         icon: FontAwesomeIcons.user,
                         noti: 'please, Enter your name',
@@ -57,6 +56,7 @@ class SignUp extends StatelessWidget {
                         height: 20,
                       ),
                       CustomTextField(
+                        controller: context.read<RegisterCubit>().signUpEmail,
                         onchange: (data) {
                           email = data;
                         },
@@ -68,6 +68,8 @@ class SignUp extends StatelessWidget {
                         height: 20,
                       ),
                       CustomTextField(
+                        controller:
+                            context.read<RegisterCubit>().signUpPassword,
                         onchange: (data) {
                           password = data;
                         },
@@ -80,8 +82,12 @@ class SignUp extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      const CustomTextField(
+                      CustomTextField(
+                        controller: context.read<RegisterCubit>().confirmPassword,
                         hint: 'Confirm Password',
+                        onchange: (data){
+                          confirm ==data;
+                        },
                         icon: Icons.lock_outline,
                         sufIconNot: Icons.visibility,
                         sufIcon: Icons.visibility_off,
@@ -93,7 +99,13 @@ class SignUp extends StatelessWidget {
                       CustomBottom(
                         text: 'Sign Up',
                         ontap: () async {
-                          if (formKey.currentState!.validate()) {}
+                          if (context
+                              .read<RegisterCubit>()
+                              .signUpFormKey
+                              .currentState!
+                              .validate() ) {
+                              context.read<RegisterCubit>().signUp();
+                          }
                         },
                       ),
                       const SizedBox(
@@ -111,7 +123,7 @@ class SignUp extends StatelessWidget {
                             ),
                             Padding(
                               padding:
-                              EdgeInsets.only(right: 8, left: 8, top: 8),
+                                  EdgeInsets.only(right: 8, left: 8, top: 8),
                               child: Text('Or signUp with'),
                             ),
                             SizedBox(
