@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginCubit(DioComsumer(dio: Dio())),
         ),
         BlocProvider(
-          create: (context) => RegisterCubit(),
+          create: (context) => RegisterCubit(DioComsumer(dio: Dio())),
         )
       ],
       child: GetMaterialApp(
