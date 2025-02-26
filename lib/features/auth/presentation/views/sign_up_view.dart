@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
 import '../wedgets/customs/custom_textfield.dart';
 
 class SignUp extends StatelessWidget {
@@ -19,7 +18,7 @@ class SignUp extends StatelessWidget {
     GlobalKey<FormState> formKey = GlobalKey();
 
     bool isLoading = false;
-    return BlocConsumer<SignUpCubit, SignUpStates>(
+    return BlocConsumer<RegisterCubit, SignUpStates>(
       listener: (BuildContext context, state) {
         if (state is SignUpLoading) {
           isLoading = false;
@@ -94,14 +93,7 @@ class SignUp extends StatelessWidget {
                       CustomBottom(
                         text: 'Sign Up',
                         ontap: () async {
-                          if (formKey.currentState!.validate()) {
-                            final siginUpEvent =
-                                BlocProvider.of<SignUpCubit>(context);
-                            siginUpEvent.SignupUser(
-                                email: email!, password: password!);
-                            return ShowDialog(context,
-                                'Welcome to the family!\n Your journey starts now');
-                          }
+                          if (formKey.currentState!.validate()) {}
                         },
                       ),
                       const SizedBox(
@@ -113,17 +105,17 @@ class SignUp extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: 100,
+                              width: 80,
                               child: Divider(
                                   color: AppLightColor.greyColor, height: 8),
                             ),
                             Padding(
                               padding:
-                                  EdgeInsets.only(right: 8, left: 8, top: 8),
+                              EdgeInsets.only(right: 8, left: 8, top: 8),
                               child: Text('Or signUp with'),
                             ),
                             SizedBox(
-                              width: 100,
+                              width: 80,
                               child: Divider(
                                   color: AppLightColor.greyColor, height: 8),
                             ),
