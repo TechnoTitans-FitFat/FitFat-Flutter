@@ -1,9 +1,9 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_bottom_nav_bar.dart';
+import 'package:fitfat/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:fitfat/features/main/presentaion/widgets/categories_list.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_dots.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_suggestion_grid_view.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_text_filed_search.dart';
+import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_title.dart';
 import 'package:flutter/material.dart';
 
