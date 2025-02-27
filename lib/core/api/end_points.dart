@@ -1,4 +1,3 @@
-
 class EndPoint {
   static String baseUrl = "https://fitfat-backend.up.railway.app";
   static String signIn = "$baseUrl/login";
@@ -17,8 +16,6 @@ class ApiKey {
   static String name = "username";
   static String confirmPassword = "confirmPassword";
   static String image = 'image';
-  static String name ='name';
-  static String price ='price';
-  static String calories ='calories';
-
+  static String price = 'price';
+  static String calories = 'calories';
 }
