@@ -1,19 +1,22 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:dio/dio.dart';
+import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
-import 'package:fitfat/features/details/presentation/views/diet_information_view.dart';
-import 'package:fitfat/firebase_options.dart';
+import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'features/auth/data/Cubit/cache/cache_helper.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  CacheHelper().init();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
@@ -30,18 +33,18 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LoginCubit(),
+          create: (context) => LoginCubit(DioComsumer(dio: Dio())),
         ),
         BlocProvider(
-          create: (context) => SignUpCubit(),
+          create: (context) => RegisterCubit(DioComsumer(dio: Dio())),
         )
       ],
       child: GetMaterialApp(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        debugShowCheckedModeBanner: false,
-        home: const DietInformationView()),
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          debugShowCheckedModeBanner: false,
+          home: const LoginSignUp()),
     );
   }
 }

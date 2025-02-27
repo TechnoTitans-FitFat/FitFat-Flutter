@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
 import '../wedgets/customs/custom_textfield.dart';
 
 class SignUp extends StatelessWidget {
@@ -14,12 +13,10 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? email, password;
-
-    GlobalKey<FormState> formKey = GlobalKey();
+    String? email, password,confirm;
 
     bool isLoading = false;
-    return BlocConsumer<SignUpCubit, SignUpStates>(
+    return BlocConsumer<RegisterCubit, SignUpStates>(
       listener: (BuildContext context, state) {
         if (state is SignUpLoading) {
           isLoading = false;
@@ -43,13 +40,14 @@ class SignUp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     color: AppLightColor.whiteColor),
                 child: Form(
-                  key: formKey,
+                  key: context.read<RegisterCubit>().signUpFormKey,
                   child: Column(
                     children: [
                       const SizedBox(
                         height: 32,
                       ),
-                      const CustomTextField(
+                      CustomTextField(
+                        controller: context.read<RegisterCubit>().signUpName,
                         hint: 'Name',
                         icon: FontAwesomeIcons.user,
                         noti: 'please, Enter your name',
@@ -58,6 +56,7 @@ class SignUp extends StatelessWidget {
                         height: 20,
                       ),
                       CustomTextField(
+                        controller: context.read<RegisterCubit>().signUpEmail,
                         onchange: (data) {
                           email = data;
                         },
@@ -69,6 +68,8 @@ class SignUp extends StatelessWidget {
                         height: 20,
                       ),
                       CustomTextField(
+                        controller:
+                            context.read<RegisterCubit>().signUpPassword,
                         onchange: (data) {
                           password = data;
                         },
@@ -81,8 +82,12 @@ class SignUp extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      const CustomTextField(
+                      CustomTextField(
+                        controller: context.read<RegisterCubit>().confirmPassword,
                         hint: 'Confirm Password',
+                        onchange: (data){
+                          confirm ==data;
+                        },
                         icon: Icons.lock_outline,
                         sufIconNot: Icons.visibility,
                         sufIcon: Icons.visibility_off,
@@ -94,13 +99,12 @@ class SignUp extends StatelessWidget {
                       CustomBottom(
                         text: 'Sign Up',
                         ontap: () async {
-                          if (formKey.currentState!.validate()) {
-                            final siginUpEvent =
-                                BlocProvider.of<SignUpCubit>(context);
-                            siginUpEvent.SignupUser(
-                                email: email!, password: password!);
-                            return ShowDialog(context,
-                                'Welcome to the family!\n Your journey starts now');
+                          if (context
+                              .read<RegisterCubit>()
+                              .signUpFormKey
+                              .currentState!
+                              .validate() ) {
+                              context.read<RegisterCubit>().signUp();
                           }
                         },
                       ),
@@ -113,7 +117,7 @@ class SignUp extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: 100,
+                              width: 80,
                               child: Divider(
                                   color: AppLightColor.greyColor, height: 8),
                             ),
@@ -123,7 +127,7 @@ class SignUp extends StatelessWidget {
                               child: Text('Or signUp with'),
                             ),
                             SizedBox(
-                              width: 100,
+                              width: 80,
                               child: Divider(
                                   color: AppLightColor.greyColor, height: 8),
                             ),
