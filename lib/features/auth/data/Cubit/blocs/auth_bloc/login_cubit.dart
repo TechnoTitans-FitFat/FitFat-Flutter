@@ -3,7 +3,7 @@ import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/errors/exceptions.dart';
-import 'package:fitfat/features/auth/data/Cubit/cache/cache_helper.dart';
+import 'package:fitfat/core/cache/cache_helper.dart';
 import 'package:fitfat/features/auth/data/Cubit/models/sign_in_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +19,6 @@ class LoginCubit extends Cubit<LoginStates> {
   TextEditingController signInEmail = TextEditingController();
   TextEditingController signInPassword = TextEditingController();
   SignInModel? user;
-
 
   // signIn() async {
   //   try {
@@ -64,33 +63,33 @@ class LoginCubit extends Cubit<LoginStates> {
   //   }
   // }
 
-signIn() async {
-  try {
-    emit(LoginLoading());
-    final response = await api.post(EndPoint.signIn, data: {
-      ApiKey.email: signInEmail.text,
-      ApiKey.password: signInPassword.text
-    });
-    user = SignInModel.fromJson(response);
-    final decodedToken = JwtDecoder.decode(user!.token);
-    if (decodedToken.containsKey(ApiKey.id)) {
-      CacheHelper().saveData(key: ApiKey.token, value: user!.token);
-      CacheHelper().saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
-    } else {
-      emit(LoginFalier(errorMassage: "Invalid token"));
+  signIn() async {
+    try {
+      emit(LoginLoading());
+      final response = await api.post(EndPoint.signIn, data: {
+        ApiKey.email: signInEmail.text,
+        ApiKey.password: signInPassword.text
+      });
+      user = SignInModel.fromJson(response);
+      final decodedToken = JwtDecoder.decode(user!.token);
+      if (decodedToken.containsKey(ApiKey.id)) {
+        CacheHelper().saveData(key: ApiKey.token, value: user!.token);
+        CacheHelper().saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
+      } else {
+        emit(LoginFalier(errorMassage: "Invalid token"));
+      }
+      print(response.data.toString());
+      print("Received Token: ${user!.token}");
+      emit(LoginSucess());
+    } on ServerException catch (e) {
+      emit(LoginFalier(errorMassage: e.errModel.errMessage));
+    } on DioException catch (e) {
+      print("Dio error: ${e.message}");
+      print("Response data: ${e.response?.data}");
+      print("Response status code: ${e.response?.statusCode}");
+      handleDioException(e);
+    } catch (e) {
+      emit(LoginFalier(errorMassage: "An unexpected error occurred"));
     }
-    print(response.data.toString());
-    print("Received Token: ${user!.token}");
-    emit(LoginSucess());
-  } on ServerException catch (e) {
-    emit(LoginFalier(errorMassage: e.errModel.errMessage));
-  }on DioException catch (e) {
-    print("Dio error: ${e.message}");
-    print("Response data: ${e.response?.data}");
-    print("Response status code: ${e.response?.statusCode}");
-    handleDioException(e);
-  } catch (e) {
-    emit(LoginFalier(errorMassage: "An unexpected error occurred"));
   }
-}
 }
