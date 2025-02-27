@@ -2,7 +2,7 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/main/presentaion/views/viewsBody/favourites_view_body.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_bottom_nav_bar.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 
 class FavouritesView extends StatelessWidget {
@@ -14,7 +14,7 @@ class FavouritesView extends StatelessWidget {
       backgroundColor: AppLightColor.backgroundColor,
       appBar: AppBar(
         backgroundColor: AppLightColor.backgroundColor,
-        title: Center(child: Text('Favourites' ,style: AppStyles.textStyle24.copyWith(color: AppLightColor.mainColor))),
+        title: Center(child: Text('My Favourites' ,style: AppStyles.textStyle24.copyWith(color: AppLightColor.mainColor))),
 
       ),
       body: const FavouritesViewBody(),
