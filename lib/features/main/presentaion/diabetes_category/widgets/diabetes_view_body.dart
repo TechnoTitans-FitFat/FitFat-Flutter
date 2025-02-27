@@ -1,8 +1,8 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_elvated_button.dart';
+import 'package:fitfat/core/widgets/custom_elvated_button.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_text_filed_search.dart';
+import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:flutter/material.dart';
 
 class DiabetesViewBody extends StatelessWidget {
@@ -10,48 +10,48 @@ class DiabetesViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final List<Map<String, dynamic>> items = [
+    final List<Map<String, dynamic>> items = [
       {
         'title': 'Tuna Crunch',
         'imagePath': 'imges/meal1.jpg',
         'calories': '350',
         'showType': false,
-        'price' : 170
+        'price': 170
       },
       {
         'title': 'Veggie Delight',
         'imagePath': 'imges/meal2.png',
         'calories': '200',
-        'showType': false, 
-        'price' : 170
+        'showType': false,
+        'price': 170
       },
       {
         'title': 'Chicken Salad',
         'imagePath': 'imges/meal3.png',
         'calories': '400',
         'showType': false,
-        'price' : 170
+        'price': 170
       },
       {
         'title': 'Tuna Crunch',
         'imagePath': 'imges/meal1.jpg',
         'calories': '350',
         'showType': false,
-        'price' : 170
+        'price': 170
       },
       {
         'title': 'Veggie Delight',
         'imagePath': 'imges/meal2.png',
         'calories': '200',
-        'showType': false, 
-        'price' : 170
+        'showType': false,
+        'price': 170
       },
       {
         'title': 'Chicken Salad',
         'imagePath': 'imges/meal3.png',
         'calories': '400',
         'showType': false,
-        'price' : 170
+        'price': 170
       },
     ];
 
@@ -59,20 +59,18 @@ class DiabetesViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: CustomTextFiledSearch(),
-        ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25),
-              child: Text(
-                'Discover',
-                style:
-                    AppStyles.textStyle24.copyWith(color: AppLightColor.mainColor),
-                    textAlign: TextAlign.left
-              ),
-            ),
-            const SizedBox(
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            child: CustomTextFiledSearch(),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 25),
+            child: Text('Discover',
+                style: AppStyles.textStyle24
+                    .copyWith(color: AppLightColor.mainColor),
+                textAlign: TextAlign.left),
+          ),
+          const SizedBox(
             height: 30,
           ),
           const Padding(
@@ -98,7 +96,7 @@ class DiabetesViewBody extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CustomListView(items: items), 
+          CustomListView(items: items),
         ],
       ),
     );

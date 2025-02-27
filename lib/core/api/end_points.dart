@@ -13,7 +13,8 @@ class ApiKey {
   static String token = "token";
   static String message = "message";
   static String id = "_id";
-  static String name = "username";
+  static String username = "username";
+  static String name = "name";
   static String confirmPassword = "confirmPassword";
   static String image = 'image';
   static String price = 'price';

@@ -6,8 +6,8 @@ import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:flutter/material.dart';
 
-class AllergyViewBody extends StatelessWidget {
-  const AllergyViewBody({super.key});
+class DietViewBody extends StatelessWidget {
+  const DietViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class AllergyViewBody extends StatelessWidget {
       {
         'title': 'Tuna Crunch',
         'imagePath': 'imges/meal1.jpg',
-        'type': 'lactose',
+        'type': 'Keto',
         'calories': '350',
         'showType': true,
         'price': 170
@@ -23,7 +23,7 @@ class AllergyViewBody extends StatelessWidget {
       {
         'title': 'Veggie Delight',
         'imagePath': 'imges/meal2.png',
-        'type': 'sellfish',
+        'type': 'Vegan',
         'calories': '200',
         'showType': true,
         'price': 170
@@ -31,7 +31,7 @@ class AllergyViewBody extends StatelessWidget {
       {
         'title': 'Chicken Salad',
         'imagePath': 'imges/meal3.png',
-        'type': 'wheat',
+        'type': 'Low-Carb',
         'calories': '400',
         'showType': true,
         'price': 170
@@ -39,7 +39,7 @@ class AllergyViewBody extends StatelessWidget {
       {
         'title': 'Tuna Crunch',
         'imagePath': 'imges/meal1.jpg',
-        'type': 'lactose',
+        'type': 'Keto',
         'calories': '350',
         'showType': true,
         'price': 170
@@ -47,7 +47,7 @@ class AllergyViewBody extends StatelessWidget {
       {
         'title': 'Veggie Delight',
         'imagePath': 'imges/meal2.png',
-        'type': 'sellfish',
+        'type': 'Vegan',
         'calories': '200',
         'showType': true,
         'price': 170
@@ -55,7 +55,7 @@ class AllergyViewBody extends StatelessWidget {
       {
         'title': 'Chicken Salad',
         'imagePath': 'imges/meal3.png',
-        'type': 'wheat',
+        'type': 'Low-Carb',
         'calories': '400',
         'showType': true,
         'price': 170
@@ -73,7 +73,7 @@ class AllergyViewBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Text(
-              'Cateogries',
+              'Categories',
               style: AppStyles.textStyle24
                   .copyWith(color: AppLightColor.mainColor),
             ),
@@ -84,31 +84,29 @@ class AllergyViewBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomCardDiet(
-                  text: 'Lactose',
+                  text: 'Keto',
                   height: 55,
                   width: 80,
                 ),
                 CustomCardDiet(
-                  text: 'Shellfish',
+                  text: 'Vegan',
                   height: 55,
                   width: 80,
                 ),
                 CustomCardDiet(
-                  text: 'Wheat',
+                  text: 'Low-Carb',
                   height: 55,
                   width: 100,
                 ),
                 CustomCardDiet(
-                  text: 'Peanuts',
+                  text: 'High-Carb',
                   height: 55,
                   width: 100,
                 ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 40,
-          ),
+          const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Text(
@@ -117,9 +115,7 @@ class AllergyViewBody extends StatelessWidget {
                   .copyWith(color: AppLightColor.mainColor),
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
           const Padding(
             padding: EdgeInsets.only(left: 25),
             child: Row(
@@ -129,9 +125,7 @@ class AllergyViewBody extends StatelessWidget {
                   butttonColor: AppLightColor.mainColor,
                   textColor: AppLightColor.whiteColor,
                 ),
-                SizedBox(
-                  width: 15,
-                ),
+                SizedBox(width: 15),
                 CustomElvatedButton(
                   text: 'Popular',
                   butttonColor: AppLightColor.whiteColor,
@@ -140,9 +134,7 @@ class AllergyViewBody extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           CustomListView(items: items),
         ],
       ),
