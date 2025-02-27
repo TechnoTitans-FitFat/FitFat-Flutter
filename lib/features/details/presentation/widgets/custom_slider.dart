@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:flutter/material.dart';
