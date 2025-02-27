@@ -9,6 +9,7 @@ class CustomCardListViewItem extends StatelessWidget {
   final String calories;
   final int price;
   final bool showType;
+  final bool isFavourite;
 
   const CustomCardListViewItem({
     super.key,
@@ -18,6 +19,7 @@ class CustomCardListViewItem extends StatelessWidget {
     required this.calories,
     required this.price,
     this.showType = true,
+    required this.isFavourite,
   });
 
   @override
@@ -38,7 +40,7 @@ class CustomCardListViewItem extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: AppLightColor.blackColor.withOpacity(0.25),
-                      blurRadius: 3,
+                      blurRadius: 4,
                       offset: const Offset(0, 3),
                     ),
                   ],
@@ -135,17 +137,21 @@ class CustomCardListViewItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                          color: AppLightColor.mainColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Icon(
-                          Icons.add,
-                          color: AppLightColor.whiteColor,
-                          size: 20,
+                      GestureDetector(
+                        onTap: () {
+                        },
+                        child: Container(
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                            color: AppLightColor.mainColor,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Icon(
+                             isFavourite ? Icons.favorite : Icons.add,
+                            color: AppLightColor.whiteColor,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ],
