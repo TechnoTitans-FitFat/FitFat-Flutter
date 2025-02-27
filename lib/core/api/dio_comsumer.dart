@@ -24,7 +24,7 @@ class DioComsumer extends ApiConsumer {
   
   @override
   delete(String path,
-      {dynamic? data, Map<String, dynamic>? queryParameters,bool isFormData =false}) async {
+      {dynamic data, Map<String, dynamic>? queryParameters,bool isFormData =false}) async {
     try {
       final response =
           await dio.delete(path, data: isFormData?FormData.fromMap(data):data, queryParameters: queryParameters);
@@ -35,7 +35,7 @@ class DioComsumer extends ApiConsumer {
   }
 
   @override
-  get(String path, {dynamic? data, Map<String, dynamic>? queryParameters})async  {
+  get(String path, {dynamic data, Map<String, dynamic>? queryParameters})async  {
      try {
       final response =
           await dio.get(path, data: data, queryParameters: queryParameters);
@@ -46,7 +46,7 @@ class DioComsumer extends ApiConsumer {
   }
 
   @override
-  patch(String path, {dynamic? data, Map<String, dynamic>? queryParameters,bool isFormData =false}) async {
+  patch(String path, {dynamic data, Map<String, dynamic>? queryParameters,bool isFormData =false}) async {
      try {
       final response =
           await dio.delete(path, data: isFormData?FormData.fromMap(data):data, queryParameters: queryParameters);
@@ -57,10 +57,10 @@ class DioComsumer extends ApiConsumer {
   }
 
   @override
-  post(String path, {dynamic? data, Map<String, dynamic>? queryParameters,bool isFormData =false}) async{
+  post(String path, {dynamic data, Map<String, dynamic>? queryParameters,bool isFormData =false}) async{
      try {
       final response =
-          await dio.delete(path, data: isFormData?FormData.fromMap(data):data, queryParameters: queryParameters);
+          await dio.post(path, data: isFormData?FormData.fromMap(data):data, queryParameters: queryParameters);
       return response.data;
     } on DioException catch (e) {
       handleDioException(e);

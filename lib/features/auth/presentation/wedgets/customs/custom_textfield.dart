@@ -5,13 +5,15 @@ import '../../../../../core/constants/light_colors.dart';
 class CustomTextField extends StatefulWidget {
   const CustomTextField(
       {super.key,
-      this.hint,
-      this.icon,
-      this.onchange,
-      this.sufIcon,
-      this.sufIconNot,
-      this.noti});
+        this.hint,
+        this.icon,
+        this.controller,
+        this.onchange,
+        this.sufIcon,
+        this.sufIconNot,
+        this.noti});
 
+  final TextEditingController? controller;
   final IconData? icon;
   final IconData? sufIcon;
   final IconData? sufIconNot;
@@ -33,6 +35,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         horizontal: 50,
       ),
       child: TextFormField(
+        controller: widget.controller,
         validator: (data) {
           if (data!.isEmpty) {
             return widget.noti;
@@ -46,7 +49,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           suffixIcon: IconButton(
               onPressed: () {
                 setState(
-                  () {
+                      () {
                     passwordVisible = !passwordVisible;
                   },
                 );

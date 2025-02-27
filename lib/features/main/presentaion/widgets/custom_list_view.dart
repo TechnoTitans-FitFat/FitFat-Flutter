@@ -8,24 +8,27 @@ class CustomListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
-        return Padding(
-          padding: const EdgeInsets.all(24),
-          child: CustomCardListViewItem(
-            title: item['title'],
-            imagePath: item['imagePath'],
-            type: item['type'],
-            calories: item['calories'],
-            showType: item['showType'] ?? true, 
-            price: item['price']
-          ),
-        );
-      },
+    return Expanded(
+      child: ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          return Padding(
+            padding: const EdgeInsets.all(24),
+            child: CustomCardListViewItem(
+              title: item['title'],
+              imagePath: item['imagePath'],
+              type: item['type'],
+              calories: item['calories'],
+              showType: item['showType'] ?? true, 
+              price: item['price'],
+              isFavourite: item['favourite'] ?? false
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +25,7 @@ class _CustomSliderState extends State<CustomSlider> {
   double currentSliderValue = 50;
 
   _CustomSliderState();
+  @override
   void initState() {
     super.initState();
     currentSliderValue = widget.value; // Initialize with the passed value
