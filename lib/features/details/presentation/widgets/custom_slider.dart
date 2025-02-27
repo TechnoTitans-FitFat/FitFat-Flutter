@@ -26,6 +26,7 @@ class _CustomSliderState extends State<CustomSlider> {
   double currentSliderValue = 50;
 
   _CustomSliderState();
+  @override
   void initState() {
     super.initState();
     currentSliderValue = widget.value; // Initialize with the passed value

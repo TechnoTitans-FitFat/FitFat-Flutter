@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
-import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
+import 'package:fitfat/features/main/presentaion/views/diabetes_view.dart';
+
+import 'package:fitfat/features/main/presentaion/views/favourites_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          home: const LoginSignUp()),
+          home: const FavouritesView()),
     );
   }
 }
