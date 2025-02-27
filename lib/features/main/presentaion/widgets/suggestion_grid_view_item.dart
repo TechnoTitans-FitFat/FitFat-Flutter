@@ -5,7 +5,16 @@ import 'package:flutter/material.dart';
 class SuggestionGridViewItem extends StatelessWidget {
   const SuggestionGridViewItem({
     super.key,
+    required this.imageUrl,
+    required this.title, 
+    required this.price,
+    required this.calories,
   });
+
+   final String imageUrl;
+  final String title;
+  final String price;
+  final String calories;
 
   @override
   Widget build(BuildContext context) {
@@ -46,19 +55,21 @@ class SuggestionGridViewItem extends StatelessWidget {
                     15,
                   ),
                 ),
-                image: const DecorationImage(
+                image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
-                    "imges/meal1.jpg",
-                  ),
+                  image: NetworkImage(imageUrl),
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text("Egg && Toast",
+              child: Text(
+                title,
                   style: AppStyles.textStyle16
-                      .copyWith(color: AppLightColor.blackColor)),
+                      .copyWith(color: AppLightColor.blackColor),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1
+                      ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -66,13 +77,13 @@ class SuggestionGridViewItem extends StatelessWidget {
                 color: AppLightColor.mainColor.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Text("350 cal",
+              child: Text('$calories cal',
                   style: AppStyles.textStyle12
                       .copyWith(color: AppLightColor.mainColor)),
             ),
             Row(
               children: [
-                Text("170",
+                Text(price,
                     style: AppStyles.textStyle16
                         .copyWith(color: AppLightColor.mainColor)),
                 Text("EGP",
