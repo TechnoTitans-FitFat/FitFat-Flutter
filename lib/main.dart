@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
-import 'package:fitfat/features/main/presentaion/views/diabetes_view.dart';
 
 import 'package:fitfat/features/main/presentaion/views/favourites_view.dart';
 import 'package:flutter/foundation.dart';

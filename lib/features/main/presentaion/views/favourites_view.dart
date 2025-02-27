@@ -17,8 +17,10 @@ class FavouritesView extends StatelessWidget {
         title: Center(child: Text('Favourites' ,style: AppStyles.textStyle24.copyWith(color: AppLightColor.mainColor))),
 
       ),
-      body: FavouritesViewBody(),
-      bottomNavigationBar: CustomBottomNavBar(),
+      body: const FavouritesViewBody(),
+      bottomNavigationBar: Container(
+        color: AppLightColor.backgroundColor,
+        child: const CustomBottomNavBar()),
       
     );
   }

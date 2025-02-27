@@ -1,5 +1,4 @@
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class FavouritesViewBody extends StatelessWidget {
