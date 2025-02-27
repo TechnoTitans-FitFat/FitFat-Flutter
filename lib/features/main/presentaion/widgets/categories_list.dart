@@ -1,6 +1,6 @@
-import 'package:fitfat/features/main/presentaion/views/allergy_view.dart';
-import 'package:fitfat/features/main/presentaion/views/diabetes_view.dart';
-import 'package:fitfat/features/main/presentaion/views/diet_view.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/views/allergy_view.dart';
+import 'package:fitfat/features/main/presentaion/diabetes_category/views/diabetes_view.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/views/diet_view.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_card_category.dart';
 import 'package:flutter/material.dart';
 
