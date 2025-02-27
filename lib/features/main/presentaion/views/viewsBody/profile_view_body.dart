@@ -1,15 +1,23 @@
-import 'dart:math';
-
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/core/utils/app_styles.dart';
+
+import 'package:fitfat/features/main/presentaion/widgets/custom_profile_card.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfileViewBody extends StatelessWidget {
+class ProfileViewBody extends StatefulWidget {
   const ProfileViewBody({super.key});
 
   @override
+  State<ProfileViewBody> createState() => _ProfileViewBodyState();
+}
+
+class _ProfileViewBodyState extends State<ProfileViewBody> {
+    bool isSwitched = false;
+  @override
+
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
@@ -31,128 +39,133 @@ class ProfileViewBody extends StatelessWidget {
             children: [
               Text(
                 'Mai Wael',
-                style:
-                    GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.w400),
+                style: GoogleFonts.roboto(
+                    fontSize: 18, fontWeight: FontWeight.w400),
               ),
               Text(
                 'mai@gmail.com',
-                style:
-                    GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.w400),
+                style: GoogleFonts.roboto(
+                    fontSize: 18, fontWeight: FontWeight.w400),
               )
             ],
           ),
+          CustomProfileCard(),
+          const SizedBox(
+            height: 15,
+          ),
           SizedBox(
-            width: 319,
-            height: 500,
-            child: Card(
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              color: AppLightColor.whiteColor,
-              //elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20 ,vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-      
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Profile Information',
-                          style: GoogleFonts.roboto(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: AppLightColor.mainColor),
-                        ),
-                        const SizedBox(
-                          width: 50,
-                        ),
-                        SvgPicture.asset('imges/edit.svg')
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Text(
-                      'General Information',
-                      style: GoogleFonts.roboto(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: AppLightColor.blackColor),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    infoText('Gender', 'female'),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                   infoText('Date Of Birth', '01/01/1990'),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                   infoText('Height', '170'),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    infoText('Weight', '70'),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Divider(
-                      color: AppLightColor.blackColor,
-                      endIndent: 24,
-                    ),
-                    Text(
-                      'Health Information',
-                      style: GoogleFonts.roboto(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: AppLightColor.blackColor),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                   infoText('Allergies', 'Peanuts'),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                   infoText('Type of Diabetes', 'Type 2'),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                   infoText('Insulin-to-Carb Ratio', '1:15'),
-                    const SizedBox(
-                      height:5,
-                    ),
-                   infoText('Blood Sugar Range', '70- 120')
-                  ],
+              height: 250,
+              width: 319,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+                color: AppLightColor.whiteColor,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'General Settings',
+                        style: GoogleFonts.roboto(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: AppLightColor.mainColor),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset('imges/language.svg'),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Languages',
+                            style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: AppLightColor.blackColor),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 13,
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset('imges/dark_mode.svg'),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Dark Mode',
+                            style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: AppLightColor.blackColor),
+                          ),
+                          const SizedBox(width: 90,),
+                           Switch(
+                            value: isSwitched,
+                            onChanged: (value) {
+                              setState(() {
+                                isSwitched = value;
+                              });
+                            },
+                            activeColor: Colors.white,
+                            activeTrackColor:
+                                Colors.red, // Color when switched on
+                            inactiveThumbColor: Colors.grey,
+                            inactiveTrackColor:
+                                Colors.grey[300], // Default off color
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 13,
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset('imges/contact support.svg'),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Contact Support',
+                            style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: AppLightColor.blackColor),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 13,
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset('imges/account_settings.svg'),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Account Settings',
+                            style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: AppLightColor.blackColor),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ),
-          )
+              ))
         ],
       ),
     );
   }
-}
-
-Widget infoText(String title, String value) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 4.0),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title,
-            style: GoogleFonts.roboto(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: AppLightColor.blackColor)),
-        Text(value,
-            style: GoogleFonts.roboto(
-                fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),
-      ],
-    ),
-  );
 }
