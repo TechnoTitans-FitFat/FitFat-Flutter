@@ -32,17 +32,16 @@ class CustomCardCategory extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           child: Column(
+           mainAxisSize: MainAxisSize.min,
             children: [
              SvgPicture.asset(
               img,
               height: 70,
               width: 70,
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 4,),      
               Text(text,
                   style: AppStyles.textStyle16
                       .copyWith(color: AppLightColor.mainColor)),
