@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class IntgredientMeal extends StatelessWidget {
   const IntgredientMeal({
-    super.key,
+    super.key, required this.ingredients,
   });
+  final List<String> ingredients;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class IntgredientMeal extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                'Lorem amet consectetur.',
+                ingredients[0],
                 style: AppStyles.textStyle15,
               )
             ],
@@ -36,7 +37,7 @@ class IntgredientMeal extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                'Dignissim vivamus.',
+                ingredients[1],
                 style: AppStyles.textStyle15,
               )
             ],
@@ -50,7 +51,7 @@ class IntgredientMeal extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                'Magna cursus.',
+                ingredients[2],
                 style: AppStyles.textStyle15,
               )
             ],
@@ -64,7 +65,7 @@ class IntgredientMeal extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                'imperdiet varius.',
+                ingredients[3],
                 style: AppStyles.textStyle15,
               )
             ],
@@ -78,12 +79,12 @@ class IntgredientMeal extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                'aliquet mauris suspendisse.',
+                ingredients[4],
                 style: AppStyles.textStyle15,
               )
             ],
           ),
-            Row(
+          Row(
             children: [
               const Icon(
                 Icons.circle,
@@ -92,7 +93,7 @@ class IntgredientMeal extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                'aliquet mauris suspendisse.',
+                ingredients[5],
                 style: AppStyles.textStyle15,
               )
             ],

@@ -11,7 +11,7 @@ class SuggestionGridViewItem extends StatelessWidget {
     required this.calories,
   });
 
-   final String imageUrl;
+  final String imageUrl;
   final String title;
   final String price;
   final String calories;
