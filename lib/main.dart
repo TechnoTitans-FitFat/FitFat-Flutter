@@ -6,9 +6,6 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.da
 import 'package:fitfat/features/favourites/presentation/views/favourites_view.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
-import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
-import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
-import 'package:fitfat/features/profile/presentation/views/profile_view.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
