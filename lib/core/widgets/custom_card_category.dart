@@ -1,15 +1,16 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomCardCategory extends StatelessWidget {
   const CustomCardCategory({
     super.key,
-    required this.text,
-    required this.icon,
+    required this.text, required this.img,
+
   });
   final String text;
-  final IconData icon;
+  final String img;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,12 +32,13 @@ class CustomCardCategory extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           child: Column(
             children: [
-              Icon(
-                icon,
-                size: 50,
+             SvgPicture.asset(
+              img,
+              height: 70,
+              width: 70,
               ),
               const SizedBox(
                 height: 10,

@@ -24,8 +24,8 @@ class CategoriesList extends StatelessWidget {
             );
           },
           child: const CustomCardCategory(
-            icon: Icons.food_bank,
-            text: 'Diet',
+             text: 'Diet',
+              img: 'assets/icons/diet.svg',
           ),
         ),
         GestureDetector(
@@ -39,7 +39,7 @@ class CategoriesList extends StatelessWidget {
           },
           child: const CustomCardCategory(
             text: 'Diabetes',
-            icon: Icons.food_bank,
+            img: 'assets/icons/diabets.svg',
           ),
         ),
         GestureDetector(
@@ -53,7 +53,7 @@ class CategoriesList extends StatelessWidget {
           },
           child: const CustomCardCategory(
             text: 'Allergy',
-            icon: Icons.food_bank,
+             img: 'assets/icons/allergy.svg',
           ),
         ),
       ],
