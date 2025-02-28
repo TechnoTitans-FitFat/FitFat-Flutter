@@ -20,7 +20,6 @@ class LoginCubit extends Cubit<LoginStates> {
   TextEditingController signInPassword = TextEditingController();
   SignInModel? user;
 
-
   // signIn() async {
   //   try {
   //     Print.info('loading');
@@ -64,33 +63,78 @@ class LoginCubit extends Cubit<LoginStates> {
   //   }
   // }
 
-signIn() async {
-  try {
-    emit(LoginLoading());
-    final response = await api.post(EndPoint.signIn, data: {
-      ApiKey.email: signInEmail.text,
-      ApiKey.password: signInPassword.text
-    });
-    user = SignInModel.fromJson(response);
-    final decodedToken = JwtDecoder.decode(user!.token);
-    if (decodedToken.containsKey(ApiKey.id)) {
-      CacheHelper().saveData(key: ApiKey.token, value: user!.token);
-      CacheHelper().saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
-    } else {
-      emit(LoginFalier(errorMassage: "Invalid token"));
+  // signIn() async {
+  //   try {
+  //     emit(LoginLoading());
+  //     final response = await api.post(EndPoint.signIn, data: {
+  //       ApiKey.email: signInEmail.text,
+  //       ApiKey.password: signInPassword.text
+  //     });
+  //     user = SignInModel.fromJson(response);
+  //     final decodedToken = JwtDecoder.decode(user!.token);
+  //     if (decodedToken.containsKey(ApiKey.id)) {
+  //       CacheHelper().saveData(key: ApiKey.token, value: user!.token);
+  //       CacheHelper().saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
+  //     } else {
+  //       emit(LoginFalier(errorMassage: "Invalid token"));
+  //     }
+  //     print(response.data.toString());
+  //     print("Received Token: ${user!.token}");
+  //     emit(LoginSucess());
+  //   } on ServerException catch (e) {
+  //     emit(LoginFalier(errorMassage: e.errModel.errMessage));
+  //   } on DioException catch (e) {
+  //     print("Dio error: ${e.message}");
+  //     print("Response data: ${e.response?.data}");
+  //     print("Response status code: ${e.response?.statusCode}");
+  //     handleDioException(e);
+  //   } catch (e) {
+  //     emit(LoginFalier(errorMassage: "An unexpected error occurred"));
+  //   }
+  // }
+
+  signIn() async {
+    try {
+      emit(LoginLoading());
+      final response = await api.post(EndPoint.signIn, data: {
+        ApiKey.email: signInEmail.text,
+        ApiKey.password: signInPassword.text
+      });
+
+      user = SignInModel.fromJson(response);
+      print("Received Token: ${user?.token}");
+
+      if (user?.token == null || user!.token.isEmpty) {
+        emit(LoginFalier(errorMassage: "Invalid token received"));
+        return;
+      }
+
+      try {
+        final decodedToken = JwtDecoder.decode(user!.token);
+        print("Decoded Token: $decodedToken");
+
+        if (!decodedToken.containsKey(ApiKey.id)) {
+          emit(LoginSucess());
+          return;
+        }
+
+        await CacheHelper().saveData(key: ApiKey.token, value: user!.token);
+        await CacheHelper().saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
+
+        print("Login successful, emitting success state...");
+        emit(LoginSucess());
+      } catch (e) {
+        emit(LoginFalier(errorMassage: "Error decoding token ${e.toString()}"));
+      }
+      print(response.toString());
+    } on ServerException catch (e) {
+      emit(LoginFalier(errorMassage: e.errModel.errMessage));
+    } on DioException catch (e) {
+      print("Response data: ${e.response?.data}");
+      print("Response status code: ${e.response?.statusCode}");
+      emit(LoginFalier(errorMassage: "Dio error: ${e.message}"));
+    } catch (e) {
+      emit(LoginFalier(errorMassage: "An unexpected error occurred ${e.toString()}"));
     }
-    print(response.data.toString());
-    print("Received Token: ${user!.token}");
-    emit(LoginSucess());
-  } on ServerException catch (e) {
-    emit(LoginFalier(errorMassage: e.errModel.errMessage));
-  }on DioException catch (e) {
-    print("Dio error: ${e.message}");
-    print("Response data: ${e.response?.data}");
-    print("Response status code: ${e.response?.statusCode}");
-    handleDioException(e);
-  } catch (e) {
-    emit(LoginFalier(errorMassage: "An unexpected error occurred"));
   }
-}
 }
