@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFiledSearch extends StatelessWidget {
@@ -29,11 +30,7 @@ class CustomTextFiledSearch extends StatelessWidget {
                 fillColor: AppLightColor.whiteColor,
                 filled: true,
                 hintText: "Search",
-                hintStyle: const TextStyle(
-                  color: AppLightColor.greyColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
+                hintStyle:AppStyles.textStyle16.copyWith(fontWeight: FontWeight.w400,color: AppLightColor.whiteColor0),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
                   borderSide: const BorderSide(
@@ -52,9 +49,9 @@ class CustomTextFiledSearch extends StatelessWidget {
                     color: AppLightColor.whiteColor,
                   ),
                 ),
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: AppLightColor.greyColor,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.asset('assets/icons/search-normal.png'),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),

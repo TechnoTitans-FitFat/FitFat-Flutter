@@ -5,7 +5,6 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

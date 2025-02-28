@@ -1,10 +1,12 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:fitfat/features/main/presentaion/widgets/categories_list.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_dots.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_suggestion_grid_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_title.dart';
+import 'package:fitfat/features/suggestions/presentation/views/suggestion_view.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -57,7 +59,21 @@ class _MainScreenState extends State<MainScreen> {
             ),
             const CustomTitle(title: 'Categories'),
             const CategoriesList(),
-            const CustomTitle(title: 'Suggestion'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const CustomTitle(title: 'Suggestion'),
+                GestureDetector(
+                  onTap: (){
+                 //   Navigator.push(context,
+               // MaterialPageRoute( builder: (context) => const SuggestionView(),  ),);
+                  },
+                    child: Text('See all',
+                        style: AppStyles.textStyle16.copyWith(
+                          color: AppLightColor.greyColor,
+                 )))
+              ],
+            ),
             const CustomSuggestionGridView(),
           ],
         ),
