@@ -1,6 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_text_filed_search.dart';
+import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/search/presentation/widgets/latest_search.dart';
 import 'package:fitfat/features/search/presentation/widgets/meal_dishes.dart';
 import 'package:fitfat/features/search/presentation/widgets/most_popular_search.dart';

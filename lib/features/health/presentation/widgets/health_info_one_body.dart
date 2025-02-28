@@ -1,6 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/details/presentation/widgets/current_page_indicator_section.dart';
-import 'package:fitfat/features/details/presentation/widgets/custom_container_profile_set_up.dart';
+import 'package:fitfat/features/registration_details/presentation/widgets/current_page_indicator_section.dart';
+import 'package:fitfat/features/registration_details/presentation/widgets/custom_container_profile_set_up.dart';
 import 'package:fitfat/features/health/presentation/widgets/answers.dart';
 import 'package:fitfat/features/health/presentation/widgets/custom_button_skip.dart';
 import 'package:fitfat/features/health/presentation/widgets/custom_card_answer.dart';
