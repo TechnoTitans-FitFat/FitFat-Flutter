@@ -18,7 +18,7 @@ class SuggestionGridViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+       return Container(
       decoration: BoxDecoration(
         color: AppLightColor.whiteColor,
         boxShadow: [
@@ -54,31 +54,30 @@ class SuggestionGridViewItem extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8), 
-            Expanded( 
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: AppStyles.textStyle16
-                        .copyWith(color: AppLightColor.blackColor),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
-                  const SizedBox(height: 8), 
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: AppLightColor.mainColor.withOpacity(0.15),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Text('$calories cal',
-                        style: AppStyles.textStyle12
-                            .copyWith(color: AppLightColor.mainColor)),
-                  ),
-                ],
-              ),
+            Text(
+              title,
+              style: AppStyles.textStyle16
+                  .copyWith(color: AppLightColor.blackColor),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
             ),
+            const Spacer(), 
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: AppLightColor.mainColor.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text('$calories cal',
+                      style: AppStyles.textStyle12
+                          .copyWith(color: AppLightColor.mainColor)),
+                ),
+                const Spacer(),
+              ],
+            ),
+            const SizedBox(height: 8), 
             Row(
               children: [
                 Text(price,
