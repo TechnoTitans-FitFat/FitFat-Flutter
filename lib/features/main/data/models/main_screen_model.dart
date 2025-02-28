@@ -1,6 +1,6 @@
 import 'package:fitfat/core/api/end_points.dart';
 
-class MainScreenModel {
+ class MainScreenModel {
   final String image;
   final String name;
   final String price;

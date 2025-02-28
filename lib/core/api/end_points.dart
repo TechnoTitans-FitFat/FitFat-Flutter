@@ -3,6 +3,7 @@ class EndPoint {
   static String signIn = "$baseUrl/login";
   static String signUp = "$baseUrl/register";
   static String home = 'api/recipes?';
+  static String meal_details = '$baseUrl/recipes/67af615680efb92a38be688c';
 }
 
 class ApiKey {
@@ -19,4 +20,10 @@ class ApiKey {
   static String image = 'image';
   static String price = 'price';
   static String calories = 'calories';
+  static String protein = 'protein';
+  static String carb = 'carb';
+  static String fiber = 'fiber';
+  static String fat = 'fat';
+  static List<String> ingredients = ['ingredients'];
+  static String cookingTime = 'cookingTime';
 }
