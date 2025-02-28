@@ -28,14 +28,10 @@ class SuggestionGridViewItem extends StatelessWidget {
             offset: const Offset(0, 3),
           ),
         ],
-        borderRadius: const BorderRadius.all(
-          Radius.circular(
-            15,
-          ),
-        ),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,52 +46,52 @@ class SuggestionGridViewItem extends StatelessWidget {
                     offset: const Offset(4, 0),
                   ),
                 ],
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(
-                    15,
-                  ),
-                ),
+                borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(imageUrl),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                title,
-                  style: AppStyles.textStyle16
-                      .copyWith(color: AppLightColor.blackColor),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1
-                      ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              decoration: BoxDecoration(
-                color: AppLightColor.mainColor.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(15),
+            const SizedBox(height: 8), 
+            Expanded( 
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: AppStyles.textStyle16
+                        .copyWith(color: AppLightColor.blackColor),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                  const SizedBox(height: 8), 
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: AppLightColor.mainColor.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Text('$calories cal',
+                        style: AppStyles.textStyle12
+                            .copyWith(color: AppLightColor.mainColor)),
+                  ),
+                ],
               ),
-              child: Text('$calories cal',
-                  style: AppStyles.textStyle12
-                      .copyWith(color: AppLightColor.mainColor)),
             ),
             Row(
               children: [
                 Text(price,
                     style: AppStyles.textStyle16
                         .copyWith(color: AppLightColor.mainColor)),
-                Text("EGP",
+                Text(" EGP",
                     style: AppStyles.textStyle16
                         .copyWith(color: AppLightColor.blackColor)),
                 const Spacer(),
                 Container(
                   decoration: BoxDecoration(
                     color: AppLightColor.mainColor,
-                    borderRadius: BorderRadius.circular(
-                      25,
-                    ),
+                    borderRadius: BorderRadius.circular(25),
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(5),
@@ -105,9 +101,9 @@ class SuggestionGridViewItem extends StatelessWidget {
                       size: 20,
                     ),
                   ),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
