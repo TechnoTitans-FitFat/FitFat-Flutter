@@ -4,7 +4,15 @@ import 'package:flutter/material.dart';
 class CustomMealDatails extends StatelessWidget {
   const CustomMealDatails({
     super.key,
+    required this.title,
+    required this.caloreis,
+    required this.rating,
+    required this.cookingTime,
   });
+  final String title;
+  final String caloreis;
+  final double rating;
+  final String cookingTime;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +23,10 @@ class CustomMealDatails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              ' Rustic Duck ',
+              title,
               style: AppStyles.textStyle24,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
             ),
             const SizedBox(
               height: 5,
@@ -28,7 +38,7 @@ class CustomMealDatails extends StatelessWidget {
                   color: Colors.yellow,
                 ),
                 Text(
-                  '4.2',
+                  rating.toString(),
                   style: AppStyles.textStyle16,
                 ),
                 const SizedBox(
@@ -42,7 +52,7 @@ class CustomMealDatails extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  '350 cal',
+                  caloreis,
                   style: AppStyles.textStyle16,
                 ),
                 const SizedBox(
@@ -56,7 +66,7 @@ class CustomMealDatails extends StatelessWidget {
                   width: 4,
                 ),
                 Text(
-                  '25 min',
+                  cookingTime,
                   style: AppStyles.textStyle16,
                 )
               ],

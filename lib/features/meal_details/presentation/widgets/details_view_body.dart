@@ -1,15 +1,21 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/custom_meal_datails.dart';
-import 'package:fitfat/features/meal_details/presentation/widgets/intgredient_meal.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/nutrients_list.dart';
 import 'package:flutter/material.dart';
 
 class DetailsViewBody extends StatelessWidget {
-  const DetailsViewBody({super.key});
+  const DetailsViewBody({
+    super.key,
+    required this.meal,
+  });
+
+  final MealDetailsModel meal;
 
   @override
   Widget build(BuildContext context) {
+    // final item = data
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -20,10 +26,13 @@ class DetailsViewBody extends StatelessWidget {
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 8),
-                child: Image.asset(
-                  'imges/Frame 38.png',
-                  height: 190,
-                  width: 190,
+                child: ClipOval(
+                  child: Image.network(
+                    meal.image,
+                    height: 190,
+                    width: 190,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -39,7 +48,12 @@ class DetailsViewBody extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomMealDatails(),
+                  CustomMealDatails(
+                    title: meal.name,
+                    caloreis: '${meal.calories} cal',
+                    cookingTime: meal.cookingTime,
+                    rating: meal.rating,
+                  ),
                   const SizedBox(
                     height: 25,
                   ),
@@ -51,7 +65,9 @@ class DetailsViewBody extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 18),
-                  const NutrientsList(),
+                  NutrientsList(
+                    meal: meal,
+                  ),
                   const SizedBox(
                     height: 25,
                   ),
@@ -61,7 +77,26 @@ class DetailsViewBody extends StatelessWidget {
                         style: AppStyles.textStyle24.copyWith(fontSize: 20)),
                   ),
                   const SizedBox(height: 18),
-                  const IntgredientMeal(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: meal.ingredients
+                        .map((ingredient) => Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "• ",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    ingredient,
+                                    style: AppStyles.textStyle16,
+                                  ),
+                                ),
+                              ],
+                            ))
+                        .toList(), // toList() should be here
+                  ),
                 ],
               ),
             ),
