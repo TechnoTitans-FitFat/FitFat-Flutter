@@ -21,8 +21,8 @@ class DetailsView extends StatelessWidget {
           if (state is MealDetailsLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is MealDetailsSucess) {
-          //  final data =state.data.take(6).toList();
-           // return DetailsViewBody(imageUrl: );
+          final meal = state.data.first;
+            return DetailsViewBody(meal:meal , );
           } else if (state is MealDetailsFailure) {
             return Center(child: Text("Error: ${state.errMessage}"));
           }

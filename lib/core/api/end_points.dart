@@ -3,7 +3,7 @@ class EndPoint {
   static String signIn = "$baseUrl/login";
   static String signUp = "$baseUrl/register";
   static String home = 'api/recipes?';
-  static String meal_details = '$baseUrl/recipes/67af615680efb92a38be688c';
+  static String meal_details = 'https://fitfat-backend.up.railway.app/api/recipes/67af615680efb92a38be688e';
 }
 
 class ApiKey {
@@ -26,4 +26,5 @@ class ApiKey {
   static String fat = 'fat';
   static List<String> ingredients = ['ingredients'];
   static String cookingTime = 'cookingTime';
+  static double rating = 1 ;
 }
