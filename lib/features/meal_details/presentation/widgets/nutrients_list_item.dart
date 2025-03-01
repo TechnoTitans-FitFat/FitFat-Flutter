@@ -1,13 +1,15 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart';
 import 'package:flutter/material.dart';
 
 class NutrientsListItem extends StatelessWidget {
-  const NutrientsListItem({super.key, required this.img, required this.title1, required this.title2});
+  const NutrientsListItem({super.key, required this.img, required this.title1, required this.title2, });
 
 final String img;
 final String title1;
 final String title2;
+ 
   @override
   Widget build(BuildContext context) {
     return Container(

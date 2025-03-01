@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 class CustomMealDatails extends StatelessWidget {
   const CustomMealDatails({
     super.key,
-    required this.title, required this.caloreis, required this.rating, required this.cookingTime,
+    required this.title,
+    required this.caloreis,
+    required this.rating,
+    required this.cookingTime,
   });
   final String title;
   final String caloreis;
-  final String rating;
+  final double rating;
   final String cookingTime;
 
   @override
@@ -22,6 +25,8 @@ class CustomMealDatails extends StatelessWidget {
             Text(
               title,
               style: AppStyles.textStyle24,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
             ),
             const SizedBox(
               height: 5,
@@ -33,7 +38,7 @@ class CustomMealDatails extends StatelessWidget {
                   color: Colors.yellow,
                 ),
                 Text(
-                  rating,
+                  rating.toString(),
                   style: AppStyles.textStyle16,
                 ),
                 const SizedBox(
