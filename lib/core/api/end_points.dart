@@ -19,4 +19,5 @@ class ApiKey {
   static String image = 'image';
   static String price = 'price';
   static String calories = 'calories';
+  static String userId = 'userId';
 }

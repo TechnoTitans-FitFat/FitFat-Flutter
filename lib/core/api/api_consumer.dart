@@ -13,7 +13,6 @@ abstract class ApiConsumer {
       Object ? data ,
       Map <String,dynamic> ?queryParameters,
       bool isFormData = false
-
     }
   );
   patch(
