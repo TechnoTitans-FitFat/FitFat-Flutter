@@ -10,7 +10,7 @@ class CustomTextFiledSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40),
+      padding: const EdgeInsets.only(top:15,bottom:35 ),
       child: Center(
         child: SizedBox(
           height: 50,

@@ -20,10 +20,13 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
 
-  static final List<Widget> screens = [
+  @override
+  Widget build(BuildContext context) {
+
+   List<Widget> screens = [
     SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -65,8 +68,8 @@ class _MainScreenState extends State<MainScreen> {
                 const CustomTitle(title: 'Suggestion'),
                 GestureDetector(
                   onTap: (){
-                 //   Navigator.push(context,
-               // MaterialPageRoute( builder: (context) => const SuggestionView(),  ),);
+                    Navigator.push(context,
+                MaterialPageRoute( builder: (context) => const SuggestionView(),),);
                   },
                     child: Text('See all',
                         style: AppStyles.textStyle16.copyWith(
@@ -85,8 +88,7 @@ class _MainScreenState extends State<MainScreen> {
     const Center(child: Text('Profile Screen')),
   ];
 
-  @override
-  Widget build(BuildContext context) {
+  
     return Scaffold(
         backgroundColor: AppLightColor.backgroundColor,
         body: screens[selectedIndex],

@@ -25,7 +25,7 @@ class SuggestionGridViewItem extends StatelessWidget {
           BoxShadow(
             color: AppLightColor.blackColor.withOpacity(0.25),
             blurRadius: 3,
-            offset: const Offset(0, 3),
+            offset: const Offset(0,3),
           ),
         ],
         borderRadius: BorderRadius.circular(15),
