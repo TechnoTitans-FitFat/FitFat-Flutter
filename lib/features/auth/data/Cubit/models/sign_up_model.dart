@@ -1,4 +1,3 @@
-import 'package:fitfat/core/api/end_points.dart';
 
 class SignUpModel {
   final String message;

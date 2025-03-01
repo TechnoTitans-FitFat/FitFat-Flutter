@@ -38,7 +38,7 @@ class DioComsumer extends ApiConsumer {
   get(String path, {dynamic data, Map<String, dynamic>? queryParameters})async  {
      try {
       final response =
-          await dio.delete(path, data: data, queryParameters: queryParameters);
+          await dio.get(path, data: data, queryParameters: queryParameters);
       return response.data;
     } on DioException catch (e) {
       handleDioException(e);

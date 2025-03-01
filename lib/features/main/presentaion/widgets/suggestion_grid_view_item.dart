@@ -5,11 +5,20 @@ import 'package:flutter/material.dart';
 class SuggestionGridViewItem extends StatelessWidget {
   const SuggestionGridViewItem({
     super.key,
+    required this.imageUrl,
+    required this.title, 
+    required this.price,
+    required this.calories,
   });
+
+   final String imageUrl;
+  final String title;
+  final String price;
+  final String calories;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+       return Container(
       decoration: BoxDecoration(
         color: AppLightColor.whiteColor,
         boxShadow: [
@@ -19,14 +28,10 @@ class SuggestionGridViewItem extends StatelessWidget {
             offset: const Offset(0, 3),
           ),
         ],
-        borderRadius: const BorderRadius.all(
-          Radius.circular(
-            15,
-          ),
-        ),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,50 +46,51 @@ class SuggestionGridViewItem extends StatelessWidget {
                     offset: const Offset(4, 0),
                   ),
                 ],
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(
-                    15,
-                  ),
-                ),
-                image: const DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(
-                    "imges/meal1.jpg",
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text("Egg && Toast",
-                  style: AppStyles.textStyle16
-                      .copyWith(color: AppLightColor.blackColor)),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              decoration: BoxDecoration(
-                color: AppLightColor.mainColor.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(imageUrl),
+                ),
               ),
-              child: Text("350 cal",
-                  style: AppStyles.textStyle12
-                      .copyWith(color: AppLightColor.mainColor)),
             ),
+            const SizedBox(height: 8), 
+            Text(
+              title,
+              style: AppStyles.textStyle16
+                  .copyWith(color: AppLightColor.blackColor),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+            const Spacer(), 
             Row(
               children: [
-                Text("170",
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: AppLightColor.mainColor.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text('$calories cal',
+                      style: AppStyles.textStyle12
+                          .copyWith(color: AppLightColor.mainColor)),
+                ),
+                const Spacer(),
+              ],
+            ),
+            const SizedBox(height: 8), 
+            Row(
+              children: [
+                Text(price,
                     style: AppStyles.textStyle16
                         .copyWith(color: AppLightColor.mainColor)),
-                Text("EGP",
+                Text(" EGP",
                     style: AppStyles.textStyle16
                         .copyWith(color: AppLightColor.blackColor)),
                 const Spacer(),
                 Container(
                   decoration: BoxDecoration(
                     color: AppLightColor.mainColor,
-                    borderRadius: BorderRadius.circular(
-                      25,
-                    ),
+                    borderRadius: BorderRadius.circular(25),
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(5),
@@ -94,9 +100,9 @@ class SuggestionGridViewItem extends StatelessWidget {
                       size: 20,
                     ),
                   ),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

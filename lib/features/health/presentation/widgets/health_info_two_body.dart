@@ -1,6 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/details/presentation/widgets/current_page_indicator_section.dart';
-import 'package:fitfat/features/details/presentation/widgets/custom_container_profile_set_up.dart';
+import 'package:fitfat/features/registration_details/presentation/widgets/current_page_indicator_section.dart';
+import 'package:fitfat/features/registration_details/presentation/widgets/custom_container_profile_set_up.dart';
 import 'package:fitfat/features/health/presentation/widgets/custom_button_skip.dart';
 import 'package:fitfat/features/health/presentation/widgets/diabets_information.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +14,6 @@ class HealthInfoTwoBody extends StatefulWidget {
 }
 
 class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -59,10 +57,8 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
           height: 30,
         ),
         const CustomContainerProfileSetUp(
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: DiabetsInformation()
-          ),
+          child:
+              Padding(padding: EdgeInsets.all(20), child: DiabetsInformation()),
         ),
       ],
     );
