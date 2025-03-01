@@ -17,27 +17,40 @@ class RegisterCubit extends Cubit<SignUpStates>{
   final ApiConsumer api;
   SignUpModel? user;
 
-  signUp() async {
+  Future<void> signUp() async {
+    if (!(signUpFormKey.currentState?.validate() ?? false)) {
+      return;
+    }
+
     try {
       emit(SignUpLoading());
+
       final response = await api.post(EndPoint.signUp, data: {
         ApiKey.email: signUpEmail.text,
         ApiKey.password: signUpPassword.text,
-        ApiKey.confirmPassword:confirmPassword.text,
-        ApiKey.name:signUpName.text,
+        ApiKey.confirmPassword: confirmPassword.text,
+        ApiKey.username: signUpName.text,
         "userType": "Vendor",
       });
-      user = SignUpModel.fromJson(response);
-      print(response.data.toString());
-      emit(SignUpSucess());
+
+      print("Response Data: $response");
+
+      if (response is Map<String, dynamic> && response.containsKey("status")) {
+        user = SignUpModel.fromJson(response);
+
+        if (user!.statusCode) {
+          emit(SignUpSucess());
+          return;
+        }
+      } else {
+        emit(SignUpFalier(errorMassage: "Unexpected response"));
+      }
     } on ServerException catch (e) {
       emit(SignUpFalier(errorMassage: e.errModel.errMessage));
-    }on DioException catch (e) {
-      print("Response data: ${e.response?.data}");
-      print("Response status code: ${e.response?.statusCode}");
-      handleDioException(e);
+    } on DioException catch (e) {
+      emit(SignUpFalier(errorMassage: e.response?.data["message"] ?? "UnKnown error"));
     } catch (e) {
-      emit(SignUpFalier(errorMassage: "An unexpected error occurred"));
+      emit(SignUpFalier(errorMassage: " Un expected error : $e"));
     }
   }
 }

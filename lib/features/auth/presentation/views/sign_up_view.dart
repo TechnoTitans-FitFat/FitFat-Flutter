@@ -19,163 +19,148 @@ class SignUp extends StatelessWidget {
     return BlocConsumer<RegisterCubit, SignUpStates>(
       listener: (BuildContext context, state) {
         if (state is SignUpLoading) {
-          isLoading = false;
         } else if (state is SignUpSucess) {
           ShowDialog(
               context, 'Welcome to the family!\n Your journey starts now');
-          isLoading = false;
         } else if (state is SignUpFalier) {
           showSnackBar(context, state.errorMassage);
-          isLoading = false;
         }
       },
-      builder: (BuildContext context, SignUpStates state) => ModalProgressHUD(
-        inAsyncCall: isLoading,
-        child: Scaffold(
-          backgroundColor: AppLightColor.whiteColor,
-          body: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: AppLightColor.whiteColor),
-                child: Form(
-                  key: context.read<RegisterCubit>().signUpFormKey,
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      CustomTextField(
-                        controller: context.read<RegisterCubit>().signUpName,
-                        hint: 'Name',
-                        icon: FontAwesomeIcons.user,
-                        noti: 'please, Enter your name',
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      CustomTextField(
-                        controller: context.read<RegisterCubit>().signUpEmail,
-                        onchange: (data) {
-                          email = data;
-                        },
-                        hint: 'Email',
-                        icon: Icons.email_outlined,
-                        noti: 'please , Enter your email',
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      CustomTextField(
-                        controller:
-                            context.read<RegisterCubit>().signUpPassword,
-                        onchange: (data) {
-                          password = data;
-                        },
-                        hint: 'Password',
-                        icon: Icons.lock_outline,
-                        sufIconNot: Icons.visibility,
-                        sufIcon: Icons.visibility_off,
-                        noti: 'please, Enter the password',
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      CustomTextField(
-                        controller: context.read<RegisterCubit>().confirmPassword,
-                        hint: 'Confirm Password',
-                        onchange: (data){
-                          confirm ==data;
-                        },
-                        icon: Icons.lock_outline,
-                        sufIconNot: Icons.visibility,
-                        sufIcon: Icons.visibility_off,
-                        noti: 'please, confirm your password',
-                      ),
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      CustomBottom(
-                        text: 'Sign Up',
-                        ontap: () async {
-                          if (context
-                              .read<RegisterCubit>()
-                              .signUpFormKey
-                              .currentState!
-                              .validate() ) {
-                              context.read<RegisterCubit>().signUp();
-                          }
-                        },
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 80,
-                              child: Divider(
-                                  color: AppLightColor.greyColor, height: 8),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(right: 8, left: 8, top: 8),
-                              child: Text('Or signUp with'),
-                            ),
-                            SizedBox(
-                              width: 80,
-                              child: Divider(
-                                  color: AppLightColor.greyColor, height: 8),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Row(
+      builder: (BuildContext context, SignUpStates state) => Scaffold(
+        backgroundColor: AppLightColor.whiteColor,
+        body: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: AppLightColor.whiteColor),
+              child: Form(
+                key: context.read<RegisterCubit>().signUpFormKey,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    CustomTextField(
+                      controller: context.read<RegisterCubit>().signUpName,
+                      hint: 'Name',
+                      icon: FontAwesomeIcons.user,
+                      noti: 'please, Enter your name',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextField(
+                      controller: context.read<RegisterCubit>().signUpEmail,
+                      hint: 'Email',
+                      icon: Icons.email_outlined,
+                      noti: 'please , Enter your email',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextField(
+                      controller:
+                          context.read<RegisterCubit>().signUpPassword,
+                      hint: 'Password',
+                      icon: Icons.lock_outline,
+                      sufIconNot: Icons.visibility,
+                      sufIcon: Icons.visibility_off,
+                      noti: 'please, Enter the password',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextField(
+                      controller: context.read<RegisterCubit>().confirmPassword,
+                      hint: 'Confirm Password',
+                      icon: Icons.lock_outline,
+                      sufIconNot: Icons.visibility,
+                      sufIcon: Icons.visibility_off,
+                      noti: 'please, confirm your password',
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    CustomBottom(
+                      text: 'Sign Up',
+                      ontap: () async {
+                        if (context
+                            .read<RegisterCubit>()
+                            .signUpFormKey
+                            .currentState!
+                            .validate()) {
+                          context.read<RegisterCubit>().signUp();
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          GestureDetector(
-                            child: const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircleAvatar(
-                                backgroundColor: AppLightColor.whiteColor,
-                                child: Image(
-                                  image: AssetImage('imges/google.png'),
-                                ),
+                          SizedBox(
+                            width: 80,
+                            child: Divider(
+                                color: AppLightColor.greyColor, height: 8),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(right: 8, left: 8, top: 8),
+                            child: Text('Or signUp with'),
+                          ),
+                          SizedBox(
+                            width: 80,
+                            child: Divider(
+                                color: AppLightColor.greyColor, height: 8),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          child: const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircleAvatar(
+                              backgroundColor: AppLightColor.whiteColor,
+                              child: Image(
+                                image: AssetImage('imges/google.png'),
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 20,
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        GestureDetector(
+                          child: const Icon(Icons.facebook,
+                              color: Colors.blueAccent, size: 27),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        GestureDetector(
+                          child: const Icon(
+                            Icons.apple_outlined,
+                            size: 35,
                           ),
-                          GestureDetector(
-                            child: const Icon(Icons.facebook,
-                                color: Colors.blueAccent, size: 27),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          GestureDetector(
-                            child: const Icon(
-                              Icons.apple_outlined,
-                              size: 35,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
