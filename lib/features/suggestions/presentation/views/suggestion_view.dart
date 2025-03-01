@@ -15,7 +15,7 @@ class SuggestionView extends StatelessWidget {
       appBar: CustomAppBar(title: 'Suggestion'),
       body: SingleChildScrollView(
         child: Padding(
-         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+         padding: EdgeInsets.symmetric(horizontal: 15, ),
           child: Column(
             children: [
               CustomTextFiledSearch(),

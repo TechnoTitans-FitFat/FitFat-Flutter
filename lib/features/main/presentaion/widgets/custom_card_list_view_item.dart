@@ -82,7 +82,7 @@ class CustomCardListViewItem extends StatelessWidget {
                       const SizedBox(width: 10),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
+                          horizontal:15,
                           vertical: 5,
                         ),
                         decoration: BoxDecoration(
