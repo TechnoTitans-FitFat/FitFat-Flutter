@@ -11,6 +11,6 @@ class SignUpModel {
     return SignUpModel(
         message: jsonData['message'],
         statusCode: jsonData['status'],
-        id: jsonData['_id']);
+        id: jsonData['userId']);
   }
 }

@@ -20,6 +20,7 @@ class ApiKey {
   static String image = 'image';
   static String price = 'price';
   static String calories = 'calories';
+  static String userId = 'userId';
   static String protein = 'protein';
   static String carb = 'carb';
   static String fiber = 'fiber';
