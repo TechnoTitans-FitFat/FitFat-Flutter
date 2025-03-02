@@ -17,18 +17,20 @@ class DetailsView extends StatelessWidget {
       backgroundColor: AppLightColor.secondColor,
       appBar: const CustomAppBarDetails(),
       body: BlocBuilder<MealDetailsCubit, MealDetailsState>(
-        builder: (context, state) {
-          if (state is MealDetailsLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is MealDetailsSucess) {
-          final meal = state.data.first;
-            return DetailsViewBody(meal:meal , );
-          } else if (state is MealDetailsFailure) {
-            return Center(child: Text("Error: ${state.errMessage}"));
-          }
-          return const SizedBox();
-        },
-      ),
+  builder: (context, state) {
+    if (state is MealDetailsLoading) {
+      return const Center(child: CircularProgressIndicator());
+    } else if (state is MealDetailsSucess) {
+     // print("MealDetailsSuccess Data: ${state.data}"); // Debugging
+      final meal = state.data.first;
+      print("Meal Rating Before UI: ${meal.rating}");
+      return DetailsViewBody(meal: meal);
+    } else if (state is MealDetailsFailure) {
+      return Center(child: Text("Error: ${state.errMessage}"));
+    }
+    return const SizedBox();
+  },
+),
       bottomNavigationBar: const DetailsBottomBar(),
     );
   }
