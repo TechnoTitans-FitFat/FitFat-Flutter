@@ -36,32 +36,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => LoginCubit(DioComsumer(dio: Dio())),
+        providers: [
+          BlocProvider(
+            create: (context) => LoginCubit(DioComsumer(dio: Dio())),
+          ),
+          BlocProvider(
+            create: (context) => RegisterCubit(DioComsumer(dio: Dio())),
+          ),
+          BlocProvider(
+            create: (context) =>
+            MainScreenCubit(DioComsumer(dio: Dio()))
+              ..fetchMainScreenData(),
+          ),
+          BlocProvider(create: (context) =>
+          MealDetailsCubit(DioComsumer(dio: Dio()))
+            ..fetchMealsDetailsData()
+          )
+        ],
+        child: GetMaterialApp(
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          debugShowCheckedModeBanner: false,
+          home: const LoginSignUp(),
         ),
-        BlocProvider(
-          create: (context) => RegisterCubit(DioComsumer(dio: Dio())),
-        ),
-        BlocProvider(
-          create: (context) =>
-              MainScreenCubit(DioComsumer(dio: Dio()))..fetchMainScreenData(),
-        ),
-        BlocProvider(create: (context)=>
-        MealDetailsCubit(DioComsumer(dio: Dio()))..fetchMealsDetailsData()
-        )
-      ],
-      child: GetMaterialApp(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        debugShowCheckedModeBanner: false,
-        home: const LoginSignUp(),
-      ),
-
-        home: const MainScreen()        
-         ),
-
     );
   }
 }
