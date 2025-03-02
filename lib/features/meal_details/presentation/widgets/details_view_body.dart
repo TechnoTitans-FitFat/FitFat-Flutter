@@ -15,7 +15,7 @@ class DetailsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final item = data
+    print("Meal Ingredients: ${meal.ingredients}");
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -79,23 +79,38 @@ class DetailsViewBody extends StatelessWidget {
                   const SizedBox(height: 18),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: meal.ingredients
-                        .map((ingredient) => Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "• ",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    ingredient,
-                                    style: AppStyles.textStyle16,
+                    children: meal.ingredients.isNotEmpty
+                        ? meal.ingredients
+                            .map((ingredient) => Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 4),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        " •     ",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          ingredient,
+                                          style: AppStyles.textStyle16,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ))
-                        .toList(), // toList() should be here
+                                ))
+                            .toList()
+                        : [
+                            Text(
+                              "No ingredients available",
+                              style: AppStyles.textStyle16
+                                  .copyWith(color: Colors.red),
+                            )
+                          ], // Show message if empty
                   ),
                 ],
               ),

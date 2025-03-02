@@ -25,7 +25,7 @@ class ApiKey {
   static String carb = 'carb';
   static String fiber = 'fiber';
   static String fat = 'fat';
-  static List<String> ingredients = ['ingredients'];
+  static const String ingredients = "ingredients";
   static String cookingTime = 'cookingTime';
-  static double rating = 1 ;
+  static const String rating = "rating";
 }

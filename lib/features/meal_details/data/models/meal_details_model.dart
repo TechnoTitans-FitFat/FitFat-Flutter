@@ -28,6 +28,11 @@ class MealDetailsModel {
   final double rating;
 
   factory MealDetailsModel.fromJson(Map<String, dynamic> jsonData) {
+    // print("Full API Response in Model: $jsonData");
+    //print("Raw Ingredients Data: ${jsonData[ApiKey.ingredients]}");
+    print("Raw Rating from API: ${jsonData[ApiKey.rating]}"); // 🔍 Debug
+
+  final ratingValue = jsonData[ApiKey.rating];
     return MealDetailsModel(
       image: jsonData[ApiKey.image] ?? '',
       name: jsonData[ApiKey.name] ?? 'Unknown',
@@ -38,13 +43,13 @@ class MealDetailsModel {
       fat: jsonData[ApiKey.fat]?.toString() ?? '0',
       fiber: jsonData[ApiKey.fiber]?.toString() ?? '0',
       // ignore: collection_methods_unrelated_type
-      ingredients: (jsonData[ApiKey.ingredients] as List<dynamic>?)
-              ?.map((e) => e.toString())
-              .toList() ??
-          [],
+    ingredients: (jsonData[ApiKey.ingredients] as List<dynamic>?)
+            ?.map((e) => e.toString())
+            .toList() ??
+        [],
       cookingTime: jsonData[ApiKey.cookingTime]?.toString() ?? '0 min',
       // ignore: collection_methods_unrelated_type
-      rating: (jsonData[ApiKey.rating] as num?)?.toDouble() ?? 0.0,
+       rating:  ratingValue is num ? ratingValue.toDouble() : 0.0,
     );
   }
 }
