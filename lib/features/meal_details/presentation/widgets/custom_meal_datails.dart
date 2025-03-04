@@ -26,7 +26,7 @@ class CustomMealDatails extends StatelessWidget {
               title,
               style: AppStyles.textStyle24,
               overflow: TextOverflow.ellipsis,
-              maxLines: 3,
+              maxLines: 2,
             ),
             const SizedBox(
               height: 5,

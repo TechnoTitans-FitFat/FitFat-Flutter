@@ -1,6 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
-import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart';
 import 'package:flutter/material.dart';
 
 class NutrientsListItem extends StatelessWidget {

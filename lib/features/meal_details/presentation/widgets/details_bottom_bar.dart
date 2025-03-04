@@ -1,16 +1,21 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart';
 import 'package:flutter/material.dart';
 
 class DetailsBottomBar extends StatelessWidget {
-  const DetailsBottomBar({super.key});
+  
+  const DetailsBottomBar({super.key,  });
+
+
+  
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color:  Color(0xffF5F5F5),
+        color: Color(0xffF5F5F5),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,7 +65,7 @@ class DetailsBottomBar extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    '170',
+                  '170',
                     style: AppStyles.textStyle24,
                   ),
                   const SizedBox(width: 8),
