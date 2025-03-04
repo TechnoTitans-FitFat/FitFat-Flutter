@@ -1,31 +1,34 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
 
 class SuggestionGridViewItem extends StatelessWidget {
   const SuggestionGridViewItem({
     super.key,
     required this.imageUrl,
-    required this.title, 
+    required this.title,
     required this.price,
     required this.calories,
+    required this.id,
   });
 
   final String imageUrl;
   final String title;
   final String price;
   final String calories;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
-       return Container(
+    return Container(
       decoration: BoxDecoration(
         color: AppLightColor.whiteColor,
         boxShadow: [
           BoxShadow(
             color: AppLightColor.blackColor.withOpacity(0.25),
             blurRadius: 3,
-            offset: const Offset(0,3),
+            offset: const Offset(0, 3),
           ),
         ],
         borderRadius: BorderRadius.circular(15),
@@ -35,25 +38,31 @@ class SuggestionGridViewItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: double.infinity,
-              height: 80,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: AppLightColor.blackColor.withOpacity(0.25),
-                    blurRadius: 3,
-                    offset: const Offset(4, 0),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DetailsView(mealId: id,)));
+              },
+              child: Container(
+                width: double.infinity,
+                height: 80,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppLightColor.blackColor.withOpacity(0.25),
+                      blurRadius: 3,
+                      offset: const Offset(4, 0),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(15),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(imageUrl),
                   ),
-                ],
-                borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(imageUrl),
                 ),
               ),
             ),
-            const SizedBox(height: 8), 
+            const SizedBox(height: 8),
             Text(
               title,
               style: AppStyles.textStyle16
@@ -61,11 +70,12 @@ class SuggestionGridViewItem extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),
-            const Spacer(), 
+            const Spacer(),
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   decoration: BoxDecoration(
                     color: AppLightColor.mainColor.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(15),
@@ -77,7 +87,7 @@ class SuggestionGridViewItem extends StatelessWidget {
                 const Spacer(),
               ],
             ),
-            const SizedBox(height: 8), 
+            const SizedBox(height: 8),
             Row(
               children: [
                 Text(price,

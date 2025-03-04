@@ -5,7 +5,6 @@ import 'package:fitfat/features/auth/presentation/wedgets/customs/custom_button.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../wedgets/customs/custom_textfield.dart';
 
 class SignUp extends StatelessWidget {

@@ -1,37 +1,61 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_state.dart';
+import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/custom_app_bar_details.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/details_bottom_bar.dart';
-import 'package:fitfat/features/meal_details/presentation/widgets/details_view_body.dart'
-    show DetailsViewBody;
+import 'package:fitfat/features/meal_details/presentation/widgets/details_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsView extends StatelessWidget {
-  const DetailsView({super.key});
+  final String mealId;
+  
+ 
+  const DetailsView({super.key, required this.mealId, });
 
   @override
   Widget build(BuildContext context) {
+    print("Navigated to DetailsView with mealId: $mealId");
+
+    context.read<MealDetailsCubit>().fetchMealsDetailsData(mealId);
+
     return Scaffold(
       backgroundColor: AppLightColor.secondColor,
       appBar: const CustomAppBarDetails(),
       body: BlocBuilder<MealDetailsCubit, MealDetailsState>(
-  builder: (context, state) {
-    if (state is MealDetailsLoading) {
-      return const Center(child: CircularProgressIndicator());
-    } else if (state is MealDetailsSucess) {
-     // print("MealDetailsSuccess Data: ${state.data}"); // Debugging
-      final meal = state.data.first;
-      print("Meal Rating Before UI: ${meal.rating}");
-      return DetailsViewBody(meal: meal);
-    } else if (state is MealDetailsFailure) {
-      return Center(child: Text("Error: ${state.errMessage}"));
-    }
-    return const SizedBox();
-  },
-),
-      bottomNavigationBar: const DetailsBottomBar(),
+        builder: (context, state) {
+          if (state is MealDetailsLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is MealDetailsSucess) {
+            print("MealDetailsSuccess Data: ${state.data}");
+
+            final meals = state.data.where((m) => m.id == mealId).toList();
+
+            if (meals.isEmpty) {
+              return const Center(
+                child: Text(
+                  "Meal not found!",
+                  style: TextStyle(fontSize: 18, color: Colors.red),
+                ),
+              );
+            }
+
+            final meal = meals.first;
+            return DetailsViewBody(meal: meal);
+          } else if (state is MealDetailsFailure) {
+            return Center(
+              child: Text(
+                "Error: ${state.errMessage}",
+                style: const TextStyle(fontSize: 16, color: Colors.red),
+              ),
+            );
+          }
+          return const SizedBox();
+        },
+      ),
+      bottomNavigationBar: 
+      DetailsBottomBar( )
     );
   }
 }
