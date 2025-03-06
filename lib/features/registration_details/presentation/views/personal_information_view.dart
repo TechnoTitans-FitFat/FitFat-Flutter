@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/features/health/presentation/views/health_info_one.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/current_page_indicator_section.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/personal_information_section.dart';
 
@@ -46,7 +47,15 @@ class PersonalInformationView extends StatelessWidget {
               ],
             ),
           ),
-          const PersonalInformationSection(),
+          PersonalInformationSection(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HealthInfoOne(),
+                  ));
+            },
+          ),
         ],
       ),
     );

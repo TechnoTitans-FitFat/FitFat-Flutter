@@ -2,6 +2,8 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/wedgets/customs/custom_button.dart';
+import 'package:fitfat/features/registration_details/presentation/views/personal_information_view.dart';
+import 'package:fitfat/features/registration_details/presentation/widgets/personal_information_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,7 +14,7 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? email, password,confirm;
+    String? email, password, confirm;
 
     bool isLoading = false;
     return BlocConsumer<RegisterCubit, SignUpStates>(
@@ -21,6 +23,14 @@ class SignUp extends StatelessWidget {
         } else if (state is SignUpSucess) {
           ShowDialog(
               context, 'Welcome to the family!\n Your journey starts now');
+          Duration(seconds: 10);
+          Navigator.pop(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PersonalInformationView(),
+            ),
+          );
         } else if (state is SignUpFalier) {
           showSnackBar(context, state.errorMassage);
         }
@@ -59,8 +69,7 @@ class SignUp extends StatelessWidget {
                       height: 20,
                     ),
                     CustomTextField(
-                      controller:
-                          context.read<RegisterCubit>().signUpPassword,
+                      controller: context.read<RegisterCubit>().signUpPassword,
                       hint: 'Password',
                       icon: Icons.lock_outline,
                       sufIconNot: Icons.visibility,
@@ -107,8 +116,7 @@ class SignUp extends StatelessWidget {
                                 color: AppLightColor.greyColor, height: 8),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsets.only(right: 8, left: 8, top: 8),
+                            padding: EdgeInsets.only(right: 8, left: 8, top: 8),
                             child: Text('Or signUp with'),
                           ),
                           SizedBox(
