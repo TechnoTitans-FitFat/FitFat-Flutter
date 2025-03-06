@@ -14,7 +14,7 @@ class DetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Navigated to DetailsView with mealId: $mealId");
+   // print("Navigated to DetailsView with mealId: $mealId");
 
     // Fetch meal details when entering this screen
     context.read<MealDetailsCubit>().fetchMealsDetailsData(mealId);
@@ -27,7 +27,7 @@ class DetailsView extends StatelessWidget {
           if (state is MealDetailsLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is MealDetailsSucess) {
-            print("MealDetailsSuccess Data: ${state.data}");
+          //  print("MealDetailsSuccess Data: ${state.data}");
 
             final meals = state.data.where((m) => m.id == mealId).toList();
 
