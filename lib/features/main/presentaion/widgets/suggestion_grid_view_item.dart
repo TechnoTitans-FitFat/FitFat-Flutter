@@ -15,7 +15,7 @@ class SuggestionGridViewItem extends StatelessWidget {
 
   final String imageUrl;
   final String title;
-  final String price;
+  final double price;
   final String calories;
   final String id;
 
@@ -41,7 +41,7 @@ class SuggestionGridViewItem extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DetailsView(mealId: id,)));
+                    MaterialPageRoute(builder: (context) => DetailsView(mealId: id, )));
               },
               child: Container(
                 width: double.infinity,
@@ -90,7 +90,7 @@ class SuggestionGridViewItem extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                Text(price,
+                Text(price.toString(),
                     style: AppStyles.textStyle16
                         .copyWith(color: AppLightColor.mainColor)),
                 Text(" EGP",

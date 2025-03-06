@@ -4,11 +4,10 @@ import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart
 import 'package:flutter/material.dart';
 
 class DetailsBottomBar extends StatelessWidget {
-  
-  const DetailsBottomBar({super.key,  });
-
-
-  
+  const DetailsBottomBar({
+    super.key, required this.price,
+  });
+  final double price;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +64,7 @@ class DetailsBottomBar extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                  '170',
+                    price.toString(),
                     style: AppStyles.textStyle24,
                   ),
                   const SizedBox(width: 8),
