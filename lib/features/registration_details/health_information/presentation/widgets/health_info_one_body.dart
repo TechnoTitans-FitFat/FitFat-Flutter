@@ -1,6 +1,6 @@
-import 'package:fitfat/features/health/presentation/widgets/food_allergy_question_section.dart';
-import 'package:fitfat/features/health/presentation/widgets/health_information_upper_text.dart';
-import 'package:fitfat/features/health/presentation/widgets/suffer_diabetes_question_section.dart';
+import 'package:fitfat/features/registration_details/health_information/presentation/widgets/food_allergy_question_section.dart';
+import 'package:fitfat/features/registration_details/health_information/presentation/widgets/health_information_upper_text.dart';
+import 'package:fitfat/features/registration_details/health_information/presentation/widgets/suffer_diabetes_question_section.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/custom_container_profile_set_up.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/next_button.dart';
 import 'package:flutter/material.dart';

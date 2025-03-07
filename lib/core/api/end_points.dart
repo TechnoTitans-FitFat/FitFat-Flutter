@@ -3,7 +3,10 @@ class EndPoint {
   static String signIn = "$baseUrl/login";
   static String signUp = "$baseUrl/register";
   static String home = 'api/recipes?';
-  static String meal_details = 'https://fitfat-backend.up.railway.app/api/recipes/';
+  static String meal_details = '$baseUrl/api/recipes/';
+  static String healthInfo =
+      'https://fitfat-backend.up.railway.app/api/healthInfo';
+  static String dietInfo = '$baseUrl/dietInfo';
 }
 
 class ApiKey {
@@ -25,7 +28,11 @@ class ApiKey {
   static String carb = 'carb';
   static String fiber = 'fiber';
   static String fat = 'fat';
-  static const String ingredients = "ingredients";
+  static String ingredients = "ingredients";
   static String cookingTime = 'cookingTime';
-  static const String rating = "rating";
+  static String rating = "rating";
+  static String weight = "weight";
+  static String height = "height";
+  static String gender = "gender";
+  static String dateOfBirth = "dateOfBirth";
 }
