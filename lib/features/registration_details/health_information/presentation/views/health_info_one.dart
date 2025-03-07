@@ -1,6 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/health/presentation/views/health_info_two.dart';
-import 'package:fitfat/features/health/presentation/widgets/health_info_one_body.dart';
+import 'package:fitfat/features/registration_details/health_information/presentation/views/health_info_two.dart';
+import 'package:fitfat/features/registration_details/health_information/presentation/widgets/health_info_one_body.dart';
 import 'package:flutter/material.dart';
 
 class HealthInfoOne extends StatelessWidget {

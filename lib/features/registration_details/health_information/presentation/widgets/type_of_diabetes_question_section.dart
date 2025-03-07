@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../core/constants/light_colors.dart' show AppLightColor;
+import '../../../../../core/constants/light_colors.dart' show AppLightColor;
 
 class TypeOfDiabetesQuestionSection extends StatefulWidget {
   const TypeOfDiabetesQuestionSection({super.key});

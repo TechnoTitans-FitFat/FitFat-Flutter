@@ -1,12 +1,13 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/health/presentation/widgets/insulin_to_card_ratio_question_section.dart';
-import 'package:fitfat/features/health/presentation/widgets/type_of_diabetes_question_section.dart';
+import 'package:fitfat/features/registration_details/health_information/presentation/widgets/insulin_to_card_ratio_question_section.dart';
+import 'package:fitfat/features/registration_details/health_information/presentation/widgets/type_of_diabetes_question_section.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DiabetsInformation extends StatefulWidget {
-  const DiabetsInformation({super.key});
+  const DiabetsInformation({super.key, this.onPressed});
+  final void Function()? onPressed;
 
   @override
   State<DiabetsInformation> createState() => _DiabetsInformationState();
@@ -79,12 +80,17 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
           const SizedBox(
             height: 15,
           ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              NextButton(),
-            ],
-          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                NextButton(
+                  onPressed: widget.onPressed,
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

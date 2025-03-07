@@ -1,5 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/health/presentation/widgets/custom_card_answer.dart';
+import 'package:fitfat/features/registration_details/health_information/presentation/widgets/custom_card_answer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
