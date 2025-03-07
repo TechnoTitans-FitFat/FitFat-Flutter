@@ -30,11 +30,11 @@ class CustomSuggestionGridView extends StatelessWidget {
              itemBuilder: (context,index){
               final item=data[index];
               return SuggestionGridViewItem(
-                price: item.price,
+              
                 id: item.id,
                 imageUrl: item.image,
                 title: item.name,
-                calories: item.calories,
+                calories: item.calories, price:item.price,
                
               );
              },

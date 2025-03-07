@@ -3,7 +3,7 @@ import 'package:fitfat/core/api/end_points.dart';
 class MainScreenModel {
   final String image;
   final String name;
-  final String price;
+  final double price;
   final String calories;
   final String id;
 
@@ -15,10 +15,12 @@ class MainScreenModel {
       required this.id});
 
   factory MainScreenModel.fromJson(Map<String, dynamic> jsonData) {
+    final priceValue = jsonData[ApiKey.price];
     return MainScreenModel(
+      
         image: jsonData[ApiKey.image],
         name: jsonData[ApiKey.name],
-        price: jsonData[ApiKey.price].toString(),
+        price: priceValue is num ? priceValue.toDouble() : 0.0,
         calories: jsonData[ApiKey.calories].toString(),
         id : jsonData[ApiKey.id]
        

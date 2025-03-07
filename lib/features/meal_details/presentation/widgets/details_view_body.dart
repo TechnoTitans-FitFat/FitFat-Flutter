@@ -2,6 +2,7 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/custom_meal_datails.dart';
+import 'package:fitfat/features/meal_details/presentation/widgets/details_bottom_bar.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/nutrients_list.dart';
 import 'package:flutter/material.dart';
 
@@ -115,7 +116,8 @@ class DetailsViewBody extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
+         // DetailsBottomBar(meal: meal)
         ],
       ),
     );
