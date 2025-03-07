@@ -3,7 +3,7 @@ import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/wedgets/customs/custom_button.dart';
 import 'package:fitfat/features/registration_details/personal_information/presentation/views/personal_information_view.dart';
-import 'package:fitfat/features/registration_details/presentation/widgets/personal_information_section.dart';
+import 'package:fitfat/features/registration_details/personal_information/presentation/widgets/personal_information_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

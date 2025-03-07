@@ -1,6 +1,6 @@
 class PersonalInfoModel {
-  final double weight;
-  final double height;
+  final int weight;
+  final int height;
   final String dateOfBirth;
   final String gender;
   final List<String> foodAllergies;
