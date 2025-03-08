@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../core/constants/light_colors.dart';
 
 class CustomTextField extends StatefulWidget {
-  const CustomTextField(
-      {super.key,
-        this.hint,
-        this.icon,
-        this.controller,
-        this.onchange,
-        this.sufIcon,
-        this.sufIconNot,
-        this.noti});
+  const CustomTextField({
+    super.key,
+    this.hint,
+    this.icon,
+    this.controller,
+    this.onchange,
+    this.sufIcon,
+    this.sufIconNot,
+    this.noti,
+  });
 
   final TextEditingController? controller;
   final IconData? icon;
@@ -31,33 +31,34 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 50,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 50),
       child: TextFormField(
         controller: widget.controller,
         validator: (data) {
-          if (data!.isEmpty) {
+          if (data == null || data.isEmpty) {
             return widget.noti;
           }
           return null;
         },
         onChanged: widget.onchange,
-        obscureText: passwordVisible,
+        obscureText: widget.sufIcon != null ? !passwordVisible : false, 
         decoration: InputDecoration(
-          prefixIcon: Icon(widget.icon, color: AppLightColor.greyColor),
-          suffixIcon: IconButton(
-              onPressed: () {
-                setState(
-                      () {
-                    passwordVisible = !passwordVisible;
+          prefixIcon: widget.icon != null
+              ? Icon(widget.icon, color: AppLightColor.greyColor)
+              : null,
+          suffixIcon: (widget.sufIcon != null && widget.sufIconNot != null)
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      passwordVisible = !passwordVisible;
+                    });
                   },
-                );
-              },
-              icon: Icon(
-                passwordVisible ? widget.sufIcon : widget.sufIconNot,
-                color: AppLightColor.greyColor,
-              )),
+                  icon: Icon(
+                    passwordVisible ? widget.sufIcon : widget.sufIconNot,
+                    color: AppLightColor.greyColor,
+                  ),
+                )
+              : null, 
           hintText: widget.hint,
           hintStyle: const TextStyle(color: AppLightColor.greyColor),
           focusedBorder: buildBorder(),
@@ -69,7 +70,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   OutlineInputBorder buildBorder() {
     return OutlineInputBorder(
-        borderSide: const BorderSide(color: AppLightColor.greyColor),
-        borderRadius: BorderRadius.circular(8));
+      borderSide: const BorderSide(color: AppLightColor.greyColor),
+      borderRadius: BorderRadius.circular(8),
+    );
   }
 }
