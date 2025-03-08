@@ -18,6 +18,7 @@ class LoginSignUp extends StatelessWidget {
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child:  const Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: AppLightColor.whiteColor,
           body: SafeArea(
               child: SingleChildScrollView(

@@ -1,5 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_animated_toggle.dart';
+import 'package:fitfat/features/auth/presentation/widgets/sign_up_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,19 +22,14 @@ class CustomImageAuth extends StatelessWidget {
             ),
           ],
         ),
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: AppLightColor.whiteColor),
-            child: const SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 16,
-                  ),
-                  AnimatedToggle(),
+          const SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 16,
+                ),
+                AnimatedToggle(),
                 ],
-              ),
             ),
           )
       ],
