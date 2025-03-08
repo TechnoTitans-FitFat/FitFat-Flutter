@@ -7,8 +7,8 @@ import 'package:fitfat/features/auth/data/Cubit/models/sign_in_model.dart';
 import 'package:fitfat/features/registration_details/personal_information/presentation/views/personal_information_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../wedgets/customs/custom_button.dart';
-import '../wedgets/customs/custom_textfield.dart';
+import '../widgets/customs/custom_button.dart';
+import '../widgets/customs/custom_textfield.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
