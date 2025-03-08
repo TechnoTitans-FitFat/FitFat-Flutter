@@ -14,18 +14,29 @@ class MainScreenCubit extends Cubit<MainScreenState> {
 
   void fetchMainScreenData() async {
     emit(MainScreenLoading());
-    try {
+   try {
       final response = await apiConsumer.get(EndPoint.home);
+
       if (response is Map<String, dynamic> && response.containsKey('recipes')) {
-        List<MainScreenModel> data = (response['recipes'] as List)
-            .map((item) => MainScreenModel.fromJson(item))
-            .toList();
-        emit(MainScreenSucess(data: data));
+        final List<dynamic> recipes = response['recipes'];
+
+        if (recipes.isNotEmpty) {
+          final List<MainScreenModel> data = recipes
+              .map((item) => MainScreenModel.fromJson(item)).take(6)
+              .toList();
+
+          emit(MainScreenSucess(data: data));
+        } else {
+          emit(MainScreenFailure(errMessage: "No data available"));
+        }
       } else {
-        emit(MainScreenFailure(errMessage: "Invalid data format"));
+        emit(MainScreenFailure(errMessage: "Invalid API response format"));
       }
     } on ServerException catch (e) {
       emit(MainScreenFailure(errMessage: e.errModel.errMessage));
+    } catch (e) {
+      emit(MainScreenFailure(errMessage: "Unexpected error: ${e.toString()}"));
     }
   }
 }
+

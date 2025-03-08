@@ -6,6 +6,8 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.da
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
+import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
+import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart';
 import 'package:fitfat/features/registration_details/personal_information/data/personal_info_cubit/personal_info_cubit.dart';
 import 'package:fitfat/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/foundation.dart';
@@ -49,7 +51,10 @@ class MyApp extends StatelessWidget {
             create: (context) => MainScreenCubit(DioComsumer(dio: Dio()))
               ..fetchMainScreenData()),
         BlocProvider(
-            create: (context) => MealDetailsCubit(DioComsumer(dio: Dio())))
+            create: (context) => MealDetailsCubit(DioComsumer(dio: Dio()))),
+              BlocProvider( 
+          create: (context) => SuggestionsCubit(DioComsumer(dio: Dio()))..fetchSuggestionsData()
+        ),
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
