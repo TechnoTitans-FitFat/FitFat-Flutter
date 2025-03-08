@@ -17,7 +17,6 @@ class CustomImageAuth extends StatelessWidget {
             SvgPicture.asset(
               'imges/shrimp.svg',
               width: MediaQuery.of(context).size.width,
-              height: 250,
               fit: BoxFit.cover,
             ),
           ],
