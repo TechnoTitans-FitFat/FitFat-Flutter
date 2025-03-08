@@ -27,6 +27,7 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   bool passwordVisible = false;
+  bool hasError = false; 
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +37,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
         controller: widget.controller,
         validator: (data) {
           if (data == null || data.isEmpty) {
+            setState(() {
+              hasError = true; 
+            });
             return widget.noti;
           }
+          setState(() {
+            hasError = false; 
+          });
           return null;
         },
         onChanged: widget.onchange,
-        obscureText: widget.sufIcon != null ? !passwordVisible : false, 
+        obscureText: widget.sufIcon != null ? !passwordVisible : false,
         decoration: InputDecoration(
           prefixIcon: widget.icon != null
               ? Icon(widget.icon, color: AppLightColor.greyColor)
@@ -58,19 +65,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     color: AppLightColor.greyColor,
                   ),
                 )
-              : null, 
+              : null,
           hintText: widget.hint,
           hintStyle: const TextStyle(color: AppLightColor.greyColor),
+          
+          
           focusedBorder: buildBorder(),
           enabledBorder: buildBorder(),
+          errorBorder: buildBorder(isError: true),
+          focusedErrorBorder: buildBorder(isError: true),
         ),
       ),
     );
   }
 
-  OutlineInputBorder buildBorder() {
+  OutlineInputBorder buildBorder({bool isError = false}) {
     return OutlineInputBorder(
-      borderSide: const BorderSide(color: AppLightColor.greyColor),
+      borderSide: BorderSide(color: isError ? AppLightColor.mainColor : AppLightColor.greyColor),
       borderRadius: BorderRadius.circular(8),
     );
   }
