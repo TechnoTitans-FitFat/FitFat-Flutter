@@ -6,9 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class LoginSignUp extends StatelessWidget {
+class LoginSignUp extends StatefulWidget {
   const LoginSignUp({super.key});
 
+  @override
+  State<LoginSignUp> createState() => _LoginSignUpState();
+}
+
+class _LoginSignUpState extends State<LoginSignUp> {
   @override
   Widget build(BuildContext context) {
     
