@@ -3,10 +3,12 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
+import 'package:fitfat/features/auth/data/Cubit/models/sign_in_model.dart';
+import 'package:fitfat/features/registration_details/personal_information/presentation/views/personal_information_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../wedgets/customs/custom_button.dart';
-import '../wedgets/customs/custom_textfield.dart';
+import '../widgets/customs/custom_button.dart';
+import '../widgets/customs/custom_textfield.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -19,13 +21,18 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(
         listener: (BuildContext context, state) {
-          if (state is LoginLoading) {
-          } else if (state is LoginSucess) {
-            ShowDialog(context, 'Great to see you again');
-          } else if (state is LoginFalier) {
-            showSnackBar(context, state.errorMassage);
-          }
-        }, builder: (context, state) {
+      if (state is LoginLoading) {
+      } else if (state is LoginSucess) {
+        ShowDialog(context, 'Great to see you again');
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PersonalInformationView(),
+            ));
+      } else if (state is LoginFalier) {
+        showSnackBar(context, state.errorMassage);
+      }
+    }, builder: (context, state) {
       return Scaffold(
         backgroundColor: AppLightColor.whiteColor,
         body: Column(
@@ -63,17 +70,17 @@ class Login extends StatelessWidget {
                     ),
                     GestureDetector(
                         child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(right: 55),
-                              child: Text(
-                                'Forgot password',
-                                style: TextStyle(color: AppLightColor.greyColor),
-                              ),
-                            ),
-                          ],
-                        )),
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 55),
+                          child: Text(
+                            'Forgot password',
+                            style: TextStyle(color: AppLightColor.greyColor),
+                          ),
+                        ),
+                      ],
+                    )),
                     const SizedBox(
                       height: 32,
                     ),

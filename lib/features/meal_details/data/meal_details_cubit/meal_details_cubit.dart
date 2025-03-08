@@ -7,16 +7,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MealDetailsCubit extends Cubit<MealDetailsState> {
   MealDetailsCubit(this.apiConsumer) : super(MealDetailsInitial());
+
   final ApiConsumer apiConsumer;
 
-  void fetchMealsDetailsData() async {
+  void fetchMealsDetailsData(String mealId) async {
     emit(MealDetailsLoading());
+
     try {
-      final response = await apiConsumer.get(EndPoint.meal_details);
+      // Construct the correct URL with mealId
+      final String url = "${EndPoint.meal_details}$mealId";
+      print("Fetching Meal from: $url"); // Debugging
+
+      final response = await apiConsumer.get(url);
+
       if (response is Map<String, dynamic>) {
         MealDetailsModel data = MealDetailsModel.fromJson(response);
-        emit(MealDetailsSucess(
-            data: [data])); // Wrap in a list if your UI expects a list
+        emit(MealDetailsSucess(data: [data])); // Wrap in list if needed
       } else {
         emit(MealDetailsFailure(errMessage: "Invalid data format"));
       }

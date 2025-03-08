@@ -12,7 +12,7 @@ class CustomAppBarDetails extends StatelessWidget implements PreferredSizeWidget
         padding: const EdgeInsets.only(left:16),
         child: GestureDetector(
           onTap: () {
-           // Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
           child: Image.asset('imges/arrow-square-left.png',height: 25,width: 25,fit: BoxFit.contain,)
         ),

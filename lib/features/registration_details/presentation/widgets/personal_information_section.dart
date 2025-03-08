@@ -8,23 +8,26 @@ import 'package:flutter/material.dart';
 class PersonalInformationSection extends StatelessWidget {
   const PersonalInformationSection({
     super.key,
+    this.onPressed,
   });
-
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
-    return const CustomContainerProfileSetUp(
+    return CustomContainerProfileSetUp(
       child: Column(
         children: [
-          SizedBox(height: 30),
-          GenderSection(),
-          DateOfBirthSection(),
-          WeightAndHeightSection(),
+          const SizedBox(height: 30),
+          const GenderSection(),
+          const DateOfBirthSection(),
+          const WeightAndHeightSection(),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                NextButton(),
+                NextButton(
+                  onPressed: onPressed,
+                ),
               ],
             ),
           )

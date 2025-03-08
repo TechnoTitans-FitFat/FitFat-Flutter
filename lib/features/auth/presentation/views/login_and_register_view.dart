@@ -1,5 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/auth/presentation/wedgets/customs/custom_animated_toggle.dart';
+import 'package:fitfat/features/auth/presentation/widgets/customs/custom_animated_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 

@@ -1,0 +1,35 @@
+import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/features/registration_details/health_information/presentation/widgets/custom_card_answer.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class SufferDiabetesQuestionSection extends StatelessWidget {
+  const SufferDiabetesQuestionSection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Do you suffer from type of diabetes?',
+          style: GoogleFonts.roboto(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: AppLightColor.blackColor,
+          ),
+        ),
+        const SizedBox(height: 15),
+        const Row(
+          children: [
+            CustomCardAnswer(title: 'Yes'),
+            SizedBox(width: 25),
+            CustomCardAnswer(title: 'No'),
+          ],
+        ),
+      ],
+    );
+  }
+}

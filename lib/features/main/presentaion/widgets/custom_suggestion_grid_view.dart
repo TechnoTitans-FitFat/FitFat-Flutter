@@ -64,6 +64,7 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
                   }
                 },
                 child:  Text("Next" ,style: TextStyle(color: AppLightColor.mainColor)),
+
               ),
           ],
         ),
@@ -105,7 +106,8 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
           imageUrl: item.image,
           title: item.name,
           calories: item.calories,
-          price: item.price,
+          price: item.price, 
+          id: item.id,
         );
       },
     );
