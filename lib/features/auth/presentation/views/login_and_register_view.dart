@@ -1,6 +1,8 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_animated_toggle.dart';
+import 'package:fitfat/features/auth/presentation/widgets/customs/custom_image_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LoginSignUp extends StatelessWidget {
@@ -13,47 +15,17 @@ class LoginSignUp extends StatelessWidget {
     bool isLoading = false;
     return ModalProgressHUD(
       inAsyncCall: isLoading,
-      child: Scaffold(
+      child: const Scaffold(
           backgroundColor: AppLightColor.whiteColor,
           body: SafeArea(
-              child: Stack(
-            children: [
-              const Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Image(
-                  image: AssetImage('imges/img.jpg'),
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CustomImageAuth(),
+                    
+                  ],
                 ),
-              ),
-              Positioned(
-                top: 200,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      color: AppLightColor.whiteColor),
-                  child: Form(
-                    key: formKey,
-                    child: const SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 16,
-                          ),
-                          AnimatedToggle(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ))),
+              ))),
     );
   }
 }
