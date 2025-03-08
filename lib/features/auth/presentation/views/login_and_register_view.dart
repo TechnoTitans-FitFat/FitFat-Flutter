@@ -1,3 +1,4 @@
+
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_animated_toggle.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_image_auth.dart';
@@ -10,21 +11,17 @@ class LoginSignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formKey = GlobalKey();
+    
+    
 
     bool isLoading = false;
     return ModalProgressHUD(
       inAsyncCall: isLoading,
-      child: const Scaffold(
+      child:  const Scaffold(
           backgroundColor: AppLightColor.whiteColor,
           body: SafeArea(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    CustomImageAuth(),
-                    
-                  ],
-                ),
+                child: CustomImageAuth(),
               ))),
     );
   }
