@@ -77,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
                  )))
               ],
             ),
-            const CustomSuggestionGridView(),
+            const CustomSuggestionsGridView(isSuggestion: false),
           ],
         ),
       ),

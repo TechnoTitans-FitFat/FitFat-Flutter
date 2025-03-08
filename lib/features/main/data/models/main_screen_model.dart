@@ -17,14 +17,12 @@ class MainScreenModel {
   factory MainScreenModel.fromJson(Map<String, dynamic> jsonData) {
     final priceValue = jsonData[ApiKey.price];
     return MainScreenModel(
-      
         image: jsonData[ApiKey.image],
         name: jsonData[ApiKey.name],
         price: priceValue is num ? priceValue.toDouble() : 0.0,
         calories: jsonData[ApiKey.calories].toString(),
-        id : jsonData[ApiKey.id]
-       
+        id : jsonData[ApiKey.id]   
         );
-        
+
   }
 }
