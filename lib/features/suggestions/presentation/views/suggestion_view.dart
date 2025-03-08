@@ -10,7 +10,7 @@ class SuggestionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const Scaffold(
+    return const Scaffold(
       backgroundColor: AppLightColor.backgroundColor,
       appBar: CustomAppBar(title: 'Suggestion'),
       body: SingleChildScrollView(
@@ -19,7 +19,7 @@ class SuggestionView extends StatelessWidget {
           child: Column(
             children: [
               CustomTextFiledSearch(),
-              CustomSuggestionGridView()
+             CustomSuggestionsGridView(isSuggestion: true)
             ],
           ),
         ),

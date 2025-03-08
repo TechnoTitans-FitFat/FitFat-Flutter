@@ -6,14 +6,19 @@ import 'package:fitfat/core/api/end_points.dart';
   final String price;
   final String calories;
 
-  MainScreenModel({required this.image, required this.name, required this.price, required this.calories});
+  MainScreenModel({
+   required this.image,
+   required this.name, 
+   required this.price,
+   required this.calories
+   });
 
   factory MainScreenModel.fromJson(Map<String,dynamic> jsonData){
     return MainScreenModel(
-      image: jsonData[ApiKey.image],
-      name: jsonData[ApiKey.name],
-      price: jsonData[ApiKey.price].toString(),
-      calories: jsonData[ApiKey.calories].toString()
+      image: jsonData[ApiKey.image]?? '',
+      name: jsonData[ApiKey.name]?? '',
+      price: jsonData[ApiKey.price]?.toString() ?? '0',
+      calories: jsonData[ApiKey.calories]?.toString() ?? '0'
     );
   }
 }
