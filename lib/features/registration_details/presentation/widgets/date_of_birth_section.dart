@@ -14,7 +14,7 @@ class DateOfBirthSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      padding: const EdgeInsets.only(right: 20,left: 20,bottom: 10,top: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
