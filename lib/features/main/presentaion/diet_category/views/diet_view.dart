@@ -13,7 +13,7 @@ class DietView extends StatelessWidget {
       backgroundColor: AppLightColor.backgroundColor,
       appBar: CustomAppBar(title: 'Diet'),
       body: DietViewBody(),
-      bottomNavigationBar: CustomBottomNavBar(),
+     // bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 }

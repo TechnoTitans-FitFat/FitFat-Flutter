@@ -13,7 +13,7 @@ class DiabetesView extends StatelessWidget {
       backgroundColor: AppLightColor.backgroundColor,
       appBar: CustomAppBar(title: 'Diabetes'),
       body: DiabetesViewBody(),
-      bottomNavigationBar: CustomBottomNavBar(),
+     // bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 }

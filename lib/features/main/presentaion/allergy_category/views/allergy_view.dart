@@ -13,7 +13,7 @@ class AllergyView extends StatelessWidget {
       backgroundColor: AppLightColor.backgroundColor,
       appBar: CustomAppBar(title: 'Allergy'),
       body: AllergyViewBody(),
-      bottomNavigationBar: CustomBottomNavBar(),
+      //bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 }

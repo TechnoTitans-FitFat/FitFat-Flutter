@@ -10,7 +10,7 @@ class ProfileView extends StatelessWidget {
     return const Scaffold(
       backgroundColor: Color(0xffFBE0E2),
       body: ProfileViewBody(),
-      bottomNavigationBar: CustomBottomNavBar(),
+      //bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 }

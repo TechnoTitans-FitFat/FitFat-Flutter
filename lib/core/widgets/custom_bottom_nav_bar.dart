@@ -2,21 +2,15 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CustomBottomNavBar extends StatefulWidget {
-  const CustomBottomNavBar({super.key});
+class CustomBottomNavBar extends StatelessWidget {
+  final int selectedIndex;
+  final Function(int) onTapped;
 
-  @override
-  State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
-}
-
-class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
-  int selectedIndex = 0;
-
-  void onTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
+  const CustomBottomNavBar({
+    super.key,
+    required this.selectedIndex,
+    required this.onTapped,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +38,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     return BottomNavigationBarItem(
       icon: SvgPicture.asset(
         assetPath,
-       color: selectedIndex == index ? AppLightColor.mainColor :AppLightColor.blackColor,
-       //colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn)
+        color: selectedIndex == index
+            ? AppLightColor.mainColor
+            : AppLightColor.blackColor,
       ),
       label: label,
     );
