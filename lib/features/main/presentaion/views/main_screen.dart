@@ -1,11 +1,15 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_bottom_nav_bar.dart';
+import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
+import 'package:fitfat/features/favourites/presentation/views/favourites_view.dart';
 import 'package:fitfat/features/main/presentaion/widgets/categories_list.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_dots.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_suggestion_grid_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_title.dart';
+import 'package:fitfat/features/menu/presentation/views/menu_screen.dart';
+import 'package:fitfat/features/profile/presentation/views/profile_view.dart';
 import 'package:fitfat/features/suggestions/presentation/views/suggestion_view.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +23,12 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
+
+  void onTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,16 +92,18 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
     ),
-    const Center(child: Text('Favourite Screen')),
-    const Center(child: Text('Book Screen')),
-    const Center(child: Text('List Screen')),
-    const Center(child: Text('Profile Screen')),
+     const MenuScreen(),
+      const FavouritesView(),
+      const CartScreen(),
+      const ProfileView(),
   ];
-
   
     return Scaffold(
         backgroundColor: AppLightColor.backgroundColor,
         body: screens[selectedIndex],
-        bottomNavigationBar: const CustomBottomNavBar());
+        bottomNavigationBar: CustomBottomNavBar(
+           selectedIndex:selectedIndex ,
+           onTapped: onTapped,
+          ));
   }
 }
