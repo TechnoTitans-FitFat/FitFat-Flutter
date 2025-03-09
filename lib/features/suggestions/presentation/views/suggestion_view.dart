@@ -24,7 +24,7 @@ class SuggestionView extends StatelessWidget {
           ),
         ),
       ),
-    //  bottomNavigationBar: CustomBottomNavBar(),
+      //bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 }
