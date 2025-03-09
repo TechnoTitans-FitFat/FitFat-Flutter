@@ -15,6 +15,7 @@ class PersonalInformationSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomContainerProfileSetUp(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 30),
           const GenderSection(),
@@ -31,6 +32,7 @@ class PersonalInformationSection extends StatelessWidget {
               ],
             ),
           )
+          
         ],
       ),
     );
