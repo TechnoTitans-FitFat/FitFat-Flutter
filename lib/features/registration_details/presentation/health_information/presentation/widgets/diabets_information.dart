@@ -2,6 +2,7 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/helper/print.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_state.dart';
+import 'package:fitfat/features/registration_details/presentation/diet_information/presentation/views/diet_information_view.dart';
 import 'package:fitfat/features/registration_details/presentation/health_information/presentation/widgets/insulin_to_card_ratio_question_section.dart';
 import 'package:fitfat/features/registration_details/presentation/health_information/presentation/widgets/suffer_diabetes_question_section.dart';
 import 'package:fitfat/features/registration_details/presentation/health_information/presentation/widgets/type_of_diabetes_question_section.dart';
@@ -311,7 +312,14 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                 children: [
                   isLoading
                       ? const CircularProgressIndicator(color: Colors.red)
-                      : NextButton(onPressed: _submitHealthInfo),
+                      : NextButton(onPressed: () {
+                          _submitHealthInfo();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DietInformationView(),
+                              ));
+                        }),
                 ],
               ),
             )
