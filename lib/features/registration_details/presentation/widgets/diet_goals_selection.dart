@@ -2,8 +2,28 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
-class DietGoalsSelection extends StatelessWidget {
-  const DietGoalsSelection({super.key});
+class DietGoalsSelection extends StatefulWidget {
+  final Function(String) onDietGoalSelected;
+  final String selectedDietGoal;
+
+  const DietGoalsSelection({
+    super.key,
+    required this.onDietGoalSelected,
+    this.selectedDietGoal = '',
+  });
+
+  @override
+  State<DietGoalsSelection> createState() => _DietGoalsSelectionState();
+}
+
+class _DietGoalsSelectionState extends State<DietGoalsSelection> {
+  late String selectedDietGoal;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDietGoal = widget.selectedDietGoal;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +42,44 @@ class DietGoalsSelection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomButton(
-                borderColor: AppLightColor.mainColor,
-                widget: "Weight Loss",
-                widgetColor: AppLightColor.blackColor,
-                background: AppLightColor.whiteColor,
-                onPressed: () {},
+              Expanded(
+                child: CustomButton(
+                  borderColor: AppLightColor.mainColor,
+                  widget: "Weight Loss",
+                  widgetColor: selectedDietGoal == "Weight Loss"
+                      ? Colors.white
+                      : AppLightColor.blackColor,
+                  background: selectedDietGoal == "Weight Loss"
+                      ? Colors.red
+                      : AppLightColor.whiteColor,
+                  onPressed: () {
+                    setState(() {
+                      selectedDietGoal = "Weight Loss";
+                      widget.onDietGoalSelected(selectedDietGoal);
+                    });
+                  },
+                ),
               ),
               const SizedBox(
                 width: 15,
               ),
-              CustomButton(
-                borderColor: AppLightColor.mainColor,
-                widget: "Weight Gain",
-                widgetColor: AppLightColor.blackColor,
-                background: AppLightColor.whiteColor,
-                onPressed: () {},
+              Expanded(
+                child: CustomButton(
+                  borderColor: AppLightColor.mainColor,
+                  widget: "Weight Gain",
+                  widgetColor: selectedDietGoal == "Weight Gain"
+                      ? Colors.white
+                      : AppLightColor.blackColor,
+                  background: selectedDietGoal == "Weight Gain"
+                      ? Colors.red
+                      : AppLightColor.whiteColor,
+                  onPressed: () {
+                    setState(() {
+                      selectedDietGoal = "Weight Gain";
+                      widget.onDietGoalSelected(selectedDietGoal);
+                    });
+                  },
+                ),
               ),
             ],
           ),
@@ -47,22 +89,44 @@ class DietGoalsSelection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomButton(
-                borderColor: AppLightColor.mainColor,
-                widget: "Weight Maintain",
-                widgetColor: AppLightColor.blackColor,
-                background: AppLightColor.whiteColor,
-                onPressed: () {},
+              Expanded(
+                child: CustomButton(
+                  borderColor: AppLightColor.mainColor,
+                  widget: "Weight Maintain",
+                  widgetColor: selectedDietGoal == "Weight Maintain"
+                      ? Colors.white
+                      : AppLightColor.blackColor,
+                  background: selectedDietGoal == "Weight Maintain"
+                      ? Colors.red
+                      : AppLightColor.whiteColor,
+                  onPressed: () {
+                    setState(() {
+                      selectedDietGoal = "Weight Maintain";
+                      widget.onDietGoalSelected(selectedDietGoal);
+                    });
+                  },
+                ),
               ),
               const SizedBox(
                 width: 15,
               ),
-              CustomButton(
-                borderColor: AppLightColor.mainColor,
-                widget: "Muscle Gain",
-                widgetColor: AppLightColor.blackColor,
-                background: AppLightColor.whiteColor,
-                onPressed: () {},
+              Expanded(
+                child: CustomButton(
+                  borderColor: AppLightColor.mainColor,
+                  widget: "Muscle Gain",
+                  widgetColor: selectedDietGoal == "Muscle Gain"
+                      ? Colors.white
+                      : AppLightColor.blackColor,
+                  background: selectedDietGoal == "Muscle Gain"
+                      ? Colors.red
+                      : AppLightColor.whiteColor,
+                  onPressed: () {
+                    setState(() {
+                      selectedDietGoal = "Muscle Gain";
+                      widget.onDietGoalSelected(selectedDietGoal);
+                    });
+                  },
+                ),
               ),
             ],
           )
