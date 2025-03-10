@@ -63,7 +63,7 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
                   
                   }
                 },
-                child:  Text("Next" ,style: TextStyle(color: AppLightColor.mainColor)),
+                child: const Text("Next" ,style: TextStyle(color: AppLightColor.mainColor)),
 
               ),
           ],
@@ -90,6 +90,7 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
 
   Widget _buildGridView(List<dynamic> data) {
     return GridView.builder(
+       padding: EdgeInsets.zero,
        key: ValueKey(data.length),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
