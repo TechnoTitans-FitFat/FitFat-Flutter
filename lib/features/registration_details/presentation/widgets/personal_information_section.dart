@@ -1,8 +1,8 @@
+import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/widgets/gender_section.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/custom_container_profile_set_up.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/date_of_birth_section.dart';
-import 'package:fitfat/features/registration_details/presentation/widgets/gender_section.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/next_button.dart';
-import 'package:fitfat/features/registration_details/presentation/widgets/weight_and_height_section.dart';
+
 import 'package:flutter/material.dart';
 
 class PersonalInformationSection extends StatelessWidget {
@@ -18,9 +18,7 @@ class PersonalInformationSection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 30),
-          const GenderSection(),
           const DateOfBirthSection(),
-          const WeightAndHeightSection(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
@@ -32,7 +30,6 @@ class PersonalInformationSection extends StatelessWidget {
               ],
             ),
           )
-          
         ],
       ),
     );

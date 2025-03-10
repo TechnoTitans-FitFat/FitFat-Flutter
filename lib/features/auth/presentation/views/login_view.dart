@@ -6,11 +6,10 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_button.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_textfield.dart';
 import 'package:fitfat/features/auth/presentation/widgets/login_view_body.dart';
-
-import 'package:fitfat/features/registration_details/personal_information/presentation/views/personal_information_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -36,9 +35,7 @@ class Login extends StatelessWidget {
       }
     }, builder: (context, state) {
       return const Scaffold(
-        backgroundColor: AppLightColor.whiteColor,
-        body: LoginViewBody()
-      );
+          backgroundColor: AppLightColor.whiteColor, body: LoginViewBody());
     });
   }
 }
