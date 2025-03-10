@@ -42,9 +42,16 @@ class CustomCardCategory extends StatelessWidget {
               width: 70,
               ),
               const SizedBox(height: 4,),      
-              Text(text,
-                  style: AppStyles.textStyle16
-                      .copyWith(color: AppLightColor.mainColor)),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  text,
+                    style: AppStyles.textStyle16.copyWith(color: AppLightColor.mainColor,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    ),
+                     
+                 ),
+              ),
             ],
           ),
         ),
