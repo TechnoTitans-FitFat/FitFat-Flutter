@@ -7,6 +7,7 @@ class EndPoint {
   static String healthInfo =
       'https://fitfat-backend.up.railway.app/api/healthInfo';
   static String dietInfo = '$baseUrl/api/dietInfo';
+  static String suggestions = 'api/recipes?';
 }
 
 class ApiKey {

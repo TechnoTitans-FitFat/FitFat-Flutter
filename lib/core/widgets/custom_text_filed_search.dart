@@ -1,6 +1,7 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTextFiledSearch extends StatelessWidget {
   const CustomTextFiledSearch({
@@ -10,39 +11,34 @@ class CustomTextFiledSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top:15,bottom:35 ),
-      child: Center(
-        child: SizedBox(
-          height: 50,
-          width: 450,
-          child: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: AppLightColor.blackColor.withOpacity(0.25),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
+      padding: const EdgeInsets.only(top: 15, bottom: 35),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            height: 50,
+            width: 280,
+            decoration: BoxDecoration(),
             child: TextField(
               decoration: InputDecoration(
                 fillColor: AppLightColor.whiteColor,
                 filled: true,
                 hintText: "Search",
-                hintStyle:AppStyles.textStyle16.copyWith(fontWeight: FontWeight.w400,color: AppLightColor.whiteColor0),
+                hintStyle: AppStyles.textStyle16.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: AppLightColor.whiteColor0),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
                   borderSide: const BorderSide(
                     color: AppLightColor.whiteColor,
                   ),
                 ),
-                focusedBorder:OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
                   borderSide: const BorderSide(
                     color: AppLightColor.mainColor,
                   ),
-                ) ,
+                ),
                 disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
                   borderSide: const BorderSide(
@@ -59,7 +55,29 @@ class CustomTextFiledSearch extends StatelessWidget {
               ),
             ),
           ),
-        ),
+          Container(
+              decoration: BoxDecoration(
+                color: AppLightColor.mainColor,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+              height: 50,
+              width: 50,
+              child: Center(
+                  child: SvgPicture.asset(
+                'assets/icons/filter.svg',
+                fit: BoxFit.fill,
+                height: 27,
+                width: 27,
+              )))
+        ],
       ),
     );
   }
