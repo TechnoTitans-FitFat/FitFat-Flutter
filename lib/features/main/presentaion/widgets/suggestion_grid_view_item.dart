@@ -34,7 +34,7 @@ class SuggestionGridViewItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,7 +45,7 @@ class SuggestionGridViewItem extends StatelessWidget {
               },
               child: Container(
                 width: double.infinity,
-                height: 80,
+                height: 100,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -68,7 +68,7 @@ class SuggestionGridViewItem extends StatelessWidget {
               style: AppStyles.textStyle16
                   .copyWith(color: AppLightColor.blackColor),
               overflow: TextOverflow.ellipsis,
-              maxLines: 2,
+              maxLines: 1,
             ),
             const Spacer(),
             Row(

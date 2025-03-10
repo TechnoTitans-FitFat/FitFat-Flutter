@@ -72,6 +72,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
             const CustomTitle(title: 'Categories'),
             const CategoriesList(),
+            const SizedBox(height:25,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
