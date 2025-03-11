@@ -19,7 +19,8 @@ class SuggestionView extends StatelessWidget {
           child: Column(
             children: [
               CustomTextFiledSearch(),
-             CustomSuggestionsGridView(isSuggestion: true)
+             CustomSuggestionsGridView(isSuggestion: true),
+             SizedBox(height: 15)
             ],
           ),
         ),

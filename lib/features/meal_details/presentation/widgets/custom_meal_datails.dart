@@ -19,59 +19,61 @@ class CustomMealDatails extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: AppStyles.textStyle24,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.star_rate,
-                  color: Colors.yellow,
-                ),
-                Text(
-                  rating.toString(),
-                  style: AppStyles.textStyle16,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                const Icon(
-                  Icons.local_fire_department,
-                  color: Colors.orange,
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                Text(
-                  caloreis,
-                  style: AppStyles.textStyle16,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                const Icon(
-                  Icons.schedule,
-                  color: Colors.blue,
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                Text(
-                  cookingTime,
-                  style: AppStyles.textStyle16,
-                )
-              ],
-            )
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: AppStyles.textStyle24,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.star_rate,
+                    color: Colors.yellow,
+                  ),
+                  Text(
+                    rating.toString(),
+                    style: AppStyles.textStyle16,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  const Icon(
+                    Icons.local_fire_department,
+                    color: Colors.orange,
+                  ),
+                  const SizedBox(
+                    width: 4,
+                  ),
+                  Text(
+                    caloreis,
+                    style: AppStyles.textStyle16,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  const Icon(
+                    Icons.schedule,
+                    color: Colors.blue,
+                  ),
+                  const SizedBox(
+                    width: 4,
+                  ),
+                  Text(
+                    cookingTime,
+                    style: AppStyles.textStyle16,
+                  )
+                ],
+              )
+            ],
+          ),
         ),
         Image.asset(
           'imges/Component 5.png',
