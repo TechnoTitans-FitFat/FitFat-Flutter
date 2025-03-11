@@ -66,7 +66,9 @@ class SuggestionGridViewItem extends StatelessWidget {
             Text(
               title,
               style: AppStyles.textStyle16
-                  .copyWith(color: AppLightColor.blackColor),
+                  .copyWith(color: AppLightColor.blackColor,
+                  fontSize: MediaQuery.of(context).size.width * 0.05,
+                  ),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),
@@ -80,9 +82,14 @@ class SuggestionGridViewItem extends StatelessWidget {
                     color: AppLightColor.mainColor.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Text('$calories cal',
-                      style: AppStyles.textStyle12
-                          .copyWith(color: AppLightColor.mainColor)),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text('$calories cal',
+                        style: AppStyles.textStyle12
+                            .copyWith(color: AppLightColor.mainColor,
+                            fontSize: MediaQuery.of(context).size.width * 0.034,
+                            )),
+                  ),
                 ),
                 const Spacer(),
               ],
@@ -90,12 +97,22 @@ class SuggestionGridViewItem extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                Text(price.toString(),
-                    style: AppStyles.textStyle16
-                        .copyWith(color: AppLightColor.mainColor)),
-                Text(" EGP",
-                    style: AppStyles.textStyle16
-                        .copyWith(color: AppLightColor.blackColor)),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(price.toString(),
+                      style: AppStyles.textStyle16
+                          .copyWith(color: AppLightColor.mainColor,
+                          fontSize: MediaQuery.of(context).size.width * 0.041,
+                          )),
+                ),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(" EGP",
+                      style: AppStyles.textStyle16
+                          .copyWith(color: AppLightColor.blackColor,
+                          fontSize: MediaQuery.of(context).size.width * 0.041,
+                          )),
+                ),
                 const Spacer(),
                 Container(
                   decoration: BoxDecoration(
