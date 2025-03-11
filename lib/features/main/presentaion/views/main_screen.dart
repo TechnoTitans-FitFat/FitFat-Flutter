@@ -82,10 +82,14 @@ class _MainScreenState extends State<MainScreen> {
                     Navigator.push(context,
                 MaterialPageRoute( builder: (context) => const SuggestionView(),),);
                   },
-                    child: Text('See all',
-                        style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.greyColor,
-                 )))
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text('See all',
+                          style: AppStyles.textStyle16.copyWith(
+                            color: AppLightColor.greyColor,
+                            fontSize: MediaQuery.of(context).size.width * 0.039,
+                                       )),
+                    ))
               ],
             ),
             const CustomSuggestionsGridView(isSuggestion: false),

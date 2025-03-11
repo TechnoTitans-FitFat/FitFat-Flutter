@@ -14,9 +14,14 @@ class CustomTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         vertical: 8,
       ),
-      child: Text(
-        title,
-        style: AppStyles.textStyle24.copyWith(color: AppLightColor.mainColor),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          title,
+          style: AppStyles.textStyle24.copyWith(color: AppLightColor.mainColor,
+          fontSize: MediaQuery.of(context).size.width * 0.06,
+          ),
+        ),
       ),
     );
   }
