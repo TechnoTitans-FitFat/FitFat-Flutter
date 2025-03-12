@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
-import 'package:fitfat/features/registration_details/data/model/health_info_model.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_state.dart';
-import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../model/diet_info_model.dart';
@@ -40,6 +38,7 @@ class DietInfoCubit extends Cubit<DietInfoState> {
         ),
       );
       String responseString = response.toString();
+      // ignore: unnecessary_null_comparison
       if (responseString == null) {
         emit(DietInfoFailure(errMessage: "data is null"));
       } else {

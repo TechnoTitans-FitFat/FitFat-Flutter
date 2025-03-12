@@ -13,7 +13,8 @@ class CustomSuggestionsGridView extends StatefulWidget {
   const CustomSuggestionsGridView({super.key, required this.isSuggestion});
 
   @override
-  State<CustomSuggestionsGridView> createState() => _CustomSuggestionsGridViewState();
+  State<CustomSuggestionsGridView> createState() =>
+      _CustomSuggestionsGridViewState();
 }
 
 class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
@@ -32,44 +33,47 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
     if (state is SuggestionsLoading) {
       return const Center(child: CircularProgressIndicator());
     } else if (state is SuggestionsSuccess) {
+      // ignore: unused_local_variable
       final List<SuggestionsModel> data = state.data;
       final suggestionsCubit = BlocProvider.of<SuggestionsCubit>(context);
-      final List<SuggestionsModel> currentPageData = suggestionsCubit.paginatedData[suggestionsCubit.currentPageIndex];
+      final List<SuggestionsModel> currentPageData =
+          suggestionsCubit.paginatedData[suggestionsCubit.currentPageIndex];
 
-         return Column(
-      children: [
-        _buildGridView(currentPageData),
-        const SizedBox(height: 8,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if(suggestionsCubit.currentPageIndex > 0)
-              ElevatedButton(
-                onPressed:() { 
-                  suggestionsCubit.prevPage();
-                  }, 
-                child: const Text("Previous",style: TextStyle(color: AppLightColor.mainColor)),
-              ),
-
+      return Column(
+        children: [
+          _buildGridView(currentPageData),
+          const SizedBox(
+            height: 8,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (suggestionsCubit.currentPageIndex > 0)
+                ElevatedButton(
+                  onPressed: () {
+                    suggestionsCubit.prevPage();
+                  },
+                  child: const Text("Previous",
+                      style: TextStyle(color: AppLightColor.mainColor)),
+                ),
               ElevatedButton(
                 onPressed: () {
-                  if (suggestionsCubit.currentPageIndex < suggestionsCubit.paginatedData.length - 1) {
+                  if (suggestionsCubit.currentPageIndex <
+                      suggestionsCubit.paginatedData.length - 1) {
                     suggestionsCubit.nextPage();
-                    
                   } else {
-                     setState(() {
-                        suggestionsCubit.fetchSuggestionsData();
-                     });
-                  
+                    setState(() {
+                      suggestionsCubit.fetchSuggestionsData();
+                    });
                   }
                 },
-                child:  Text("Next" ,style: TextStyle(color: AppLightColor.mainColor)),
-
+                child: const Text("Next",
+                    style: TextStyle(color: AppLightColor.mainColor)),
               ),
-          ],
-        ),
-      ],
-    );
+            ],
+          ),
+        ],
+      );
     } else if (state is SuggestionsFailure) {
       return Center(child: Text("Error: ${state.errMessage}"));
     }
@@ -90,7 +94,7 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
 
   Widget _buildGridView(List<dynamic> data) {
     return GridView.builder(
-       key: ValueKey(data.length),
+      key: ValueKey(data.length),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -106,7 +110,7 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
           imageUrl: item.image,
           title: item.name,
           calories: item.calories,
-          price: item.price, 
+          price: item.price,
           id: item.id,
         );
       },

@@ -25,7 +25,7 @@ class HealthInfoCubit extends Cubit<HealthInfoState> {
         EndPoint.healthInfo,
         data: {
           "foodAllergies": foodAllergies,
-          "diabetes": diabetes, // Already as int
+          "diabetes": diabetes,
           "weight": weight,
           "height": height,
           "dateOfBirth": dateOfBirth,

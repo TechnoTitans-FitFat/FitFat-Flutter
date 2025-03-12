@@ -1,7 +1,4 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/registration_details/presentation/widgets/buttons.dart'
-    show CustomButton;
-
 import 'package:fitfat/features/registration_details/presentation/widgets/custom_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,7 +35,7 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
 
   // Food preferences
   final List<String> _foodPreferences = [];
-  final List<String> _availableFoods = [
+  final List<String> availableFoods = [
     'Chicken',
     'Beef',
     'Fish',
@@ -51,7 +48,7 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
     'Legumes'
   ];
 
-  void _saveDietInformation() {
+  void saveDietInformation() {
     // Here you would save the diet information to your state management solution
     // For example, using a provider, bloc, or passing to the next page
 
