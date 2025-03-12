@@ -4,20 +4,23 @@ import 'package:fitfat/features/registration_details/presentation/personal_infor
 import 'package:flutter/material.dart';
 
 class PersonalInformationView extends StatelessWidget {
-  const PersonalInformationView({super.key});
-
+  const PersonalInformationView({
+    super.key,
+    required this.userId,
+  });
+  final String userId;
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppLightColor.secondColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          PersonalInformationUpperText(),
-          PersonalInformationSection(),
+          const PersonalInformationUpperText(),
+          PersonalInformationSection(userId: userId),
         ],
       ),
     );

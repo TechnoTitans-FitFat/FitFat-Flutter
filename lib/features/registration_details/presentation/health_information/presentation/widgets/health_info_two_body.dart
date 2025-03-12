@@ -13,6 +13,7 @@ class HealthInfoTwoBody extends StatefulWidget {
     required this.height,
     required this.foodAllergies,
     required this.diabetes,
+    required this.userId,
   });
   final String selectedGender;
   final String dateOfBirth;
@@ -20,6 +21,7 @@ class HealthInfoTwoBody extends StatefulWidget {
   final String height;
   final List<String> foodAllergies;
   final bool diabetes;
+  final String userId;
 
   @override
   State<HealthInfoTwoBody> createState() => _HealthInfoTwoBodyState();
@@ -100,6 +102,7 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
               dateOfBirth: widget.dateOfBirth,
               gender: widget.selectedGender,
               foodAllergies: widget.foodAllergies,
+              userId: widget.userId,
             ),
           ),
         ),
