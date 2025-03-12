@@ -1,6 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/registration_details/presentation/views/calculate_diet_view.dart';
-import 'package:fitfat/features/registration_details/presentation/views/input_my_diet_view.dart';
+import 'package:fitfat/features/registration_details/presentation/calculatw_diet/calculate_diet_view.dart';
+import 'package:fitfat/features/registration_details/presentation/input_my_diet/presentation/view/input_my_diet_view.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 

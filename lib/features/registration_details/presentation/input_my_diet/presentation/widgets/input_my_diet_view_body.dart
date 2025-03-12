@@ -13,40 +13,19 @@ class InputMyDietViewBody extends StatefulWidget {
 class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
   // Diet preferences state
   final List<String> _dietTypes = [
-    'Balanced',
+    'High Carb',
     'Low Carb',
     'Keto',
-    'Vegetarian',
     'Vegan',
-    'Paleo'
   ];
-  String _selectedDietType = 'Balanced';
+  String _selectedDietType = 'High Carb';
 
   // Macronutrient values
   double _proteinPercentage = 30;
   double _carbsPercentage = 40;
   double _fatPercentage = 30;
-
-  // Meal frequency
-  double _mealsPerDay = 3;
-
-  // Calorie goal
-  double _calorieGoal = 2000;
-
   // Food preferences
   final List<String> _foodPreferences = [];
-  final List<String> availableFoods = [
-    'Chicken',
-    'Beef',
-    'Fish',
-    'Eggs',
-    'Dairy',
-    'Fruits',
-    'Vegetables',
-    'Nuts',
-    'Grains',
-    'Legumes'
-  ];
 
   void saveDietInformation() {
     // Here you would save the diet information to your state management solution
@@ -55,11 +34,6 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
     // Example of data to save
     final Map<String, dynamic> dietInfo = {
       'dietType': _selectedDietType,
-      'proteinPercentage': _proteinPercentage,
-      'carbsPercentage': _carbsPercentage,
-      'fatPercentage': _fatPercentage,
-      'mealsPerDay': _mealsPerDay.toInt(),
-      'calorieGoal': _calorieGoal.toInt(),
       'foodPreferences': _foodPreferences,
     };
 
