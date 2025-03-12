@@ -94,6 +94,7 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
 
   Widget _buildGridView(List<dynamic> data) {
     return GridView.builder(
+      padding: EdgeInsets.zero,
       key: ValueKey(data.length),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

@@ -3,8 +3,8 @@ import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
 import 'package:fitfat/features/favourites/presentation/views/favourites_view.dart';
+import 'package:fitfat/features/main/presentaion/widgets/auto_scroll_panner.dart';
 import 'package:fitfat/features/main/presentaion/widgets/categories_list.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_dots.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_suggestion_grid_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_title.dart';
@@ -43,7 +43,8 @@ class _MainScreenState extends State<MainScreen> {
             const CustomTextFiledSearch(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Container(
+              child: AutoScrollPanner()
+              /*Container(
                 width: double.infinity,
                 height: 200,
                 decoration: BoxDecoration(
@@ -61,8 +62,9 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
               ),
+              */
             ),
-            const Row(
+           /* const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomDots(dotsColor: AppLightColor.mainColor),
@@ -70,8 +72,10 @@ class _MainScreenState extends State<MainScreen> {
                 CustomDots(dotsColor: AppLightColor.greyColor),
               ],
             ),
+            */
             const CustomTitle(title: 'Categories'),
             const CategoriesList(),
+            const SizedBox(height:25,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -81,10 +85,14 @@ class _MainScreenState extends State<MainScreen> {
                     Navigator.push(context,
                 MaterialPageRoute( builder: (context) => const SuggestionView(),),);
                   },
-                    child: Text('See all',
-                        style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.greyColor,
-                 )))
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text('See all',
+                          style: AppStyles.textStyle16.copyWith(
+                            color: AppLightColor.greyColor,
+                            fontSize: MediaQuery.of(context).size.width * 0.039,
+                                       )),
+                    ))
               ],
             ),
             const CustomSuggestionsGridView(isSuggestion: false),
