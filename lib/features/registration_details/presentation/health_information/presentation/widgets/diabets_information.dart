@@ -21,6 +21,7 @@ class DiabetsInformation extends StatefulWidget {
     required this.dateOfBirth,
     required this.gender,
     required this.foodAllergies,
+    required this.userId,
   });
 
   final double initialInsulinRatio;
@@ -31,6 +32,7 @@ class DiabetsInformation extends StatefulWidget {
   final String dateOfBirth;
   final String gender;
   final List<String> foodAllergies;
+  final String userId;
 
   @override
   State<DiabetsInformation> createState() => _DiabetsInformationState();
@@ -48,11 +50,6 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
     insulinRatio = widget.initialInsulinRatio;
   }
 
-  Future<String?> _getToken() async {
-    // Get token from LoginCubit
-    return context.read<LoginCubit>().user?.token;
-  }
-
   void _submitHealthInfo() async {
     // Validate required fields
     if (widget.dateOfBirth.isEmpty) {
@@ -68,17 +65,6 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
     setState(() {
       isLoading = true;
     });
-
-    final token = await _getToken();
-    if (token == null) {
-      _showSnackBar('Authentication token not found. Please login again.',
-          isError: true);
-      setState(() {
-        isLoading = false;
-      });
-      return;
-    }
-
     // Default target blood sugar range
     final Map<String, int> targetBloodSugarRange = {
       'min': 70,
@@ -88,18 +74,19 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
     try {
       final healthInfoCubit = context.read<HealthInfoCubit>();
 
-      // Convert boolean to integer (1 for true, 0 for false)
       final int diabetesValue = hasDiabetes ? 1 : 0;
 
       healthInfoCubit.postHealthInfo(
-        token: token,
         foodAllergies: widget.foodAllergies,
-        diabetes: diabetesValue, // Pass as integer instead of boolean
+        diabetes: diabetesValue,
         weight: widget.weight,
         height: widget.height,
         dateOfBirth: widget.dateOfBirth,
         gender: widget.gender,
         targetBloodSugarRange: targetBloodSugarRange,
+        userId: widget.userId,
+        diabetesType: diabetesType, // Pass the diabetes type
+        insulinRatio: insulinRatio, // Pass the insulin ratio
       );
     } catch (e) {
       setState(() {
@@ -132,8 +119,14 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
             isLoading = false;
           });
           _showSnackBar('Health information saved successfully!');
-          // You can navigate to the next screen here if needed
-          // Navigator.of(context).pushNamed('/next_screen');
+
+          // Navigate only after successful posting
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DietInformationView(),
+            ),
+          );
         } else if (state is HealthInfoFailure) {
           setState(() {
             isLoading = false;
@@ -154,6 +147,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                   hasDiabetes = value;
                   if (!value) {
                     diabetesType = "";
+                    insulinRatio = 0.0;
                   }
                 });
                 widget.onDiabetesChanged(value);
@@ -287,6 +281,8 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(vertical: 10),
                       ),
+                      initialValue:
+                          insulinRatio > 0 ? insulinRatio.toString() : '',
                       onChanged: (value) {
                         final ratio = double.tryParse(value) ?? 0.0;
                         setState(() {
@@ -310,12 +306,20 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                   isLoading
                       ? const CircularProgressIndicator(color: Colors.red)
                       : NextButton(onPressed: () {
+                          if (hasDiabetes && diabetesType.isEmpty) {
+                            _showSnackBar('Please select diabetes type',
+                                isError: true);
+                            return;
+                          }
+
+                          if (hasDiabetes && insulinRatio <= 0) {
+                            _showSnackBar('Please enter a valid insulin ratio',
+                                isError: true);
+                            return;
+                          }
+
                           _submitHealthInfo();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DietInformationView(),
-                              ));
+                          // Navigation is now handled in the BlocListener
                         }),
                 ],
               ),

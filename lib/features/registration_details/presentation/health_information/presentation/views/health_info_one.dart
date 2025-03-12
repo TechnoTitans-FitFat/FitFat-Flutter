@@ -9,11 +9,13 @@ class HealthInfoOne extends StatelessWidget {
     required this.dateOfBirth,
     required this.weight,
     required this.height,
+    required this.userId,
   });
   final String selectedGender;
   final String dateOfBirth;
   final String weight;
   final String height;
+  final String userId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +25,7 @@ class HealthInfoOne extends StatelessWidget {
         height: height,
         selectedGender: selectedGender,
         weight: weight,
+        userId: userId,
       ),
     );
   }

@@ -1,16 +1,19 @@
-
 class SignUpModel {
-  final String message;
   final bool statusCode;
-  final String id;
+  final String? message;
+  final String? userId;
 
-  SignUpModel(
-      {required this.message, required this.statusCode, required this.id});
+  SignUpModel({
+    required this.statusCode,
+    this.message,
+    this.userId,
+  });
 
-  factory SignUpModel.fromJson(Map<String, dynamic> jsonData) {
+  factory SignUpModel.fromJson(Map<String, dynamic> json) {
     return SignUpModel(
-        message: jsonData['message'],
-        statusCode: jsonData['status'],
-        id: jsonData['userId']);
+      statusCode: json['status'] ?? false,
+      message: json['message'],
+      userId: json['userId'],
+    );
   }
 }
