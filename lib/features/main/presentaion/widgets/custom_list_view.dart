@@ -16,7 +16,7 @@ class CustomListView extends StatelessWidget {
         itemBuilder: (context, index) {
           final item = items[index];
           return Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 6),
             child: CustomCardListViewItem(
               title: item['title'],
               imagePath: item['imagePath'],
