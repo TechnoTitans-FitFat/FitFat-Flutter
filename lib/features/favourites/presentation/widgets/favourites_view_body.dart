@@ -48,12 +48,12 @@ class FavouritesViewBody extends StatelessWidget {
         'favourite' : true,
       },
       {
-        'title': 'Chicken Salad',
-        'imagePath': 'imges/meal3.png',
-        'calories': '400',
-        'showType': false,
+        'title': 'Veggie Delight',
+        'imagePath': 'imges/meal2.png',
+        'calories': '200',
+        'showType': false, 
         'price' : 170,
-         
+        'favourite' : true,
       },
 
 

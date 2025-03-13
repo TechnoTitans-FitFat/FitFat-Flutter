@@ -25,7 +25,7 @@ class CustomCardListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 30,
+      elevation: 3,
       shadowColor: Colors.black,
       color: AppLightColor.whiteColor,
       child: Padding(
@@ -36,16 +36,9 @@ class CustomCardListViewItem extends StatelessWidget {
             Container(
               width: 150,
               height: 150,
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppLightColor.blackColor.withOpacity(0.25),
-                      blurRadius: 4,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
+              decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: const BorderRadius.all(Radius.circular(15))),
+                  borderRadius:  BorderRadius.all(Radius.circular(15))),
               child: Image.asset(imagePath, fit: BoxFit.cover),
             ),
             const SizedBox(width: 20),
@@ -144,13 +137,10 @@ class CustomCardListViewItem extends StatelessWidget {
                           height: 35,
                           width: 35,
                           decoration: BoxDecoration(
-                            color: AppLightColor.mainColor,
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Icon(
-                             isFavourite ? Icons.favorite : Icons.add,
-                            color: AppLightColor.whiteColor,
-                            size: 20,
+                          child: Image.asset(
+                            isFavourite ? 'assets/icons/liked.png' : 'assets/icons/add.png'
                           ),
                         ),
                       ),

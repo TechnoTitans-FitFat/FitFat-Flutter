@@ -19,7 +19,7 @@ class DetailsView extends StatelessWidget {
     context.read<MealDetailsCubit>().fetchMealsDetailsData(mealId);
 
     return Scaffold(
-      backgroundColor: AppLightColor.whiteColor1,
+      backgroundColor: AppLightColor.backgroundColor,
       body: BlocBuilder<MealDetailsCubit, MealDetailsState>(
         builder: (context, state) {
           if (state is MealDetailsLoading) {
