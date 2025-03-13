@@ -72,8 +72,9 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
       context,
       MaterialPageRoute(
         builder: (context) => DietInformationView(
-            // healthInfo: healthInfo,
-            ),
+          userId: widget.userId,
+          // healthInfo: healthInfo,
+        ),
       ),
     );
   }

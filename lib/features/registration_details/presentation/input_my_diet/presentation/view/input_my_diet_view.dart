@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InputMyDietView extends StatelessWidget {
-  const InputMyDietView({super.key});
-
+  const InputMyDietView({super.key, required this.userId});
+  final String userId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,10 +54,12 @@ class InputMyDietView extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const CustomContainerProfileSetUp(
+          CustomContainerProfileSetUp(
               child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-            child: InputMyDietViewBody(),
+            child: InputMyDietViewBody(
+              userId: userId,
+            ),
           ))
         ],
       ),

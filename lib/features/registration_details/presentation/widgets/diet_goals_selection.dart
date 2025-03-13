@@ -37,7 +37,7 @@ class _DietGoalsSelectionState extends State<DietGoalsSelection> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(
-            height: 24,
+            height: 5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,7 +61,7 @@ class _DietGoalsSelectionState extends State<DietGoalsSelection> {
                 ),
               ),
               const SizedBox(
-                width: 15,
+                width: 5,
               ),
               Expanded(
                 child: CustomButton(
@@ -84,7 +84,7 @@ class _DietGoalsSelectionState extends State<DietGoalsSelection> {
             ],
           ),
           const SizedBox(
-            height: 12,
+            height: 5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,7 +108,7 @@ class _DietGoalsSelectionState extends State<DietGoalsSelection> {
                 ),
               ),
               const SizedBox(
-                width: 15,
+                width: 5,
               ),
               Expanded(
                 child: CustomButton(
