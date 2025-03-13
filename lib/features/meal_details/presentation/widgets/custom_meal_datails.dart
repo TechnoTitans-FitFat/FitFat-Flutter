@@ -1,7 +1,7 @@
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
-class CustomMealDatails extends StatelessWidget {
+class CustomMealDatails extends StatefulWidget {
   const CustomMealDatails({
     super.key,
     required this.title,
@@ -15,6 +15,17 @@ class CustomMealDatails extends StatelessWidget {
   final String cookingTime;
 
   @override
+  State<CustomMealDatails> createState() => _CustomMealDatailsState();
+}
+
+class _CustomMealDatailsState extends State<CustomMealDatails> {
+   bool _isTapped = false;
+     void _tappedImage() {
+    setState(() {
+      _isTapped = !_isTapped; 
+    });
+  }
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,7 +35,7 @@ class CustomMealDatails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                widget.title,
                 style: AppStyles.textStyle24,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
@@ -39,7 +50,7 @@ class CustomMealDatails extends StatelessWidget {
                     color: Colors.yellow,
                   ),
                   Text(
-                    rating.toString(),
+                    widget.rating.toString(),
                     style: AppStyles.textStyle16,
                   ),
                   const SizedBox(
@@ -53,7 +64,7 @@ class CustomMealDatails extends StatelessWidget {
                     width: 4,
                   ),
                   Text(
-                    caloreis,
+                    widget.caloreis,
                     style: AppStyles.textStyle16,
                   ),
                   const SizedBox(
@@ -67,7 +78,7 @@ class CustomMealDatails extends StatelessWidget {
                     width: 4,
                   ),
                   Text(
-                    cookingTime,
+                    widget.cookingTime,
                     style: AppStyles.textStyle16,
                   )
                 ],
@@ -75,11 +86,14 @@ class CustomMealDatails extends StatelessWidget {
             ],
           ),
         ),
-        Image.asset(
-          'imges/Component 5.png',
-          width: 50,
-          height: 50,
-          fit: BoxFit.contain,
+        GestureDetector(
+          onTap:_tappedImage,
+          child: Image.asset(
+            _isTapped?  'assets/icons/liked.png' : 'imges/Component 5.png',
+            width: 50,
+            height: 50,
+            fit: BoxFit.contain,
+          ),
         )
       ],
     );
