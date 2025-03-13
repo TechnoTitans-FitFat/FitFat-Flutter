@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CalculateDietView extends StatelessWidget {
-  const CalculateDietView({super.key});
-
+  const CalculateDietView({super.key, required this.userId});
+  final String userId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,12 +55,21 @@ class CalculateDietView extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const Expanded(
-            child: SingleChildScrollView(
-              child: CustomContainerProfileSetUp(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 35),
-                  child: CalculatrBody(),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: CustomContainerProfileSetUp(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 35),
+                    child: CalculatrBody(userId: userId),
+                  ),
                 ),
               ),
             ),

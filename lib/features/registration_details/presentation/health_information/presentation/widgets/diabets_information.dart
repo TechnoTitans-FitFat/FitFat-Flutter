@@ -65,7 +65,6 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
     setState(() {
       isLoading = true;
     });
-    // Default target blood sugar range
     final Map<String, int> targetBloodSugarRange = {
       'min': 70,
       'max': 180,
@@ -124,7 +123,9 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DietInformationView(),
+              builder: (context) => DietInformationView(
+                userId: widget.userId,
+              ),
             ),
           );
         } else if (state is HealthInfoFailure) {
@@ -319,7 +320,6 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                           }
 
                           _submitHealthInfo();
-                          // Navigation is now handled in the BlocListener
                         }),
                 ],
               ),

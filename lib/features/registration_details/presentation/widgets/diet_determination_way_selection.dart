@@ -5,8 +5,8 @@ import 'package:fitfat/features/registration_details/presentation/widgets/button
 import 'package:flutter/material.dart';
 
 class DietDeterminationWaySelection extends StatelessWidget {
-  const DietDeterminationWaySelection({super.key});
-
+  const DietDeterminationWaySelection({super.key, required this.userId});
+  final String userId;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +31,9 @@ class DietDeterminationWaySelection extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const InputMyDietView()));
+                        builder: (context) => InputMyDietView(
+                              userId: userId,
+                            )));
               },
             ),
             const Spacer(
@@ -46,7 +48,7 @@ class DietDeterminationWaySelection extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return const CalculateDietView();
+                    return CalculateDietView(userId: userId);
                   },
                 ));
               },
