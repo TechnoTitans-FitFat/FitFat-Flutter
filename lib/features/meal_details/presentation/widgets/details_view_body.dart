@@ -89,7 +89,7 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
                builder: (context, scrollController) {
                  return Container(
               decoration: const BoxDecoration(
-                  color: AppLightColor.whiteColor1,
+                  color: AppLightColor.backgroundColor,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(45),
                       topRight: Radius.circular(45))),
