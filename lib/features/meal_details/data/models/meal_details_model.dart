@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:fitfat/core/api/end_points.dart';
 
 class MealDetailsModel {

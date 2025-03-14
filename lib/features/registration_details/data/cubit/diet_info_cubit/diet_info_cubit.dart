@@ -1,63 +1,61 @@
 import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
-import 'package:fitfat/features/registration_details/data/model/health_info_model.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_state.dart';
-import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../model/diet_info_model.dart';
+import '../../../../../core/errors/exceptions.dart' show ServerException;
 
 class DietInfoCubit extends Cubit<DietInfoState> {
-  final ApiConsumer apiConsumer;
-  DietInfoCubit(this.apiConsumer) : super(DietInfoInitial());
+  final ApiConsumer api;
+  DietInfoCubit(this.api) : super(DietInfoInitial());
   void postDietInfo({
-    required String token,
     required String dietType,
     required Map<String, int> macronutrientGoals,
     required String dietaryGoals,
     required String activityLevel,
     required List<String> mealPreferences,
+    required String userId,
   }) async {
-    emit(DietInfoLoading());
     try {
-      final response = await apiConsumer.post(
-        EndPoint.dietInfo,
-        data: {
-          "dietType": dietType,
-          "macronutrientGoals": macronutrientGoals,
-          "dietaryGoals": dietaryGoals,
-          "activityLevel": activityLevel,
-          "mealPreferences": mealPreferences,
-        },
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-          validateStatus: (status) {
-            return status! < 500;
-          },
-        ),
+      emit(DietInfoLoading());
+
+      final Map<String, dynamic> data = {
+        'userId': userId,
+        "dietType": dietType,
+        "macronutrientGoals": macronutrientGoals,
+        "dietaryGoals": dietaryGoals,
+        "activityLevel": activityLevel,
+        "mealPreferences": mealPreferences,
+      };
+
+      final response = await api.post(
+        EndPoint.dietInfo + "/$userId",
+        data: data,
       );
-      String responseString = response.toString();
-      if (responseString == null) {
-        emit(DietInfoFailure(errMessage: "data is null"));
+
+      if (response is Map<String, dynamic> && response.containsKey("status")) {
+        if (response["status"] == true) {
+          emit(DietInfoSuccess());
+        } else {
+          emit(DietInfoFailure(
+            errMessage:
+                response["message"] ?? "Failed to save health information",
+          ));
+        }
       } else {
-        emit(
-          DietInfoSuccess(
-            dietInfoModel: DietInfoModel(
-              activityLevel: activityLevel,
-              dietType: dietType,
-              dietaryGoals: dietaryGoals,
-              macronutrientGoals: macronutrientGoals,
-              mealPreferences: mealPreferences,
-            ),
-          ),
-        );
+        emit(DietInfoFailure(
+          errMessage: "Unexpected response format",
+        ));
       }
-      print('Raw Response: ${response.toString()}');
+    } on ServerException catch (e) {
+      emit(DietInfoFailure(errMessage: e.errModel.errMessage));
+    } on DioException catch (e) {
+      emit(DietInfoFailure(
+        errMessage: e.response?.data["message"] ?? "Unknown error occurred",
+      ));
     } catch (e) {
-      emit(DietInfoFailure(errMessage: e.toString()));
+      emit(DietInfoFailure(errMessage: "Unexpected error: $e"));
     }
   }
 }

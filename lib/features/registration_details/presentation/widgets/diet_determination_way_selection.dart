@@ -1,12 +1,12 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/registration_details/presentation/views/calculate_diet_view.dart';
-import 'package:fitfat/features/registration_details/presentation/views/input_my_diet_view.dart';
+import 'package:fitfat/features/registration_details/presentation/calculatw_diet/calculate_diet_view.dart';
+import 'package:fitfat/features/registration_details/presentation/input_my_diet/presentation/view/input_my_diet_view.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class DietDeterminationWaySelection extends StatelessWidget {
-  const DietDeterminationWaySelection({super.key});
-
+  const DietDeterminationWaySelection({super.key, required this.userId});
+  final String userId;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +31,9 @@ class DietDeterminationWaySelection extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const InputMyDietView()));
+                        builder: (context) => InputMyDietView(
+                              userId: userId,
+                            )));
               },
             ),
             const Spacer(
@@ -46,7 +48,7 @@ class DietDeterminationWaySelection extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return const CalculateDietView();
+                    return CalculateDietView(userId: userId);
                   },
                 ));
               },

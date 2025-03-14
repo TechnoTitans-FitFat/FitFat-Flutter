@@ -10,4 +10,6 @@ class AppLightColor {
   static const Color greyColor1 = Color.fromRGBO(0, 0, 0, 0.7);
   static const Color green = Color(0xff2fe487);
   static const Color secondColor = Color(0xffFBE0E2);
+  static const Color transpernt = Colors.transparent;
+  static const Color whiteColor1 = Color(0xffF5F5F5);
 }
