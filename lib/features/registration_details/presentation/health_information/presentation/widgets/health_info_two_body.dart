@@ -19,7 +19,7 @@ class HealthInfoTwoBody extends StatefulWidget {
   final String dateOfBirth;
   final String weight;
   final String height;
-  final List<String> foodAllergies;
+  final String foodAllergies;
   final bool diabetes;
   final String userId;
 
