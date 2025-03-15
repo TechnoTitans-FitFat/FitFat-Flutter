@@ -11,7 +11,7 @@ class HealthInfoCubit extends Cubit<HealthInfoState> {
   HealthInfoCubit(this.api) : super(HealthInfoInitial());
 
   Future<void> postHealthInfo({
-    required List<String> foodAllergies,
+    required String foodAllergies,
     required int diabetes,
     required int weight,
     required int height,

@@ -31,7 +31,7 @@ class DiabetsInformation extends StatefulWidget {
   final int height;
   final String dateOfBirth;
   final String gender;
-  final List<String> foodAllergies;
+  final String foodAllergies;
   final String userId;
 
   @override
