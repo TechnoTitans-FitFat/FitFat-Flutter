@@ -14,7 +14,7 @@ class DietInfoCubit extends Cubit<DietInfoState> {
     required Map<String, int> macronutrientGoals,
     required String dietaryGoals,
     required String activityLevel,
-    required List<String> mealPreferences,
+    required String mealPreferences,
     required String userId,
   }) async {
     try {

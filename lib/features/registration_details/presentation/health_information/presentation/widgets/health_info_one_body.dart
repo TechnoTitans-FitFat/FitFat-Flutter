@@ -32,10 +32,11 @@ class HealthInfoOneBody extends StatefulWidget {
 }
 
 class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
-  List<String> foodAllergies = [];
+  String foodAllergies = "";
   bool diabetes = false;
   String diabetesType = "";
   late RangeValues currentRange;
+
   @override
   void initState() {
     currentRange = widget.initialBloodSugarRange;
@@ -45,21 +46,14 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
   void updateFoodAllergies(String allergy, bool isSelected) {
     setState(() {
       if (allergy == "None") {
-        // If "None" is selected, clear other allergies
-        foodAllergies = isSelected ? ["None"] : [];
+        // If "None" is selected, set or clear it
+        foodAllergies = isSelected ? "None" : "";
       } else {
-        // If any other allergy is selected, remove "None" if present
-        if (foodAllergies.contains("None")) {
-          foodAllergies.remove("None");
-        }
-
-        // Toggle the selected allergy
+        // Otherwise, handle other allergy selection
         if (isSelected) {
-          if (!foodAllergies.contains(allergy)) {
-            foodAllergies.add(allergy);
-          }
-        } else {
-          foodAllergies.remove(allergy);
+          foodAllergies = allergy;
+        } else if (foodAllergies == allergy) {
+          foodAllergies = ""; // Clear it if unselected
         }
       }
     });
