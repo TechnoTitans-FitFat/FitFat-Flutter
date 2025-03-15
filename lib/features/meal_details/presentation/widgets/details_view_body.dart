@@ -19,6 +19,7 @@ class DetailsViewBody extends StatefulWidget {
 }
 
 class _DetailsViewBodyState extends State<DetailsViewBody> {
+    
     final DraggableScrollableController _scrollController =
       DraggableScrollableController();
 
@@ -77,100 +78,98 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
           left: 0,
           right: 0,
           bottom: 0,
-          child: Positioned.fill(
-            child: DraggableScrollableSheet(
-               controller: _scrollController, 
-               initialChildSize: .98, 
-               minChildSize: 0.85, 
-               maxChildSize: 0.99,
-               snap: true,
-               snapSizes: [0.85, 0.98],
-               expand: false,
-                 builder: (context, scrollController) {
-                   return Container(
-                decoration: const BoxDecoration(
-                    color: AppLightColor.whiteColor1,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(45),
-                        topRight: Radius.circular(45))),
-                child: Padding(
-                  padding: const EdgeInsets.all(32),
-                  child: SingleChildScrollView(
-                    controller: scrollController, 
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomMealDatails(
-                          title: widget.meal.name,
-                          caloreis: '${widget.meal.calories} cal',
-                          cookingTime: widget.meal.cookingTime,
-                          rating: widget.meal.rating,
+          child: DraggableScrollableSheet(
+             controller: _scrollController, 
+             initialChildSize: .98, 
+             minChildSize: 0.85, 
+             maxChildSize: 0.99,
+             snap: true,
+             snapSizes: [0.85, 0.98],
+             expand: false,
+               builder: (context, scrollController) {
+                 return Container(
+              decoration: const BoxDecoration(
+                  color: AppLightColor.backgroundColor,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(45),
+                      topRight: Radius.circular(45))),
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: SingleChildScrollView(
+                  controller: scrollController, 
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomMealDatails(
+                        title: widget.meal.name,
+                        caloreis: '${widget.meal.calories} cal',
+                        cookingTime: widget.meal.cookingTime,
+                        rating: widget.meal.rating,
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12),
+                        child: Text(
+                          'Nutrients',
+                          style: AppStyles.textStyle24.copyWith(fontSize: 20),
                         ),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12),
-                          child: Text(
-                            'Nutrients',
-                            style: AppStyles.textStyle24.copyWith(fontSize: 20),
-                          ),
-                        ),
-                        const SizedBox(height: 18),
-                        NutrientsList(
-                          meal: widget.meal,
-                        ),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12),
-                          child: Text('Ingredients',
-                              style: AppStyles.textStyle24.copyWith(fontSize: 20)),
-                        ),
-                        const SizedBox(height: 18),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: widget.meal.ingredients.isNotEmpty
-                              ? widget.meal.ingredients
-                                  .map((ingredient) => Padding(
-                                        padding:
-                                            const EdgeInsets.symmetric(vertical: 4),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              " •     ",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 18),
+                      NutrientsList(
+                        meal: widget.meal,
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12),
+                        child: Text('Ingredients',
+                            style: AppStyles.textStyle24.copyWith(fontSize: 20)),
+                      ),
+                      const SizedBox(height: 18),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: widget.meal.ingredients.isNotEmpty
+                            ? widget.meal.ingredients
+                                .map((ingredient) => Padding(
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 4),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            " •     ",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              ingredient,
+                                              style: AppStyles.textStyle16,
                                             ),
-                                            Expanded(
-                                              child: Text(
-                                                ingredient,
-                                                style: AppStyles.textStyle16,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ))
-                                  .toList()
-                              : [
-                                  Text(
-                                    "No ingredients available",
-                                    style: AppStyles.textStyle16
-                                        .copyWith(color: Colors.red),
-                                  )
-                                ], // Show message if empty
-                        ),
-                      ],
-                    ),
+                                          ),
+                                        ],
+                                      ),
+                                    ))
+                                .toList()
+                            : [
+                                Text(
+                                  "No ingredients available",
+                                  style: AppStyles.textStyle16
+                                      .copyWith(color: Colors.red),
+                                )
+                              ], // Show message if empty
+                      ),
+                    ],
                   ),
                 ),
-              );
-                 }
-            ),
+              ),
+            );
+               }
           ),
         ),
                 ]
