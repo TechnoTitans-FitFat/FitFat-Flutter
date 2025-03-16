@@ -17,6 +17,7 @@ class HealthInfoOneBody extends StatefulWidget {
     required this.height,
     this.initialBloodSugarRange = const RangeValues(70, 80),
     this.onBloodSugarRangeChanged,
+    required this.userId,
   });
   final String selectedGender;
   final String dateOfBirth;
@@ -24,16 +25,18 @@ class HealthInfoOneBody extends StatefulWidget {
   final String height;
   final RangeValues initialBloodSugarRange;
   final Function(RangeValues)? onBloodSugarRangeChanged;
+  final String userId;
 
   @override
   State<HealthInfoOneBody> createState() => _HealthInfoOneBodyState();
 }
 
 class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
-  List<String> foodAllergies = [];
+  String foodAllergies = "";
   bool diabetes = false;
   String diabetesType = "";
   late RangeValues currentRange;
+
   @override
   void initState() {
     currentRange = widget.initialBloodSugarRange;
@@ -43,21 +46,14 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
   void updateFoodAllergies(String allergy, bool isSelected) {
     setState(() {
       if (allergy == "None") {
-        // If "None" is selected, clear other allergies
-        foodAllergies = isSelected ? ["None"] : [];
+        // If "None" is selected, set or clear it
+        foodAllergies = isSelected ? "None" : "";
       } else {
-        // If any other allergy is selected, remove "None" if present
-        if (foodAllergies.contains("None")) {
-          foodAllergies.remove("None");
-        }
-
-        // Toggle the selected allergy
+        // Otherwise, handle other allergy selection
         if (isSelected) {
-          if (!foodAllergies.contains(allergy)) {
-            foodAllergies.add(allergy);
-          }
-        } else {
-          foodAllergies.remove(allergy);
+          foodAllergies = allergy;
+        } else if (foodAllergies == allergy) {
+          foodAllergies = ""; // Clear it if unselected
         }
       }
     });
@@ -165,13 +161,13 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => HealthInfoTwo(
-                                  dateOfBirth: widget.dateOfBirth,
-                                  diabetes: diabetes,
-                                  foodAllergies: foodAllergies,
-                                  height: widget.height,
-                                  selectedGender: widget.selectedGender,
-                                  weight: widget.weight,
-                                ),
+                                    dateOfBirth: widget.dateOfBirth,
+                                    diabetes: diabetes,
+                                    foodAllergies: foodAllergies,
+                                    height: widget.height,
+                                    selectedGender: widget.selectedGender,
+                                    weight: widget.weight,
+                                    userId: widget.userId),
                               ));
                         },
                       ),

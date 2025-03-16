@@ -10,7 +10,7 @@ class FoodAllergyQuestionSection extends StatelessWidget {
     required this.onFoodAllergyChanged,
   });
 
-  final List<String> anyFoodAllergies;
+  final String anyFoodAllergies;
   final Function(String, bool) onFoodAllergyChanged;
 
   @override

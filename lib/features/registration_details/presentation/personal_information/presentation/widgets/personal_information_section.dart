@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import '../../../widgets/next_button.dart';
 
 class PersonalInformationSection extends StatefulWidget {
-  const PersonalInformationSection({super.key});
-
+  const PersonalInformationSection({
+    super.key,
+    required this.userId,
+  });
+  final String userId;
   @override
   _PersonalInformationSectionState createState() =>
       _PersonalInformationSectionState();
@@ -60,6 +63,7 @@ class _PersonalInformationSectionState
                         context,
                         MaterialPageRoute(
                           builder: (context) => HealthInfoOne(
+                            userId: widget.userId,
                             selectedGender: selectedGender,
                             dateOfBirth: dateOfBirth,
                             height: height,

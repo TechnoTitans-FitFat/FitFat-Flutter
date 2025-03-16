@@ -1,8 +1,9 @@
+import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/widgets/gender_selection_button.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../core/constants/light_colors.dart';
 
 class GenderSection extends StatefulWidget {
   const GenderSection({
@@ -41,7 +42,7 @@ class _GenderSectionState extends State<GenderSection> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GenderSelectionButton(
-                genderImage: 'imges/female.png',
+                genderImage: Assets.images.female.path,
                 genderType: 'female',
                 isSelected: selectedGender == 'female',
                 onTap: () {
@@ -52,7 +53,7 @@ class _GenderSectionState extends State<GenderSection> {
                 },
               ),
               GenderSelectionButton(
-                genderImage: 'imges/male.png',
+                genderImage: Assets.images.male.path,
                 genderType: 'male',
                 isSelected: selectedGender == 'male',
                 onTap: () {

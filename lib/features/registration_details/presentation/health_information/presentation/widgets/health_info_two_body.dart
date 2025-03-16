@@ -13,13 +13,15 @@ class HealthInfoTwoBody extends StatefulWidget {
     required this.height,
     required this.foodAllergies,
     required this.diabetes,
+    required this.userId,
   });
   final String selectedGender;
   final String dateOfBirth;
   final String weight;
   final String height;
-  final List<String> foodAllergies;
+  final String foodAllergies;
   final bool diabetes;
+  final String userId;
 
   @override
   State<HealthInfoTwoBody> createState() => _HealthInfoTwoBodyState();
@@ -69,9 +71,10 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const DietInformationView(
-            // healthInfo: healthInfo,
-            ),
+        builder: (context) => DietInformationView(
+          userId: widget.userId,
+          // healthInfo: healthInfo,
+        ),
       ),
     );
   }
@@ -100,6 +103,7 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
               dateOfBirth: widget.dateOfBirth,
               gender: widget.selectedGender,
               foodAllergies: widget.foodAllergies,
+              userId: widget.userId,
             ),
           ),
         ),

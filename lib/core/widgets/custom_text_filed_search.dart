@@ -1,5 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -47,7 +48,7 @@ class CustomTextFiledSearch extends StatelessWidget {
                 ),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Image.asset('assets/icons/search-normal.png'),
+                  child: Image.asset(Assets.icons.searchNormal.path),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
@@ -72,11 +73,13 @@ class CustomTextFiledSearch extends StatelessWidget {
               width: 50,
               child: Center(
                   child: SvgPicture.asset(
-                'assets/icons/filter.svg',
+                    Assets.icons.filter,
                 fit: BoxFit.fill,
                 height: 27,
                 width: 27,
               )))
+
+
         ],
       ),
     );

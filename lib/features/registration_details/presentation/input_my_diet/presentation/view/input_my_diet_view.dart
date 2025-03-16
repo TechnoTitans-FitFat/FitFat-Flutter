@@ -1,14 +1,13 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/registration_details/presentation/widgets/calculatr_body.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/current_page_indicator_section.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/custom_container_profile_set_up.dart';
-
+import 'package:fitfat/features/registration_details/presentation/input_my_diet/presentation/widgets/input_my_diet_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CalculateDietView extends StatelessWidget {
-  const CalculateDietView({super.key});
-
+class InputMyDietView extends StatelessWidget {
+  const InputMyDietView({super.key, required this.userId});
+  final String userId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,16 +54,13 @@ class CalculateDietView extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const Expanded(
-            child: SingleChildScrollView(
-              child: CustomContainerProfileSetUp(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 35),
-                  child: CalculatrBody(),
-                ),
-              ),
+          CustomContainerProfileSetUp(
+              child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            child: InputMyDietViewBody(
+              userId: userId,
             ),
-          ),
+          ))
         ],
       ),
     );

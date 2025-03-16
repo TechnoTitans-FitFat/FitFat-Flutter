@@ -14,12 +14,13 @@ class SuggestionView extends StatelessWidget {
       appBar: CustomAppBar(title: 'Suggestion'),
       body: SingleChildScrollView(
         child: Padding(
-         padding: EdgeInsets.symmetric(horizontal: 15, ),
+          padding: EdgeInsets.symmetric(
+            horizontal: 15,
+          ),
           child: Column(
             children: [
               CustomTextFiledSearch(),
-             CustomSuggestionsGridView(isSuggestion: true),
-             SizedBox(height: 15)
+              CustomSuggestionsGridView(isSuggestion: true)
             ],
           ),
         ),

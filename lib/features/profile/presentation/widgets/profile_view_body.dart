@@ -1,6 +1,7 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 
 import 'package:fitfat/features/main/presentaion/widgets/custom_profile_card.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -78,7 +79,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                       ),
                       Row(
                         children: [
-                          SvgPicture.asset('imges/language.svg'),
+                          SvgPicture.asset(Assets.icons.language),
                           const SizedBox(
                             width: 10,
                           ),
@@ -96,7 +97,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                       ),
                       Row(
                         children: [
-                          SvgPicture.asset('imges/dark_mode.svg'),
+                          SvgPicture.asset(Assets.icons.darkMode),
                           const SizedBox(
                             width: 10,
                           ),
@@ -129,7 +130,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                       ),
                       Row(
                         children: [
-                          SvgPicture.asset('imges/contact support.svg'),
+                          SvgPicture.asset(Assets.icons.contactSupport),
                           const SizedBox(
                             width: 10,
                           ),
@@ -147,7 +148,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                       ),
                       Row(
                         children: [
-                          SvgPicture.asset('imges/account_settings.svg'),
+                          SvgPicture.asset(Assets.icons.accountSettings),
                           const SizedBox(
                             width: 10,
                           ),

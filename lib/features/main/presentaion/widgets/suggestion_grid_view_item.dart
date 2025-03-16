@@ -43,21 +43,24 @@ class SuggestionGridViewItem extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => DetailsView(mealId: id, )));
               },
-              child: Container(
-                width: double.infinity,
-                height: 100,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppLightColor.blackColor.withOpacity(0.25),
-                      blurRadius: 3,
-                      offset: const Offset(4, 0),
+              child: Hero(
+                tag:imageUrl ,
+                child: Container(
+                  width: double.infinity,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppLightColor.blackColor.withOpacity(0.25),
+                        blurRadius: 3,
+                        offset: const Offset(4, 0),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(imageUrl),
                     ),
-                  ],
-                  borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(imageUrl),
                   ),
                 ),
               ),

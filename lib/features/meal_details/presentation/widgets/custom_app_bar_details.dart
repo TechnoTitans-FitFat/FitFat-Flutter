@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBarDetails extends StatelessWidget implements PreferredSizeWidget {
@@ -7,20 +8,20 @@ class CustomAppBarDetails extends StatelessWidget implements PreferredSizeWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppLightColor.secondColor,
+      backgroundColor:AppLightColor.transpernt,
       leading: Padding(
         padding: const EdgeInsets.only(left:16),
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).pop();
           },
-          child: Image.asset('imges/arrow-square-left.png',height: 25,width: 25,fit: BoxFit.contain,)
+          child: Image.asset(Assets.icons.back.path,height: 25,width: 25,fit: BoxFit.contain,)
         ),
       ),
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16),
-          child: Image.asset('imges/shopping-cart.png'),
+          child: Image.asset(Assets.icons.shoppingCart.path,height: 34,width: 34,fit: BoxFit.contain,),
         )
       ],
     );

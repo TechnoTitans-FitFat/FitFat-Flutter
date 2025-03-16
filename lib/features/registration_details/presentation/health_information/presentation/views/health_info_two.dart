@@ -3,20 +3,23 @@ import 'package:fitfat/features/registration_details/presentation/health_informa
 import 'package:flutter/material.dart';
 
 class HealthInfoTwo extends StatelessWidget {
-  const HealthInfoTwo(
-      {super.key,
-      required this.selectedGender,
-      required this.dateOfBirth,
-      required this.weight,
-      required this.height,
-      required this.foodAllergies,
-      required this.diabetes});
+  const HealthInfoTwo({
+    super.key,
+    required this.selectedGender,
+    required this.dateOfBirth,
+    required this.weight,
+    required this.height,
+    required this.foodAllergies,
+    required this.diabetes,
+    required this.userId,
+  });
   final String selectedGender;
   final String dateOfBirth;
   final String weight;
   final String height;
-  final List<String> foodAllergies;
+  final String foodAllergies;
   final bool diabetes;
+  final String userId;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +32,7 @@ class HealthInfoTwo extends StatelessWidget {
         height: height,
         selectedGender: selectedGender,
         weight: weight,
+        userId: userId,
       ),
     );
   }

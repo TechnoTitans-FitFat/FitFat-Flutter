@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class DetailsBottomBar extends StatelessWidget {
   const DetailsBottomBar({
-    super.key, required this.price,
+    super.key,
+    required this.price,
   });
   final double price;
 

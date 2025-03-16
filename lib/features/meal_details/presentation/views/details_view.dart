@@ -1,7 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_state.dart';
-import 'package:fitfat/features/meal_details/presentation/widgets/custom_app_bar_details.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/details_bottom_bar.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/details_view_body.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +19,7 @@ class DetailsView extends StatelessWidget {
     context.read<MealDetailsCubit>().fetchMealsDetailsData(mealId);
 
     return Scaffold(
-      backgroundColor: AppLightColor.secondColor,
-      appBar: const CustomAppBarDetails(),
+      backgroundColor: AppLightColor.backgroundColor,
       body: BlocBuilder<MealDetailsCubit, MealDetailsState>(
         builder: (context, state) {
           if (state is MealDetailsLoading) {
