@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class AutoScrollPanner extends StatelessWidget {
@@ -6,10 +7,10 @@ class AutoScrollPanner extends StatelessWidget {
 
 
 final List<String> images = [
-    'imges/offer1.png',
-    'imges/offer2.png',
-    'imges/offer3.png',
-    'imges/offer4.png'
+    Assets.images.offer1.path,
+    Assets.images.offer2.path,
+    Assets.images.offer3.path,
+    Assets.images.offer4.path
   ];
   @override
   Widget build(BuildContext context) {

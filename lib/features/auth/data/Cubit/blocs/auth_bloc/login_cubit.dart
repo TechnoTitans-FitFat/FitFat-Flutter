@@ -119,7 +119,8 @@ class LoginCubit extends Cubit<LoginStates> {
         }
 
         await CacheHelper().saveData(key: ApiKey.token, value: user!.token);
-        await CacheHelper().saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
+        await CacheHelper()
+            .saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
 
         print("Login successful, emitting success state...");
         emit(LoginSucess());
@@ -134,7 +135,8 @@ class LoginCubit extends Cubit<LoginStates> {
       print("Response status code: ${e.response?.statusCode}");
       emit(LoginFalier(errorMassage: "Dio error: ${e.message}"));
     } catch (e) {
-      emit(LoginFalier(errorMassage: "An unexpected error occurred ${e.toString()}"));
+      emit(LoginFalier(
+          errorMassage: "An unexpected error occurred ${e.toString()}"));
     }
   }
 }

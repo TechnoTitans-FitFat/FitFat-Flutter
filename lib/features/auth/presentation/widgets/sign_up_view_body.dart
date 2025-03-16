@@ -2,6 +2,7 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_button.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_textfield.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -105,14 +106,12 @@ class SignUpViewBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    child: const SizedBox(
+                    child: SizedBox(
                       height: 20,
                       width: 20,
                       child: CircleAvatar(
                         backgroundColor: AppLightColor.whiteColor,
-                        child: Image(
-                          image: AssetImage('imges/google.png'),
-                        ),
+                        child: Assets.icons.google.image()
                       ),
                     ),
                   ),

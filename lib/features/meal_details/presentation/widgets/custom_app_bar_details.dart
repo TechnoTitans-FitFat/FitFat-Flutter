@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBarDetails extends StatelessWidget implements PreferredSizeWidget {
@@ -14,13 +15,13 @@ class CustomAppBarDetails extends StatelessWidget implements PreferredSizeWidget
           onTap: () {
             Navigator.of(context).pop();
           },
-          child: Image.asset('assets/icons/back.png',height: 25,width: 25,fit: BoxFit.contain,)
+          child: Image.asset(Assets.icons.back.path,height: 25,width: 25,fit: BoxFit.contain,)
         ),
       ),
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16),
-          child: Image.asset('assets/icons/shoppingcart.png',height: 34,width: 34,fit: BoxFit.contain,),
+          child: Image.asset(Assets.icons.shoppingCart.path,height: 34,width: 34,fit: BoxFit.contain,),
         )
       ],
     );
