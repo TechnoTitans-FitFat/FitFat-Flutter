@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -37,11 +38,11 @@ class CustomBottomNavBar extends StatelessWidget {
         ),
         child: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
-            buildNavItem('imges/home.svg', 'Home', 0),
-            buildNavItem('imges/menu.svg', 'Menu', 1),
-            buildNavItem('imges/favourite.svg', 'Favourite', 2),
-            buildNavItem('imges/cart.svg', 'Cart', 3),
-            buildNavItem('imges/profile.svg', 'Profile', 4),
+            buildNavItem(Assets.icons.home, 'Home', 0),
+            buildNavItem(Assets.icons.menu, 'Menu', 1),
+            buildNavItem(Assets.icons.favourite, 'Favourite', 2),
+            buildNavItem(Assets.icons.cart, 'Cart', 3),
+            buildNavItem(Assets.icons.profile, 'Profile', 4),
           ],
           currentIndex: selectedIndex,
           selectedItemColor: AppLightColor.mainColor,

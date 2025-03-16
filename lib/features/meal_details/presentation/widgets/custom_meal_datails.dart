@@ -1,4 +1,5 @@
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class CustomMealDatails extends StatefulWidget {
@@ -89,7 +90,7 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
         GestureDetector(
           onTap:_tappedImage,
           child: Image.asset(
-            _isTapped?  'assets/icons/liked.png' : 'imges/Component 5.png',
+            _isTapped?  Assets.icons.liked.path : Assets.icons.component5.path,
             width: 50,
             height: 50,
             fit: BoxFit.contain,

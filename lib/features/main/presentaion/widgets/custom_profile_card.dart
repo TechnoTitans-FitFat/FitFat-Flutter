@@ -1,5 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/main/presentaion/widgets/info_text.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,7 +32,7 @@ SizedBox CustomProfileCard() {
                             color: AppLightColor.mainColor),
                       ),
                      
-                      SvgPicture.asset('imges/edit.svg')
+                      SvgPicture.asset(Assets.icons.edit)
                     ],
                   ),
                   const SizedBox(

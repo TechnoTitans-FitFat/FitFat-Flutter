@@ -79,6 +79,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/google.png
   AssetGenImage get google => const AssetGenImage('assets/icons/google.png');
 
+
+  AssetGenImage get liked => const AssetGenImage('assets/icons/liked.png');
+
   /// File path: assets/icons/home.svg
   String get home => 'assets/icons/home.svg';
 

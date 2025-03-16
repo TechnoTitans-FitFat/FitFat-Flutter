@@ -1,3 +1,4 @@
+import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -35,8 +36,8 @@ class CustomButton extends StatelessWidget {
               widget!,
               style: TextStyle(
                   color: widgetColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
+                  fontWeight: AppStyles.textStyle18.fontWeight,
+                  fontSize: AppStyles.textStyle16.fontSize),
             ),
           ],
         ),

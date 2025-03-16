@@ -41,10 +41,8 @@ class GenderSelectionButton extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Image(
-              image: AssetImage(
-                genderImage,
-              ),
+            Image.asset(
+              genderImage,
               width: 90,
               height: 90,
             ),
