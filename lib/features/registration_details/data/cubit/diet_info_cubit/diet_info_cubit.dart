@@ -40,22 +40,18 @@ class DietInfoCubit extends Cubit<DietInfoState> {
         ),
       );
       String responseString = response.toString();
-      if (responseString == null) {
-        emit(DietInfoFailure(errMessage: "data is null"));
-      } else {
-        emit(
-          DietInfoSuccess(
-            dietInfoModel: DietInfoModel(
-              activityLevel: activityLevel,
-              dietType: dietType,
-              dietaryGoals: dietaryGoals,
-              macronutrientGoals: macronutrientGoals,
-              mealPreferences: mealPreferences,
-            ),
+      emit(
+        DietInfoSuccess(
+          dietInfoModel: DietInfoModel(
+            activityLevel: activityLevel,
+            dietType: dietType,
+            dietaryGoals: dietaryGoals,
+            macronutrientGoals: macronutrientGoals,
+            mealPreferences: mealPreferences,
           ),
-        );
-      }
-      print('Raw Response: ${response.toString()}');
+        ),
+      );
+          print('Raw Response: ${response.toString()}');
     } catch (e) {
       emit(DietInfoFailure(errMessage: e.toString()));
     }

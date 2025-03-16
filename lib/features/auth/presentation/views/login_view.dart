@@ -3,8 +3,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
-import 'package:fitfat/features/auth/presentation/widgets/customs/custom_button.dart';
-import 'package:fitfat/features/auth/presentation/widgets/customs/custom_textfield.dart';
 import 'package:fitfat/features/auth/presentation/widgets/login_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

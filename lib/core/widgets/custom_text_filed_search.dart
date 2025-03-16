@@ -18,7 +18,7 @@ class CustomTextFiledSearch extends StatelessWidget {
           Container(
             height: 50,
             width: 280,
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: TextField(
               decoration: InputDecoration(
                 fillColor: AppLightColor.whiteColor,
@@ -64,7 +64,7 @@ class CustomTextFiledSearch extends StatelessWidget {
                     color: Colors.black.withOpacity(0.2),
                     spreadRadius: 2,
                     blurRadius: 10,
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),

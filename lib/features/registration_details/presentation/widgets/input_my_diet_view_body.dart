@@ -31,10 +31,10 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
   double _fatPercentage = 30;
 
   // Meal frequency
-  double _mealsPerDay = 3;
+  final double _mealsPerDay = 3;
 
   // Calorie goal
-  double _calorieGoal = 2000;
+  final double _calorieGoal = 2000;
 
   // Food preferences
   final List<String> _foodPreferences = [];

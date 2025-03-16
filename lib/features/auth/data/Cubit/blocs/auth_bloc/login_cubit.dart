@@ -102,15 +102,15 @@ class LoginCubit extends Cubit<LoginStates> {
       });
 
       user = SignInModel.fromJson(response);
-      print("Received Token: ${user?.token}");
+      print("Received Token: ${user?.id}");
 
-      if (user?.token == null || user!.token.isEmpty) {
+      if (user?.id == null || user!.id.isEmpty) {
         emit(LoginFalier(errorMassage: "Invalid token received"));
         return;
       }
 
       try {
-        final decodedToken = JwtDecoder.decode(user!.token);
+        final decodedToken = JwtDecoder.decode(user!.id);
         print("Decoded Token: $decodedToken");
 
         if (!decodedToken.containsKey(ApiKey.id)) {
@@ -118,7 +118,7 @@ class LoginCubit extends Cubit<LoginStates> {
           return;
         }
 
-        await CacheHelper().saveData(key: ApiKey.token, value: user!.token);
+        await CacheHelper().saveData(key: ApiKey.token, value: user!.id);
         await CacheHelper().saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
 
         print("Login successful, emitting success state...");

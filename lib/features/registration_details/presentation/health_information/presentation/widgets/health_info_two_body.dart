@@ -69,7 +69,7 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => DietInformationView(
+        builder: (context) => const DietInformationView(
             // healthInfo: healthInfo,
             ),
       ),

@@ -53,7 +53,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
 
   Future<String?> _getToken() async {
     // Get token from LoginCubit
-    return context.read<LoginCubit>().user?.token;
+    return context.read<LoginCubit>().user?.id;
   }
 
   void _submitHealthInfo() async {
@@ -317,7 +317,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DietInformationView(),
+                                builder: (context) => const DietInformationView(),
                               ));
                         }),
                 ],
