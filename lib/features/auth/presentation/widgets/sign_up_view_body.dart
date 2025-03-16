@@ -165,7 +165,7 @@ class SignUpViewBody extends StatelessWidget {
                             child: CircleAvatar(
                               backgroundColor: AppLightColor.whiteColor,
                               child: Image(
-                                image: AssetImage('imges/google.png'),
+                                image: AssetImage('assets/icons/google.png'),
                               ),
                             ),
                           ),

@@ -10,13 +10,12 @@ import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_detail
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
-    show SuggestionsCubit;
+show SuggestionsCubit;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'core/cache/cache_helper.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   CacheHelper().init();

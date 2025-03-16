@@ -328,7 +328,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const DietInformationView(),
+                                builder: (context) => const DietInformationView(userId:'' ,),
                               ));
                         }),
                 ],
