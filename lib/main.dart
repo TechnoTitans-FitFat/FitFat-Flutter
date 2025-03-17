@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: MainScreen(),
+        home: const MainScreen(),
       ),
     );
   }
