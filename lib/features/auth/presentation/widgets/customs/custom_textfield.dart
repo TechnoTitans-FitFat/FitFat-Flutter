@@ -11,6 +11,9 @@ class CustomTextField extends StatefulWidget {
     this.sufIcon,
     this.sufIconNot,
     this.noti,
+    this.validator,
+    this.obscureText,
+    this.keyboardType,
   });
 
   final TextEditingController? controller;
@@ -20,6 +23,12 @@ class CustomTextField extends StatefulWidget {
   final String? hint;
   final Function(String)? onchange;
   final String? noti;
+  // Add validator parameter
+  final String? Function(String?)? validator;
+  // Add obscureText option to override default behavior
+  final bool? obscureText;
+  // Add keyboard type parameter
+  final TextInputType? keyboardType;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -27,7 +36,7 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   bool passwordVisible = false;
-  bool hasError = false; 
+  bool hasError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +44,25 @@ class _CustomTextFieldState extends State<CustomTextField> {
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: TextFormField(
         controller: widget.controller,
-        validator: (data) {
+        // Use custom validator if provided, otherwise use default behavior
+        validator: widget.validator ?? (data) {
           if (data == null || data.isEmpty) {
             setState(() {
-              hasError = true; 
+              hasError = true;
             });
             return widget.noti;
           }
           setState(() {
-            hasError = false; 
+            hasError = false;
           });
           return null;
         },
         onChanged: widget.onchange,
-        obscureText: widget.sufIcon != null ? !passwordVisible : false,
+        // Use custom obscureText if provided, otherwise use default behavior
+        obscureText: widget.obscureText ?? 
+          (widget.sufIcon != null ? !passwordVisible : false),
+        // Use provided keyboard type or default to text
+        keyboardType: widget.keyboardType ?? TextInputType.text,
         decoration: InputDecoration(
           prefixIcon: widget.icon != null
               ? Icon(widget.icon, color: AppLightColor.greyColor)
@@ -68,8 +82,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
               : null,
           hintText: widget.hint,
           hintStyle: const TextStyle(color: AppLightColor.greyColor),
-          
-          
           focusedBorder: buildBorder(),
           enabledBorder: buildBorder(),
           errorBorder: buildBorder(isError: true),

@@ -50,6 +50,11 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
     insulinRatio = widget.initialInsulinRatio;
   }
 
+  Future<String?> _getToken() async {
+    // Get token from LoginCubit
+    return context.read<LoginCubit>().user?.id;
+  }
+
   void _submitHealthInfo() async {
     // Validate required fields
     if (widget.dateOfBirth.isEmpty) {
@@ -320,6 +325,11 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                           }
 
                           _submitHealthInfo();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DietInformationView(userId:'' ,),
+                              ));
                         }),
                 ],
               ),
