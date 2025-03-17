@@ -57,7 +57,7 @@ class CalculateDietView extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
@@ -67,7 +67,7 @@ class CalculateDietView extends StatelessWidget {
               child: SingleChildScrollView(
                 child: CustomContainerProfileSetUp(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 35),
+                    padding: const EdgeInsets.only(top: 35),
                     child: CalculatrBody(userId: userId),
                   ),
                 ),
