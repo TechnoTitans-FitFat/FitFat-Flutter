@@ -30,7 +30,7 @@ class _OtpScreenState extends State<OtpScreen> {
     focusNodes = List.generate(6, (index) => FocusNode());
 
     final args = Get.arguments;
-    if (args is Map<String, dynamic>) {  // ✅ Ensures correct type
+    if (args is Map<String, dynamic>) {
       email = args["email"] ?? "";
       userId = args["userId"] ?? "";
     }
@@ -128,89 +128,101 @@ class _OtpScreenState extends State<OtpScreen> {
           }
         },
         builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 20),
-                Icon(
-                  Icons.mark_email_read,
-                  size: 70,
-                  color: Theme.of(context).primaryColor,
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  "Email Verification",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  email.isNotEmpty
-                      ? "We've sent a 6-digit code to $email"
-                      : "Error: No email provided!",
-                  style: TextStyle(
+          return GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(), // Hide keyboard on tap
+            child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              padding: const EdgeInsets.all(20.0), 
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 20),
+                  Icon(
+                    Icons.mark_email_read,
+                    size: 70,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Email Verification",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    email.isNotEmpty
+                        ? "We've sent a 6-digit code to $email"
+                        : "Error: No email provided!",
+                    style: TextStyle(
                       color: email.isNotEmpty ? Colors.black87 : Colors.red,
-                      fontSize: 16),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(
-                    6,
-                    (index) => SizedBox(
-                      width: 40,
-                      child: TextField(
-                        controller: otpControllers[index],
-                        focusNode: focusNodes[index],
-                        keyboardType: TextInputType.number,
-                        textAlign: TextAlign.center,
-                        maxLength: 1,
-                        decoration: const InputDecoration(counterText: ""),
-                        onChanged: (value) {
-                          if (value.length == 1 && index < 5) {
-                            focusNodes[index + 1].requestFocus();
-                          }
-                          if (index == 5 &&
-                              value.length == 1 &&
-                              completeOtp.length == 6) {
-                            verifyOtp();
-                          }
-                        },
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30),
+                  
+                  // OTP Fields
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(
+                      6,
+                      (index) => SizedBox(
+                        width: 40,
+                        child: TextField(
+                          controller: otpControllers[index],
+                          focusNode: focusNodes[index],
+                          keyboardType: TextInputType.number, 
+                          textInputAction: TextInputAction.next,
+                          textAlign: TextAlign.center,
+                          maxLength: 1,
+                          decoration: const InputDecoration(counterText: ""),
+                          autofocus: index == 0, // Auto-focus the first field
+                          onChanged: (value) {
+                            if (value.isNotEmpty && index < 5) {
+                              focusNodes[index + 1].requestFocus();
+                            } 
+                            if (index == 5 && completeOtp.length == 6) {
+                              verifyOtp();
+                            }
+                          },
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 30),
-                SizedBox(
-                  height: 50,
-                  child: state is VerifyEmailLoading
-                      ? const Center(child: CircularProgressIndicator())
-                      : ElevatedButton(
-                          onPressed: verifyOtp,
-                          child: const Text("Verify",
-                              style: TextStyle(fontSize: 16)),
-                        ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Didn't receive the code? "),
-                    TextButton(
-                      onPressed: enableResend ? resendOtp : null,
-                      child: Text(enableResend
-                          ? "Resend"
-                          : "Resend in ${resendCountdown}s"),
-                    ),
-                  ],
-                ),
-              ],
+
+                  const SizedBox(height: 30),
+
+                  // Verify Button
+                  SizedBox(
+                    height: 50,
+                    child: state is VerifyEmailLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : ElevatedButton(
+                            onPressed: verifyOtp,
+                            child: const Text("Verify",
+                                style: TextStyle(fontSize: 16)),
+                          ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Resend OTP
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Didn't receive the code? "),
+                      TextButton(
+                        onPressed: enableResend ? resendOtp : null,
+                        child: Text(enableResend
+                            ? "Resend"
+                            : "Resend in ${resendCountdown}s"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           );
         },
