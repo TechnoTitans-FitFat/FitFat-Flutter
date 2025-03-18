@@ -1,3 +1,4 @@
+import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,8 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.da
 import 'dart:async';
 
 class OtpScreen extends StatefulWidget {
+  const OtpScreen({super.key});
+
   @override
   _OtpScreenState createState() => _OtpScreenState();
 }
@@ -102,7 +105,7 @@ class _OtpScreenState extends State<OtpScreen> {
       appBar: AppBar(
         title: const Text("Verify Email"),
         elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: AppLightColor.mainColor,
         foregroundColor: Colors.white,
       ),
       body: BlocConsumer<RegisterCubit, SignUpStates>(
@@ -168,7 +171,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
                         maxLength: 1,
-                        decoration: InputDecoration(counterText: ""),
+                        decoration: const InputDecoration(counterText: ""),
                         onChanged: (value) {
                           if (value.length == 1 && index < 5) {
                             focusNodes[index + 1].requestFocus();

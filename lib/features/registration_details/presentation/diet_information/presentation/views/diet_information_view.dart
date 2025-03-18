@@ -56,7 +56,7 @@ class DietInformationView extends StatelessWidget {
           ),
           CustomContainerProfileSetUp(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 22, vertical: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 32),
               child: DietDeterminationWaySelection(
                 userId: userId,
               ),
