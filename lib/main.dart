@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
+import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
@@ -49,8 +50,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/', // Define initial route
         getPages: [
-          GetPage(name: '/', page: () => const LoginSignUp()),
-          GetPage(name: '/otpScreen', page: () => OtpScreen()), // Add OTP Screen route
+          GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
+          GetPage(
+  name: '/otpScreen',
+  page: () {
+    return OtpScreen();
+  },
+),
+ // Add OTP Screen route
         ],
        
       ),

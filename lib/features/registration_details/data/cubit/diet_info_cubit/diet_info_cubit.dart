@@ -30,7 +30,7 @@ class DietInfoCubit extends Cubit<DietInfoState> {
       };
 
       final response = await api.post(
-        EndPoint.dietInfo + "/$userId",
+        "${EndPoint.dietInfo}/$userId",
         data: data,
       );
 

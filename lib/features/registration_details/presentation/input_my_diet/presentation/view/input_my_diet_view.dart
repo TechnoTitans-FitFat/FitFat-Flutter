@@ -56,7 +56,7 @@ class InputMyDietView extends StatelessWidget {
           ),
           CustomContainerProfileSetUp(
               child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
             child: InputMyDietViewBody(
               userId: userId,
             ),

@@ -1,22 +1,23 @@
+
+/*
 import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/errors/exceptions.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/verify_state.dart';
 import 'package:fitfat/features/auth/data/Cubit/models/sign_up_model.dart';
-import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
-part 'sign_up_states.dart';
-class RegisterCubit extends Cubit<SignUpStates> {
-  RegisterCubit(this.api) : super(SignUpInitial());
+
+
+class VerifyCubit extends Cubit<SignUpStates> {
+  VerifyCubit(this.api) : super(VerifyInitial());
 
   final ApiConsumer api;
 
-  // ❌ Remove GlobalKey<FormState> from the Cubit
-
+  final GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
   final TextEditingController signUpName = TextEditingController();
   final TextEditingController signUpEmail = TextEditingController();
   final TextEditingController signUpPassword = TextEditingController();
@@ -24,52 +25,7 @@ class RegisterCubit extends Cubit<SignUpStates> {
 
   SignUpModel? user;
 
-  Future<void> signUp(BuildContext context) async {
-    try {
-      emit(SignUpLoading());
-
-      final requestData = {
-        "username": signUpName.text,
-        "email": signUpEmail.text,
-        "password": signUpPassword.text,
-        "confirmPassword": confirmPassword.text,
-      };
-
-      print("Sign-Up Request Data: $requestData");
-
-      final response = await api.post(EndPoint.signUp, data: requestData);
-
-      print("Sign-Up Response: $response");
-
-      if (response is Map<String, dynamic>) {
-        final bool status = response["status"] == true;
-        final String message = response["message"] ?? "No message";
-        final String userId = response["userId"] ?? "";
-
-        if (status) {
-          emit(SignUpSucess(email: signUpEmail.text, userId: userId));
-
-          // Navigate to OTP screen with email and userId
-          Get.toNamed('/otpScreen', parameters: {'email': signUpEmail.text, 'userId': userId});
-          return;
-        } else {
-          emit(SignUpFalier(errorMassage: message));
-          return;
-        }
-      }
-
-      emit(SignUpFalier(errorMassage: "Unexpected response format"));
-    } on ServerException catch (e) {
-      emit(SignUpFalier(errorMassage: e.errModel.errMessage));
-    } on DioException catch (e) {
-      final errorMessage = e.response?.data?["message"] ?? "Server error";
-      emit(SignUpFalier(errorMassage: errorMessage));
-    } catch (e) {
-      emit(SignUpFalier(errorMassage: "Unexpected error: $e"));
-    }
-  }
-
-  Future<void> verifyEmail( String email, String otp, String userId) async {
+  Future<void> verifyEmail(String email, String otp, String userId) async {
     try {
       emit(VerifyEmailLoading());
 
@@ -85,7 +41,7 @@ class RegisterCubit extends Cubit<SignUpStates> {
       }
 
       final requestData = {
-        "email":email,
+        "email": email,
         "otp": otp,
       };
 
@@ -128,4 +84,4 @@ class RegisterCubit extends Cubit<SignUpStates> {
     confirmPassword.dispose();
     return super.close();
   }
-}
+}*/
