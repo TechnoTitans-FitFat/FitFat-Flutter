@@ -84,7 +84,7 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
              minChildSize: 0.85, 
              maxChildSize: 0.99,
              snap: true,
-             snapSizes: [0.85, 0.98],
+             snapSizes: const [0.85, 0.98],
              expand: false,
                builder: (context, scrollController) {
                  return Container(

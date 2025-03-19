@@ -1,6 +1,6 @@
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_animated_toggle.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomImageAuth extends StatelessWidget {
   const CustomImageAuth({super.key});
@@ -8,29 +8,25 @@ class CustomImageAuth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+        children: [
         Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.bottomCenter,
-          children: [
-            SvgPicture.asset(
-              'imges/shrimp.svg',
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
-            ),
-          ],
-        ),
-          const SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 16,
-                ),
-                AnimatedToggle(),
-                ],
-            ),
-          )
-      ],
+        clipBehavior: Clip.none,
+        alignment: Alignment.bottomCenter,
+        children: [
+        Assets.images.img.image(width: MediaQuery.of(context).size.width, fit: BoxFit.cover),
+    ],
+    ),
+    const SingleChildScrollView(
+    child: Column(
+    children: [
+    SizedBox(
+    height: 16,
+    ),
+    AnimatedToggle(),
+    ],
+    ),
+    )
+    ],
     );
   }
 }

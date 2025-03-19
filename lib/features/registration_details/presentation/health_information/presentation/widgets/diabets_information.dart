@@ -31,7 +31,7 @@ class DiabetsInformation extends StatefulWidget {
   final int height;
   final String dateOfBirth;
   final String gender;
-  final List<String> foodAllergies;
+  final String foodAllergies;
   final String userId;
 
   @override
@@ -48,6 +48,11 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
   void initState() {
     super.initState();
     insulinRatio = widget.initialInsulinRatio;
+  }
+
+  Future<String?> _getToken() async {
+    // Get token from LoginCubit
+    return context.read<LoginCubit>().user?.id;
   }
 
   void _submitHealthInfo() async {
@@ -320,6 +325,11 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                           }
 
                           _submitHealthInfo();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DietInformationView(userId:'' ,),
+                              ));
                         }),
                 ],
               ),

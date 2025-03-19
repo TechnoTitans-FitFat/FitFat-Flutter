@@ -1,5 +1,6 @@
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -112,8 +113,8 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
               },
               child: Image.asset(
                 isFavourite
-                    ? 'assets/icons/liked.png'
-                    : 'imges/Component 5.png',
+                    ? Assets.icons.liked.path 
+                    : Assets.icons.component5.path,
                 width: 50,
                 height: 50,
                 fit: BoxFit.contain,
@@ -122,6 +123,6 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
           ],
         );
       },
-    );
+              );
   }
 }

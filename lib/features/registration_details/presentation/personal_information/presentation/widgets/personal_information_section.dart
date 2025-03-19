@@ -37,12 +37,15 @@ class _PersonalInformationSectionState
               });
             },
           ),
-          DateOfBirthSection(
-            onDateChanged: (String dob) {
-              setState(() {
-                dateOfBirth = dob;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            child: DateOfBirthSection(
+              onDateChanged: (String dob) {
+                setState(() {
+                  dateOfBirth = dob;
+                });
+              },
+            ),
           ),
           WeightAndHeightSection(
             onWeightHeightChanged: (String newWeight, String newHeight) {

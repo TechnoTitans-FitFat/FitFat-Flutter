@@ -60,7 +60,7 @@ class _CalculatrBodyState extends State<CalculatrBody> {
           "fats": 0,
           "calories": 0,
         },
-        mealPreferences: [selectedMealType],
+        mealPreferences: selectedMealType,
         userId: widget.userId,
       );
     } catch (e) {

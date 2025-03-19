@@ -33,16 +33,16 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
       final dietInfoCubit = context.read<DietInfoCubit>();
 
       dietInfoCubit.postDietInfo(
-        activityLevel: "Moderately Active",
+        activityLevel: "none",
         dietType: _selectedDietType,
-        dietaryGoals: "Weight Loss",
+        dietaryGoals: "none",
         macronutrientGoals: {
           "proteins": _proteinPercentage.round(),
           "carbs": _carbsPercentage.round(),
           "fats": _fatPercentage.round(),
           "calories": _caloriesValue.round(),
         },
-        mealPreferences: ["Vegetarian", "Gluten-Free"],
+        mealPreferences: "Vegetarian",
         userId: widget.userId,
       );
     } catch (e) {

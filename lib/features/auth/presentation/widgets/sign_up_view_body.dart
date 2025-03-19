@@ -5,139 +5,211 @@ import 'package:fitfat/features/auth/presentation/widgets/customs/custom_textfie
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 class SignUpViewBody extends StatelessWidget {
-  const SignUpViewBody({super.key});
+  
+   SignUpViewBody({super.key});
+   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-   
-    return Column(
-      children: [
-        Form(
-          key: context.read<RegisterCubit>().signUpFormKey,
+    return BlocConsumer<RegisterCubit, SignUpStates>(
+      listener: (context, state) {
+        if (state is SignUpFalier) {
+          // Show error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMassage.toString()),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+        
+        // No need to handle navigation here as it's handled in the cubit
+      },
+      builder: (context, state) {
+        final cubit = context.read<RegisterCubit>();
+        
+        return SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(
-                height: 32,
-              ),
-              CustomTextField(
-                controller: context.read<RegisterCubit>().signUpName,
-                hint: 'Name',
-                icon: FontAwesomeIcons.user,
-                noti: 'please, Enter your name',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              CustomTextField(
-                controller: context.read<RegisterCubit>().signUpEmail,
-                hint: 'Email',
-                icon: Icons.email_outlined,
-                noti: 'please , Enter your email',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              CustomTextField(
-                controller: context.read<RegisterCubit>().signUpPassword,
-                hint: 'Password',
-                icon: Icons.lock_outline,
-                sufIconNot: Icons.visibility_off,
-                sufIcon: Icons.visibility,
-                noti: 'please, Enter the password',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              CustomTextField(
-                controller: context.read<RegisterCubit>().confirmPassword,
-                hint: 'Confirm Password',
-                icon: Icons.lock_outline,
-                sufIconNot: Icons.visibility_off,
-                sufIcon: Icons.visibility,
-                noti: 'please, confirm your password',
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              CustomBottom(
-                text: 'Sign Up',
-                ontap: () async {
-                  if (context
-                      .read<RegisterCubit>()
-                      .signUpFormKey
-                      .currentState!
-                      .validate()) {
-                    context.read<RegisterCubit>().signUp();
-                  }
-                },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              Form(
+                key: _formKey,
+                child: Column(
                   children: [
-                    SizedBox(
-                      width: 80,
-                      child:
-                          Divider(color: AppLightColor.greyColor, height: 8),
+                    const SizedBox(height: 32),
+                    
+                    // Name Field
+                    CustomTextField(
+                      controller: cubit.signUpName,
+                      hint: 'Name',
+                      icon: FontAwesomeIcons.user,
+                      noti: 'Please enter your name',
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Name is required';
+                        }
+                        return null;
+                      },
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 8, left: 8, top: 8),
-                      child: Text('Or signUp with'),
+                    const SizedBox(height: 20),
+                    
+                    // Email Field
+                    CustomTextField(
+                      controller: cubit.signUpEmail,
+                      hint: 'Email',
+                      icon: Icons.email_outlined,
+                      noti: 'Please enter your email',
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Email is required';
+                        }
+                        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                          return 'Please enter a valid email';
+                        }
+                        return null;
+                      },
                     ),
-                    SizedBox(
-                      width: 80,
-                      child:
-                          Divider(color: AppLightColor.greyColor, height: 8),
+                    const SizedBox(height: 20),
+                    
+                    // Password Field
+                    CustomTextField(
+                      controller: cubit.signUpPassword,
+                      hint: 'Password',
+                      icon: Icons.lock_outline,
+                      sufIconNot: Icons.visibility_off,
+                      sufIcon: Icons.visibility,
+                      noti: 'Please enter the password',
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password is required';
+                        }
+                        if (value.length < 6) {
+                          return 'Password must be at least 6 characters long';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    
+                    // Confirm Password Field
+                    CustomTextField(
+                      controller: cubit.confirmPassword,
+                      hint: 'Confirm Password',
+                      icon: Icons.lock_outline,
+                      sufIconNot: Icons.visibility_off,
+                      sufIcon: Icons.visibility,
+                      noti: 'Please confirm your password',
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please confirm your password';
+                        }
+                        if (value != cubit.signUpPassword.text) {
+                          return 'Passwords do not match';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 32),
+                    
+                    // Sign Up Button
+                    state is SignUpLoading
+                      ? const CircularProgressIndicator()
+                      : CustomBottom(
+                          text: 'Sign Up',
+                          ontap: () async {
+                            // The navigation is now handled in the cubit
+                            await cubit.signUp(context);
+                          },
+                        ),
+                    const SizedBox(height: 16),
+                    
+                    // Or sign up with
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 80,
+                            child: Divider(color: AppLightColor.greyColor, height: 8),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 8, left: 8, top: 8),
+                            child: Text('Or sign up with'),
+                          ),
+                          SizedBox(
+                            width: 80,
+                            child: Divider(color: AppLightColor.greyColor, height: 8),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    
+                    // Social Media Sign Up Options
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            // Google sign up logic
+                          },
+                          child: const SizedBox(
+                            height: 26,
+                            width: 26,
+                            child: CircleAvatar(
+                              backgroundColor: AppLightColor.whiteColor,
+                              child: Image(
+                                image: AssetImage('assets/icons/google.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        GestureDetector(
+                          onTap: () {
+                            // Facebook sign up logic
+                          },
+                          child: const Icon(Icons.facebook,
+                              color: Colors.blueAccent, size: 27),
+                        ),
+                        const SizedBox(width: 20),
+                        GestureDetector(
+                          onTap: () {
+                            // Apple sign up logic
+                          },
+                          child: const Icon(
+                            Icons.apple_outlined,
+                            size: 35,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    
+                    // Already have an account
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Already have an account?"),
+                        TextButton(
+                          onPressed: () => Get.offNamed('/loginScreen'),
+                          child: const Text("Login"),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    child: const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircleAvatar(
-                        backgroundColor: AppLightColor.whiteColor,
-                        child: Image(
-                          image: AssetImage('imges/google.png'),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  GestureDetector(
-                    child: const Icon(Icons.facebook,
-                        color: Colors.blueAccent, size: 27),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  GestureDetector(
-                    child: const Icon(
-                      Icons.apple_outlined,
-                      size: 35,
-                    ),
-                  ),
-                ],
               )
             ],
           ),
-        )
-      ],
+        );
+      },
     );
   }
 }

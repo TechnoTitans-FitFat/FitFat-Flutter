@@ -1,5 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class CustomCardListViewItem extends StatelessWidget {
@@ -138,10 +139,12 @@ class CustomCardListViewItem extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                           ),
+
                           child: Image.asset( 
-                              isFavourite ? 'assets/icons/liked.png' : 'assets/icons/add.png'
+                              isFavourite ? Assets.icons.liked.path  :  Assets.icons.add.path
                               ),
-                          ),
+
+                        ),
                         ),
                     ],
                   ),

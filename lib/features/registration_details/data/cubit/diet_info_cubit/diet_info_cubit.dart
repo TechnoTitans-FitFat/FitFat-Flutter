@@ -14,7 +14,7 @@ class DietInfoCubit extends Cubit<DietInfoState> {
     required Map<String, int> macronutrientGoals,
     required String dietaryGoals,
     required String activityLevel,
-    required List<String> mealPreferences,
+    required String mealPreferences,
     required String userId,
   }) async {
     try {
@@ -30,7 +30,7 @@ class DietInfoCubit extends Cubit<DietInfoState> {
       };
 
       final response = await api.post(
-        EndPoint.dietInfo + "/$userId",
+        "${EndPoint.dietInfo}/$userId",
         data: data,
       );
 
