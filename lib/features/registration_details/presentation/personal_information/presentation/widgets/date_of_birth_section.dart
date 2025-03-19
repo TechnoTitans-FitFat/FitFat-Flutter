@@ -53,39 +53,36 @@ class _DateOfBirthSectionState extends State<DateOfBirthSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Date of birth",
-            style: GoogleFonts.roboto(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: AppLightColor.blackColor,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Date of birth",
+          style: GoogleFonts.roboto(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: AppLightColor.blackColor,
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            DayBoxPickDateOfBirth(
+              onDaySelected: onDaySelected,
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              DayBoxPickDateOfBirth(
-                onDaySelected: onDaySelected,
-              ),
-              const Spacer(),
-              MonthBoxPickDateOfBirth(
-                onMonthSelected: onMonthSelected,
-              ),
-              const Spacer(),
-              YearBoxDateOfBirth(
-                onYearSelected: onYearSelected,
-              ),
-            ],
-          ),
-        ],
-      ),
+            const Spacer(),
+            MonthBoxPickDateOfBirth(
+              onMonthSelected: onMonthSelected,
+            ),
+            const Spacer(),
+            YearBoxDateOfBirth(
+              onYearSelected: onYearSelected,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

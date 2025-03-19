@@ -122,10 +122,13 @@ class $AssetsIconsGen {
   AssetGenImage get vegetable1 =>
       const AssetGenImage('assets/icons/vegetable 1.png');
 
+  AssetGenImage get add =>
+      const AssetGenImage('assets/icons/add.png');
   /// List of all assets
   List<dynamic> get values => [
     component5,
     accountSettings,
+    add,
     allergyPng,
     allergySvg,
     arrowSquareLeft,

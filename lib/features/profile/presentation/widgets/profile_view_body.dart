@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileViewBody extends StatefulWidget {
   const ProfileViewBody({super.key});
@@ -16,20 +17,23 @@ class ProfileViewBody extends StatefulWidget {
 }
 
 class _ProfileViewBodyState extends State<ProfileViewBody> {
-    bool isSwitched = false;
-  @override
+  bool isSwitched = false;
 
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 50),
+          Padding(
+            padding: const EdgeInsets.only(top: 50),
             child: Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('imges/jinx.jpg'),
+              child: GestureDetector(
+                onTap: () {},
+                child: const CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('imges/jinx.jpg'),
+                ),
               ),
             ),
           ),
@@ -108,8 +112,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                                 fontWeight: FontWeight.w400,
                                 color: AppLightColor.blackColor),
                           ),
-                          const SizedBox(width: 90,),
-                           Switch(
+                          const SizedBox(
+                            width: 90,
+                          ),
+                          Switch(
                             value: isSwitched,
                             onChanged: (value) {
                               setState(() {
@@ -117,8 +123,8 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                               });
                             },
                             activeColor: Colors.white,
-                            activeTrackColor:
-                                Colors.red, // Color when switched on
+                            activeTrackColor: Colors.red,
+                            // Color when switched on
                             inactiveThumbColor: Colors.grey,
                             inactiveTrackColor:
                                 Colors.grey[300], // Default off color
