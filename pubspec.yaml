@@ -45,6 +45,7 @@ dependencies:
   fontfamily: ^0.0.3
   get: ^4.6.6
   google_fonts: ^6.2.1
+  image_picker: ^1.1.2
   jwt_decoder: ^2.0.1
   logger: ^2.5.0
   modal_progress_hud_nsn: ^0.5.1
