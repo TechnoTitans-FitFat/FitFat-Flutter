@@ -3,6 +3,7 @@ import 'package:fitfat/features/main/presentaion/widgets/custom_card_list_view_i
 
 class CustomListView extends StatelessWidget {
   final List<Map<String, dynamic>> items;
+    
 
   const CustomListView({super.key, required this.items});
 
@@ -24,7 +25,7 @@ class CustomListView extends StatelessWidget {
               calories: item['calories'],
               showType: item['showType'] ?? true, 
               price: item['price'],
-              isFavourite: item['favourite'] ?? false
+              isFavourite: item['favourite'] ?? false,
             ),
           );
         },

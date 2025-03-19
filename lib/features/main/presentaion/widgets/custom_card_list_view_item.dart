@@ -11,7 +11,6 @@ class CustomCardListViewItem extends StatelessWidget {
   final int price;
   final bool showType;
   final bool isFavourite;
-
   const CustomCardListViewItem({
     super.key,
     required this.title,
@@ -140,11 +139,13 @@ class CustomCardListViewItem extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Image.asset(
-                            isFavourite ? Assets.icons.liked.path : Assets.icons.add.path
-                          ),
+
+                          child: Image.asset( 
+                              isFavourite ? Assets.icons.liked.path  :  Assets.icons.add.path
+                              ),
+
                         ),
-                      ),
+                        ),
                     ],
                   ),
                 ],

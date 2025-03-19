@@ -5,6 +5,7 @@ import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
+import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
@@ -42,12 +43,19 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => MainScreenCubit(DioComsumer(dio: Dio()))..fetchMainScreenData()),
         BlocProvider(create: (context) => MealDetailsCubit(DioComsumer(dio: Dio()))),
         BlocProvider(create: (context) => SuggestionsCubit(DioComsumer(dio: Dio()))..fetchSuggestionsData()),
+        BlocProvider( 
+          create: (context) => FavouritesCubit(DioComsumer(dio: Dio())),
+        ),
+        
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
+
+       // home: const MainScreen(),
+
         initialRoute: '/', // Define initial route
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
