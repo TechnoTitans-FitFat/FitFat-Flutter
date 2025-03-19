@@ -1,7 +1,6 @@
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_animated_toggle.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomImageAuth extends StatelessWidget {
   const CustomImageAuth({super.key});

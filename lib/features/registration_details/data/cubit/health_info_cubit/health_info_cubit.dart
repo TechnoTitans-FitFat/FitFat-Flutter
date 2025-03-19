@@ -43,7 +43,7 @@ class HealthInfoCubit extends Cubit<HealthInfoState> {
       }
 
       final response = await api.post(
-        EndPoint.healthInfo + "/$userId",
+        "${EndPoint.healthInfo}/$userId",
         data: data,
       );
 

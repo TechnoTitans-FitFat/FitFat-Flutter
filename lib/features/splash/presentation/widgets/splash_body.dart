@@ -1,3 +1,4 @@
+import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
@@ -95,9 +96,10 @@ class _SplashBodyState extends State<SplashBody>
             duration: const Duration(milliseconds: 250));
       } else {
         // Navigate to Login Screen if not logged in
-        Get.to(() => const LoginSignUp(),
+        Get.to(() => const LoginSignUp(DioComsumer),
             transition: Transition.fadeIn,
             duration: const Duration(milliseconds: 250));
+            
       }
     });
   }

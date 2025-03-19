@@ -2,7 +2,6 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_button.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_textfield.dart';
-import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,7 +9,8 @@ import 'package:get/get.dart';
 
 class SignUpViewBody extends StatelessWidget {
   
-  const SignUpViewBody({super.key});
+   SignUpViewBody({super.key});
+   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class SignUpViewBody extends StatelessWidget {
           child: Column(
             children: [
               Form(
-                key: cubit.signUpFormKey,
+                key: _formKey,
                 child: Column(
                   children: [
                     const SizedBox(height: 32),
