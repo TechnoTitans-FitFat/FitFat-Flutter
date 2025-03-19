@@ -101,10 +101,13 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomMealDatails(
+                        id: widget.meal.id,
                         title: widget.meal.name,
                         caloreis: '${widget.meal.calories} cal',
                         cookingTime: widget.meal.cookingTime,
                         rating: widget.meal.rating,
+                        imagePath: widget.meal.image, 
+                        price: widget.meal.price,  
                       ),
                       const SizedBox(
                         height: 25,
