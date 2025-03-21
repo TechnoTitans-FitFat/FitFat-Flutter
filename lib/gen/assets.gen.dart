@@ -79,7 +79,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/google.png
   AssetGenImage get google => const AssetGenImage('assets/icons/google.png');
 
-
   AssetGenImage get liked => const AssetGenImage('assets/icons/liked.png');
 
   /// File path: assets/icons/home.svg
@@ -122,43 +121,43 @@ class $AssetsIconsGen {
   AssetGenImage get vegetable1 =>
       const AssetGenImage('assets/icons/vegetable 1.png');
 
-  AssetGenImage get add =>
-      const AssetGenImage('assets/icons/add.png');
+  AssetGenImage get add => const AssetGenImage('assets/icons/add.png');
+
   /// List of all assets
   List<dynamic> get values => [
-    component5,
-    accountSettings,
-    add,
-    allergyPng,
-    allergySvg,
-    arrowSquareLeft,
-    back,
-    carbohydrate1,
-    cart,
-    clockSvgrepoCom1,
-    contactSupport,
-    darkMode,
-    diabetes,
-    diabets,
-    dietPng,
-    dietSvg,
-    edit,
-    favourite,
-    filter,
-    flameDangerSvgrepoCom1,
-    google,
-    home,
-    language,
-    menu,
-    previous,
-    profile,
-    proteins1,
-    searchNormal,
-    shoppingCart,
-    shoppingcart,
-    transFatsFree1,
-    vegetable1,
-  ];
+        component5,
+        accountSettings,
+        add,
+        allergyPng,
+        allergySvg,
+        arrowSquareLeft,
+        back,
+        carbohydrate1,
+        cart,
+        clockSvgrepoCom1,
+        contactSupport,
+        darkMode,
+        diabetes,
+        diabets,
+        dietPng,
+        dietSvg,
+        edit,
+        favourite,
+        filter,
+        flameDangerSvgrepoCom1,
+        google,
+        home,
+        language,
+        menu,
+        previous,
+        profile,
+        proteins1,
+        searchNormal,
+        shoppingCart,
+        shoppingcart,
+        transFatsFree1,
+        vegetable1,
+      ];
 }
 
 class $AssetsImagesGen {
@@ -194,16 +193,16 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-    eoCircleGreenCheckmarkSvg,
-    female,
-    img,
-    logo,
-    male,
-    offer1,
-    offer2,
-    offer3,
-    offer4,
-  ];
+        eoCircleGreenCheckmarkSvg,
+        female,
+        img,
+        logo,
+        male,
+        offer1,
+        offer2,
+        offer3,
+        offer4,
+      ];
 }
 
 class Assets {
