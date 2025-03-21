@@ -1,13 +1,13 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
-import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
+import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
@@ -54,9 +54,9 @@ class MyApp extends StatelessWidget {
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
 
-       // home: const MainScreen(),
+        home:MainScreen()
 
-        initialRoute: '/', // Define initial route
+      /*  initialRoute: '/', // Define initial route
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
   },
 ),
  // Add OTP Screen route
-        ],
+        ],*/
       ),
     );
   }

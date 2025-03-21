@@ -1,5 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/main/presentaion/allergy_category/widgets/allergy_view_body.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/presentation/widgets/allergy_view_body.dart';
 import 'package:fitfat/core/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
