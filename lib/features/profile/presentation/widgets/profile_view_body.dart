@@ -70,7 +70,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
                 child: Column(
-                  spacing: 10,
+                 // spacing: 10,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
