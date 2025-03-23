@@ -7,7 +7,6 @@ import 'package:fitfat/features/auth/presentation/views/login_and_register_view.
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
-import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
@@ -72,7 +71,7 @@ class MyApp extends StatelessWidget {
           GetPage(
             name: '/otpScreen',
             page: () {
-              return OtpScreen();
+              return const OtpScreen();
             },
           ),
           // Add OTP Screen route

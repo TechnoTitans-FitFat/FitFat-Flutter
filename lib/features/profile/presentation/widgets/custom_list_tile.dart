@@ -40,7 +40,7 @@ class CustomListTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: Row(
-          spacing: 10,
+        //  spacing: 10,
           children: [
             SvgPicture.asset(image),
             Text(
