@@ -20,6 +20,7 @@ abstract class ApiConsumer {
   delete(
     String path, {
     Object? data,
+    Options? options,
     Map<String, dynamic>? queryParameters,
     bool isFormData = false,
   });
