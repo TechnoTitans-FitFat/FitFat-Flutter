@@ -7,9 +7,9 @@ class ApiServices {
   final Duration timeoutDuration;
 
   ApiServices(
-      this.dio, {
-        this.timeoutDuration = const Duration(seconds: 20),
-      });
+    this.dio, {
+    this.timeoutDuration = const Duration(seconds: 20),
+  });
 
   CancelToken createCancelToken() {
     final cancelToken = CancelToken();
@@ -80,6 +80,7 @@ class ApiServices {
 
   Future<Response> deleteRequest({
     required String endpoint,
+    Map<String, dynamic>? data,
     String? token,
   }) async {
     final cancelToken = createCancelToken();

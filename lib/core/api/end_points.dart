@@ -10,6 +10,10 @@ class EndPoint {
   static String dietInfo = '$baseUrl/api/dietInfo';
   static String suggestions = 'api/recipes?';
   static String favourites = 'api/favorites';
+  static String dietview = '$baseUrl/api/recipes?category=diet';
+  static String allergyView = '$baseUrl/api/recipes?allergy=allergy&rating=5';
+  static String diabetsView = '$baseUrl/api/recipes?diabetes=true&rating=5';
+  static String logout = '$baseUrl/logout';
 }
 
 class ApiKey {
