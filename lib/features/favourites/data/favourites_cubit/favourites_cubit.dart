@@ -3,10 +3,12 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
-import 'package:fitfat/core/cache/cache_helper.dart';
 import 'package:fitfat/core/errors/exceptions.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/favourites/data/model/favourites_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 part 'favourites_state.dart';
 
@@ -16,81 +18,35 @@ class FavouritesCubit extends Cubit<FavouritesState> {
 
   List<FavouritesModel> favourites = [];
 
-  void getFavourites() async{
-   try{
-     emit(FavouritesLoading());
-     final cacheHelper = CacheHelper();
-     final token= cacheHelper.getData(key: ApiKey.token);
-     if(token==null){
-      emit(FavouritesFailure(errMessage: 'User not logged in'));
-      return;
-     }
-     final response = await apiConsumer.get(EndPoint.favourites,
-        queryParameters: {
-          'Authorization': 'Bearer $token', 
-        },
-      );
-      favourites = (response as List)
-          .map((item) => FavouritesModel.fromJson(item))
-          .toList();
-
-          emit(FavouritesSuccess(data: List.from(favourites)));
-   } on ServerException catch (e) {
-      emit(FavouritesFailure(errMessage: e.errModel.errMessage));
-    } on DioException catch (e) {
-      emit(FavouritesFailure(errMessage: "Dio error: ${e.message}"));
-    } catch (e) {
-      emit( FavouritesFailure(errMessage: "Unexpected error occurred"));
-    }
-
-  }
-
-  void addToFavourite(String itemId) async{
-    try{
+   Future <void> getFavourites(BuildContext context) async {
+    try {
       emit(FavouritesLoading());
-       print("جاري إضافة للمفضلة...");
-       
-       final cacheHelper = CacheHelper();
-     final token= cacheHelper.getData(key: ApiKey.token);
-     if(token==null){
-      emit(FavouritesFailure(errMessage: 'User not logged in'));
-      return;
-     }
-     final response = await apiConsumer.post(EndPoint.favourites,
-     data: {"item_id": itemId},
-        queryParameters: {
-          'Authorization': 'Bearer $token',
-        },
-     );
-     favourites.add(FavouritesModel.fromJson(response));
-      print("تمت الإضافة بنجاح!");
-     emit(FavouritesSuccess(data: List.from(favourites)));
-    } on ServerException catch (e) {
-    emit(FavouritesFailure(errMessage: e.errModel.errMessage));
-  } on DioException catch (e) {
-    emit(FavouritesFailure(errMessage: "Dio error: ${e.message}"));
-  } catch (e) {
-    print("خطأ أثناء الإضافة: $e");
-    emit(FavouritesFailure(errMessage: "Unexpected error occurred"));
-  }
-  }
 
-  void deleteFromFavourite(String itemId) async {
-    try{
-      emit(FavouritesLoading());
-      final cacheHelper = CacheHelper();
-      final token = cacheHelper.getData(key: ApiKey.token);
+      final token = context.read<LoginCubit>().user?.token;
+    print("التوكن من LoginCubit: $token");
+
+
       if (token == null) {
         emit(FavouritesFailure(errMessage: 'User not logged in'));
         return;
       }
-      await apiConsumer.delete(
-        "${EndPoint.favourites}/$itemId",
-        queryParameters: {
-          'Authorization': 'Bearer $token',
-        },
+ 
+ final response = await apiConsumer.get(
+        EndPoint.favourites,
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
       );
-       favourites.removeWhere((fav) => fav.id == itemId);
+        debugPrint(" رد السيرفر: $response");
+
+     final List<dynamic> favouritesList = response['favorites'] ?? [];
+
+favourites = favouritesList
+    .map((item) => FavouritesModel.fromJson(item))
+    .toList();
+
       emit(FavouritesSuccess(data: List.from(favourites)));
     } on ServerException catch (e) {
       emit(FavouritesFailure(errMessage: e.errModel.errMessage));
@@ -100,5 +56,90 @@ class FavouritesCubit extends Cubit<FavouritesState> {
       emit(FavouritesFailure(errMessage: "Unexpected error occurred"));
     }
   }
+
+   Future <void>  addToFavourite(BuildContext context,String itemId) async {
+    try {
+      emit(FavouritesLoading());
+
+       final token = context.read<LoginCubit>().user?.token;
+      print("التوكن   : $token");
+
+      if (token == null) {
+        emit(FavouritesFailure(errMessage: 'User not logged in'));
+        return;
+      }
+
+    final response = await apiConsumer.post(
+        EndPoint.favourites,
+        data: {"recipeId": itemId},
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+             'Content-Type': 'application/json', 
+          },
+        ),
+      );
+
+      final newFavourite = FavouritesModel.fromJson(response);
+
     
+      if (!favourites.any((fav) => fav.id == newFavourite.id)) {
+        favourites.add(newFavourite);
+      }
+
+      emit(FavouritesSuccess(data: List.from(favourites)));
+    } on ServerException catch (e) {
+      emit(FavouritesFailure(errMessage: e.errModel.errMessage));
+    } on DioException catch (e) {
+      emit(FavouritesFailure(errMessage: "Dio error: ${e.message}"));
+    } catch (e) {
+      emit(FavouritesFailure(errMessage: "Unexpected error occurred"));
+    }
+  }
+
+   Future <void>  deleteFromFavourite(BuildContext context,String itemId) async {
+    try {
+      emit(FavouritesLoading());
+
+      
+      final token = context.read<LoginCubit>().user?.token;
+      print("التوكن   : $token");
+
+      if (token == null) {
+        emit(FavouritesFailure(errMessage: 'User not logged in'));
+        return;
+      }
+
+      
+   final response = await apiConsumer.delete(
+  EndPoint.favourites, 
+  data: {"recipeId": itemId}, 
+  options: Options(
+    headers: {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    },
+  ),
+);
+
+    print(" رد السيرفر بعد الحذف: $response");
+
+    
+    final beforeDeleteLength = favourites.length;
+    favourites.removeWhere((fav) => fav.id == itemId);
+    
+    if (beforeDeleteLength == favourites.length) {
+      print(" العنصر لم يتم حذفه");
+    } else {
+      print(" تم حذف العنصر بنجاح");
+    }
+      emit(FavouritesSuccess(data: List.from(favourites)));
+    } on ServerException catch (e) {
+      emit(FavouritesFailure(errMessage: e.errModel.errMessage));
+    } on DioException catch (e) {
+      emit(FavouritesFailure(errMessage: "Dio error: ${e.message}"));
+    } catch (e) {
+      emit(FavouritesFailure(errMessage: "Unexpected error occurred"));
+    }
+  }
 }

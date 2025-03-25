@@ -18,9 +18,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'core/cache/cache_helper.dart';
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  CacheHelper().init();
+ await CacheHelper().init();
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
@@ -36,15 +36,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => HealthInfoCubit(DioComsumer(dio: Dio()))),
-        BlocProvider(create: (context) => DietInfoCubit(DioComsumer(dio: Dio()))),
-        BlocProvider(create: (context) => LoginCubit(DioComsumer(dio: Dio()))),
-        BlocProvider(create: (context) => RegisterCubit(DioComsumer(dio: Dio()))),
-        BlocProvider(create: (context) => MainScreenCubit(DioComsumer(dio: Dio()))..fetchMainScreenData()),
-        BlocProvider(create: (context) => MealDetailsCubit(DioComsumer(dio: Dio()))),
-        BlocProvider(create: (context) => SuggestionsCubit(DioComsumer(dio: Dio()))..fetchSuggestionsData()),
+        BlocProvider(create: (context) => HealthInfoCubit(DioComsumer(dio: Dio(),))),
+        BlocProvider(create: (context) => DietInfoCubit(DioComsumer(dio: Dio(),))),
+        BlocProvider(create: (context) => LoginCubit(DioComsumer(dio: Dio(),))),
+        BlocProvider(create: (context) => RegisterCubit(DioComsumer(dio: Dio(),))),
+        BlocProvider(create: (context) => MainScreenCubit(DioComsumer(dio: Dio(),))..fetchMainScreenData()),
+        BlocProvider(create: (context) => MealDetailsCubit(DioComsumer(dio: Dio(),))),
+        BlocProvider(create: (context) => SuggestionsCubit(DioComsumer(dio: Dio(),))..fetchSuggestionsData()),
         BlocProvider( 
-          create: (context) => FavouritesCubit(DioComsumer(dio: Dio())),
+          create: (context) => FavouritesCubit(DioComsumer(dio: Dio(),)),
         ),
         
       ],
