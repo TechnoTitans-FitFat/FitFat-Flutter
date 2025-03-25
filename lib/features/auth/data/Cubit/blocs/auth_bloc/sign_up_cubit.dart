@@ -2,20 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/errors/exceptions.dart';
-import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/verify_state.dart';
 import 'package:fitfat/features/auth/data/Cubit/models/sign_up_model.dart';
-import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 part 'sign_up_states.dart';
+
 class RegisterCubit extends Cubit<SignUpStates> {
   RegisterCubit(this.api) : super(SignUpInitial());
 
   final ApiConsumer api;
-
-  // ❌ Remove GlobalKey<FormState> from the Cubit
 
   final TextEditingController signUpName = TextEditingController();
   final TextEditingController signUpEmail = TextEditingController();
@@ -50,7 +47,8 @@ class RegisterCubit extends Cubit<SignUpStates> {
           emit(SignUpSucess(email: signUpEmail.text, userId: userId));
 
           // Navigate to OTP screen with email and userId
-          Get.toNamed('/otpScreen', parameters: {'email': signUpEmail.text, 'userId': userId});
+          Get.toNamed('/otpScreen',
+              parameters: {'email': signUpEmail.text, 'userId': userId});
           return;
         } else {
           emit(SignUpFalier(errorMassage: message));
@@ -69,13 +67,14 @@ class RegisterCubit extends Cubit<SignUpStates> {
     }
   }
 
-  Future<void> verifyEmail( String email, String otp, String userId) async {
+  Future<void> verifyEmail(String email, String otp, String userId) async {
     try {
       emit(VerifyEmailLoading());
 
       // Validate inputs
       if (email.isEmpty || otp.isEmpty || userId.isEmpty) {
-        emit(VerifyEmailFailure(errorMessage: "Email, OTP, or User ID is missing"));
+        emit(VerifyEmailFailure(
+            errorMessage: "Email, OTP, or User ID is missing"));
         return;
       }
 
@@ -85,7 +84,7 @@ class RegisterCubit extends Cubit<SignUpStates> {
       }
 
       final requestData = {
-        "email":email,
+        "email": email,
         "otp": otp,
       };
 
@@ -100,8 +99,8 @@ class RegisterCubit extends Cubit<SignUpStates> {
         final String message = response["message"] ?? "No message";
 
         if (status) {
-          emit(VerifyEmailSuccess(sucessMessage:'Verified Successfully'));
-          return ;
+          emit(VerifyEmailSuccess(sucessMessage: 'Verified Successfully'));
+          return;
         } else {
           emit(VerifyEmailFailure(errorMessage: message));
           return;

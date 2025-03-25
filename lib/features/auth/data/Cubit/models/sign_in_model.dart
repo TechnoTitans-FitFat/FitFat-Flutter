@@ -1,22 +1,18 @@
-import 'package:fitfat/core/api/end_points.dart';
-
 class SignInModel {
-  
+  final String token;
   final String name;
   final String email;
   final String id;
-  final String token;
 
   SignInModel(
       {required this.name,
-        required this.email,
-        required this.id,
-        required this.token
-        });
+      required this.email,
+      required this.id,
+      required this.token});
 
   factory SignInModel.fromJson(Map<String, dynamic> jsonData) {
     return SignInModel(
-      token: jsonData[ApiKey.token],
+      token: jsonData['token'],
       id: jsonData['_id'],
       name: jsonData['username'],
       email: jsonData['email'],

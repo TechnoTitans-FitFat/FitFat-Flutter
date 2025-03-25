@@ -13,7 +13,7 @@ class BloodSuger extends StatefulWidget {
 
 class _BloodSugerState extends State<BloodSuger> {
   @override
-  RangeValues _values = RangeValues(70, 120);
+  RangeValues _values = const RangeValues(70, 120);
 
   @override
   Widget build(BuildContext context) {
