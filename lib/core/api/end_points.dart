@@ -12,7 +12,7 @@ class EndPoint {
   static String favourites = 'api/favorites';
   static String dietview = '$baseUrl/api/recipes/healthy?category=diet&rating=5';
   static String allergyView = '$baseUrl/api/recipes?allergy=allergy&rating=5';
-  static String diabetsView = '$baseUrl/api/recipes?diabetes=true&rating=5';
+  static String diabetsView = '$baseUrl/api/recipes/healthy?diabetes=true&rating=5';
   static String logout = '$baseUrl/logout';
   static String profile = "$baseUrl/api/users/";
 }
