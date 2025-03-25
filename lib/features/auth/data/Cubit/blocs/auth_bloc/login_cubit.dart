@@ -118,7 +118,7 @@ class LoginCubit extends Cubit<LoginStates> {
           return;
         }
 
-        await CacheHelper().saveData(key: ApiKey.token, value: user!.id);
+        await CacheHelper().saveData(key: ApiKey.token, value: user!.token);
         await CacheHelper()
             .saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
 
