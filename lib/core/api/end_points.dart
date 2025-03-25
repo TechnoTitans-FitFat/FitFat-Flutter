@@ -10,9 +10,19 @@ class EndPoint {
   static String dietInfo = '$baseUrl/api/dietInfo';
   static String suggestions = 'api/recipes?';
   static String favourites = 'api/favorites';
-  static String dietview = '$baseUrl/api/recipes/healthy?category=diet&rating=5';
+  static String dietview =
+      '$baseUrl/api/recipes/healthy?category=diet&rating=5';
+  static String ketoView =
+      '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=Keto';
+      static String veganView =
+      '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=Vegan';
+      static String highCarbView =
+      '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=High-Carb';
+      static String lowCarbView =
+      '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=Low-Carb';
   static String allergyView = '$baseUrl/api/recipes?allergy=allergy&rating=5';
-  static String diabetsView = '$baseUrl/api/recipes/healthy?diabetes=true&rating=5';
+  static String diabetsView =
+      '$baseUrl/api/recipes/healthy?diabetes=true&rating=5';
   static String logout = '$baseUrl/logout';
   static String profile = "$baseUrl/api/users/";
 }
@@ -46,6 +56,5 @@ class ApiKey {
   static String dateOfBirth = "dateOfBirth";
   static String otp = "otp";
   static String diet = "diet";
-  static String allergy = "allergy"; 
-  
+  static String allergy = "allergy";
 }
