@@ -14,9 +14,11 @@ class EndPoint {
   static String allergyView = '$baseUrl/api/recipes?allergy=allergy&rating=5';
   static String diabetsView = '$baseUrl/api/recipes?diabetes=true&rating=5';
   static String logout = '$baseUrl/logout';
+  static String profile="$baseUrl/api/users/";
 }
 
 class ApiKey {
+  static String profile = "profile";
   static String status = "status";
   static String errorMessage = "ErrorMessage";
   static String email = "email";

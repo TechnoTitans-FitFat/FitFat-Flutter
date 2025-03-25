@@ -19,9 +19,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'core/cache/cache_helper.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await CacheHelper().init();
+  await CacheHelper.init();
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
