@@ -5,7 +5,7 @@ class FavouritesModel {
   final String image;
   final String name;
   final String  calories; 
-  final String  rating; 
+  final double  rating; 
   final int  price; 
 
   FavouritesModel({
@@ -22,7 +22,9 @@ class FavouritesModel {
       image: jsonData[ApiKey.image] ?? '',
       name: jsonData[ApiKey.name] ?? '',
       calories: jsonData[ApiKey.calories]?.toString() ?? '0',
-      rating: jsonData[ApiKey.rating]?.toString() ?? '0',
+      rating: jsonData[ApiKey.rating] is double
+    ? jsonData[ApiKey.rating]
+    : double.tryParse(jsonData[ApiKey.rating].toString()) ?? 0.0,
       price: jsonData[ApiKey.price] is int 
           ? jsonData[ApiKey.price] 
           : int.tryParse(jsonData[ApiKey.price].toString()) ?? 0,

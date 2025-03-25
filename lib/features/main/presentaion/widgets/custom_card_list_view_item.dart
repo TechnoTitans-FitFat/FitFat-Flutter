@@ -19,6 +19,7 @@ class CustomCardListViewItem extends StatelessWidget {
     required this.imagePath,
     this.type,
     required this.calories,
+    required this.rating,
     required this.price,
     this.showType = true,
     required this.isFavourite,
