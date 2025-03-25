@@ -10,11 +10,11 @@ class EndPoint {
   static String dietInfo = '$baseUrl/api/dietInfo';
   static String suggestions = 'api/recipes?';
   static String favourites = 'api/favorites';
-  static String dietview = '$baseUrl/api/recipes?category=diet';
+  static String dietview = '$baseUrl/api/recipes/healthy?category=diet&rating=5';
   static String allergyView = '$baseUrl/api/recipes?allergy=allergy&rating=5';
   static String diabetsView = '$baseUrl/api/recipes?diabetes=true&rating=5';
   static String logout = '$baseUrl/logout';
-  static String profile="$baseUrl/api/users/";
+  static String profile = "$baseUrl/api/users/";
 }
 
 class ApiKey {
@@ -45,4 +45,7 @@ class ApiKey {
   static String gender = "gender";
   static String dateOfBirth = "dateOfBirth";
   static String otp = "otp";
+  static String diet = "diet";
+  static String allergy = "allergy"; 
+  
 }

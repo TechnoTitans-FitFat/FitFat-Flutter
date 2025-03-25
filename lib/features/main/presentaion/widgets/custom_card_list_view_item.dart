@@ -8,11 +8,11 @@ class CustomCardListViewItem extends StatelessWidget {
   final String imagePath;
   final String? type;
   final String calories;
-  final double rating; 
-  final int price;
+  final double price;
   final bool showType;
   final bool isFavourite;
-   final VoidCallback onFavouriteTap;
+  final double rating;
+  final VoidCallback onFavouriteTap;
   const CustomCardListViewItem({
     super.key,
     required this.title,
@@ -23,7 +23,7 @@ class CustomCardListViewItem extends StatelessWidget {
     required this.price,
     this.showType = true,
     required this.isFavourite,
-    required this.onFavouriteTap,
+    required this.onFavouriteTap, required this.rating,
   });
 
   @override
@@ -42,7 +42,7 @@ class CustomCardListViewItem extends StatelessWidget {
               height: 150,
               decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius:  BorderRadius.all(Radius.circular(15))),
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
               child: Image.network(imagePath, fit: BoxFit.cover),
             ),
             const SizedBox(width: 20),
@@ -79,7 +79,7 @@ class CustomCardListViewItem extends StatelessWidget {
                       const SizedBox(width: 10),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal:15,
+                          horizontal: 15,
                           vertical: 5,
                         ),
                         decoration: BoxDecoration(
@@ -105,7 +105,7 @@ class CustomCardListViewItem extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                         rating.toStringAsFixed(1),
+                        rating.toString(),
                         style: AppStyles.textStyle16.copyWith(
                           color: AppLightColor.blackColor,
                           fontSize: 14,
@@ -142,13 +142,11 @@ class CustomCardListViewItem extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                           ),
-
-                          child: Image.asset( 
-                              isFavourite ? Assets.icons.liked.path  :  Assets.icons.add.path
-                              ),
-
+                          child: Image.asset(isFavourite
+                              ? Assets.icons.liked.path
+                              : Assets.icons.add.path),
                         ),
-                        ),
+                      ),
                     ],
                   ),
                 ],
