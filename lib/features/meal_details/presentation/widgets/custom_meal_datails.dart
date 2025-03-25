@@ -109,6 +109,7 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
                   favouritesCubit.deleteFromFavourite(context, widget.id);
                 } else {
                   favouritesCubit.addToFavourite(context,widget.id);
+                  favouritesCubit.getFavourites(context);
                 }
               },
               child: Image.asset(

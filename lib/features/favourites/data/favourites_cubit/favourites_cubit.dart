@@ -86,8 +86,17 @@ favourites = favouritesList
       if (!favourites.any((fav) => fav.id == newFavourite.id)) {
         favourites.add(newFavourite);
       }
-
       emit(FavouritesSuccess(data: List.from(favourites)));
+
+    // بدلًا من استدعاء `getFavourites` فورًا، انتظر قليلًا
+    await Future.delayed(Duration(milliseconds: 500));
+    getFavourites(context); 
+     // emit(FavouritesSuccess(data: []));
+
+    // أرسل الحالة المحدثة بعد فترة قصيرة
+    //await Future.delayed(Duration(milliseconds: 100));
+    //emit(FavouritesSuccess(data: List.of(favourites)));
+
     } on ServerException catch (e) {
       emit(FavouritesFailure(errMessage: e.errModel.errMessage));
     } on DioException catch (e) {

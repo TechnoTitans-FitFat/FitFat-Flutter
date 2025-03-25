@@ -8,6 +8,7 @@ class CustomCardListViewItem extends StatelessWidget {
   final String imagePath;
   final String? type;
   final String calories;
+  final double rating; 
   final int price;
   final bool showType;
   final bool isFavourite;
@@ -18,6 +19,7 @@ class CustomCardListViewItem extends StatelessWidget {
     required this.imagePath,
     this.type,
     required this.calories,
+    required this.rating,
     required this.price,
     this.showType = true,
     required this.isFavourite,
@@ -103,7 +105,7 @@ class CustomCardListViewItem extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        '4.5',
+                         rating.toStringAsFixed(1),
                         style: AppStyles.textStyle16.copyWith(
                           color: AppLightColor.blackColor,
                           fontSize: 14,
