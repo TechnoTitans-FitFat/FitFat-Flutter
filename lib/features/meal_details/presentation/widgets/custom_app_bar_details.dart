@@ -21,7 +21,7 @@ class CustomAppBarDetails extends StatelessWidget implements PreferredSizeWidget
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16),
-          child: Image.asset(Assets.icons.shoppingCart.path,height: 34,width: 34,fit: BoxFit.contain,),
+          child: Image.asset(Assets.icons.shoppingcart.path,height: 34,width: 34,fit: BoxFit.contain,),
         )
       ],
     );

@@ -11,6 +11,7 @@ class CustomCardListViewItem extends StatelessWidget {
   final int price;
   final bool showType;
   final bool isFavourite;
+   final VoidCallback onFavouriteTap;
   const CustomCardListViewItem({
     super.key,
     required this.title,
@@ -20,6 +21,7 @@ class CustomCardListViewItem extends StatelessWidget {
     required this.price,
     this.showType = true,
     required this.isFavourite,
+    required this.onFavouriteTap,
   });
 
   @override
@@ -39,7 +41,7 @@ class CustomCardListViewItem extends StatelessWidget {
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius:  BorderRadius.all(Radius.circular(15))),
-              child: Image.asset(imagePath, fit: BoxFit.cover),
+              child: Image.network(imagePath, fit: BoxFit.cover),
             ),
             const SizedBox(width: 20),
             Expanded(
@@ -131,8 +133,7 @@ class CustomCardListViewItem extends StatelessWidget {
                         ],
                       ),
                       GestureDetector(
-                        onTap: () {
-                        },
+                        onTap: onFavouriteTap,
                         child: Container(
                           height: 35,
                           width: 35,
