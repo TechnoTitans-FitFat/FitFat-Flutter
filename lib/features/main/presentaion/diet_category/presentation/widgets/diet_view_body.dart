@@ -2,6 +2,10 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_state.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/high_carb_screen.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/keto_screen.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/low_carb_screen.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/vegan_screen.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_card_diet.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
@@ -43,17 +47,30 @@ class _DietViewBodyState extends State<DietViewBody> {
                   .copyWith(color: AppLightColor.mainColor),
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.only(left: 25),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  CustomCardDiet(text: 'Keto', height: 55, width: 80),
-                  CustomCardDiet(text: 'Vegan', height: 55, width: 80),
-                  CustomCardDiet(text: 'Low-Carb', height: 55, width: 100),
-                  CustomCardDiet(text: 'High-Carb', height: 55, width: 100),
+                  CustomCardDiet(
+                    text: 'Keto',
+                    height: 55,
+                    width: 80,
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> KetoScreen()));
+                    },
+                  ),
+                  CustomCardDiet(text: 'Vegan', height: 55, width: 80,onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> VeganScreen()));
+                    },),
+                  CustomCardDiet(text: 'Low-Carb', height: 55, width: 100,onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> LowCarbScreen()));
+                    },),
+                  CustomCardDiet(text: 'High-Carb', height: 55, width: 100,onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> HighCarbScreen()));
+                    },),
                 ],
               ),
             ),
@@ -109,13 +126,15 @@ class _DietViewBodyState extends State<DietViewBody> {
                   return {
                     'name': diet.name,
                     'image': diet.image,
-                   'diet': (diet.diet != null && diet.diet.isNotEmpty) ? diet.diet.first : 'No diet info',
+                    'diet': (diet.diet != null && diet.diet.isNotEmpty)
+                        ? diet.diet.first
+                        : 'No diet info',
                     'calories': diet.calories,
                     'showType': false,
                     'price': diet.price, // Ensure price is set correctly
                     'favourite': false,
                     'onFavouriteTap': () {},
-                    'rating':diet.rating
+                    'rating': diet.rating
                   };
                 }).toList();
 

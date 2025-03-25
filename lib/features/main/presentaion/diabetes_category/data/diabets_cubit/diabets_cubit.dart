@@ -13,7 +13,7 @@ class DiabetsCubit extends Cubit<DiabetsState> {
   final ApiConsumer apiConsumer;
   DiabetsCubit(this.apiConsumer) : super(DiabetsInitial());
 
-  void fetchDietData() async {
+  void fetchDiabetsData() async {
     emit(DiabetsLoading());
    try {
       final response = await apiConsumer.get(EndPoint.diabetsView);

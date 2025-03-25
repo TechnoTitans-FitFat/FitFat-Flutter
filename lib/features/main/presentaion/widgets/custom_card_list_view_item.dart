@@ -23,7 +23,7 @@ class CustomCardListViewItem extends StatelessWidget {
     required this.price,
     this.showType = true,
     required this.isFavourite,
-    required this.onFavouriteTap, required this.rating,
+    required this.onFavouriteTap, 
   });
 
   @override

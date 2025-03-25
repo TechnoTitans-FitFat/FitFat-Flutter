@@ -8,23 +8,32 @@ class DiabetsModel {
   final String id;
   final double cookingTime;
 
-  DiabetsModel(
-      {required this.image,
-      required this.name,
-      required this.price,
-      required this.calories,
-      required this.id,
-      required this.cookingTime, });
+
+  final double rating;
+
+  DiabetsModel({
+    required this.image,
+    required this.name,
+    required this.price,
+    required this.calories,
+    required this.id,
+    required this.cookingTime,
+  
+
+    required this.rating,
+  });
 
   factory DiabetsModel.fromJson(Map<String, dynamic> jsonData) {
     final priceValue = jsonData[ApiKey.price];
+
     return DiabetsModel(
-      cookingTime:jsonData[ApiKey.cookingTime],
-        image: jsonData[ApiKey.image],
-        name: jsonData[ApiKey.name],
-        price: priceValue is num ? priceValue.toDouble() : 0.0,
-        calories: jsonData[ApiKey.calories].toString(),
-        id: jsonData[ApiKey.id],
-        );
+      cookingTime: jsonData[ApiKey.cookingTime]?.toDouble() ?? 0.0,
+      image: jsonData[ApiKey.image] ?? '',
+      name: jsonData[ApiKey.name] ?? '',
+      price: priceValue is num ? priceValue.toDouble() : 0.0,
+      calories: jsonData[ApiKey.calories]?.toString() ?? '0',
+      id: jsonData[ApiKey.id] ?? '',
+      rating: (jsonData['rating'] as num?)?.toDouble() ?? 0.0,
+    );
   }
 }
