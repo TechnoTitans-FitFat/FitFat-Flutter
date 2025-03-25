@@ -3,11 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
-import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
-import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
+
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/presentation/views/diet_view.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
@@ -59,7 +59,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FavouritesCubit(DioComsumer(dio: Dio())),
         ),
-        BlocProvider(create: (context) => DietCubit(DioComsumer(dio: Dio()))..fetchDietData())
+        BlocProvider(create: (context) => DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
+        BlocProvider(create: (context) => KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData())
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,

@@ -59,17 +59,17 @@ class _DietViewBodyState extends State<DietViewBody> {
                     height: 55,
                     width: 80,
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> KetoScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const KetoScreen()));
                     },
                   ),
                   CustomCardDiet(text: 'Vegan', height: 55, width: 80,onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> VeganScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const VeganScreen()));
                     },),
                   CustomCardDiet(text: 'Low-Carb', height: 55, width: 100,onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> LowCarbScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const LowCarbScreen()));
                     },),
                   CustomCardDiet(text: 'High-Carb', height: 55, width: 100,onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> HighCarbScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const HighCarbScreen()));
                     },),
                 ],
               ),

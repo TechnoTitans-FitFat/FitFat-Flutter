@@ -2,20 +2,21 @@ import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/errors/exceptions.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_state.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_state.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/models/models/diet_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DietCubit extends Cubit<DietState> {
+class KetoCubit extends Cubit<KetoState> {
   final ApiConsumer apiConsumer;
 
-  DietCubit(this.apiConsumer) : super(DietInitial());
+  KetoCubit(this.apiConsumer) : super(KetoInitial());
 
-  Future<void> fetchDietData() async {
-    emit(DietLoading());
+  Future<void> fetchKetoData() async {
+    emit(KetoLoading());
 
     try {
       final response = await apiConsumer.get(
-        EndPoint.dietview
+        EndPoint.ketoView
       );
 
       if (response is Map<String, dynamic> && response.containsKey('recipes')) {
@@ -29,20 +30,20 @@ class DietCubit extends Cubit<DietState> {
               .toList();
 
           if (data.isNotEmpty) {
-            emit(DietSuccess(data: data));
+            emit(KetoSuccess(data: data));
           } else {
-            emit(DietFailure(errMessage: "No diet recipes found."));
+            emit(KetoFailure(errMessage: "No diet recipes found."));
           }
         } else {
-          emit(DietFailure(errMessage: "Invalid API response format (Expected List)."));
+          emit(KetoFailure(errMessage: "Invalid API response format (Expected List)."));
         }
       } else {
-        emit(DietFailure(errMessage: "Unexpected API response structure."));
+        emit(KetoFailure(errMessage: "Unexpected API response structure."));
       }
     } on ServerException catch (e) {
-      emit(DietFailure(errMessage: e.errModel.errMessage));
+      emit(KetoFailure(errMessage: e.errModel.errMessage));
     } catch (e) {
-      emit(DietFailure(errMessage: "An error occurred: ${e.toString()}"));
+      emit(KetoFailure(errMessage: "An error occurred: ${e.toString()}"));
     }
   }
 }
