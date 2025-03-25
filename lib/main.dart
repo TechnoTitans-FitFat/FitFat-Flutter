@@ -7,6 +7,8 @@ import 'package:fitfat/features/auth/presentation/views/login_and_register_view.
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/views/diet_view.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
@@ -57,15 +59,16 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FavouritesCubit(DioComsumer(dio: Dio())),
         ),
+        BlocProvider(create: (context) => DietCubit(DioComsumer(dio: Dio()))..fetchDietData())
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        //home: LoginSignUp(DioComsumer(dio: Dio())),
+        home: DietView()
 
-        initialRoute: '/', // Define initial route
+       /* initialRoute: '/', // Define initial route
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(
@@ -75,7 +78,7 @@ class MyApp extends StatelessWidget {
             },
           ),
           // Add OTP Screen route
-        ],
+        ],*/
       ),
     );
   }
