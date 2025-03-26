@@ -1,7 +1,6 @@
 import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/errors/exceptions.dart';
-import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_state.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_state.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/models/models/diet_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

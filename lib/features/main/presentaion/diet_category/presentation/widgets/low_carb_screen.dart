@@ -79,7 +79,7 @@ class LowCarbScreen extends StatelessWidget {
                   return {
                     'name': diet.name,
                     'image': diet.image,
-                    'diet': (diet.diet != null && diet.diet.isNotEmpty)
+                    'diet': (diet.diet.isNotEmpty)
                         ? diet.diet.first
                         : 'No diet info',
                     'calories': diet.calories,
