@@ -71,6 +71,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/
     #- imges/edit.svg
 
     
