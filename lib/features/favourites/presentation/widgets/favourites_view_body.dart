@@ -21,45 +21,30 @@ class _FavouritesViewBodyState extends State<FavouritesViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<FavouritesCubit, FavouritesState>(
-      listener: (context, state) {
-       if (state is FavouritesSuccess) {
-        setState(() {}); 
-      }
+    return BlocBuilder<FavouritesCubit, FavouritesState>(
+      builder: (context, state) {
+        if (state is FavouritesLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is FavouritesFailure) {
+          return Center(child: Text(state.errMessage));
+        } else if (state is FavouritesSuccess) {
+          final favouritesList = state.data;
+
+          return SingleChildScrollView(
+            child: CustomListView(
+              items: favouritesList,
+              getId: (item) => item.id,
+              getName: (item) => item.name,
+              getImage: (item) => item.image,
+              getType: (item) => "Favourite", // You can change this if needed
+              getCalories: (item) => item.calories,
+              getPrice: (item) => item.price,
+              getRating: (item) => item.rating,
+            ),
+          );
+        }
+        return const Center(child: Text("لا يوجد مفضلات بعد."));
       },
-      child: BlocBuilder<FavouritesCubit, FavouritesState>(
-        builder: (context, state) {
-          //  final favouritesCubit = context.watch<FavouritesCubit>();
-
-          if (state is FavouritesLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is FavouritesFailure) {
-            return Center(child: Text(state.errMessage));
-          } else if (state is FavouritesSuccess) {
-            final items = state.data
-                .map((fav) => {
-                      'title': fav.name,
-                      'imagePath': fav.image,
-                      'calories': fav.calories,
-                      'showType': false,
-                      'price': fav.price,
-                      'rating': fav.rating,
-                      'favourite': true,
-                       'onFavouriteTap': () {
-                        context.read<FavouritesCubit>().deleteFromFavourite(context, fav.id); 
-                      },
-                    })
-                .toList();
-
-            return SingleChildScrollView(
-                child: CustomListView(
-              items: items,
-            ));
-          }
-
-          return const Center(child: Text("لا يوجد مفضلات بعد."));
-        },
-      ),
     );
   }
 }

@@ -7,7 +7,7 @@ class CustomCardListViewItem extends StatelessWidget {
   final String title;
   final String imagePath;
   final String? type;
-  final String calories;
+  final double calories;
   final double price;
   final bool showType;
   final bool isFavourite;

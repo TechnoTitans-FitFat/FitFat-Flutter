@@ -2,6 +2,7 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_state.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/models/models/diet_model.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/high_carb_screen.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/keto_screen.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/low_carb_screen.dart';
@@ -47,7 +48,7 @@ class _DietViewBodyState extends State<DietViewBody> {
                   .copyWith(color: AppLightColor.mainColor),
             ),
           ),
-           Padding(
+          Padding(
             padding: const EdgeInsets.only(left: 25),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -59,18 +60,45 @@ class _DietViewBodyState extends State<DietViewBody> {
                     height: 55,
                     width: 80,
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const KetoScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const KetoScreen()));
                     },
                   ),
-                  CustomCardDiet(text: 'Vegan', height: 55, width: 80,onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const VeganScreen()));
-                    },),
-                  CustomCardDiet(text: 'Low-Carb', height: 55, width: 100,onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const LowCarbScreen()));
-                    },),
-                  CustomCardDiet(text: 'High-Carb', height: 55, width: 100,onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const HighCarbScreen()));
-                    },),
+                  CustomCardDiet(
+                    text: 'Vegan',
+                    height: 55,
+                    width: 80,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const VeganScreen()));
+                    },
+                  ),
+                  CustomCardDiet(
+                    text: 'Low-Carb',
+                    height: 55,
+                    width: 100,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LowCarbScreen()));
+                    },
+                  ),
+                  CustomCardDiet(
+                    text: 'High-Carb',
+                    height: 55,
+                    width: 100,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HighCarbScreen()));
+                    },
+                  ),
                 ],
               ),
             ),
@@ -122,23 +150,19 @@ class _DietViewBodyState extends State<DietViewBody> {
                 );
               } else if (state is DietSuccess) {
                 // Convert API response to required format
-                final List<Map<String, dynamic>> items = state.data.map((diet) {
-                  return {
-                    'name': diet.name,
-                    'image': diet.image,
-                    'diet': (diet.diet.isNotEmpty)
-                        ? diet.diet.first
-                        : 'No diet info',
-                    'calories': diet.calories,
-                    'showType': false,
-                    'price': diet.price, // Ensure price is set correctly
-                    'favourite': false,
-                    'onFavouriteTap': () {},
-                    'rating': diet.rating
-                  };
-                }).toList();
+                final List<DietModel> dietList = state.data;
 
-                return CustomListView(items: items);
+                return CustomListView<DietModel>(
+                  items: dietList,
+                  getId: (item) => item.id,
+                  getName: (item) => item.name,
+                  getImage: (item) => item.image,
+                  getType: (item) =>
+                      item.diet.isNotEmpty ? item.diet.first : "Unknown",
+                  getCalories: (item) => item.calories,
+                  getPrice: (item) => item.price,
+                  getRating: (item) => item.rating,
+                );
               } else {
                 return const SizedBox.shrink();
               }

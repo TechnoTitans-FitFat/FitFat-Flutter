@@ -3,6 +3,7 @@ import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_state.dart';
+import 'package:fitfat/features/main/presentaion/diabetes_category/data/models/diabets_model.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,7 @@ class _DiabetesViewBodyState extends State<DiabetesViewBody> {
           const SizedBox(
             height: 10,
           ),
-            BlocConsumer<DiabetsCubit, DiabetsState>(
+          BlocConsumer<DiabetsCubit, DiabetsState>(
             listener: (context, state) {},
             builder: (context, state) {
               if (state is DiabetsLoading) {
@@ -76,20 +77,20 @@ class _DiabetesViewBodyState extends State<DiabetesViewBody> {
                 );
               } else if (state is DiabetsSucess) {
                 // Convert API response to required format
-                final List<Map<String, dynamic>> items = state.data.map((diabets) {
-                  return {
-                    'name': diabets.name,
-                    'image': diabets.image,
-                    'calories': diabets.calories,
-                    'showType': false,
-                    'price': diabets.price, // Ensure price is set correctly
-                    'favourite': false,
-                    'onFavouriteTap': () {},
-                    'rating': diabets.rating
-                  };
-                }).toList();
+                final List<DiabetsModel> diabetsList = state.data;
 
-                return CustomListView(items: items);
+                return SingleChildScrollView(
+                  child: CustomListView<DiabetsModel>(
+                    items: diabetsList,
+                    getId: (item) => item.id,
+                    getName: (item) => item.name,
+                    getImage: (item) => item.image,
+                    getType: (item) => "Favourite",
+                    getCalories: (item) => item.calories,
+                    getPrice: (item) => item.price, // No price for favorites
+                    getRating: (item) => item.rating,
+                  ),
+                );
               } else {
                 return const SizedBox.shrink();
               }
