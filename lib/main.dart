@@ -7,7 +7,10 @@ import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubi
 
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/high_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/presentation/views/diet_view.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
@@ -60,14 +63,17 @@ class MyApp extends StatelessWidget {
           create: (context) => FavouritesCubit(DioComsumer(dio: Dio())),
         ),
         BlocProvider(create: (context) => DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
-        BlocProvider(create: (context) => KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData())
+        BlocProvider(create: (context) => KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData()),
+        BlocProvider(create: (context) => VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
+         BlocProvider(create: (context) => HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
+          BlocProvider(create: (context) => LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: DietView()
+        home:const DietView()
 
        /* initialRoute: '/', // Define initial route
         getPages: [
