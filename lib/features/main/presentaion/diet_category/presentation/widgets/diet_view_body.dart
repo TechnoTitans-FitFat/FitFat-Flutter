@@ -48,7 +48,7 @@ class _DietViewBodyState extends State<DietViewBody> {
             ),
           ),
            Padding(
-            padding: EdgeInsets.only(left: 25),
+            padding: const EdgeInsets.only(left: 25),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -126,7 +126,7 @@ class _DietViewBodyState extends State<DietViewBody> {
                   return {
                     'name': diet.name,
                     'image': diet.image,
-                    'diet': (diet.diet != null && diet.diet.isNotEmpty)
+                    'diet': (diet.diet.isNotEmpty)
                         ? diet.diet.first
                         : 'No diet info',
                     'calories': diet.calories,

@@ -81,7 +81,7 @@ class AllergyViewBody extends StatelessWidget {
             ),
           ),
            Padding(
-            padding: EdgeInsets.only(left: 25),
+            padding: const EdgeInsets.only(left: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -89,28 +89,28 @@ class AllergyViewBody extends StatelessWidget {
                   text: 'Lactose',
                   height: 55,
                   width: 80, onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> VeganScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
                     }
                 ),
                 CustomCardDiet(
                   text: 'Shellfish',
                   height: 55,
                   width: 80, onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> VeganScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
                     }
                 ),
                 CustomCardDiet(
                   text: 'Wheat',
                   height: 55,
                   width: 100, onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> VeganScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
                     }
                 ),
                 CustomCardDiet(
                   text: 'Peanuts',
                   height: 55,
                   width: 100, onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> VeganScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
                     }
                 ),
               ],
