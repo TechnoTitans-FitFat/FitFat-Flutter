@@ -23,7 +23,7 @@ class CustomCardListViewItem extends StatelessWidget {
     required this.price,
     this.showType = true,
     required this.isFavourite,
-    required this.onFavouriteTap, 
+    required this.onFavouriteTap,
   });
 
   @override
@@ -41,9 +41,26 @@ class CustomCardListViewItem extends StatelessWidget {
               width: 150,
               height: 150,
               decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
-              child: Image.network(imagePath, fit: BoxFit.cover),
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              child: Image.network(
+                imagePath,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    'assets/error_photo.jpg', // Fallback image
+                    fit: BoxFit.cover,
+                  );
+                },
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null)
+                    return child; // Show image when loaded
+                  return Center(
+                      child:
+                          CircularProgressIndicator()); // Show loading indicator
+                },
+              ),
             ),
             const SizedBox(width: 20),
             Expanded(

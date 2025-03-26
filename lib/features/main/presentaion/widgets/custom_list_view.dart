@@ -22,7 +22,7 @@ class CustomListView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
           child: CustomCardListViewItem(
             title: item.name,
-           imagePath: (item.image.isNotEmpty) ? item.image : 'https://via.placeholder.com/150',
+           imagePath: (item.image.isNotEmpty) ? item.image : 'assets/error_photo.jpg',
             type: dietType, // ✅ Use the first diet type safely
             price: item.price,
             calories: item.calories.toString(),

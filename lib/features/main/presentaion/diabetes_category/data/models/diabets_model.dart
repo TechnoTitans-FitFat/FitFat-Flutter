@@ -7,8 +7,6 @@ class DiabetsModel {
   final String calories;
   final String id;
   final double cookingTime;
-
-
   final double rating;
 
   DiabetsModel({
@@ -18,8 +16,6 @@ class DiabetsModel {
     required this.calories,
     required this.id,
     required this.cookingTime,
-  
-
     required this.rating,
   });
 
@@ -28,12 +24,19 @@ class DiabetsModel {
 
     return DiabetsModel(
       cookingTime: jsonData[ApiKey.cookingTime]?.toDouble() ?? 0.0,
-      image: jsonData[ApiKey.image] ?? '',
+      image: _validateImage(jsonData[ApiKey.image]), // Validate image
       name: jsonData[ApiKey.name] ?? '',
       price: priceValue is num ? priceValue.toDouble() : 0.0,
       calories: jsonData[ApiKey.calories]?.toString() ?? '0',
       id: jsonData[ApiKey.id] ?? '',
       rating: (jsonData['rating'] as num?)?.toDouble() ?? 0.0,
     );
+  }
+
+  static String _validateImage(String? imageUrl) {
+    if (imageUrl == null || imageUrl.isEmpty || !Uri.parse(imageUrl).isAbsolute) {
+      return 'assets/error_photo.jpg'; // Local fallback image
+    }
+    return imageUrl;
   }
 }

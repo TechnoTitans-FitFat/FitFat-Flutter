@@ -6,6 +6,8 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.da
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diabetes_category/presentation/views/diabetes_view.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/high_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_cubit.dart';
@@ -67,6 +69,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
          BlocProvider(create: (context) => HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
           BlocProvider(create: (context) => LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
+          BlocProvider(create: (context) => DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
