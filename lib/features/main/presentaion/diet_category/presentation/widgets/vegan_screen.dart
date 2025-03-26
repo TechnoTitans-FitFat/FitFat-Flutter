@@ -5,6 +5,7 @@ import 'package:fitfat/core/widgets/custom_elvated_button.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_state.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/models/models/diet_model.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,23 +76,20 @@ class VeganScreen extends StatelessWidget {
                 );
               } else if (state is VeganSuccess) {
                 // Convert API response to required format
-                final List<Map<String, dynamic>> items = state.data.map((diet) {
-                  return {
-                    'name': diet.name,
-                    'image': diet.image,
-                    'diet': (diet.diet.isNotEmpty)
-                        ? diet.diet.first
-                        : 'No diet info',
-                    'calories': diet.calories,
-                    'showType': false,
-                    'price': diet.price, // Ensure price is set correctly
-                    'favourite': true,
-                    'onFavouriteTap': () {},
-                    'rating': diet.rating
-                  };
-                }).toList();
+                final List<DietModel> dietList = state.data;
 
-                return CustomListView(items: items);
+                    return CustomListView<DietModel>(
+                      items: dietList,
+                      getId: (item) => item.id,
+                      getName: (item) => item.name,
+                      getImage: (item) => item.image,
+                      getType: (item) =>
+                          item.diet.isNotEmpty ? item.diet.first : "Unknown",
+                      getCalories: (item) => item.calories,
+                      getPrice: (item) => item
+                          .price, // Ensure it's converted to string if needed
+                      getRating: (item) => item.rating,
+                    );
               } else {
                 return const SizedBox.shrink();
               }

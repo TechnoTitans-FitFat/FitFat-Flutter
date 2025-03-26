@@ -1,12 +1,12 @@
 import 'package:fitfat/core/api/end_points.dart';
 
-class FavouritesModel {
+ class FavouritesModel {
    final String id;
   final String image;
   final String name;
-  final String  calories; 
+  final double  calories; 
   final double  rating; 
-  final int  price; 
+  final double  price; 
 
   FavouritesModel({
    required this.id,
@@ -21,7 +21,7 @@ class FavouritesModel {
       id: jsonData[ApiKey.id]?.toString() ?? '',
       image: jsonData[ApiKey.image] ?? '',
       name: jsonData[ApiKey.name] ?? '',
-      calories: jsonData[ApiKey.calories]?.toString() ?? '0',
+      calories: jsonData[ApiKey.calories] ?? '0',
       rating: jsonData[ApiKey.rating] is double
     ? jsonData[ApiKey.rating]
     : double.tryParse(jsonData[ApiKey.rating].toString()) ?? 0.0,
