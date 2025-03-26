@@ -1,5 +1,7 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/main/data/models/main_screen_model.dart';
+import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
+import 'package:fitfat/features/menu/data/models/menu_model.dart';
 import 'package:fitfat/features/suggestions/data/models/suggestions_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,10 +9,12 @@ import 'package:fitfat/features/main/presentaion/widgets/suggestion_grid_view_it
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart';
 
+enum GridType { mainScreen, suggestions, menu }
 class CustomSuggestionsGridView extends StatefulWidget {
-  final bool isSuggestion;
+  
+  final GridType gridType;
 
-  const CustomSuggestionsGridView({super.key, required this.isSuggestion});
+  const CustomSuggestionsGridView({super.key, required this.gridType});
 
   @override
   State<CustomSuggestionsGridView> createState() =>
@@ -20,13 +24,22 @@ class CustomSuggestionsGridView extends StatefulWidget {
 class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
   @override
   Widget build(BuildContext context) {
-    return widget.isSuggestion
-        ? BlocBuilder<SuggestionsCubit, SuggestionsState>(
-            builder: (context, state) => _buildSuggestionsGrid(context, state),
-          )
-        : BlocBuilder<MainScreenCubit, MainScreenState>(
-            builder: (context, state) => _buildMainScreenGrid(context, state),
-          );
+    switch (widget.gridType) {
+      case GridType.suggestions:
+        return BlocBuilder<SuggestionsCubit, SuggestionsState>(
+          builder: (context, state) => _buildSuggestionsGrid(context, state),
+        );
+      case GridType.mainScreen:
+        return BlocBuilder<MainScreenCubit, MainScreenState>(
+          builder: (context, state) => _buildMainScreenGrid(context, state),
+        );
+      case GridType.menu:
+        return BlocBuilder<MenuCubit, MenuState>(
+          builder: (context, state) => _buildMenuGrid(context, state),
+        );
+      default:
+        return const SizedBox();
+    }
   }
 
   Widget _buildSuggestionsGrid(BuildContext context, SuggestionsState state) {
@@ -87,6 +100,17 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
       final List<MainScreenModel> data = state.data;
       return _buildGridView(data);
     } else if (state is MainScreenFailure) {
+      return Center(child: Text("Error: ${state.errMessage}"));
+    }
+    return const SizedBox();
+  }
+  Widget _buildMenuGrid(BuildContext context, MenuState state) {
+    if (state is MenuLoading) {
+      return const Center(child: CircularProgressIndicator());
+    } else if (state is MenuSucess) {
+      final List<MenuModel> data = state.data;
+      return _buildGridView(data);
+    } else if (state is MenuFailure) {
       return Center(child: Text("Error: ${state.errMessage}"));
     }
     return const SizedBox();

@@ -14,6 +14,7 @@ import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/k
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
+import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
@@ -69,6 +70,9 @@ class MyApp extends StatelessWidget {
          BlocProvider(create: (context) => HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
           BlocProvider(create: (context) => LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
           BlocProvider(create: (context) => DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
+          BlocProvider(
+            create: (context) => MenuCubit(DioComsumer(dio: Dio()))
+              ..fetchMenuData()),
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
@@ -87,6 +91,7 @@ class MyApp extends StatelessWidget {
             },
           ),
           // Add OTP Screen route
+        ],
         ],
       ),
     );
