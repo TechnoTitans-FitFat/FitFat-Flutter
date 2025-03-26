@@ -1,4 +1,5 @@
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
+import 'package:fitfat/features/favourites/presentation/widgets/favourites_list_view.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,9 +53,8 @@ class _FavouritesViewBodyState extends State<FavouritesViewBody> {
                 .toList();
 
             return SingleChildScrollView(
-                child: CustomListView(
-              items: items,
-            ));
+                child: FavouritesListView(items: items)
+                );
           }
 
           return const Center(child: Text("لا يوجد مفضلات بعد."));
