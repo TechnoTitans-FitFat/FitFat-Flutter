@@ -3,12 +3,12 @@ class EndPoint {
   static String signIn = "$baseUrl/login";
   static String signUp = "$baseUrl/register";
   static String verifyEmail = "$baseUrl/verify-email";
-  static String home = 'api/recipes';
+  static String home = '/api/recipes/healthy?';
   static String meal_details = '$baseUrl/api/recipes/';
   static String healthInfo =
       'https://fitfat-backend.up.railway.app/api/healthInfo';
   static String dietInfo = '$baseUrl/api/dietInfo';
-  static String suggestions = 'api/recipes?';
+  static String suggestions = '/api/recipes/healthy?';
   static String favourites = 'api/favorites';
   static String dietview =
       '$baseUrl/api/recipes/healthy?category=diet&rating=5';
