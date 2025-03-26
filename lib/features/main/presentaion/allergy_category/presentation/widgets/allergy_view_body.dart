@@ -153,7 +153,7 @@ class AllergyViewBody extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CustomListView(items: items),
+         // CustomListView(items: items),
         ],
       ),
     );

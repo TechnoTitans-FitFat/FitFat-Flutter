@@ -18,34 +18,23 @@ class FavouritesCubit extends Cubit<FavouritesState> {
 
   List<FavouritesModel> favourites = [];
 
-   Future <void> getFavourites(BuildContext context) async {
+  Future<void> getFavourites(BuildContext context) async {
     try {
       emit(FavouritesLoading());
 
       final token = context.read<LoginCubit>().user?.token;
-    print("التوكن من LoginCubit: $token");
-
-
       if (token == null) {
         emit(FavouritesFailure(errMessage: 'User not logged in'));
         return;
       }
- 
- final response = await apiConsumer.get(
+
+      final response = await apiConsumer.get(
         EndPoint.favourites,
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
-        debugPrint(" رد السيرفر: $response");
 
-     final List<dynamic> favouritesList = response['favorites'] ?? [];
-
-favourites = favouritesList
-    .map((item) => FavouritesModel.fromJson(item))
-    .toList();
+      final List<dynamic> favouritesList = response['favorites'] ?? [];
+      favourites = favouritesList.map((item) => FavouritesModel.fromJson(item)).toList();
 
       emit(FavouritesSuccess(data: List.from(favourites)));
     } on ServerException catch (e) {
@@ -57,41 +46,29 @@ favourites = favouritesList
     }
   }
 
-   Future <void>  addToFavourite(BuildContext context,String itemId) async {
+  Future<void> addToFavourite(BuildContext context, String itemId) async {
     try {
-      emit(FavouritesLoading());
-
-       final token = context.read<LoginCubit>().user?.token;
-      print("التوكن   : $token");
-
+      final token = context.read<LoginCubit>().user?.token;
       if (token == null) {
         emit(FavouritesFailure(errMessage: 'User not logged in'));
         return;
       }
 
-    final response = await apiConsumer.post(
+      final response = await apiConsumer.post(
         EndPoint.favourites,
         data: {"recipeId": itemId},
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-             'Content-Type': 'application/json', 
-          },
-        ),
+        options: Options(headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        }),
       );
 
       final newFavourite = FavouritesModel.fromJson(response);
 
-    
       if (!favourites.any((fav) => fav.id == newFavourite.id)) {
         favourites.add(newFavourite);
+        emit(FavouritesSuccess(data: List.from(favourites))); // Emit only if the list changes
       }
-      emit(FavouritesSuccess(data: List.from(favourites)));
-
-    await Future.delayed(const Duration(milliseconds: 500));
-    getFavourites(context); 
-
-
     } on ServerException catch (e) {
       emit(FavouritesFailure(errMessage: e.errModel.errMessage));
     } on DioException catch (e) {
@@ -101,43 +78,29 @@ favourites = favouritesList
     }
   }
 
-   Future <void>  deleteFromFavourite(BuildContext context,String itemId) async {
+  Future<void> deleteFromFavourite(BuildContext context, String itemId) async {
     try {
-      emit(FavouritesLoading());
-
-      
       final token = context.read<LoginCubit>().user?.token;
-      print("التوكن   : $token");
-
       if (token == null) {
         emit(FavouritesFailure(errMessage: 'User not logged in'));
         return;
       }
 
-      
-   final response = await apiConsumer.delete(
-  EndPoint.favourites, 
-  data: {"recipeId": itemId}, 
-  options: Options(
-    headers: {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json',
-    },
-  ),
-);
+      await apiConsumer.delete(
+        EndPoint.favourites,
+        data: {"recipeId": itemId},
+        options: Options(headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        }),
+      );
 
-    print(" رد السيرفر بعد الحذف: $response");
+      final beforeDeleteLength = favourites.length;
+      favourites.removeWhere((fav) => fav.id == itemId);
 
-    
-    final beforeDeleteLength = favourites.length;
-    favourites.removeWhere((fav) => fav.id == itemId);
-    
-    if (beforeDeleteLength == favourites.length) {
-      print(" العنصر لم يتم حذفه");
-    } else {
-      print(" تم حذف العنصر بنجاح");
-    }
-      emit(FavouritesSuccess(data: List.from(favourites)));
+      if (beforeDeleteLength != favourites.length) {
+        emit(FavouritesSuccess(data: List.from(favourites))); // Emit only if an item was removed
+      }
     } on ServerException catch (e) {
       emit(FavouritesFailure(errMessage: e.errModel.errMessage));
     } on DioException catch (e) {
@@ -145,5 +108,9 @@ favourites = favouritesList
     } catch (e) {
       emit(FavouritesFailure(errMessage: "Unexpected error occurred"));
     }
+  }
+
+  bool isFavourite(String itemId) {
+    return favourites.any((fav) => fav.id == itemId);
   }
 }

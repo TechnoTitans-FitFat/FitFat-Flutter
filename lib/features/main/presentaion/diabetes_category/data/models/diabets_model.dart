@@ -4,7 +4,7 @@ class DiabetsModel {
   final String image;
   final String name;
   final double price;
-  final String calories;
+  final double calories;
   final String id;
   final double cookingTime;
   final double rating;
@@ -27,7 +27,7 @@ class DiabetsModel {
       image: _validateImage(jsonData[ApiKey.image]), // Validate image
       name: jsonData[ApiKey.name] ?? '',
       price: priceValue is num ? priceValue.toDouble() : 0.0,
-      calories: jsonData[ApiKey.calories]?.toString() ?? '0',
+      calories: jsonData[ApiKey.calories]?? '0',
       id: jsonData[ApiKey.id] ?? '',
       rating: (jsonData['rating'] as num?)?.toDouble() ?? 0.0,
     );
