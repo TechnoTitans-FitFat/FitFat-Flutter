@@ -25,6 +25,7 @@ class EndPoint {
       '$baseUrl/api/recipes/healthy?diabetes=true&rating=5';
   static String logout = '$baseUrl/logout';
   static String profile = "$baseUrl/api/users/";
+  static String menu = '/api/recipes//unhealthy?';
 }
 
 class ApiKey {
