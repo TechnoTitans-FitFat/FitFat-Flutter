@@ -106,9 +106,10 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
               onTap: () {
                  print("تم الضغط على الصورة");
                 if (isFavourite) {
-                  favouritesCubit.deleteFromFavourite(widget.id);
+                  favouritesCubit.deleteFromFavourite(context, widget.id);
                 } else {
-                  favouritesCubit.addToFavourite(widget.id);
+                  favouritesCubit.addToFavourite(context,widget.id);
+                  favouritesCubit.getFavourites(context);
                 }
               },
               child: Image.asset(

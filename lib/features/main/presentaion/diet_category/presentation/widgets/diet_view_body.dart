@@ -1,67 +1,36 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_state.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/models/models/diet_model.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/high_carb_screen.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/keto_screen.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/low_carb_screen.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/vegan_screen.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_card_diet.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DietViewBody extends StatelessWidget {
+class DietViewBody extends StatefulWidget {
   const DietViewBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> items = [
-      {
-        'title': 'Tuna Crunch',
-        'imagePath': 'imges/meal1.jpg',
-        'type': 'Keto',
-        'calories': '350',
-        'showType': true,
-        'price': 170
-      },
-      {
-        'title': 'Veggie Delight',
-        'imagePath': 'imges/meal2.png',
-        'type': 'Vegan',
-        'calories': '200',
-        'showType': true,
-        'price': 170
-      },
-      {
-        'title': 'Chicken Salad',
-        'imagePath': 'imges/meal3.png',
-        'type': 'Low-Carb',
-        'calories': '400',
-        'showType': true,
-        'price': 170
-      },
-      {
-        'title': 'Tuna Crunch',
-        'imagePath': 'imges/meal1.jpg',
-        'type': 'Keto',
-        'calories': '350',
-        'showType': true,
-        'price': 170
-      },
-      {
-        'title': 'Veggie Delight',
-        'imagePath': 'imges/meal2.png',
-        'type': 'Vegan',
-        'calories': '200',
-        'showType': true,
-        'price': 170
-      },
-      {
-        'title': 'Chicken Salad',
-        'imagePath': 'imges/meal3.png',
-        'type': 'Low-Carb',
-        'calories': '400',
-        'showType': true,
-        'price': 170
-      },
-    ];
+  State<DietViewBody> createState() => _DietViewBodyState();
+}
 
+class _DietViewBodyState extends State<DietViewBody> {
+  @override
+  void initState() {
+    super.initState();
+    // Fetch diet data when the screen loads
+    context.read<DietCubit>().fetchDietData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,32 +48,59 @@ class DietViewBody extends StatelessWidget {
                   .copyWith(color: AppLightColor.mainColor),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomCardDiet(
-                  text: 'Keto',
-                  height: 55,
-                  width: 80,
-                ),
-                CustomCardDiet(
-                  text: 'Vegan',
-                  height: 55,
-                  width: 80,
-                ),
-                CustomCardDiet(
-                  text: 'Low-Carb',
-                  height: 55,
-                  width: 100,
-                ),
-                CustomCardDiet(
-                  text: 'High-Carb',
-                  height: 55,
-                  width: 100,
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.only(left: 25),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomCardDiet(
+                    text: 'Keto',
+                    height: 55,
+                    width: 80,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const KetoScreen()));
+                    },
+                  ),
+                  CustomCardDiet(
+                    text: 'Vegan',
+                    height: 55,
+                    width: 80,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const VeganScreen()));
+                    },
+                  ),
+                  CustomCardDiet(
+                    text: 'Low-Carb',
+                    height: 55,
+                    width: 100,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LowCarbScreen()));
+                    },
+                  ),
+                  CustomCardDiet(
+                    text: 'High-Carb',
+                    height: 55,
+                    width: 100,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HighCarbScreen()));
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 40),
@@ -136,7 +132,42 @@ class DietViewBody extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          CustomListView(items:items ),
+
+          // BlocConsumer listens to DietCubit state
+          BlocConsumer<DietCubit, DietState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              if (state is DietLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is DietFailure) {
+                return Center(
+                  child: Text(
+                    state.errMessage,
+                    style: AppStyles.textStyle16.copyWith(color: Colors.red),
+                  ),
+                );
+              } else if (state is DietSuccess) {
+                // Convert API response to required format
+                final List<DietModel> dietList = state.data;
+
+                return CustomListView<DietModel>(
+                  items: dietList,
+                  getId: (item) => item.id,
+                  getName: (item) => item.name,
+                  getImage: (item) => item.image,
+                  getType: (item) =>
+                      item.diet.isNotEmpty ? item.diet.first : "Unknown",
+                  getCalories: (item) => item.calories,
+                  getPrice: (item) => item.price,
+                  getRating: (item) => item.rating,
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
+          ),
         ],
       ),
     );

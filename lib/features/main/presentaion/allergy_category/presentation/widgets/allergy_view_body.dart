@@ -1,5 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/vegan_screen.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_card_diet.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
@@ -79,30 +80,38 @@ class AllergyViewBody extends StatelessWidget {
                   .copyWith(color: AppLightColor.mainColor),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 25),
+           Padding(
+            padding: const EdgeInsets.only(left: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomCardDiet(
                   text: 'Lactose',
                   height: 55,
-                  width: 80,
+                  width: 80, onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
+                    }
                 ),
                 CustomCardDiet(
                   text: 'Shellfish',
                   height: 55,
-                  width: 80,
+                  width: 80, onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
+                    }
                 ),
                 CustomCardDiet(
                   text: 'Wheat',
                   height: 55,
-                  width: 100,
+                  width: 100, onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
+                    }
                 ),
                 CustomCardDiet(
                   text: 'Peanuts',
                   height: 55,
-                  width: 100,
+                  width: 100, onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
+                    }
                 ),
               ],
             ),
@@ -144,7 +153,7 @@ class AllergyViewBody extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CustomListView(items: items),
+         // CustomListView(items: items),
         ],
       ),
     );

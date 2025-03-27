@@ -7,19 +7,23 @@ class CustomCardListViewItem extends StatelessWidget {
   final String title;
   final String imagePath;
   final String? type;
-  final String calories;
-  final int price;
+  final double calories;
+  final double price;
   final bool showType;
   final bool isFavourite;
+  final double rating;
+  final VoidCallback onFavouriteTap;
   const CustomCardListViewItem({
     super.key,
     required this.title,
     required this.imagePath,
     this.type,
     required this.calories,
+    required this.rating,
     required this.price,
     this.showType = true,
     required this.isFavourite,
+    required this.onFavouriteTap,
   });
 
   @override
@@ -37,9 +41,26 @@ class CustomCardListViewItem extends StatelessWidget {
               width: 150,
               height: 150,
               decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius:  BorderRadius.all(Radius.circular(15))),
-              child: Image.asset(imagePath, fit: BoxFit.cover),
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              child: Image.network(
+                imagePath,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    'assets/error_photo.jpg', // Fallback image
+                    fit: BoxFit.cover,
+                  );
+                },
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null)
+                    return child; // Show image when loaded
+                  return Center(
+                      child:
+                          CircularProgressIndicator()); // Show loading indicator
+                },
+              ),
             ),
             const SizedBox(width: 20),
             Expanded(
@@ -75,7 +96,7 @@ class CustomCardListViewItem extends StatelessWidget {
                       const SizedBox(width: 10),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal:15,
+                          horizontal: 15,
                           vertical: 5,
                         ),
                         decoration: BoxDecoration(
@@ -101,7 +122,7 @@ class CustomCardListViewItem extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        '4.5',
+                        rating.toString(),
                         style: AppStyles.textStyle16.copyWith(
                           color: AppLightColor.blackColor,
                           fontSize: 14,
@@ -131,21 +152,18 @@ class CustomCardListViewItem extends StatelessWidget {
                         ],
                       ),
                       GestureDetector(
-                        onTap: () {
-                        },
+                        onTap: onFavouriteTap,
                         child: Container(
                           height: 35,
                           width: 35,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                           ),
-
-                          child: Image.asset( 
-                              isFavourite ? Assets.icons.liked.path  :  Assets.icons.add.path
-                              ),
-
+                          child: Image.asset(isFavourite
+                              ? Assets.icons.liked.path
+                              : Assets.icons.add.path),
                         ),
-                        ),
+                      ),
                     ],
                   ),
                 ],

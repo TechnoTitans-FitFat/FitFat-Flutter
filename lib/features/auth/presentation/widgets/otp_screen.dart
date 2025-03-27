@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -117,7 +118,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 backgroundColor: Colors.green,
               ),
             );
-            Get.offNamed('/homeScreen');
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>  PersonalInformationView(userId:userId )));
           } else if (state is VerifyEmailFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -129,10 +130,11 @@ class _OtpScreenState extends State<OtpScreen> {
         },
         builder: (context, state) {
           return GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(), // Hide keyboard on tap
+            onTap: () =>
+                FocusScope.of(context).unfocus(), // Hide keyboard on tap
             child: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.all(20.0), 
+              padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -163,7 +165,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 30),
-                  
+
                   // OTP Fields
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -174,7 +176,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         child: TextField(
                           controller: otpControllers[index],
                           focusNode: focusNodes[index],
-                          keyboardType: TextInputType.number, 
+                          keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           textAlign: TextAlign.center,
                           maxLength: 1,
@@ -183,7 +185,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           onChanged: (value) {
                             if (value.isNotEmpty && index < 5) {
                               focusNodes[index + 1].requestFocus();
-                            } 
+                            }
                             if (index == 5 && completeOtp.length == 6) {
                               verifyOtp();
                             }

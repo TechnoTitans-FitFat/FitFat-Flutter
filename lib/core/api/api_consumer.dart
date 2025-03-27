@@ -4,6 +4,7 @@ abstract class ApiConsumer {
   get(
     String path, {
     Object? data,
+    Options? options,
     Map<String, dynamic>? queryParameters,
   });
   post(String path,
