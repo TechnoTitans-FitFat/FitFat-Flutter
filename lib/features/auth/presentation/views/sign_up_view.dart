@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({super.key});
-
+  const SignUp({super.key, required this.tabController});
+  final TabController tabController;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, SignUpStates>(
@@ -21,7 +21,8 @@ class SignUp extends StatelessWidget {
             "/otpScreen",
             arguments: {
               "email": state.email,
-              "userId": state.userId, // Ensure userId is included in SignUpSucess state
+              "userId": state
+                  .userId, // Ensure userId is included in SignUpSucess state
             },
           );
         } else if (state is SignUpFalier) {
@@ -36,10 +37,12 @@ class SignUp extends StatelessWidget {
           backgroundColor: AppLightColor.whiteColor,
           body: Stack(
             children: [
-               SignUpViewBody(),
+              SignUpViewBody(
+                tabController: tabController,
+              ),
               if (state is SignUpLoading)
                 const Center(
-                  child: CircularProgressIndicator(), // Show loading indicator
+                  child: CircularProgressIndicator(),
                 ),
             ],
           ),
