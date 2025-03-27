@@ -45,6 +45,7 @@ dependencies:
   fontfamily: ^0.0.3
   get: ^4.6.6
   google_fonts: ^6.2.1
+  google_sign_in: ^6.3.0
   image_picker: ^1.1.2
   jwt_decoder: ^2.0.1
   logger: ^2.5.0

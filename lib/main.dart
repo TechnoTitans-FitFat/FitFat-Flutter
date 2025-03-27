@@ -9,8 +9,10 @@ import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
+import 'package:fitfat/features/profile/presentation/views/update_profile_view.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
+import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
     show SuggestionsCubit;
@@ -64,19 +66,19 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        //home: LoginSignUp(DioComsumer(dio: Dio())),
+        home: const LoginSignUp(DioComsumer),
 
-        initialRoute: '/', // Define initial route
+        /*  initialRoute: '/', // Define initial route
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(
-            name: '/otpScreen',
-            page: () {
-              return OtpScreen();
-            },
-          ),
-          // Add OTP Screen route
-        ],
+  name: '/otpScreen',
+  page: () {
+    return OtpScreen();
+  },
+),
+ // Add OTP Screen route
+        ],*/
       ),
     );
   }

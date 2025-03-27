@@ -17,12 +17,12 @@ class _LoginSignUpState extends State<LoginSignUp> {
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: const Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: AppLightColor.whiteColor,
-          body: SafeArea(
-              child: SingleChildScrollView(
-            child: CustomImageAuth(),
-          ))),
+        resizeToAvoidBottomInset: false,
+        backgroundColor: AppLightColor.whiteColor,
+        body: SingleChildScrollView(
+          child: CustomImageAuth(),
+        ),
+      ),
     );
   }
 }

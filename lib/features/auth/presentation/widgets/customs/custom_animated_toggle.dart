@@ -1,14 +1,12 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/presentation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
-
 import '../../views/login_view.dart';
 
 class AnimatedToggle extends StatefulWidget {
   const AnimatedToggle({
     super.key,
   });
-
   @override
   State<AnimatedToggle> createState() => _AnimatedToggleState();
 }
@@ -16,7 +14,6 @@ class AnimatedToggle extends StatefulWidget {
 class _AnimatedToggleState extends State<AnimatedToggle>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-
   @override
   void initState() {
     super.initState();
@@ -37,8 +34,11 @@ class _AnimatedToggleState extends State<AnimatedToggle>
           padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 5),
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppLightColor.backgroundColor)),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: AppLightColor.backgroundColor,
+              ),
+            ),
             child: TabBar(
               indicatorSize: TabBarIndicatorSize.tab,
               controller: _tabController,
@@ -50,13 +50,14 @@ class _AnimatedToggleState extends State<AnimatedToggle>
               unselectedLabelColor: AppLightColor.mainColor,
               tabs: const [
                 Tab(
-                    child: SizedBox(
-                  width: double.infinity,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text("Sign Up"),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text("Sign Up"),
+                    ),
                   ),
-                )),
+                ),
                 Tab(
                   child: SizedBox(
                     width: double.infinity,
@@ -71,11 +72,11 @@ class _AnimatedToggleState extends State<AnimatedToggle>
           ),
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height * 0.7,
           child: TabBarView(
             controller: _tabController,
             children: [
-              const SignUp(),
+              SignUp(tabController: _tabController),
               Login(),
             ],
           ),

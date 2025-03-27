@@ -1,3 +1,4 @@
+import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/light_colors.dart';
 
@@ -45,22 +46,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: TextFormField(
         controller: widget.controller,
         // Use custom validator if provided, otherwise use default behavior
-        validator: widget.validator ?? (data) {
-          if (data == null || data.isEmpty) {
-            setState(() {
-              hasError = true;
-            });
-            return widget.noti;
-          }
-          setState(() {
-            hasError = false;
-          });
-          return null;
-        },
+        validator: widget.validator ??
+            (data) {
+              if (data == null || data.isEmpty) {
+                setState(() {
+                  hasError = true;
+                });
+                return widget.noti;
+              }
+              setState(() {
+                hasError = false;
+              });
+              return null;
+            },
         onChanged: widget.onchange,
         // Use custom obscureText if provided, otherwise use default behavior
-        obscureText: widget.obscureText ?? 
-          (widget.sufIcon != null ? !passwordVisible : false),
+        obscureText: widget.obscureText ??
+            (widget.sufIcon != null ? !passwordVisible : false),
         // Use provided keyboard type or default to text
         keyboardType: widget.keyboardType ?? TextInputType.text,
         decoration: InputDecoration(
@@ -81,7 +83,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 )
               : null,
           hintText: widget.hint,
-          hintStyle: const TextStyle(color: AppLightColor.greyColor),
+          hintStyle: AppStyles.textStyle13.copyWith(
+            color: AppLightColor.greyColor,
+            fontWeight: FontWeight.w500,
+          ),
           focusedBorder: buildBorder(),
           enabledBorder: buildBorder(),
           errorBorder: buildBorder(isError: true),
@@ -93,7 +98,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   OutlineInputBorder buildBorder({bool isError = false}) {
     return OutlineInputBorder(
-      borderSide: BorderSide(color: isError ? AppLightColor.mainColor : AppLightColor.greyColor),
+      borderSide: BorderSide(
+          color: isError ? AppLightColor.mainColor : AppLightColor.greyColor),
       borderRadius: BorderRadius.circular(8),
     );
   }

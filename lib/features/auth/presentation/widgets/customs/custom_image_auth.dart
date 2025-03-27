@@ -1,3 +1,4 @@
+import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_animated_toggle.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -8,25 +9,38 @@ class CustomImageAuth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: [
+      children: [
         Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.bottomCenter,
-        children: [
-        Assets.images.img.image(width: MediaQuery.of(context).size.width, fit: BoxFit.cover),
-    ],
-    ),
-    const SingleChildScrollView(
-    child: Column(
-    children: [
-    SizedBox(
-    height: 16,
-    ),
-    AnimatedToggle(),
-    ],
-    ),
-    )
-    ],
+          clipBehavior: Clip.none,
+          alignment: Alignment.bottomCenter,
+          children: [
+            Assets.images.main.image(
+              width: MediaQuery.of(context).size.width,
+              height: 200,
+              fit: BoxFit.cover,
+            ),
+            Container(
+              height: 200,
+              width: double.infinity,
+              color: AppLightColor.mainColor.withOpacity(
+                0.2,
+              ),
+            ),
+            Container(
+              height: 15,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: AppLightColor.whiteColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
+              ),
+            ),
+          ],
+        ),
+        const AnimatedToggle()
+      ],
     );
   }
 }
