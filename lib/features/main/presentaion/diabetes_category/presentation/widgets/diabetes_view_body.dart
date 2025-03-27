@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+/*import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
@@ -101,3 +101,4 @@ class _DiabetesViewBodyState extends State<DiabetesViewBody> {
     );
   }
 }
+*/

@@ -1,5 +1,4 @@
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
-import 'package:fitfat/features/favourites/presentation/widgets/favourites_list_view.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +11,6 @@ class FavouritesViewBody extends StatefulWidget {
 }
 
 class _FavouritesViewBodyState extends State<FavouritesViewBody> {
-  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -53,8 +51,9 @@ class _FavouritesViewBodyState extends State<FavouritesViewBody> {
                 .toList();
 
             return SingleChildScrollView(
-                child: FavouritesListView(items: items)
-                );
+                child: CustomListView(
+              items: items,
+            ));
           }
 
           return const Center(child: Text("لا يوجد مفضلات بعد."));
