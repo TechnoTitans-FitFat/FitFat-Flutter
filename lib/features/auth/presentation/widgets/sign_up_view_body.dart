@@ -2,6 +2,7 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.da
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_button.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_textfield.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/sign_up_with_google_divider_and_button.dart';
+import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -110,14 +111,20 @@ class SignUpViewBody extends StatelessWidget {
                         : CustomBottom(
                             text: 'Sign Up',
                             ontap: () async {
-                              // The navigation is now handled in the cubit
                               await cubit.signUp(context);
+                              Navigator.push(
+                                // ignore: use_build_context_synchronously
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const OtpScreen(),
+                                ),
+                              );
                             },
                           ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               SignUpWithGoogleDividerAndButton(tabController: tabController),

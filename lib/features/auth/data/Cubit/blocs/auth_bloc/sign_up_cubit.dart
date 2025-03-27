@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/errors/exceptions.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/verify_state.dart';
 import 'package:fitfat/features/auth/data/Cubit/models/sign_up_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -115,6 +116,50 @@ class RegisterCubit extends Cubit<SignUpStates> {
       emit(VerifyEmailFailure(errorMessage: errorMessage));
     } catch (e) {
       emit(VerifyEmailFailure(errorMessage: "Unexpected error: $e"));
+    }
+  }
+
+  Future<void> resendOtp(String email) async {
+    try {
+      emit(ResendOtpLoading());
+
+      // Validate email
+      if (email.isEmpty) {
+        emit(ResendOtpFailure(errorMessage: "Email is required"));
+        return;
+      }
+
+      final requestData = {
+        "email": email,
+      };
+
+      print("Resend OTP Request Data: $requestData");
+
+      final response = await api.post(EndPoint.resendOtp, data: requestData);
+
+      print("Resend OTP Response: $response");
+
+      if (response is Map<String, dynamic>) {
+        final bool status = response["status"] == true;
+        final String message = response["message"] ?? "OTP resent successfully";
+
+        if (status) {
+          emit(ResendOtpSuccess(successMessage: message));
+          return;
+        } else {
+          emit(ResendOtpFailure(errorMessage: message));
+          return;
+        }
+      }
+
+      emit(ResendOtpFailure(errorMessage: "Invalid response format"));
+    } on ServerException catch (e) {
+      emit(ResendOtpFailure(errorMessage: e.errModel.errMessage));
+    } on DioException catch (e) {
+      final errorMessage = e.response?.data?["message"] ?? "Network error";
+      emit(ResendOtpFailure(errorMessage: errorMessage));
+    } catch (e) {
+      emit(ResendOtpFailure(errorMessage: "Unexpected error: $e"));
     }
   }
 

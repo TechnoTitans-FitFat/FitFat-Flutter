@@ -30,3 +30,17 @@ class VerifyEmailFailure extends SignUpStates {
   final String errorMessage;
   VerifyEmailFailure({required this.errorMessage});
 }
+
+class ResendOtpLoading extends SignUpStates {}
+
+class ResendOtpSuccess extends SignUpStates {
+  final String successMessage;
+
+  ResendOtpSuccess({required this.successMessage});
+}
+
+class ResendOtpFailure extends SignUpStates {
+  final String errorMessage;
+
+  ResendOtpFailure({required this.errorMessage});
+}

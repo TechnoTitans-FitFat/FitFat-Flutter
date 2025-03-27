@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 class FavouritesListView extends StatelessWidget {
   const FavouritesListView({super.key, required this.items});
- final List<Map<String, dynamic>> items;
+  final List<Map<String, dynamic>> items;
   @override
-  Widget build(BuildContext context,) {
+  Widget build(
+    BuildContext context,
+  ) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -18,15 +20,14 @@ class FavouritesListView extends StatelessWidget {
             title: item['title'],
             imagePath: item['imagePath'],
             type: item['type'],
-            calories: item['calories'].toString(),
+            calories: item['calories'],
             showType: item['showType'] ?? true,
-           price: item['price'] is num
-    ? (item['price'] as num).toDouble()
-    : double.tryParse(item['price'].toString()) ?? 0.0,
+            price: item['price'] is num
+                ? (item['price'] as num).toDouble()
+                : double.tryParse(item['price'].toString()) ?? 0.0,
             isFavourite: item['favourite'] ?? false,
-            onFavouriteTap: item['onFavouriteTap'], 
+            onFavouriteTap: item['onFavouriteTap'],
             rating: item['rating'],
-            
           ),
         );
       },

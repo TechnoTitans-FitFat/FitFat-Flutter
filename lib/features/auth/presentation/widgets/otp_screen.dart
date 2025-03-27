@@ -1,10 +1,16 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/verify_state.dart';
+import 'package:fitfat/features/auth/presentation/widgets/customs/enter_otpsent_to_text.dart';
 import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
+import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'dart:async';
+
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -14,8 +20,9 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  late List<TextEditingController> otpControllers;
-  late List<FocusNode> focusNodes;
+  TextEditingController textEditingController = TextEditingController();
+  StreamController<ErrorAnimationType>? errorController;
+  String currentText = "";
 
   String email = "";
   String userId = "";
@@ -27,8 +34,7 @@ class _OtpScreenState extends State<OtpScreen> {
   void initState() {
     super.initState();
 
-    otpControllers = List.generate(6, (index) => TextEditingController());
-    focusNodes = List.generate(6, (index) => FocusNode());
+    errorController = StreamController<ErrorAnimationType>();
 
     final args = Get.arguments;
     if (args is Map<String, dynamic>) {
@@ -65,50 +71,17 @@ class _OtpScreenState extends State<OtpScreen> {
     });
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    for (var controller in otpControllers) {
-      controller.dispose();
-    }
-    for (var node in focusNodes) {
-      node.dispose();
-    }
-    super.dispose();
-  }
-
-  String get completeOtp =>
-      otpControllers.map((controller) => controller.text).join();
-
-  void verifyOtp() {
-    final otp = completeOtp;
-    if (otp.length != 6) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please enter a 6-digit OTP")),
-      );
-      return;
-    }
-
-    context.read<RegisterCubit>().verifyEmail(email, otp, userId);
-  }
-
   void resendOtp() {
     if (!enableResend) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("OTP resent successfully")),
-    );
-    startResendTimer();
+
+    // Call resend OTP method from RegisterCubit
+    context.read<RegisterCubit>().resendOtp(email);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Verify Email"),
-        elevation: 0,
-        backgroundColor: AppLightColor.mainColor,
-        foregroundColor: Colors.white,
-      ),
+      backgroundColor: AppLightColor.whiteColor,
       body: BlocConsumer<RegisterCubit, SignUpStates>(
         listener: (context, state) {
           if (state is VerifyEmailSuccess) {
@@ -118,8 +91,28 @@ class _OtpScreenState extends State<OtpScreen> {
                 backgroundColor: Colors.green,
               ),
             );
-            Navigator.push(context, MaterialPageRoute(builder: (context) =>  PersonalInformationView(userId:userId )));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        PersonalInformationView(userId: userId)));
           } else if (state is VerifyEmailFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage),
+                backgroundColor: Colors.red,
+              ),
+            );
+          } else if (state is ResendOtpSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.successMessage),
+                backgroundColor: Colors.green,
+              ),
+            );
+            // Restart the resend timer
+            startResendTimer();
+          } else if (state is ResendOtpFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.errorMessage),
@@ -130,96 +123,130 @@ class _OtpScreenState extends State<OtpScreen> {
         },
         builder: (context, state) {
           return GestureDetector(
-            onTap: () =>
-                FocusScope.of(context).unfocus(), // Hide keyboard on tap
+            onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(55),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 20),
-                  Icon(
-                    Icons.mark_email_read,
-                    size: 70,
-                    color: Theme.of(context).primaryColor,
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.1,
+                  ),
+                  Assets.images.verify.image(
+                    height: MediaQuery.sizeOf(context).width * 0.5,
+                    width: MediaQuery.sizeOf(context).width * 0.5,
                   ),
                   const SizedBox(height: 20),
                   Text(
                     "Email Verification",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    style: AppStyles.textStyle22.copyWith(
+                      color: AppLightColor.blackColor,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    email.isNotEmpty
-                        ? "We've sent a 6-digit code to $email"
-                        : "Error: No email provided!",
-                    style: TextStyle(
-                      color: email.isNotEmpty ? Colors.black87 : Colors.red,
-                      fontSize: 16,
+                  EnterOtpsentToText(email: email),
+                  const SizedBox(height: 30),
+                  PinCodeTextField(
+                    appContext: context,
+                    length: 6,
+                    obscureText: false,
+                    animationType: AnimationType.fade,
+                    pinTheme: PinTheme(
+                      shape: PinCodeFieldShape.box,
+                      borderRadius: BorderRadius.circular(5),
+                      fieldHeight: 50,
+                      fieldWidth: 40,
+                      activeFillColor: AppLightColor.whiteColor,
+                      selectedFillColor: AppLightColor.backgroundColor,
+                      activeColor: AppLightColor.blackColor,
+                      selectedColor: AppLightColor.mainColor,
+                      inactiveFillColor: AppLightColor.backgroundColor,
+                      inactiveColor: AppLightColor.greyColor,
                     ),
-                    textAlign: TextAlign.center,
+                    cursorColor: AppLightColor.mainColor,
+                    animationDuration: const Duration(milliseconds: 300),
+                    enableActiveFill: true,
+                    errorAnimationController: errorController,
+                    controller: textEditingController,
+                    keyboardType: TextInputType.number,
+                    textStyle: AppStyles.textStyle16.copyWith(
+                      color: AppLightColor.blackColor,
+                    ),
+                    boxShadows: const [
+                      BoxShadow(
+                        offset: Offset(0, 1),
+                        color: Colors.black12,
+                        blurRadius: 10,
+                      )
+                    ],
+                    onCompleted: (value) {
+                      setState(() {
+                        currentText = value;
+                      });
+                      verifyOtp();
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        currentText = value;
+                      });
+                    },
+                    beforeTextPaste: (text) {
+                      debugPrint("Allowing to paste $text");
+                      return true;
+                    },
                   ),
                   const SizedBox(height: 30),
-
-                  // OTP Fields
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(
-                      6,
-                      (index) => SizedBox(
-                        width: 40,
-                        child: TextField(
-                          controller: otpControllers[index],
-                          focusNode: focusNodes[index],
-                          keyboardType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
-                          textAlign: TextAlign.center,
-                          maxLength: 1,
-                          decoration: const InputDecoration(counterText: ""),
-                          autofocus: index == 0, // Auto-focus the first field
-                          onChanged: (value) {
-                            if (value.isNotEmpty && index < 5) {
-                              focusNodes[index + 1].requestFocus();
-                            }
-                            if (index == 5 && completeOtp.length == 6) {
-                              verifyOtp();
-                            }
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 30),
-
-                  // Verify Button
                   SizedBox(
                     height: 50,
+                    width: MediaQuery.sizeOf(context).width * 0.7,
                     child: state is VerifyEmailLoading
                         ? const Center(child: CircularProgressIndicator())
                         : ElevatedButton(
-                            onPressed: verifyOtp,
-                            child: const Text("Verify",
-                                style: TextStyle(fontSize: 16)),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppLightColor.mainColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  8,
+                                ),
+                              ),
+                            ),
+                            onPressed:
+                                currentText.length == 6 ? verifyOtp : null,
+                            child: Text(
+                              "Verify",
+                              style: AppStyles.textStyle16.copyWith(
+                                color: AppLightColor.whiteColor,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
                           ),
                   ),
                   const SizedBox(height: 20),
-
-                  // Resend OTP
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Didn't receive the code? "),
+                      Text(
+                        "Didn't receive the code?",
+                        style: AppStyles.textStyle13.copyWith(
+                          color: AppLightColor.greyColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       TextButton(
-                        onPressed: enableResend ? resendOtp : null,
-                        child: Text(enableResend
-                            ? "Resend"
-                            : "Resend in ${resendCountdown}s"),
+                        onPressed: state is! ResendOtpLoading && enableResend
+                            ? resendOtp
+                            : null,
+                        child: Text(
+                          state is ResendOtpLoading
+                              ? "Resending..."
+                              : (enableResend
+                                  ? "Resend"
+                                  : "Resend in ${resendCountdown}s"),
+                          style: AppStyles.textStyle13.copyWith(
+                            color: AppLightColor.mainColor,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -230,5 +257,23 @@ class _OtpScreenState extends State<OtpScreen> {
         },
       ),
     );
+  }
+
+  void verifyOtp() {
+    if (currentText.length != 6) {
+      // Trigger shake animation on PinCodeTextField
+      errorController!.add(ErrorAnimationType.shake);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter a 6-digit OTP"),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    context.read<RegisterCubit>().verifyEmail(email, currentText, userId);
   }
 }
