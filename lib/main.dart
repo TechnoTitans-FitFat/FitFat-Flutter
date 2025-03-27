@@ -17,6 +17,7 @@ import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_detail
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
+import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
     show SuggestionsCubit;
@@ -64,35 +65,46 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FavouritesCubit(DioComsumer(dio: Dio())),
         ),
-        BlocProvider(create: (context) => DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
-        BlocProvider(create: (context) => KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData()),
-        BlocProvider(create: (context) => VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
-         BlocProvider(create: (context) => HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
-          BlocProvider(create: (context) => LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
-          BlocProvider(create: (context) => DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
-          BlocProvider(
-            create: (context) => MenuCubit(DioComsumer(dio: Dio()))
-              ..fetchMenuData()),
+        BlocProvider(
+            create: (context) =>
+                DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
+        BlocProvider(
+            create: (context) =>
+                KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData()),
+        BlocProvider(
+            create: (context) =>
+                VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
+        BlocProvider(
+            create: (context) =>
+                HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
+        BlocProvider(
+            create: (context) =>
+                LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
+        BlocProvider(
+            create: (context) =>
+                DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
+        BlocProvider(
+            create: (context) =>
+                MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-       // home: MainScreen()
+        //home: LoginSignUp(DioComsumer(dio: Dio())),
 
-       initialRoute: '/', // Define initial route
+        initialRoute: '/', // Define initial route
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(
             name: '/otpScreen',
             page: () {
-              return const OtpScreen();
+              return OtpScreen();
             },
           ),
           // Add OTP Screen route
         ],
-        
       ),
     );
   }

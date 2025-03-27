@@ -14,11 +14,11 @@ class EndPoint {
       '$baseUrl/api/recipes/healthy?category=diet&rating=5';
   static String ketoView =
       '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=Keto';
-      static String veganView =
+  static String veganView =
       '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=Vegan';
-      static String highCarbView =
+  static String highCarbView =
       '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=High-Carb';
-      static String lowCarbView =
+  static String lowCarbView =
       '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=Low-Carb';
   static String allergyView = '$baseUrl/api/recipes?allergy=allergy&rating=5';
   static String diabetsView =
@@ -26,6 +26,7 @@ class EndPoint {
   static String logout = '$baseUrl/logout';
   static String profile = "$baseUrl/api/users/";
   static String menu = '/api/recipes//unhealthy?';
+  static const String resendOtp = '/resend-otp';
 }
 
 class ApiKey {
