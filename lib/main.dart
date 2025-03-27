@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
           ),
           // Add OTP Screen route
         ],
-        ],
+        
       ),
     );
   }
