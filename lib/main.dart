@@ -14,6 +14,7 @@ import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/k
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
+import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
