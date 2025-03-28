@@ -1,8 +1,5 @@
 import 'package:fitfat/features/main/presentaion/widgets/categories_list_view_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_card_list_view_item.dart';
 
 class CategoriesListView<T> extends StatelessWidget {
   final List<T> items;
@@ -46,6 +43,7 @@ class CategoriesListView<T> extends StatelessWidget {
             price: getPrice(item),
             calories: getCalories(item),
             rating: getRating(item),
+            id: getId(item),
           ),
         );
       },

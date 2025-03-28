@@ -5,8 +5,6 @@ import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_state.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/models/diabets_model.dart';
 import 'package:fitfat/features/main/presentaion/widgets/categories_list_view.dart';
-
-import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
