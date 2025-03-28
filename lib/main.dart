@@ -7,6 +7,12 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.da
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
+import 'package:fitfat/features/forget_password/data/forget_password_remote_datasource.dart';
+import 'package:fitfat/features/forget_password/domain/repositories/forget_password_repository.dart';
+import 'package:fitfat/features/forget_password/domain/usecases/reset_password_usecase.dart';
+import 'package:fitfat/features/forget_password/domain/usecases/send_otp_usecase.dart';
+import 'package:fitfat/features/forget_password/domain/usecases/verify_otp_usecase.dart';
+import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
@@ -47,16 +53,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ApiServices apiServices=ApiServices(Dio());
+    ApiServices apiServices = ApiServices(Dio());
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => ForgotPasswordCubit(
+            sendOtpUseCase: SendOtpUseCase(
+              ForgotPasswordRepository(
+                ForgotPasswordRemoteDatasource(),
+              ),
+            ),
+            verifyOtpUseCase: VerifyOtpUseCase(
+              ForgotPasswordRepository(
+                ForgotPasswordRemoteDatasource(),
+              ),
+            ),
+            resetPasswordUseCase: ResetPasswordUseCase(
+              ForgotPasswordRepository(
+                ForgotPasswordRemoteDatasource(),
+              ),
+            ),
+          ),
+        ),
         BlocProvider(
           create: (context) =>
               GetHealthInfoCubit(apiServices)..getUserProfile(),
         ),
         BlocProvider(
-          create: (context) =>
-          GetDietInfoCubit(apiServices)..getDietInfo(),
+          create: (context) => GetDietInfoCubit(apiServices)..getDietInfo(),
         ),
         BlocProvider(
           create: (context) => UserCubit(DioComsumer(dio: Dio())),
