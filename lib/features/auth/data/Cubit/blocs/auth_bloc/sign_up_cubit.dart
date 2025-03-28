@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/errors/exceptions.dart';
-import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/verify_state.dart';
 import 'package:fitfat/features/auth/data/Cubit/models/sign_up_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

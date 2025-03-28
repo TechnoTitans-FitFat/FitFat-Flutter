@@ -1,4 +1,3 @@
-/*
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
@@ -8,9 +7,10 @@ import 'package:fitfat/features/main/presentaion/diet_category/presentation/widg
 import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/keto_screen.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/low_carb_screen.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/vegan_screen.dart';
+
+import 'package:fitfat/features/main/presentaion/widgets/categories_list_view.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_card_diet.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -153,7 +153,7 @@ class _DietViewBodyState extends State<DietViewBody> {
                 // Convert API response to required format
                 final List<DietModel> dietList = state.data;
 
-                return CustomListView<DietModel>(
+                return CategoriesListView<DietModel>(
                   items: dietList,
                   getId: (item) => item.id,
                   getName: (item) => item.name,
@@ -174,4 +174,3 @@ class _DietViewBodyState extends State<DietViewBody> {
     );
   }
 }
-*/

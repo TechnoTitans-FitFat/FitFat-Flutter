@@ -13,11 +13,11 @@ import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/h
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/views/diet_view.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
-import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
     show SuggestionsCubit;
@@ -92,8 +92,8 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        //home: LoginSignUp(DioComsumer(dio: Dio())),
-
+        home:const DietView()
+        /*
         initialRoute: '/', // Define initial route
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
             },
           ),
           // Add OTP Screen route
-        ],
+        ],*/
       ),
     );
   }

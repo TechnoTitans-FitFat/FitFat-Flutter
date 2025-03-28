@@ -88,7 +88,7 @@ favourites = favouritesList
       }
       emit(FavouritesSuccess(data: List.from(favourites)));
 
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 500));
     getFavourites(context); 
 
 

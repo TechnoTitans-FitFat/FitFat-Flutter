@@ -1,4 +1,4 @@
-/*import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/vegan_screen.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_card_diet.dart';
@@ -159,4 +159,3 @@ class AllergyViewBody extends StatelessWidget {
     );
   }
 }
-*/

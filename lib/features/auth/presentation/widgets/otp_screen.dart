@@ -1,6 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
-import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/verify_state.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/enter_otpsent_to_text.dart';
 import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
 import 'package:fitfat/gen/assets.gen.dart';
