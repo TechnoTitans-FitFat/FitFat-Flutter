@@ -4,6 +4,7 @@ import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
+import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/forget_password/data/forget_password_remote_datasource.dart';
 import 'package:fitfat/features/forget_password/domain/repositories/forget_password_repository.dart';
@@ -55,6 +56,35 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          create: (context) => ForgotPasswordCubit(
+            sendOtpUseCase: SendOtpUseCase(
+              ForgotPasswordRepository(
+                ForgotPasswordRemoteDatasource(),
+              ),
+            ),
+            verifyOtpUseCase: VerifyOtpUseCase(
+              ForgotPasswordRepository(
+                ForgotPasswordRemoteDatasource(),
+              ),
+            ),
+            resetPasswordUseCase: ResetPasswordUseCase(
+              ForgotPasswordRepository(
+                ForgotPasswordRemoteDatasource(),
+              ),
+            ),
+          ),
+        ),
+        BlocProvider(
+          create: (context) =>
+              GetHealthInfoCubit(apiServices)..getUserProfile(),
+        ),
+        BlocProvider(
+          create: (context) => GetDietInfoCubit(apiServices)..getDietInfo(),
+        ),
+        BlocProvider(
+          create: (context) => UserCubit(DioComsumer(dio: Dio())),
+        ),
+        BlocProvider(
             create: (context) => AccountSettingsCubit(DioComsumer(dio: Dio()))),
         BlocProvider(
             create: (context) => HealthInfoCubit(DioComsumer(dio: Dio()))),
@@ -101,7 +131,7 @@ class MyApp extends StatelessWidget {
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          home: const DietView()
+          home: const LoginSignUp(DioComsumer)
           /*
         initialRoute: '/', // Define initial route
         getPages: [
