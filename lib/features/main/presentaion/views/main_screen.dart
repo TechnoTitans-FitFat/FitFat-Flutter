@@ -9,6 +9,7 @@ import 'package:fitfat/features/main/presentaion/widgets/custom_suggestion_grid_
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_title.dart';
 import 'package:fitfat/features/menu/presentation/views/menu_screen.dart';
+import 'package:fitfat/features/profile/presentation/views/profile_view.dart';
 import 'package:fitfat/features/suggestions/presentation/views/suggestion_view.dart';
 import 'package:flutter/material.dart';
 
@@ -102,7 +103,7 @@ class _MainScreenState extends State<MainScreen> {
      const MenuScreen(),
       const FavouritesView(),
       const CartScreen(),
-      // const ProfileView(),
+     const ProfileView(),
   ];
   
     return Scaffold(

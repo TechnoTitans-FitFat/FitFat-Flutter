@@ -26,6 +26,8 @@ class UserCubit extends Cubit<UserState> {
       emit(UserLoaded(UserModel.fromJson(response)));
     } on ServerException catch (e) {
       emit(UserError(e.errModel.errMessage));
+    }catch(e){
+      print(e);
     }
   }
 

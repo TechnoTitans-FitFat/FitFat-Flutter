@@ -1,5 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
+import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
@@ -14,10 +15,12 @@ import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/k
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
+import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
+import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
+import 'package:fitfat/features/profile/presentation/views/profile_view.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
-import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
     show SuggestionsCubit;
@@ -26,11 +29,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'core/cache/cache_helper.dart';
+import 'features/profile/presentation/data/health_info_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
-  runApp(
+  return runApp(
     DevicePreview(
       enabled: !kReleaseMode,
       builder: (context) => const MyApp(),
@@ -43,8 +47,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ApiServices apiServices=ApiServices(Dio());
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) =>
+              GetHealthInfoCubit(apiServices)..getUserProfile(),
+        ),
+        BlocProvider(
+          create: (context) =>
+          GetDietInfoCubit(apiServices)..getDietInfo(),
+        ),
+        BlocProvider(
+          create: (context) => UserCubit(DioComsumer(dio: Dio())),
+        ),
         BlocProvider(
             create: (context) => AccountSettingsCubit(DioComsumer(dio: Dio()))),
         BlocProvider(
@@ -92,9 +108,10 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        //home: LoginSignUp(DioComsumer(dio: Dio())),
+        home: const ProfileView(),
 
-        initialRoute: '/', // Define initial route
+        initialRoute: '/',
+        // Define initial route
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(
