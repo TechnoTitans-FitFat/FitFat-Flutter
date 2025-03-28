@@ -4,6 +4,8 @@ import 'package:fitfat/core/widgets/custom_elvated_button.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_state.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/models/diabets_model.dart';
+import 'package:fitfat/features/main/presentaion/widgets/categories_list_view.dart';
+
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +82,7 @@ class _DiabetesViewBodyState extends State<DiabetesViewBody> {
                 final List<DiabetsModel> diabetsList = state.data;
 
                 return SingleChildScrollView(
-                  child: CustomListView<DiabetsModel>(
+                  child: CategoriesListView<DiabetsModel>(
                     items: diabetsList,
                     getId: (item) => item.id,
                     getName: (item) => item.name,

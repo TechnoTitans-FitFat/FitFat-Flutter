@@ -27,7 +27,7 @@ class SignUpWithGoogleButton extends StatelessWidget {
 
               if (result.isSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                  const SnackBar(
                     content: Text("Sign In Successful"),
                     backgroundColor: Colors.green,
                   ),

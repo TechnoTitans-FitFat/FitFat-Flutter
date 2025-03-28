@@ -1,13 +1,15 @@
-import 'package:fitfat/features/main/presentaion/widgets/custom_card_list_view_item.dart';
+/*import 'package:fitfat/features/main/presentaion/widgets/custom_card_list_view_item.dart';
 import 'package:flutter/material.dart';
 
 class FavouritesListView extends StatelessWidget {
   const FavouritesListView({super.key, required this.items});
   final List<Map<String, dynamic>> items;
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+
+  Widget build(BuildContext context,) {
+      debugPrint("FavouritesListView استلمت: ${items.toString()}");
+
+
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -20,6 +22,11 @@ class FavouritesListView extends StatelessWidget {
             title: item['title'],
             imagePath: item['imagePath'],
             type: item['type'],
+
+           calories: item['calories'] is num
+    ? (item['calories'] as num).toDouble()
+    : double.tryParse(item['calories'].toString()) ?? 0.0,
+
             calories: item['calories'],
             showType: item['showType'] ?? true,
             price: item['price'] is num
@@ -34,3 +41,5 @@ class FavouritesListView extends StatelessWidget {
     );
   }
 }
+
+*/

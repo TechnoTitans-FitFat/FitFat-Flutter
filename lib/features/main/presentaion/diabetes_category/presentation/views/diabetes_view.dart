@@ -16,3 +16,4 @@ class DiabetesView extends StatelessWidget {
     );
   }
 }
+

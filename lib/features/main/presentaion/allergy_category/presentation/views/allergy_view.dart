@@ -16,3 +16,4 @@ class AllergyView extends StatelessWidget {
     );
   }
 }
+

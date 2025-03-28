@@ -1,19 +1,17 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
-import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
-class CustomCardListViewItem extends StatelessWidget {
+class CategoriesListViewItem extends StatelessWidget {
   final String title;
   final String imagePath;
   final String? type;
-  final String calories;
+  final double calories;
   final double rating; 
-  final int price;
+  final double price;
   final bool showType;
-  final bool isFavourite;
-   final VoidCallback onFavouriteTap;
-  const CustomCardListViewItem({
+ 
+  const CategoriesListViewItem({
     super.key,
     required this.title,
     required this.imagePath,
@@ -22,8 +20,7 @@ class CustomCardListViewItem extends StatelessWidget {
     required this.rating,
     required this.price,
     this.showType = true,
-    required this.isFavourite,
-    required this.onFavouriteTap,
+  
   });
 
   @override
@@ -134,7 +131,7 @@ class CustomCardListViewItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                      GestureDetector(
+                    /*  GestureDetector(
                         onTap: onFavouriteTap,
                         child: Container(
                           height: 35,
@@ -148,7 +145,7 @@ class CustomCardListViewItem extends StatelessWidget {
                               ),
 
                         ),
-                        ),
+                        ),*/
                     ],
                   ),
                 ],

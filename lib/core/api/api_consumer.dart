@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:fitfat/core/api/api_interceptor.dart';
 
 abstract class ApiConsumer {
+  final Dio _dio = Dio()..interceptors.add(ApiInterceptor());
   get(
     String path, {
     Object? data,
