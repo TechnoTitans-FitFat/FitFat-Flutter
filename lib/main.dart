@@ -4,6 +4,8 @@ import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
+import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
+import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
@@ -106,19 +108,19 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home:const DietView()
-        /*
+       // home:const DietView()
+      
         initialRoute: '/', // Define initial route
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(
             name: '/otpScreen',
             page: () {
-              return OtpScreen();
+              return const OtpScreen();
             },
           ),
           // Add OTP Screen route
-        ],*/
+        ],
       ),
     );
   }
