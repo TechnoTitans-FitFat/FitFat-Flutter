@@ -15,6 +15,9 @@ class EndPoint {
   static String diabetsView = '$baseUrl/api/recipes?diabetes=true&rating=5';
   static String logout = '$baseUrl/logout';
   static String profile="$baseUrl/api/users/";
+  static getHealthInfo (id) {
+    return "$baseUrl/api/healthInfo/$id";
+  }
 }
 
 class ApiKey {

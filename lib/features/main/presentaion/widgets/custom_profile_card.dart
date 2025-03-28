@@ -1,5 +1,7 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/main/presentaion/widgets/info_text.dart';
+import 'package:fitfat/features/profile/presentation/views/update_profile_view.dart';
+import 'package:fitfat/features/profile/presentation/widgets/diet_user_data.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,7 +35,12 @@ class CustomProfileCard extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: AppLightColor.mainColor),
                   ),
-                  SvgPicture.asset(Assets.icons.edit)
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                          MaterialPageRoute( builder: (context) => const UpdateProfile(),),);
+                      },
+                      child: SvgPicture.asset(Assets.icons.edit))
                 ],
               ),
               const SizedBox(
@@ -49,41 +56,7 @@ class CustomProfileCard extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              infoText('Gender', 'female'),
-              const SizedBox(
-                height: 5,
-              ),
-              infoText('Date Of Birth', '01/01/1990'),
-              const SizedBox(
-                height: 5,
-              ),
-              infoText('Height', '170'),
-              const SizedBox(
-                height: 5,
-              ),
-              infoText('Weight', '70'),
-              const SizedBox(
-                height: 10,
-              ),
-              const Divider(
-                color: AppLightColor.blackColor,
-                endIndent: 24,
-              ),
-              Text(
-                'Health Information',
-                style: GoogleFonts.roboto(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: AppLightColor.blackColor),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              infoText('Allergies', 'Peanuts'),
-              const SizedBox(
-                height: 5,
-              ),
-              infoText('Type of Diabetes', 'Type 2'),
+              DietUserData(),
               const SizedBox(
                 height: 5,
               ),

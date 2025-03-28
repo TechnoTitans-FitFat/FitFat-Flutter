@@ -8,7 +8,6 @@ import 'package:fitfat/features/auth/data/Cubit/models/sign_in_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginStates> {

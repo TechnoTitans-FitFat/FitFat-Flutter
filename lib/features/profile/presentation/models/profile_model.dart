@@ -14,8 +14,9 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> jsonData) {
     return UserModel(
       profile: jsonData[ApiKey.profile],
-      username: jsonData[ApiKey.username],
-      email: jsonData[ApiKey.email],
+        email: jsonData["email"] ?? "guest@example.com",
+        username: jsonData[ApiKey.username] ??"Yasmeen",
+
     );
   }
 }
