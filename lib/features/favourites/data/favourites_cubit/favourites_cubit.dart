@@ -86,8 +86,12 @@ favourites = favouritesList
       if (!favourites.any((fav) => fav.id == newFavourite.id)) {
         favourites.add(newFavourite);
       }
-
       emit(FavouritesSuccess(data: List.from(favourites)));
+
+    await Future.delayed(Duration(milliseconds: 500));
+    getFavourites(context); 
+
+
     } on ServerException catch (e) {
       emit(FavouritesFailure(errMessage: e.errModel.errMessage));
     } on DioException catch (e) {

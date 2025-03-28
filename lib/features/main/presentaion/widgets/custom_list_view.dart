@@ -27,6 +27,9 @@ class CustomListView extends StatelessWidget {
                 : int.tryParse(item['price'].toString()) ?? 0,
             isFavourite: item['favourite'] ?? false,
             onFavouriteTap: item['onFavouriteTap'], 
+           rating: item['rating'] is double
+        ? item['rating']
+        : double.tryParse(item['rating'].toString()) ?? 0.0,
             
           ),
         );

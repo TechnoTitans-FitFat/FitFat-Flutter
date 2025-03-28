@@ -9,25 +9,30 @@ class CustomCardDiet extends StatelessWidget {
     required this.text,
     required this.height,
     required this.width,
+    required this.onTap,
   });
   final String text;
   final double height;
   final double width;
+   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
       width: width,
-      child: Card(
-        color: AppLightColor.whiteColor,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          child: Text(
-            text,
-            style:
-                AppStyles.textStyle12.copyWith(color: AppLightColor.mainColor),
-            textAlign: TextAlign.center,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Card(
+          color: AppLightColor.whiteColor,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Text(
+              text,
+              style: AppStyles.textStyle12
+                  .copyWith(color: AppLightColor.mainColor),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),

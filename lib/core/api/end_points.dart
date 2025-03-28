@@ -3,21 +3,32 @@ class EndPoint {
   static String signIn = "$baseUrl/login";
   static String signUp = "$baseUrl/register";
   static String verifyEmail = "$baseUrl/verify-email";
-  static String home = 'api/recipes';
+  static String home = '/api/recipes/healthy?';
   static String meal_details = '$baseUrl/api/recipes/';
   static String healthInfo =
       'https://fitfat-backend.up.railway.app/api/healthInfo';
   static String dietInfo = '$baseUrl/api/dietInfo';
-  static String suggestions = 'api/recipes?';
+  static String suggestions = '/api/recipes/healthy?';
   static String favourites = 'api/favorites';
-  static String dietview = '$baseUrl/api/recipes?category=diet';
+  static String dietview =
+      '$baseUrl/api/recipes/healthy?category=diet&rating=5';
+  static String ketoView =
+      '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=Keto';
+  static String veganView =
+      '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=Vegan';
+  static String highCarbView =
+      '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=High-Carb';
+  static String lowCarbView =
+      '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=Low-Carb';
   static String allergyView = '$baseUrl/api/recipes?allergy=allergy&rating=5';
-  static String diabetsView = '$baseUrl/api/recipes?diabetes=true&rating=5';
+  static String diabetsView =
+      '$baseUrl/api/recipes/healthy?diabetes=true&rating=5';
   static String logout = '$baseUrl/logout';
   static String profile="$baseUrl/api/users/";
-  static getHealthInfo (id) {
-    return "$baseUrl/api/healthInfo/$id";
-  }
+  static String getHealthInfo ="$baseUrl/api/healthInfo/";
+  static String getDietInfo ="$baseUrl/api/dietInfo/";
+  static String menu = '/api/recipes//unhealthy?';
+  static const String resendOtp = '/resend-otp';
 }
 
 class ApiKey {
@@ -48,4 +59,6 @@ class ApiKey {
   static String gender = "gender";
   static String dateOfBirth = "dateOfBirth";
   static String otp = "otp";
+  static String diet = "diet";
+  static String allergy = "allergy";
 }

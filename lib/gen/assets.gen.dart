@@ -191,6 +191,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/offer4.png
   AssetGenImage get offer4 => const AssetGenImage('assets/images/offer4.png');
 
+  AssetGenImage get main => const AssetGenImage('assets/images/main.jpeg');
+  AssetGenImage get verify => const AssetGenImage('assets/images/verify.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         eoCircleGreenCheckmarkSvg,
@@ -202,6 +205,8 @@ class $AssetsImagesGen {
         offer2,
         offer3,
         offer4,
+        main,
+        verify
       ];
 }
 

@@ -1,60 +1,24 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+/*import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
+import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_state.dart';
+import 'package:fitfat/features/main/presentaion/diabetes_category/data/models/diabets_model.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DiabetesViewBody extends StatelessWidget {
+class DiabetesViewBody extends StatefulWidget {
   const DiabetesViewBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> items = [
-      {
-        'title': 'Tuna Crunch',
-        'imagePath': 'imges/meal1.jpg',
-        'calories': '350',
-        'showType': false,
-        'price': 170
-      },
-      {
-        'title': 'Veggie Delight',
-        'imagePath': 'imges/meal2.png',
-        'calories': '200',
-        'showType': false,
-        'price': 170
-      },
-      {
-        'title': 'Chicken Salad',
-        'imagePath': 'imges/meal3.png',
-        'calories': '400',
-        'showType': false,
-        'price': 170
-      },
-      {
-        'title': 'Tuna Crunch',
-        'imagePath': 'imges/meal1.jpg',
-        'calories': '350',
-        'showType': false,
-        'price': 170
-      },
-      {
-        'title': 'Veggie Delight',
-        'imagePath': 'imges/meal2.png',
-        'calories': '200',
-        'showType': false,
-        'price': 170
-      },
-      {
-        'title': 'Chicken Salad',
-        'imagePath': 'imges/meal3.png',
-        'calories': '400',
-        'showType': false,
-        'price': 170
-      },
-    ];
+  State<DiabetesViewBody> createState() => _DiabetesViewBodyState();
+}
 
+class _DiabetesViewBodyState extends State<DiabetesViewBody> {
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,9 +61,44 @@ class DiabetesViewBody extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CustomListView(items: items),
+          BlocConsumer<DiabetsCubit, DiabetsState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              if (state is DiabetsLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is DiabetsFailure) {
+                return Center(
+                  child: Text(
+                    state.errMessage,
+                    style: AppStyles.textStyle16.copyWith(color: Colors.red),
+                  ),
+                );
+              } else if (state is DiabetsSucess) {
+                // Convert API response to required format
+                final List<DiabetsModel> diabetsList = state.data;
+
+                return SingleChildScrollView(
+                  child: CustomListView<DiabetsModel>(
+                    items: diabetsList,
+                    getId: (item) => item.id,
+                    getName: (item) => item.name,
+                    getImage: (item) => item.image,
+                    getType: (item) => "Favourite",
+                    getCalories: (item) => item.calories,
+                    getPrice: (item) => item.price, // No price for favorites
+                    getRating: (item) => item.rating,
+                  ),
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
+          ),
         ],
       ),
     );
   }
 }
+*/

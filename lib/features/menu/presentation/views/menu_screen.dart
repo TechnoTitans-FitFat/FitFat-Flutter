@@ -1,3 +1,10 @@
+import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
+import 'package:fitfat/features/main/presentaion/widgets/auto_scroll_panner.dart';
+import 'package:fitfat/features/main/presentaion/widgets/custom_suggestion_grid_view.dart';
+import 'package:fitfat/features/main/presentaion/widgets/custom_title.dart';
+import 'package:fitfat/features/menu/presentation/widgets/categories_menu_list.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -5,8 +12,41 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      
+    return  Scaffold(
+      backgroundColor: AppLightColor.backgroundColor,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+             const CustomTextFiledSearch(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: AutoScrollPanner(),
+              ),
+             const CustomTitle(title:'Categories'),
+             const CategoriesMenuList(),
+             const SizedBox(height:25,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const CustomTitle(title: 'Most Popular'),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text('See all',
+                        style: AppStyles.textStyle16.copyWith(
+                          color: AppLightColor.greyColor,
+                          fontSize: MediaQuery.of(context).size.width * 0.039,
+                                     )),
+                  )
+                ],
+              ),
+              CustomSuggestionsGridView(gridType: GridType.menu)
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -45,11 +45,13 @@ dependencies:
   fontfamily: ^0.0.3
   get: ^4.6.6
   google_fonts: ^6.2.1
+  google_sign_in: ^6.3.0
   image_picker: ^1.1.2
   jwt_decoder: ^2.0.1
   logger: ^2.5.0
   modal_progress_hud_nsn: ^0.5.1
   percent_indicator: ^4.2.4
+  pin_code_fields: ^8.0.1
   shared_preferences: ^2.5.2
   toggle_switch: ^2.3.0
 
@@ -71,6 +73,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/
     #- imges/edit.svg
 
     

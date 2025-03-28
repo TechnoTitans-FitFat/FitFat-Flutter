@@ -5,13 +5,20 @@ import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
-import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
+import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/high_carb_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
 import 'package:fitfat/features/profile/presentation/views/profile_view.dart';
+import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
@@ -74,6 +81,27 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FavouritesCubit(DioComsumer(dio: Dio())),
         ),
+        BlocProvider(
+            create: (context) =>
+                DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
+        BlocProvider(
+            create: (context) =>
+                KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData()),
+        BlocProvider(
+            create: (context) =>
+                VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
+        BlocProvider(
+            create: (context) =>
+                HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
+        BlocProvider(
+            create: (context) =>
+                LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
+        BlocProvider(
+            create: (context) =>
+                DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
+        BlocProvider(
+            create: (context) =>
+                MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
@@ -89,7 +117,7 @@ class MyApp extends StatelessWidget {
           GetPage(
             name: '/otpScreen',
             page: () {
-              return const OtpScreen();
+              return OtpScreen();
             },
           ),
           // Add OTP Screen route
