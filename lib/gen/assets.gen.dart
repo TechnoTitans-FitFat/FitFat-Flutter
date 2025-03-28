@@ -193,6 +193,14 @@ class $AssetsImagesGen {
 
   AssetGenImage get main => const AssetGenImage('assets/images/main.jpeg');
   AssetGenImage get verify => const AssetGenImage('assets/images/verify.png');
+  AssetGenImage get forgetPassword =>
+      const AssetGenImage("assets/images/forget_password.png");
+  AssetGenImage get password =>
+      const AssetGenImage("assets/images/password.png");
+  AssetGenImage get checkEmail =>
+      const AssetGenImage("assets/images/check_email.png");
+  AssetGenImage get resetPassword =>
+      const AssetGenImage("assets/images/reset_password.png");
 
   /// List of all assets
   List<AssetGenImage> get values => [
@@ -206,7 +214,11 @@ class $AssetsImagesGen {
         offer3,
         offer4,
         main,
-        verify
+        verify,
+        forgetPassword,
+        password,
+        checkEmail,
+        resetPassword,
       ];
 }
 
