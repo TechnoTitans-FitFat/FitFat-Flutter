@@ -1,28 +1,31 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:dio/dio.dart';
 import 'package:fitfat/features/profile/presentation/models/diet_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/api/api_services.dart';
 part 'diet_info_state.dart';
 
-class DietCubit extends Cubit<DietState> {
-  DietCubit() : super(DietInitial());
+class GetDietInfoCubit extends Cubit<DietInfoState> {
+  GetDietInfoCubit( this.api) : super(DietInfoInitial());
 
-  Future<void> fetchDietInfo(String userId) async {
-    emit(DietLoading());
-
+  final ApiServices api;
+  Future<void> getDietInfo() async {
+    emit(DietInfoLoading());
     try {
-      final response = await Dio().get(
-          'https://fitfat-backend.up.railway.app/api/dietInfo/$userId');
+      final response = await api.getRequest(
+        endpoint: "https://fitfat-backend.up.railway.app/api/dietInfo/67e5eb180b8e8a027bd2d5a7",
+      );
 
-      if (response.statusCode == 200) {
-        final dietInfo = GetDietInfo.fromJson(response.data['dietInfo']);
-        emit(DietLoaded(dietInfo));
+      final data = response.data;;
+      if (data["status"] == true) {
+        final dietInfo = GetDietInfoModel.fromJson(data);
+        emit(DietInfoLoaded(dietInfo));
       } else {
-        emit(DietError("Failed to load data"));
+        emit(DietInfoError("Failed to fetch health info"));
       }
-    } catch (e) {
-      emit(DietError(e.toString()));
+      print("🟢 Response received: $data");
+    }  catch (e) {
+      emit(DietInfoError("Error: ${e.toString()}"));
+      print(e.toString());
     }
   }
 }

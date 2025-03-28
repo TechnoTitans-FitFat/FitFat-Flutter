@@ -1,6 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_profile_card.dart';
-import 'package:fitfat/features/profile/presentation/widgets/diet_user_data.dart';
+import 'package:fitfat/features/profile/presentation/widgets/health_user_data.dart';
 import 'package:fitfat/features/profile/presentation/widgets/personal_user_data.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';

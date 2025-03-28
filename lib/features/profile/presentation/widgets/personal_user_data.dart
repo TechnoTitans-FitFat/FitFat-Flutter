@@ -15,9 +15,9 @@ class PersonalUserData extends StatelessWidget {
       if(state is UserError){
         showSnackBar(context, state.message);
       }if(state is UserLoaded){
-          final user = state.user; // ✅ التحقق من أن `user` ليس null
+          final user = state.user;
           if (user == null) {
-            print("لم يتم تحميل بيانات المستخدم.");
+            print("User's data can't loaded");
           }
       }
     },

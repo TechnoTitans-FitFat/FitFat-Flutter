@@ -9,6 +9,7 @@ import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubi
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
+import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
 import 'package:fitfat/features/profile/presentation/views/profile_view.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
@@ -45,6 +46,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               GetHealthInfoCubit(apiServices)..getUserProfile(),
+        ),
+        BlocProvider(
+          create: (context) =>
+          GetDietInfoCubit(apiServices)..getDietInfo(),
         ),
         BlocProvider(
           create: (context) => UserCubit(DioComsumer(dio: Dio())),

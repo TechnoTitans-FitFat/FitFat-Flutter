@@ -2,6 +2,7 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/main/presentaion/widgets/info_text.dart';
 import 'package:fitfat/features/profile/presentation/views/update_profile_view.dart';
 import 'package:fitfat/features/profile/presentation/widgets/diet_user_data.dart';
+import 'package:fitfat/features/profile/presentation/widgets/health_user_data.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -56,15 +57,15 @@ class CustomProfileCard extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
+              HealthUserData(),
+              const SizedBox(
+                height: 5,
+              ),
               DietUserData(),
               const SizedBox(
                 height: 5,
               ),
-              infoText('Insulin-to-Carb Ratio', '1:15'),
-              const SizedBox(
-                height: 5,
-              ),
-              infoText('Blood Sugar Range', '70- 120')
+
             ],
           ),
         ),
