@@ -33,20 +33,7 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
-    signingConfigs{
-        debug{
-            keyAlias "login-key"
-            storePassword '123456'
-            storeFile file('login-key.jks')
-            keyPassword '123456'
-        }
-    }
 
-    buildTypes {
-        debug {
-            signingConfig = signingConfigs.debug
-        }
-    }
 }
 
 flutter {

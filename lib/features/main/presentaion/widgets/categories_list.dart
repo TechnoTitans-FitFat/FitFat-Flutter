@@ -18,7 +18,7 @@ class CategoriesList extends StatelessWidget {
       children: [
         Expanded(
           child: GestureDetector(
-           /* onTap: () {
+           onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -26,7 +26,7 @@ class CategoriesList extends StatelessWidget {
                 ),
               );
             },
-            */
+           
             child: CustomCardCategory(
                text: 'Diet',
                 img: Assets.icons.dietSvg,
@@ -36,13 +36,13 @@ class CategoriesList extends StatelessWidget {
         Expanded(
           child: GestureDetector(
             onTap: () {
-             /* Navigator.push(
+             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const DiabetesView(),
                 ),
               );
-              */
+            
             },
             child: CustomCardCategory(
               text: 'Diabetes',
@@ -53,13 +53,13 @@ class CategoriesList extends StatelessWidget {
         Expanded(
           child: GestureDetector(
             onTap: () {
-             /* Navigator.push(
+            Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const AllergyView(),
                 ),
               );
-              */
+            
             },
             child: CustomCardCategory(
               text: 'Allergy',

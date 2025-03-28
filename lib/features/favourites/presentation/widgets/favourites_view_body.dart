@@ -11,6 +11,7 @@ class FavouritesViewBody extends StatefulWidget {
 }
 
 class _FavouritesViewBodyState extends State<FavouritesViewBody> {
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {

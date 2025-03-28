@@ -42,7 +42,7 @@ class MenuScreen extends StatelessWidget {
                   )
                 ],
               ),
-              CustomSuggestionsGridView(gridType: GridType.menu)
+              const CustomSuggestionsGridView(gridType: GridType.menu)
             ],
           ),
         ),
