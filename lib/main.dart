@@ -17,6 +17,9 @@ import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_detail
 import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
+import 'package:fitfat/features/profile/presentation/views/profile_view.dart';
+import 'package:fitfat/features/profile/presentation/widgets/diet_user_data.dart';
+import 'package:fitfat/features/profile/presentation/widgets/health_user_data.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
@@ -26,10 +29,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'bloc_observer.dart';
 import 'core/cache/cache_helper.dart';
 import 'features/profile/presentation/data/health_info_cubit.dart';
 
 Future<void> main() async {
+  Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   return runApp(
@@ -51,10 +56,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               GetHealthInfoCubit(apiServices)..getUserProfile(),
+          child: HealthUserData(),
         ),
         BlocProvider(
           create: (context) =>
           GetDietInfoCubit(apiServices)..getDietInfo(),
+          child: DietUserData(),
         ),
         BlocProvider(
           create: (context) => UserCubit(DioComsumer(dio: Dio())),
@@ -106,7 +113,7 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home:const DietView()
+        home:ProfileView()
         /*
         initialRoute: '/', // Define initial route
         getPages: [

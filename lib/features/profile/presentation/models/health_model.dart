@@ -23,6 +23,7 @@ class HealthInfo {
   String foodAllergies;
   bool diabetes;
   String diabetesType;
+  double insulinToCarbRatio;
 
   HealthInfo({
     required this.targetBloodSugarRange,
@@ -35,11 +36,13 @@ class HealthInfo {
     required this.foodAllergies,
     required this.diabetes,
     required this.diabetesType,
+    required this.insulinToCarbRatio
   });
 
   factory HealthInfo.fromJson(Map<String, dynamic> json) {
     return HealthInfo(
       targetBloodSugarRange: TargetBloodSugarRange.fromJson(json['targetBloodSugarRange']),
+      insulinToCarbRatio: json['insulinToCarbRatio'],
       id: json['_id'],
       userId: json['userId'],
       gender: json['gender'],

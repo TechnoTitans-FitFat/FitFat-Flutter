@@ -73,7 +73,7 @@ class _DietUserDataState extends State<HealthUserData> {
             ],
           );
         } else if (state is UserError) {
-          return Center(child: Text("Error: ${state.message}"));
+          return Center(child: Text(" ${state.message}"));
         }
         return const Center(child: Text("No data available"));
       },
