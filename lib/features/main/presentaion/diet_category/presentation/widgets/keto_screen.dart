@@ -7,7 +7,6 @@ import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/k
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_state.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/models/models/diet_model.dart';
 import 'package:fitfat/features/main/presentaion/widgets/categories_list_view.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

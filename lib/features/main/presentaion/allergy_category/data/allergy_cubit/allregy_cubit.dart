@@ -12,7 +12,7 @@ class AllregyCubit extends Cubit<AllergyState> {
   final ApiConsumer apiConsumer;
   AllregyCubit(this.apiConsumer) : super(AllergyInitial());
 
-  void fetchDietData() async {
+  void fetchAllergyData() async {
     emit(AllergyLoading());
    try {
       final response = await apiConsumer.get(EndPoint.allergyView);
