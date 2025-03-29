@@ -2,7 +2,7 @@ import 'package:fitfat/features/main/presentaion/widgets/categories_list_view_it
 import 'package:flutter/material.dart';
 
 class CategoriesListView<T> extends StatelessWidget {
-  final List<T>? items;
+  final List<T> items;
   final String Function(T) getId; // Function to get ID from item
   final String Function(T) getName;
   final String Function(T) getImage;
@@ -13,7 +13,7 @@ class CategoriesListView<T> extends StatelessWidget {
 
   const CategoriesListView({
     super.key,
-     this.items,
+    required this.items,
     required this.getId,
     required this.getName,
     required this.getImage,
@@ -28,9 +28,9 @@ class CategoriesListView<T> extends StatelessWidget {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: items!.length,
+      itemCount: items.length,
       itemBuilder: (context, index) {
-       final item = items![index];
+       final item = items[index];
 
     
 
@@ -39,7 +39,7 @@ class CategoriesListView<T> extends StatelessWidget {
           child: CategoriesListViewItem(
             title: getName(item),
             imagePath: getImage(item).isNotEmpty ? getImage(item) : 'assets/error_photo.jpg',
-            type: getType != null ? getType!(item) ?? "Unknown" : "Unknown",
+            type: getType != null ? getType!(item) ?? "Unknown" : null,
             price: getPrice(item),
             calories: getCalories(item),
             rating: getRating(item),

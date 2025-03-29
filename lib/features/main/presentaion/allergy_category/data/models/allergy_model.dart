@@ -23,18 +23,18 @@ class AllergyModel {
   factory AllergyModel.fromJson(Map<String, dynamic> jsonData) {
     final priceValue = jsonData[ApiKey.price];
     return AllergyModel(
-      allergy: jsonData[ApiKey.allergy] is List
-          ? List<String>.from(jsonData[ApiKey.allergy])
-          : jsonData[ApiKey.allergy] != null
-              ? [jsonData[ApiKey.allergy].toString()]
-              : [],
-      cookingTime: jsonData[ApiKey.cookingTime],
-      image: jsonData[ApiKey.image],
-      name: jsonData[ApiKey.name],
-      price: priceValue is num ? priceValue.toDouble() : 0.0,
-      calories: jsonData[ApiKey.calories],
-      id: jsonData[ApiKey.id],
-       rating: (jsonData['rating'] as num?)?.toDouble() ?? 0.0,
+       cookingTime: jsonData[ApiKey.cookingTime]?.toDouble() ?? 0.0,
+    image: jsonData[ApiKey.image] ?? '',
+    name: jsonData[ApiKey.name] ?? '',
+    price: priceValue is num ? priceValue.toDouble() : 0.0,
+    calories: (jsonData[ApiKey.calories] as num?)?.toDouble() ?? 0.0, // FIXED
+    id: jsonData[ApiKey.id] ?? '',
+    allergy: jsonData[ApiKey.allergy] is List
+        ? List<String>.from(jsonData[ApiKey.allergy])
+        : jsonData[ApiKey.allergy] != null
+            ? [jsonData[ApiKey.allergy].toString()]
+            : [],
+    rating: (jsonData['rating'] as num?)?.toDouble() ?? 0.0,
     );
   }
 }

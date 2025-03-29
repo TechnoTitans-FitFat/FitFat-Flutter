@@ -14,6 +14,12 @@ import 'package:fitfat/features/forget_password/domain/usecases/send_otp_usecase
 import 'package:fitfat/features/forget_password/domain/usecases/verify_otp_usecase.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/allregy_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/lactose_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/peanuts_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/shellfish_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/wheat_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/presentation/views/allergy_view.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/high_carb_cubit.dart';
@@ -120,6 +126,21 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
+         BlocProvider(
+            create: (context) =>
+                AllregyCubit(DioComsumer(dio: Dio()))..fetchAllergyData()),
+        BlocProvider(
+            create: (context) =>
+                LactoseCubit(DioComsumer(dio: Dio()))..fetchLactoseData()),
+        BlocProvider(
+            create: (context) =>
+                WheatCubit(DioComsumer(dio: Dio()))..fetchWheatData()),
+        BlocProvider(
+            create: (context) =>
+                ShellfishCubit(DioComsumer(dio: Dio()))..fetchShellfishData()),
+        BlocProvider(
+            create: (context) =>
+                PeanutsCubit(DioComsumer(dio: Dio()))..fetchPeanutsData()),
         BlocProvider(
             create: (context) =>
                 DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
