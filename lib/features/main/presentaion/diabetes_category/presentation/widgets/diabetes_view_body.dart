@@ -77,7 +77,7 @@ class _DiabetesViewBodyState extends State<DiabetesViewBody> {
                 );
               } else if (state is DiabetsSucess) {
                 // Convert API response to required format
-               // final List<DiabetsModel> diabetsList = state.data;
+                final List<DiabetsModel> diabetsList = state.data;
 
                 return SingleChildScrollView(
                   child: CategoriesListView<DiabetsModel>(
@@ -86,8 +86,9 @@ class _DiabetesViewBodyState extends State<DiabetesViewBody> {
                     getName: (item) => item.name,
                     getImage: (item) => item.image,
                     getCalories: (item) => item.calories,
-                    getPrice: (item) => item.price, // No price for favorites
-                    getRating: (item) => item.rating,
+                    getPrice: (item) => item.price, 
+                    getRating: (item) => item.rating, 
+                    items: diabetsList,
                   ),
                 );
               } else {

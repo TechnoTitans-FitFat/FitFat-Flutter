@@ -7,7 +7,6 @@ import 'package:fitfat/features/main/presentaion/allergy_category/presentation/w
 import 'package:fitfat/features/main/presentaion/allergy_category/presentation/widgets/peanuts_screen.dart';
 import 'package:fitfat/features/main/presentaion/allergy_category/presentation/widgets/shellfish_screen.dart';
 import 'package:fitfat/features/main/presentaion/allergy_category/presentation/widgets/wheat_screen.dart';
-
 import 'package:fitfat/features/main/presentaion/widgets/categories_list_view.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_card.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';

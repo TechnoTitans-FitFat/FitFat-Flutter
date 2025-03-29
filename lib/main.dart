@@ -4,8 +4,6 @@ import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
-import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
-import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/forget_password/data/forget_password_remote_datasource.dart';
 import 'package:fitfat/features/forget_password/domain/repositories/forget_password_repository.dart';
@@ -14,15 +12,18 @@ import 'package:fitfat/features/forget_password/domain/usecases/send_otp_usecase
 import 'package:fitfat/features/forget_password/domain/usecases/verify_otp_usecase.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/allregy_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/lactose_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/peanuts_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/shellfish_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/wheat_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/presentation/views/allergy_view.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
-import 'package:fitfat/features/main/presentaion/diabetes_category/presentation/views/diabetes_view.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/high_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
-import 'package:fitfat/features/main/presentaion/diet_category/presentation/views/diet_view.dart';
-import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
@@ -122,6 +123,21 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
+         BlocProvider(
+            create: (context) =>
+                AllregyCubit(DioComsumer(dio: Dio()))..fetchAllergyData()),
+        BlocProvider(
+            create: (context) =>
+                LactoseCubit(DioComsumer(dio: Dio()))..fetchLactoseData()),
+        BlocProvider(
+            create: (context) =>
+                WheatCubit(DioComsumer(dio: Dio()))..fetchWheatData()),
+        BlocProvider(
+            create: (context) =>
+                ShellfishCubit(DioComsumer(dio: Dio()))..fetchShellfishData()),
+        BlocProvider(
+            create: (context) =>
+                PeanutsCubit(DioComsumer(dio: Dio()))..fetchPeanutsData()),
         BlocProvider(
             create: (context) =>
                 DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
@@ -134,7 +150,7 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home:const DietView()
+        home: const AllergyView()
       
       /*  initialRoute: '/', // Define initial route
         getPages: [

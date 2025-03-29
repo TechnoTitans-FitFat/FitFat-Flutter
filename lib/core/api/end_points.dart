@@ -20,13 +20,22 @@ class EndPoint {
       '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=High-Carb';
   static String lowCarbView =
       '$baseUrl/api/recipes/healthy?category=diet&rating=5&diet=Low-Carb';
-  static String allergyView = '$baseUrl/api/recipes?allergy=allergy&rating=5';
+
   static String diabetsView =
       '$baseUrl/api/recipes/healthy?diabetes=true&rating=5';
+  static String allergyView = '$baseUrl/api/recipes/healthy?category=allergy&rating=5';
+  static String lactoseView =
+      '$baseUrl/api/recipes/healthy?category=allergy&allergy=Lactose&rating=5';
+  static String peanutsView =
+      '$baseUrl/api/recipes/healthy?category=allergy&allergy=Peanuts&rating=5';
+  static String wheatView =
+      '$baseUrl/api/recipes/healthy?category=allergy&allergy=Wheat&rating=5';
+  static String shellFishView =
+      '$baseUrl/api/recipes/healthy?category=allergy&allergy=ShellFish&rating=5';
   static String logout = '$baseUrl/logout';
-  static String profile="$baseUrl/api/users/";
-  static String getHealthInfo ="$baseUrl/api/healthInfo/";
-  static String getDietInfo ="$baseUrl/api/dietInfo/";
+  static String profile = "$baseUrl/api/users/";
+  static String getHealthInfo = "$baseUrl/api/healthInfo/";
+  static String getDietInfo = "$baseUrl/api/dietInfo/";
   static String menu = '/api/recipes//unhealthy?';
   static const String resendOtp = '/resend-otp';
 }

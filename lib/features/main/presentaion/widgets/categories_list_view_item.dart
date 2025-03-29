@@ -68,19 +68,22 @@ class CategoriesListViewItem extends StatelessWidget {
                   Row(
                     children: [
                       if (showType)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppLightColor.mainColor.withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            type ?? '',
-                            style: AppStyles.textStyle12.copyWith(
-                              color: AppLightColor.mainColor,
+                        Visibility(
+                          visible: type != "Diabetes" && type != null,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppLightColor.mainColor.withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Text(
+                              type ?? '',
+                              style: AppStyles.textStyle12.copyWith(
+                                color: AppLightColor.mainColor,
+                              ),
                             ),
                           ),
                         ),
