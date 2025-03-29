@@ -4,6 +4,8 @@ import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
+import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
+import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/forget_password/data/forget_password_remote_datasource.dart';
 import 'package:fitfat/features/forget_password/domain/repositories/forget_password_repository.dart';
