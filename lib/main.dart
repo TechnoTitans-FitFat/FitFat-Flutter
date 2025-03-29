@@ -15,11 +15,14 @@ import 'package:fitfat/features/forget_password/domain/usecases/verify_otp_useca
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diabetes_category/presentation/views/diabetes_view.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/high_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/presentation/views/diet_view.dart';
+import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
@@ -131,9 +134,9 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-       // home:const DietView()
+        home:const DietView()
       
-        initialRoute: '/', // Define initial route
+      /*  initialRoute: '/', // Define initial route
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(
@@ -143,7 +146,7 @@ class MyApp extends StatelessWidget {
             },
           ),
           // Add OTP Screen route
-        ],
+        ],*/
       ),
     );
   }

@@ -9,7 +9,7 @@ import 'package:fitfat/features/main/presentaion/diet_category/presentation/widg
 import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/vegan_screen.dart';
 
 import 'package:fitfat/features/main/presentaion/widgets/categories_list_view.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_card_diet.dart';
+import 'package:fitfat/features/main/presentaion/widgets/custom_card.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +56,7 @@ class _DietViewBodyState extends State<DietViewBody> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  CustomCardDiet(
+                  CustomCard(
                     text: 'Keto',
                     height: 55,
                     width: 80,
@@ -67,7 +67,7 @@ class _DietViewBodyState extends State<DietViewBody> {
                               builder: (context) => const KetoScreen()));
                     },
                   ),
-                  CustomCardDiet(
+                  CustomCard(
                     text: 'Vegan',
                     height: 55,
                     width: 80,
@@ -78,7 +78,7 @@ class _DietViewBodyState extends State<DietViewBody> {
                               builder: (context) => const VeganScreen()));
                     },
                   ),
-                  CustomCardDiet(
+                  CustomCard(
                     text: 'Low-Carb',
                     height: 55,
                     width: 100,
@@ -89,7 +89,7 @@ class _DietViewBodyState extends State<DietViewBody> {
                               builder: (context) => const LowCarbScreen()));
                     },
                   ),
-                  CustomCardDiet(
+                  CustomCard(
                     text: 'High-Carb',
                     height: 55,
                     width: 100,

@@ -1,25 +1,24 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/core/widgets/custom_app_bar.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
-import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
-import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_state.dart';
-import 'package:fitfat/features/main/presentaion/diabetes_category/data/models/diabets_model.dart';
-import 'package:fitfat/features/main/presentaion/widgets/categories_list_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_cubit.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_state.dart';
+import 'package:fitfat/features/main/presentaion/diet_category/data/models/models/diet_model.dart';
+import 'package:fitfat/features/main/presentaion/widgets/categories_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DiabetesViewBody extends StatefulWidget {
-  const DiabetesViewBody({super.key});
+class LactoseScreen extends StatelessWidget {
+  const LactoseScreen({super.key});
 
-  @override
-  State<DiabetesViewBody> createState() => _DiabetesViewBodyState();
-}
-
-class _DiabetesViewBodyState extends State<DiabetesViewBody> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return  Scaffold(
+     backgroundColor: AppLightColor.backgroundColor,
+      appBar:const CustomAppBar(title: 'Lactose'),
+      body:SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -61,35 +60,36 @@ class _DiabetesViewBodyState extends State<DiabetesViewBody> {
           const SizedBox(
             height: 10,
           ),
-          BlocConsumer<DiabetsCubit, DiabetsState>(
+          BlocConsumer<KetoCubit, KetoState>(
             listener: (context, state) {},
             builder: (context, state) {
-              if (state is DiabetsLoading) {
+              if (state is KetoLoading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state is DiabetsFailure) {
+              } else if (state is KetoFailure) {
                 return Center(
                   child: Text(
                     state.errMessage,
                     style: AppStyles.textStyle16.copyWith(color: Colors.red),
                   ),
                 );
-              } else if (state is DiabetsSucess) {
+              } else if (state is KetoSuccess) {
                 // Convert API response to required format
-               // final List<DiabetsModel> diabetsList = state.data;
+                 final List<DietModel> dietList = state.data;
 
-                return SingleChildScrollView(
-                  child: CategoriesListView<DiabetsModel>(
-                   // items: diabetsList,
-                    getId: (item) => item.id,
-                    getName: (item) => item.name,
-                    getImage: (item) => item.image,
-                    getCalories: (item) => item.calories,
-                    getPrice: (item) => item.price, // No price for favorites
-                    getRating: (item) => item.rating,
-                  ),
-                );
+                    return CategoriesListView<DietModel>(
+                      items: dietList,
+                      getId: (item) => item.id,
+                      getName: (item) => item.name,
+                      getImage: (item) => item.image,
+                      getType: (item) =>
+                          item.diet.isNotEmpty ? item.diet.first : "Unknown",
+                      getCalories: (item) => item.calories,
+                      getPrice: (item) => item
+                          .price, // Ensure it's converted to string if needed
+                      getRating: (item) => item.rating,
+                    );
               } else {
                 return const SizedBox.shrink();
               }
@@ -97,6 +97,7 @@ class _DiabetesViewBodyState extends State<DiabetesViewBody> {
           ),
         ],
       ),
+    )
     );
   }
 }
