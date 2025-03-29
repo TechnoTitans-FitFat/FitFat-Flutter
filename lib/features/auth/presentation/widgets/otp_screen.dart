@@ -19,10 +19,9 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  TextEditingController textEditingController = TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
   StreamController<ErrorAnimationType>? errorController;
   String currentText = "";
-
   String email = "";
   String userId = "";
   int resendCountdown = 60;
@@ -32,33 +31,40 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   void initState() {
     super.initState();
-
     errorController = StreamController<ErrorAnimationType>();
-
     final args = Get.arguments;
     if (args is Map<String, dynamic>) {
       email = args["email"] ?? "";
       userId = args["userId"] ?? "";
     }
 
-    if (email.isEmpty || userId.isEmpty) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (email.isEmpty || userId.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Invalid arguments received.")),
         );
         Get.back();
-      });
-    }
-
-    startResendTimer();
+        return;
+      }
+      startResendTimer();
+    });
   }
 
   void startResendTimer() {
+    if (!mounted) return;
+
     setState(() {
       enableResend = false;
       resendCountdown = 60;
     });
+
+    _timer?.cancel(); // Cancel any existing timer
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+
       setState(() {
         if (resendCountdown > 0) {
           resendCountdown--;
@@ -71,10 +77,29 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void resendOtp() {
-    if (!enableResend) return;
+    if (!enableResend || !mounted) return;
 
-    // Call resend OTP method from RegisterCubit
     context.read<RegisterCubit>().resendOtp(email);
+  }
+
+  void verifyOtp() {
+    if (!mounted) return;
+
+    if (currentText.length != 6) {
+      // Trigger shake animation on PinCodeTextField
+      errorController?.add(ErrorAnimationType.shake);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter a 6-digit OTP"),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    context.read<RegisterCubit>().verifyEmail(email, currentText, userId);
   }
 
   @override
@@ -83,6 +108,8 @@ class _OtpScreenState extends State<OtpScreen> {
       backgroundColor: AppLightColor.whiteColor,
       body: BlocConsumer<RegisterCubit, SignUpStates>(
         listener: (context, state) {
+          if (!mounted) return;
+
           if (state is VerifyEmailSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -90,7 +117,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 backgroundColor: Colors.green,
               ),
             );
-            Navigator.push(
+
+            // Use pushReplacement instead of push to avoid stacking screens
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
@@ -125,15 +154,15 @@ class _OtpScreenState extends State<OtpScreen> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: const EdgeInsets.all(55),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.1),
               child: Column(
                 children: [
                   SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.1,
+                    height: MediaQuery.of(context).size.height * 0.1,
                   ),
                   Assets.images.verify.image(
-                    height: MediaQuery.sizeOf(context).width * 0.5,
-                    width: MediaQuery.sizeOf(context).width * 0.5,
+                    height: MediaQuery.of(context).size.width * 0.5,
+                    width: MediaQuery.of(context).size.width * 0.5,
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -180,12 +209,14 @@ class _OtpScreenState extends State<OtpScreen> {
                       )
                     ],
                     onCompleted: (value) {
+                      if (!mounted) return;
                       setState(() {
                         currentText = value;
                       });
                       verifyOtp();
                     },
                     onChanged: (value) {
+                      if (!mounted) return;
                       setState(() {
                         currentText = value;
                       });
@@ -198,7 +229,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   const SizedBox(height: 30),
                   SizedBox(
                     height: 50,
-                    width: MediaQuery.sizeOf(context).width * 0.7,
+                    width: MediaQuery.of(context).size.width * 0.7,
                     child: state is VerifyEmailLoading
                         ? const Center(child: CircularProgressIndicator())
                         : ElevatedButton(
@@ -256,23 +287,5 @@ class _OtpScreenState extends State<OtpScreen> {
         },
       ),
     );
-  }
-
-  void verifyOtp() {
-    if (currentText.length != 6) {
-      // Trigger shake animation on PinCodeTextField
-      errorController!.add(ErrorAnimationType.shake);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please enter a 6-digit OTP"),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-      return;
-    }
-
-    context.read<RegisterCubit>().verifyEmail(email, currentText, userId);
   }
 }
