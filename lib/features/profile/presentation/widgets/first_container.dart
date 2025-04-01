@@ -1,6 +1,7 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/profile/presentation/data/update_health_cubit.dart';
+import 'package:fitfat/features/profile/presentation/models/update_health_model.dart';
 import 'package:fitfat/features/profile/presentation/widgets/gender_selection.dart';
 import 'package:fitfat/features/profile/presentation/widgets/num_fields.dart';
 import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/widgets/date_of_birth_section.dart';
@@ -16,10 +17,16 @@ class FirstContainer extends StatefulWidget {
 
 class _FirstContainerState extends State<FirstContainer> {
   String dateOfBirth = '';
-
+  final TextEditingController heightController = TextEditingController();
+  final TextEditingController weightController = TextEditingController();
   String gender = 'Female';
 
-
+  @override
+  void dispose() {
+    heightController.dispose();
+    weightController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +78,13 @@ class _FirstContainerState extends State<FirstContainer> {
                   setState(() {
                     dateOfBirth = dob;
                   });
+                  final updatedHealthInfo = UpdateHealthInfo (
+                      dateOfBirth: dateOfBirth,
+                      targetBloodSugarRange:
+                      TargetBloodSugarRange(min: 78, max: 110));
+                  context
+                      .read<UpdateHealthInfoCubit>()
+                      .updateHealthInfo(updatedHealthInfo);
                 },
               ),
               Row(
@@ -89,8 +103,18 @@ class _FirstContainerState extends State<FirstContainer> {
                           ),
                         ),
                         TextFieldProfile(
+                          onChange: (value){
+                            final updatedHealthInfo = UpdateHealthInfo (
+                                height: heightController.text.isNotEmpty ? int.tryParse(heightController.text): null,
+                                targetBloodSugarRange:
+                                TargetBloodSugarRange(min: 78, max: 110));
+                            context
+                                .read<UpdateHealthInfoCubit>()
+                                .updateHealthInfo(updatedHealthInfo);
+                          },
                           hint: "Height",
                           lable: "Height",
+                          controller: heightController,
                         ),
                       ],
                     ),
@@ -112,8 +136,18 @@ class _FirstContainerState extends State<FirstContainer> {
                           ),
                         ),
                         TextFieldProfile(
+                          controller: weightController,
                           lable: "Weight",
                           hint: "Weight",
+                          onChange: (value){
+                            final updatedHealthInfo = UpdateHealthInfo (
+                                weight: weightController.text.isNotEmpty ? int.tryParse(weightController.text): null,
+                                targetBloodSugarRange:
+                                TargetBloodSugarRange(min: 78, max: 110));
+                            context
+                                .read<UpdateHealthInfoCubit>()
+                                .updateHealthInfo(updatedHealthInfo);
+                          },
                         ),
                       ],
                     ),

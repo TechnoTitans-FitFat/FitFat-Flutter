@@ -1,13 +1,22 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/profile/presentation/data/update_health_cubit.dart';
 import 'package:fitfat/features/profile/presentation/widgets/allergy_selection.dart';
 import 'package:fitfat/features/profile/presentation/widgets/blood_suger.dart';
 import 'package:fitfat/features/profile/presentation/widgets/carb_ration_input.dart';
 import 'package:fitfat/features/profile/presentation/widgets/diabetes_type_selector.dart';
 import 'package:flutter/material.dart';
 
-class SecondContainer extends StatelessWidget {
-  const SecondContainer({super.key});
+class SecondContainer extends StatefulWidget {
+   SecondContainer({super.key});
+
+  @override
+  State<SecondContainer> createState() => _SecondContainerState();
+}
+
+class _SecondContainerState extends State<SecondContainer> {
+  String allergy = 'Peanuts';
+  String dietType = 'Type 1';
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +45,13 @@ class SecondContainer extends StatelessWidget {
                   width: double.infinity,
                   child: Divider(color: AppLightColor.greyColor, height: 8),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Allergies",
-                    style: TextStyle(
-                        fontWeight: AppStyles.textStyle18.fontWeight,
-                        fontSize: AppStyles.textStyle18.fontSize),
-                  ),
-                ),
                 AllergySelection(
-                  onAllergySelected: (p0) {},
+                  onAllergySelected: (selectedAllergy) {
+                    setState(() {
+                      allergy = selectedAllergy;
+                      UpdateHealthInfoCubit();
+                    });
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0,top: 8.0),
@@ -57,7 +62,10 @@ class SecondContainer extends StatelessWidget {
                   ),
                 ),
                 DiabetesTypeSelector(
-                  onDiabetesTypeSelected: (p0) {},
+                  onDiabetesTypeSelected: (value) {
+                    dietType = value;
+                    UpdateHealthInfoCubit();
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

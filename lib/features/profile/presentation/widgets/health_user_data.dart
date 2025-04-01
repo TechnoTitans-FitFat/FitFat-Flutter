@@ -60,7 +60,6 @@ class _DietUserDataState extends State<HealthUserData> {
                 healthInfo.healthInfo.foodAllergies.isNotEmpty ? healthInfo.healthInfo.foodAllergies : 'None',
               ),
               const SizedBox(height: 5),
-              infoText('Diabetes', healthInfo.healthInfo.diabetes ? "Yes" : "No"),
               if (healthInfo.healthInfo.diabetes)
                 const SizedBox(height: 5),
               if (healthInfo.healthInfo.diabetes)

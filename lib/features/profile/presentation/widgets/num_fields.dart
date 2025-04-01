@@ -2,14 +2,16 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldProfile extends StatelessWidget {
-  TextFieldProfile({super.key,this.controller,this.hint,this.lable});
+  TextFieldProfile({super.key,this.controller,this.hint,this.lable,required this.onChange});
 
   String? lable;
   String? hint;
   TextEditingController? controller;
+  final ValueChanged<String> onChange;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChange,
       keyboardType: TextInputType.number,
       controller: controller,
       decoration: InputDecoration(
