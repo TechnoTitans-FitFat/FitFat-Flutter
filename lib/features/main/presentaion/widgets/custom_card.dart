@@ -3,8 +3,8 @@ import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class CustomCardDiet extends StatelessWidget {
-  const CustomCardDiet({
+class CustomCard extends StatelessWidget {
+  const CustomCard({
     super.key,
     required this.text,
     required this.height,

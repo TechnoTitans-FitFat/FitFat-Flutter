@@ -1,68 +1,36 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
-import 'package:fitfat/features/main/presentaion/diet_category/presentation/widgets/vegan_screen.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_card_diet.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/allergy_state.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/allregy_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/models/allergy_model.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/presentation/widgets/lactose_screen.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/presentation/widgets/peanuts_screen.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/presentation/widgets/shellfish_screen.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/presentation/widgets/wheat_screen.dart';
+import 'package:fitfat/features/main/presentaion/widgets/categories_list_view.dart';
+import 'package:fitfat/features/main/presentaion/widgets/custom_card.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
-import 'package:fitfat/features/main/presentaion/widgets/custom_list_view.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AllergyViewBody extends StatelessWidget {
+class AllergyViewBody extends StatefulWidget {
   const AllergyViewBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> items = [
-      {
-        'title': 'Tuna Crunch',
-        'imagePath': 'imges/meal1.jpg',
-        'type': 'lactose',
-        'calories': '350',
-        'showType': true,
-        'price': 170
-      },
-      {
-        'title': 'Veggie Delight',
-        'imagePath': 'imges/meal2.png',
-        'type': 'sellfish',
-        'calories': '200',
-        'showType': true,
-        'price': 170
-      },
-      {
-        'title': 'Chicken Salad',
-        'imagePath': 'imges/meal3.png',
-        'type': 'wheat',
-        'calories': '400',
-        'showType': true,
-        'price': 170
-      },
-      {
-        'title': 'Tuna Crunch',
-        'imagePath': 'imges/meal1.jpg',
-        'type': 'lactose',
-        'calories': '350',
-        'showType': true,
-        'price': 170
-      },
-      {
-        'title': 'Veggie Delight',
-        'imagePath': 'imges/meal2.png',
-        'type': 'sellfish',
-        'calories': '200',
-        'showType': true,
-        'price': 170
-      },
-      {
-        'title': 'Chicken Salad',
-        'imagePath': 'imges/meal3.png',
-        'type': 'wheat',
-        'calories': '400',
-        'showType': true,
-        'price': 170
-      },
-    ];
+  State<AllergyViewBody> createState() => _AllergyViewBodyState();
+}
 
+class _AllergyViewBodyState extends State<AllergyViewBody> {
+  @override
+  void initState() {
+    super.initState();
+    // Fetch diet data when the screen loads
+    context.read<AllregyCubit>().fetchAllergyData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,50 +43,67 @@ class AllergyViewBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Text(
-              'Cateogries',
+              'Categories',
               style: AppStyles.textStyle24
                   .copyWith(color: AppLightColor.mainColor),
             ),
           ),
-           Padding(
+          Padding(
             padding: const EdgeInsets.only(left: 25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomCardDiet(
-                  text: 'Lactose',
-                  height: 55,
-                  width: 80, onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
-                    }
-                ),
-                CustomCardDiet(
-                  text: 'Shellfish',
-                  height: 55,
-                  width: 80, onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
-                    }
-                ),
-                CustomCardDiet(
-                  text: 'Wheat',
-                  height: 55,
-                  width: 100, onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
-                    }
-                ),
-                CustomCardDiet(
-                  text: 'Peanuts',
-                  height: 55,
-                  width: 100, onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const VeganScreen()));
-                    }
-                ),
-              ],
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomCard(
+                    text: 'Lactose',
+                    height: 55,
+                    width: 80,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LactoseScreen()));
+                    },
+                  ),
+                  CustomCard(
+                    text: 'Shellfish',
+                    height: 55,
+                    width: 80,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ShellfishScreen()));
+                    },
+                  ),
+                  CustomCard(
+                    text: 'Wheat',
+                    height: 55,
+                    width: 100,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const WheatScreen()));
+                    },
+                  ),
+                  CustomCard(
+                    text: 'Peanuts',
+                    height: 55,
+                    width: 100,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PeanutsScreen()));
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
-          const SizedBox(
-            height: 40,
-          ),
+          const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Text(
@@ -127,9 +112,7 @@ class AllergyViewBody extends StatelessWidget {
                   .copyWith(color: AppLightColor.mainColor),
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
           const Padding(
             padding: EdgeInsets.only(left: 25),
             child: Row(
@@ -139,9 +122,7 @@ class AllergyViewBody extends StatelessWidget {
                   butttonColor: AppLightColor.mainColor,
                   textColor: AppLightColor.whiteColor,
                 ),
-                SizedBox(
-                  width: 15,
-                ),
+                SizedBox(width: 15),
                 CustomElvatedButton(
                   text: 'Popular',
                   butttonColor: AppLightColor.whiteColor,
@@ -150,10 +131,43 @@ class AllergyViewBody extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 10,
+          const SizedBox(height: 10),
+
+          // BlocConsumer listens to DietCubit state
+          BlocConsumer<AllregyCubit, AllergyState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              if (state is AllergyLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is AllergyFailure) {
+                return Center(
+                  child: Text(
+                    state.errMessage,
+                    style: AppStyles.textStyle16.copyWith(color: Colors.red),
+                  ),
+                );
+              } else if (state is AllergySucess) {
+                // Convert API response to required format
+                final List<AllergyModel> allergyList = state.data;
+
+                return CategoriesListView<AllergyModel>(
+                  items: allergyList,
+                  getId: (item) => item.id,
+                  getName: (item) => item.name,
+                  getImage: (item) => item.image,
+                  getType: (item) =>
+                      item.allergy.isNotEmpty ? item.allergy.first : "Unknown",
+                  getCalories: (item) => item.calories,
+                  getPrice: (item) => item.price,
+                  getRating: (item) => item.rating,
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
           ),
-         // CustomListView(items: items),
         ],
       ),
     );

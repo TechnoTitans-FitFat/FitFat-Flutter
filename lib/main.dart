@@ -4,22 +4,33 @@ import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
+import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
+import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
+import 'package:fitfat/features/forget_password/data/forget_password_remote_datasource.dart';
+import 'package:fitfat/features/forget_password/domain/repositories/forget_password_repository.dart';
+import 'package:fitfat/features/forget_password/domain/usecases/reset_password_usecase.dart';
+import 'package:fitfat/features/forget_password/domain/usecases/send_otp_usecase.dart';
+import 'package:fitfat/features/forget_password/domain/usecases/verify_otp_usecase.dart';
+import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/allregy_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/lactose_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/peanuts_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/shellfish_cubit.dart';
+import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/wheat_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/high_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
-import 'package:fitfat/features/main/presentaion/diet_category/presentation/views/diet_view.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
+import 'package:fitfat/features/profile/presentation/data/update_health_cubit.dart';
 import 'package:fitfat/features/profile/presentation/views/profile_view.dart';
-import 'package:fitfat/features/profile/presentation/widgets/diet_user_data.dart';
-import 'package:fitfat/features/profile/presentation/widgets/health_user_data.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
@@ -29,12 +40,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'bloc_observer.dart';
 import 'core/cache/cache_helper.dart';
 import 'features/profile/presentation/data/health_info_cubit.dart';
 
 Future<void> main() async {
-  Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   return runApp(
@@ -50,18 +59,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ApiServices apiServices=ApiServices(Dio());
+    ApiServices apiServices = ApiServices(Dio());
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => UpdateHealthInfoCubit()),
         BlocProvider(
-          create: (context) =>
-              GetHealthInfoCubit(apiServices)..getUserProfile(),
-          child: HealthUserData(),
+          create: (context) => ForgotPasswordCubit(
+            sendOtpUseCase: SendOtpUseCase(
+              ForgotPasswordRepository(
+                ForgotPasswordRemoteDatasource(),
+              ),
+            ),
+            verifyOtpUseCase: VerifyOtpUseCase(
+              ForgotPasswordRepository(
+                ForgotPasswordRemoteDatasource(),
+              ),
+            ),
+            resetPasswordUseCase: ResetPasswordUseCase(
+              ForgotPasswordRepository(
+                ForgotPasswordRemoteDatasource(),
+              ),
+            ),
+          ),
         ),
         BlocProvider(
           create: (context) =>
-          GetDietInfoCubit(apiServices)..getDietInfo(),
-          child: DietUserData(),
+          GetHealthInfoCubit(apiServices)..getUserProfile(),
+        ),
+        BlocProvider(
+          create: (context) => GetDietInfoCubit(apiServices)..getDietInfo(),
         ),
         BlocProvider(
           create: (context) => UserCubit(DioComsumer(dio: Dio())),
@@ -88,44 +114,59 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
             create: (context) =>
-                DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
+            DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
         BlocProvider(
             create: (context) =>
-                KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData()),
+            KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData()),
         BlocProvider(
             create: (context) =>
-                VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
+            VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
         BlocProvider(
             create: (context) =>
-                HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
+            HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
         BlocProvider(
             create: (context) =>
-                LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
+            LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
         BlocProvider(
             create: (context) =>
-                DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
+            AllregyCubit(DioComsumer(dio: Dio()))..fetchAllergyData()),
         BlocProvider(
             create: (context) =>
-                MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
+            LactoseCubit(DioComsumer(dio: Dio()))..fetchLactoseData()),
+        BlocProvider(
+            create: (context) =>
+            WheatCubit(DioComsumer(dio: Dio()))..fetchWheatData()),
+        BlocProvider(
+            create: (context) =>
+            ShellfishCubit(DioComsumer(dio: Dio()))..fetchShellfishData()),
+        BlocProvider(
+            create: (context) =>
+            PeanutsCubit(DioComsumer(dio: Dio()))..fetchPeanutsData()),
+        BlocProvider(
+            create: (context) =>
+            DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
+        BlocProvider(
+            create: (context) =>
+            MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
       ],
       child: GetMaterialApp(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        debugShowCheckedModeBanner: false,
-        home:ProfileView()
-        /*
-        initialRoute: '/', // Define initial route
-        getPages: [
-          GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
-          GetPage(
-            name: '/otpScreen',
-            page: () {
-              return OtpScreen();
-            },
-          ),
-          // Add OTP Screen route
-        ],*/
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          debugShowCheckedModeBanner: false,
+          home:const ProfileView(),
+          getPages: [
+            GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
+            GetPage(
+              name: '/otpScreen',
+              page: () {
+                return const OtpScreen();
+              },
+            ),
+            // Add OTP Screen route
+          ]
+        /*  initialRoute: '/', // Define initial route
+        ,*/
       ),
     );
   }

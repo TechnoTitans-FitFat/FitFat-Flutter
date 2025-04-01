@@ -1,5 +1,7 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart';
+import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesListViewItem extends StatelessWidget {
@@ -7,10 +9,12 @@ class CategoriesListViewItem extends StatelessWidget {
   final String imagePath;
   final String? type;
   final double calories;
-  final double rating; 
+  final double rating;
   final double price;
   final bool showType;
- 
+  final String id;
+
+
   const CategoriesListViewItem({
     super.key,
     required this.title,
@@ -19,7 +23,7 @@ class CategoriesListViewItem extends StatelessWidget {
     required this.calories,
     required this.rating,
     required this.price,
-    this.showType = true,
+    this.showType = true, required this.id,
   
   });
 
@@ -39,8 +43,15 @@ class CategoriesListViewItem extends StatelessWidget {
               height: 150,
               decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius:  BorderRadius.all(Radius.circular(15))),
-              child: Image.network(imagePath, fit: BoxFit.cover),
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailsView(mealId: id )));
+                  },
+                  child: Image.network(imagePath, fit: BoxFit.cover)),
             ),
             const SizedBox(width: 20),
             Expanded(
@@ -57,26 +68,29 @@ class CategoriesListViewItem extends StatelessWidget {
                   Row(
                     children: [
                       if (showType)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppLightColor.mainColor.withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            type ?? '',
-                            style: AppStyles.textStyle12.copyWith(
-                              color: AppLightColor.mainColor,
+                        Visibility(
+                          visible: type != "Diabetes" && type != null,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppLightColor.mainColor.withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Text(
+                              type ?? '',
+                              style: AppStyles.textStyle12.copyWith(
+                                color: AppLightColor.mainColor,
+                              ),
                             ),
                           ),
                         ),
                       const SizedBox(width: 10),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal:15,
+                          horizontal: 15,
                           vertical: 5,
                         ),
                         decoration: BoxDecoration(
@@ -102,7 +116,7 @@ class CategoriesListViewItem extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                         rating.toStringAsFixed(1),
+                        rating.toStringAsFixed(1),
                         style: AppStyles.textStyle16.copyWith(
                           color: AppLightColor.blackColor,
                           fontSize: 14,
@@ -131,7 +145,7 @@ class CategoriesListViewItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                    /*  GestureDetector(
+                      /*  GestureDetector(
                         onTap: onFavouriteTap,
                         child: Container(
                           height: 35,

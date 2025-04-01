@@ -23,20 +23,20 @@ class DiabetsModel {
     final priceValue = jsonData[ApiKey.price];
 
     return DiabetsModel(
-      cookingTime: jsonData[ApiKey.cookingTime]?.toDouble() ?? 0.0,
-      image: _validateImage(jsonData[ApiKey.image]), // Validate image
-      name: jsonData[ApiKey.name] ?? '',
-      price: priceValue is num ? priceValue.toDouble() : 0.0,
-      calories: jsonData[ApiKey.calories]?? '0',
-      id: jsonData[ApiKey.id] ?? '',
-      rating: (jsonData['rating'] as num?)?.toDouble() ?? 0.0,
+       cookingTime: jsonData[ApiKey.cookingTime]?.toDouble() ?? 0.0,
+    image: jsonData[ApiKey.image] ?? '',
+    name: jsonData[ApiKey.name] ?? '',
+    price: priceValue is num ? priceValue.toDouble() : 0.0,
+    calories: (jsonData[ApiKey.calories] as num?)?.toDouble() ?? 0.0, // FIXED
+    id: jsonData[ApiKey.id] ?? '',
+    rating: (jsonData[ApiKey.rating])?.toDouble() ?? 0.0 
     );
-  }
 
-  static String _validateImage(String? imageUrl) {
+  /*static String _validateImage(String? imageUrl) {
     if (imageUrl == null || imageUrl.isEmpty || !Uri.parse(imageUrl).isAbsolute) {
       return 'assets/error_photo.jpg'; // Local fallback image
     }
     return imageUrl;
-  }
+  }*/
+}
 }

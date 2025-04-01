@@ -14,6 +14,10 @@ abstract class AppStyles {
     fontSize: 12,
     fontWeight: FontWeight.w600,
   );
+  static final textStyle12Light = GoogleFonts.montserrat(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+  );
   static final textStyle18 = GoogleFonts.montserrat(
     fontSize: 18,
     fontWeight: FontWeight.w500,
