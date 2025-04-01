@@ -7,12 +7,12 @@ import '../../../../core/api/api_consumer.dart';
 
 class AccountSettingsCubit extends Cubit<AccountSettingsState> {
   final ApiConsumer apiConsumer;
-
   // Controllers for text fields
   final TextEditingController lastPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  final TextEditingController otpController = TextEditingController();
 
   AccountSettingsCubit(this.apiConsumer) : super(const AccountSettingsState());
 
@@ -20,29 +20,19 @@ class AccountSettingsCubit extends Cubit<AccountSettingsState> {
     emit(state.copyWith(changePasswordExpanded: !state.changePasswordExpanded));
   }
 
-  void changePassword() {
-    // Implement password change logic here using apiConsumer
-    // For example:
-    // apiConsumer.post('/change-password', body: {
-    //   'oldPassword': lastPasswordController.text,
-    //   'newPassword': newPasswordController.text,
-    // });
-    lastPasswordController.clear();
-    newPasswordController.clear();
-    confirmPasswordController.clear();
-    emit(state.copyWith(changePasswordExpanded: false));
-  }
-
   Future<void> logout(String token) async {
     try {
       emit(state.copyWith(isLoading: true));
       await apiConsumer.post(
+        EndPoint.logout,
         options: Options(headers: {
           "Authorization": "Bearer $token",
         }),
-        EndPoint.logout,
       );
-      emit(state.copyWith(isLoading: false, loggedOut: true));
+      emit(state.copyWith(
+          isLoading: false,
+          loggedOut: true,
+          successMessage: "Logged out successfully"));
     } on DioException catch (error) {
       emit(state.copyWith(
           isLoading: false,
@@ -55,17 +45,25 @@ class AccountSettingsCubit extends Cubit<AccountSettingsState> {
     }
   }
 
-// In your account_settings_cubit.dart file
+  void showOTPField() {
+    // Update state to show OTP field
+    emit(state.copyWith(showOTPField: true));
+    // Then request OTP is handled in the view by calling ForgotPasswordCubit
+  }
+
   Future<void> deleteAccount(String token) async {
     try {
       emit(state.copyWith(isLoading: true));
       await apiConsumer.delete(
+        'https://fitfat-backend.up.railway.app/users',
         options: Options(headers: {
           "Authorization": "Bearer $token",
         }),
-        'https://fitfat-backend.up.railway.app/users',
       );
-      emit(state.copyWith(isLoading: false, accountDeleted: true));
+      emit(state.copyWith(
+          isLoading: false,
+          accountDeleted: true,
+          successMessage: "Account deleted successfully"));
       print('Account successfully deleted');
     } on DioException catch (error) {
       emit(state.copyWith(
@@ -82,11 +80,20 @@ class AccountSettingsCubit extends Cubit<AccountSettingsState> {
     }
   }
 
+  void setOtpVerified(bool verified) {
+    emit(state.copyWith(otpVerified: verified));
+  }
+
+  void clearMessages() {
+    emit(state.copyWith(errorMessage: '', successMessage: ''));
+  }
+
   @override
   Future<void> close() {
     lastPasswordController.dispose();
     newPasswordController.dispose();
     confirmPasswordController.dispose();
+    otpController.dispose();
     return super.close();
   }
 }
