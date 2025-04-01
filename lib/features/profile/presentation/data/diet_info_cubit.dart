@@ -1,5 +1,3 @@
-import 'package:fitfat/core/api/end_points.dart';
-import 'package:fitfat/core/cache/cache_helper.dart';
 import 'package:fitfat/features/profile/presentation/models/diet_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,9 +12,10 @@ class GetDietInfoCubit extends Cubit<DietInfoState> {
   Future<void> getDietInfo() async {
     emit(DietInfoLoading());
     try {
-      id = CacheHelper().getData(key: ApiKey.id);
+      // id = CacheHelper().getData(key: ApiKey.id);
       final response = await api.getRequest(
-        endpoint: "${EndPoint.dietInfo}$id",
+        //endpoint: "${EndPoint.dietInfo}$id",
+        endpoint: 'https://fitfat-backend.up.railway.app/api/dietInfo/67e5eb180b8e8a027bd2d5a7'
       );
 
       final data = response.data;;
@@ -28,7 +27,8 @@ class GetDietInfoCubit extends Cubit<DietInfoState> {
       }
       print("🟢 Response received: $data");
     }  catch (e) {
-      emit(DietInfoError("Error: ${e.toString()}"));
+      emit(DietInfoError("Failed"));
+      print(id);
       print(e.toString());
     }
   }

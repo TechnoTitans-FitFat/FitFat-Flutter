@@ -25,10 +25,10 @@ class _AllergySelectionState extends State<AllergySelection> {
           dropdownMenuEntries: const [
             DropdownMenuEntry(value: "Peanuts", label: "Peanuts"),
             DropdownMenuEntry(value: "Gluten", label: "Gluten"),
-            DropdownMenuEntry(value: "Eggs", label: "Eggs"),
-            DropdownMenuEntry(value: "Soy", label: "Soy"),
+            DropdownMenuEntry(value: "Lactose", label: "Lactose"),
             DropdownMenuEntry(value: "Shellfish", label: "Shellfish"),
             DropdownMenuEntry(value: "Wheat", label: "Wheat"),
+            DropdownMenuEntry(value: "None", label: "None"),
           ],
           onSelected: (String? newAllergy) {
             if (newAllergy != null) {

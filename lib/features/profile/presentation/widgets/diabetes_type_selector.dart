@@ -34,7 +34,7 @@ class _DiabetesTypeSelectorState extends State<DiabetesTypeSelector> {
                     setState(() {
                       _selectedDiabetesType = value;
                     });
-                    widget.onDiabetesTypeSelected(value!);
+                    widget.onDiabetesTypeSelected(value!)?.call(value ?? '');
                   },
                 ),
                 Text(

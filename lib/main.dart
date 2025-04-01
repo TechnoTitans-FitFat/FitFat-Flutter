@@ -19,18 +19,18 @@ import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_c
 import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/peanuts_cubit.dart';
 import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/shellfish_cubit.dart';
 import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/wheat_cubit.dart';
-import 'package:fitfat/features/main/presentaion/allergy_category/presentation/views/allergy_view.dart';
 import 'package:fitfat/features/main/presentaion/diabetes_category/data/diabets_cubit/diabets_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/diet_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/high_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/keto_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
-import 'package:fitfat/features/main/presentaion/diet_category/presentation/views/diet_view.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
+import 'package:fitfat/features/profile/presentation/data/update_health_cubit.dart';
+import 'package:fitfat/features/profile/presentation/views/profile_view.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
     ApiServices apiServices = ApiServices(Dio());
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => UpdateHealthInfoCubit()),
         BlocProvider(
           create: (context) => ForgotPasswordCubit(
             sendOtpUseCase: SendOtpUseCase(
@@ -83,7 +84,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-              GetHealthInfoCubit(apiServices)..getUserProfile(),
+          GetHealthInfoCubit(apiServices)..getUserProfile(),
         ),
         BlocProvider(
           create: (context) => GetDietInfoCubit(apiServices)..getDietInfo(),
@@ -113,47 +114,47 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
             create: (context) =>
-                DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
+            DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
         BlocProvider(
             create: (context) =>
-                KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData()),
+            KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData()),
         BlocProvider(
             create: (context) =>
-                VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
+            VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
         BlocProvider(
             create: (context) =>
-                HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
+            HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
         BlocProvider(
             create: (context) =>
-                LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
-         BlocProvider(
-            create: (context) =>
-                AllregyCubit(DioComsumer(dio: Dio()))..fetchAllergyData()),
+            LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
         BlocProvider(
             create: (context) =>
-                LactoseCubit(DioComsumer(dio: Dio()))..fetchLactoseData()),
+            AllregyCubit(DioComsumer(dio: Dio()))..fetchAllergyData()),
         BlocProvider(
             create: (context) =>
-                WheatCubit(DioComsumer(dio: Dio()))..fetchWheatData()),
+            LactoseCubit(DioComsumer(dio: Dio()))..fetchLactoseData()),
         BlocProvider(
             create: (context) =>
-                ShellfishCubit(DioComsumer(dio: Dio()))..fetchShellfishData()),
+            WheatCubit(DioComsumer(dio: Dio()))..fetchWheatData()),
         BlocProvider(
             create: (context) =>
-                PeanutsCubit(DioComsumer(dio: Dio()))..fetchPeanutsData()),
+            ShellfishCubit(DioComsumer(dio: Dio()))..fetchShellfishData()),
         BlocProvider(
             create: (context) =>
-                DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
+            PeanutsCubit(DioComsumer(dio: Dio()))..fetchPeanutsData()),
         BlocProvider(
             create: (context) =>
-                MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
+            DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
+        BlocProvider(
+            create: (context) =>
+            MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
       ],
       child: GetMaterialApp(
           useInheritedMediaQuery: true,
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          home: LoginSignUp(DioComsumer),
+          home:const ProfileView(),
           getPages: [
             GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
             GetPage(
@@ -164,9 +165,9 @@ class MyApp extends StatelessWidget {
             ),
             // Add OTP Screen route
           ]
-          /*  initialRoute: '/', // Define initial route
+        /*  initialRoute: '/', // Define initial route
         ,*/
-          ),
+      ),
     );
   }
 }
