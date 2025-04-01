@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-          GetHealthInfoCubit(apiServices)..getUserProfile(),
+              GetHealthInfoCubit(apiServices)..getUserProfile(),
         ),
         BlocProvider(
           create: (context) => GetDietInfoCubit(apiServices)..getDietInfo(),
@@ -114,47 +114,47 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
             create: (context) =>
-            DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
+                DietCubit(DioComsumer(dio: Dio()))..fetchDietData()),
         BlocProvider(
             create: (context) =>
-            KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData()),
+                KetoCubit(DioComsumer(dio: Dio()))..fetchKetoData()),
         BlocProvider(
             create: (context) =>
-            VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
+                VeganCubit(DioComsumer(dio: Dio()))..fetchVeganData()),
         BlocProvider(
             create: (context) =>
-            HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
+                HighCarbCubit(DioComsumer(dio: Dio()))..fetchHighCarbData()),
         BlocProvider(
             create: (context) =>
-            LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
+                LowCarbCubit(DioComsumer(dio: Dio()))..fetchLowCarbData()),
         BlocProvider(
             create: (context) =>
-            AllregyCubit(DioComsumer(dio: Dio()))..fetchAllergyData()),
+                AllregyCubit(DioComsumer(dio: Dio()))..fetchAllergyData()),
         BlocProvider(
             create: (context) =>
-            LactoseCubit(DioComsumer(dio: Dio()))..fetchLactoseData()),
+                LactoseCubit(DioComsumer(dio: Dio()))..fetchLactoseData()),
         BlocProvider(
             create: (context) =>
-            WheatCubit(DioComsumer(dio: Dio()))..fetchWheatData()),
+                WheatCubit(DioComsumer(dio: Dio()))..fetchWheatData()),
         BlocProvider(
             create: (context) =>
-            ShellfishCubit(DioComsumer(dio: Dio()))..fetchShellfishData()),
+                ShellfishCubit(DioComsumer(dio: Dio()))..fetchShellfishData()),
         BlocProvider(
             create: (context) =>
-            PeanutsCubit(DioComsumer(dio: Dio()))..fetchPeanutsData()),
+                PeanutsCubit(DioComsumer(dio: Dio()))..fetchPeanutsData()),
         BlocProvider(
             create: (context) =>
-            DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
+                DiabetsCubit(DioComsumer(dio: Dio()))..fetchDiabetsData()),
         BlocProvider(
             create: (context) =>
-            MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
+                MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
       ],
       child: GetMaterialApp(
           useInheritedMediaQuery: true,
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          home:const ProfileView(),
+          home: LoginSignUp(DioComsumer),
           getPages: [
             GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
             GetPage(
@@ -165,9 +165,9 @@ class MyApp extends StatelessWidget {
             ),
             // Add OTP Screen route
           ]
-        /*  initialRoute: '/', // Define initial route
+          /*  initialRoute: '/', // Define initial route
         ,*/
-      ),
+          ),
     );
   }
 }
