@@ -20,7 +20,7 @@ class CustomListTile extends StatelessWidget {
       style: ButtonStyle(
         elevation: WidgetStateProperty.all(0),
         padding: WidgetStateProperty.all(
-          const EdgeInsets.symmetric(horizontal: 5),
+          const EdgeInsets.symmetric(horizontal: 0),
         ),
         backgroundColor: WidgetStateProperty.all(Colors.transparent),
         overlayColor: WidgetStateProperty.all(
@@ -37,22 +37,19 @@ class CustomListTile extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5),
-        child: Row(
-        //  spacing: 10,
-          children: [
-            SvgPicture.asset(image),
-            Text(
-              title,
-              style: GoogleFonts.roboto(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: AppLightColor.blackColor,
-              ),
+      child: Row(
+        spacing: 10,
+        children: [
+          SvgPicture.asset(image),
+          Text(
+            title,
+            style: GoogleFonts.roboto(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: AppLightColor.blackColor,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
