@@ -1,31 +1,37 @@
-import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/features/settings/presentation/widgets/password_text_field.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordWidget extends StatelessWidget {
   final bool isExpanded;
   final VoidCallback onExpand;
-  final TextEditingController lastPasswordController;
   final TextEditingController newPasswordController;
   final TextEditingController confirmPasswordController;
+  final TextEditingController otpController;
   final VoidCallback onSave;
+  final VoidCallback onVerifyOTP;
+  final VoidCallback onConfirmChange;
+  final bool showOTPField;
+  final bool otpVerified;
 
   const ChangePasswordWidget({
-    super.key,
+    Key? key,
     required this.isExpanded,
     required this.onExpand,
-    required this.lastPasswordController,
     required this.newPasswordController,
     required this.confirmPasswordController,
+    required this.otpController,
     required this.onSave,
-  });
+    required this.onVerifyOTP,
+    required this.onConfirmChange,
+    required this.showOTPField,
+    required this.otpVerified,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppLightColor.whiteColor,
-        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         children: [
@@ -35,11 +41,8 @@ class ChangePasswordWidget extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  const Icon(
-                    Icons.lock_outline,
-                    color: AppLightColor.greyColor,
-                  ),
-                  const SizedBox(width: 12),
+                  const Icon(Icons.lock, color: Colors.red),
+                  const SizedBox(width: 16),
                   const Text(
                     'Change Password',
                     style: TextStyle(
@@ -64,57 +67,123 @@ class ChangePasswordWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Last password',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                  if (!showOTPField) ...[
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: onConfirmChange,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text('Yes, I want to change my password'),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  PasswordTextField(controller: lastPasswordController),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'New password',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                  ],
+                  if (showOTPField && !otpVerified) ...[
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Enter verification code',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  PasswordTextField(controller: newPasswordController),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Confirm password',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  PasswordTextField(controller: confirmPasswordController),
-                  const SizedBox(height: 24),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: onSave,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: otpController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
                         ),
-                      ),
-                      child: const Text(
-                        'Save Change',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        hintText: 'Enter the code sent to your email',
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: onVerifyOTP,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text('Verify Code'),
+                      ),
+                    ),
+                  ],
+                  if (showOTPField && otpVerified) ...[
+                    const SizedBox(height: 16),
+                    const Text(
+                      'New password',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: newPasswordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        hintText: 'Enter new password',
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Confirm password',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: confirmPasswordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        hintText: 'Confirm new password',
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: onSave,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text('Save Change'),
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 16),
                 ],
               ),

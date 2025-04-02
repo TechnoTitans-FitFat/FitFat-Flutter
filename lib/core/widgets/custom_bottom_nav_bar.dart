@@ -26,8 +26,8 @@ class CustomBottomNavBar extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
             blurRadius: 10,
-            spreadRadius: 2, 
-            offset: const Offset(0, -3), 
+            spreadRadius: 2,
+            offset: const Offset(0, -3),
           ),
         ],
       ),
@@ -48,14 +48,14 @@ class CustomBottomNavBar extends StatelessWidget {
           selectedItemColor: AppLightColor.mainColor,
           unselectedItemColor: Colors.grey,
           onTap: onTapped,
-          backgroundColor: Colors.transparent, 
+          backgroundColor: Colors.transparent,
         ),
       ),
     );
   }
 
-  /// Helper function to build BottomNavigationBarItem
-  BottomNavigationBarItem buildNavItem(String assetPath, String label, int index) {
+  BottomNavigationBarItem buildNavItem(
+      String assetPath, String label, int index) {
     return BottomNavigationBarItem(
       icon: SvgPicture.asset(
         assetPath,
