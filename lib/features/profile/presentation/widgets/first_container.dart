@@ -76,15 +76,26 @@ class _FirstContainerState extends State<FirstContainer> {
               DateOfBirthSection(
                 onDateChanged: (String dob) {
                   setState(() {
-                    dateOfBirth = dob;
+                    // تحويل `dob` من `dd/MM/yyyy` إلى `yyyy-MM-dd`
+                    List<String> parts = dob.split('/');
+                    if (parts.length == 3) {
+                      String formattedDate = "${parts[2]}-${parts[1]}-${parts[0]}"; // yyyy-MM-dd
+
+                      dateOfBirth = formattedDate;
+                      print("🗓 Formatted Date: $dateOfBirth");
+
+                      final updatedHealthInfo = UpdateHealthInfo(
+                        dateOfBirth: dateOfBirth,
+                        targetBloodSugarRange: TargetBloodSugarRange(min: 78, max: 110),
+                      );
+
+                      print("🚀 Sending update request with: ${updatedHealthInfo.toJson()}");
+
+                      context.read<UpdateHealthInfoCubit>().updateHealthInfo(updatedHealthInfo);
+                    } else {
+                      print("⚠ Invalid date format received: $dob");
+                    }
                   });
-                  final updatedHealthInfo = UpdateHealthInfo (
-                      dateOfBirth: dateOfBirth,
-                      targetBloodSugarRange:
-                      TargetBloodSugarRange(min: 78, max: 110));
-                  context
-                      .read<UpdateHealthInfoCubit>()
-                      .updateHealthInfo(updatedHealthInfo);
                 },
               ),
               Row(

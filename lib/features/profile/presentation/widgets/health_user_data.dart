@@ -37,13 +37,13 @@ class _DietUserDataState extends State<HealthUserData> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              infoText('Gender', healthInfo.healthInfo.gender),
+              infoText('Gender', healthInfo.healthInfo!.gender),
               const SizedBox(height: 5),
-              infoText('Date Of Birth', healthInfo.healthInfo.dateOfBirth),
+              infoText('Date Of Birth', healthInfo.healthInfo!.dateOfBirth),
               const SizedBox(height: 5),
-              infoText('Height', '${healthInfo.healthInfo.height} cm'),
+              infoText('Height', '${healthInfo.healthInfo!.height} cm'),
               const SizedBox(height: 5),
-              infoText('Weight', '${healthInfo.healthInfo.weight} kg'),
+              infoText('Weight', '${healthInfo.healthInfo!.weight} kg'),
               const SizedBox(height: 10),
               const Divider(color: AppLightColor.blackColor, endIndent: 24),
               Text(
@@ -57,18 +57,20 @@ class _DietUserDataState extends State<HealthUserData> {
               const SizedBox(height: 15),
               infoText(
                 'Allergies',
-                healthInfo.healthInfo.foodAllergies.isNotEmpty ? healthInfo.healthInfo.foodAllergies : 'None',
+                healthInfo.healthInfo!.foodAllergies.isNotEmpty ? healthInfo.healthInfo!.foodAllergies : 'None',
               ),
               const SizedBox(height: 5),
-              if (healthInfo.healthInfo.diabetes)
+              if (healthInfo.healthInfo!.diabetes)
                 const SizedBox(height: 5),
-              if (healthInfo.healthInfo.diabetes)
+              if (healthInfo.healthInfo!.diabetes)
                 infoText(
                   'Type of Diabetes',
-                  healthInfo.healthInfo.diabetesType.isNotEmpty ? healthInfo.healthInfo.diabetesType : 'N/A',
+                  healthInfo.healthInfo!.diabetesType.isNotEmpty ? healthInfo.healthInfo!.diabetesType : 'N/A',
                 ),
-              const SizedBox(height: 15),
-              infoText('Blood Sugar Range','${healthInfo.healthInfo.targetBloodSugarRange.min}-${healthInfo.healthInfo.targetBloodSugarRange.max}' )
+              const SizedBox(height: 5),
+              infoText("Insulin_TO_Carb Ratio ", '1:${healthInfo.healthInfo!.insulinToCarbRatio}'),
+              const SizedBox(height: 5),
+              infoText('Blood Sugar Range','${healthInfo.healthInfo!.targetBloodSugarRange!.min}-${healthInfo.healthInfo!.targetBloodSugarRange!.max}' )
             ],
           );
         } else if (state is UserError) {
