@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
           create: (context) => GetDietInfoCubit(apiServices)..getDietInfo(),
         ),
         BlocProvider(
-          create: (context) => UserCubit(DioComsumer(dio: Dio())),
+          create: (context) => UserCubit(apiServices),
         ),
         BlocProvider(
             create: (context) => AccountSettingsCubit(DioComsumer(dio: Dio()))),
@@ -154,7 +154,7 @@ class MyApp extends StatelessWidget {
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          home: LoginSignUp(DioComsumer),
+          home: ProfileView(),
           getPages: [
             GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
             GetPage(
