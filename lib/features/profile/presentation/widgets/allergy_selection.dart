@@ -1,3 +1,4 @@
+import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/profile/presentation/data/update_health_cubit.dart';
 import 'package:fitfat/features/profile/presentation/models/update_health_model.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,14 @@ class _AllergySelectionState extends State<AllergySelection> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Allergies",style: TextStyle(
+            fontSize: AppStyles.textStyle16.fontSize,
+            fontWeight: AppStyles.textStyle18.fontWeight),),
+          ),
           DropdownMenu(
+            hintText: "Peanuts",
             width: MediaQuery
                 .of(context)
                 .size

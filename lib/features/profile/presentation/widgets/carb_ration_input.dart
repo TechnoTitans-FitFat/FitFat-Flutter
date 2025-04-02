@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class InsulinToCarbRatioInput extends StatefulWidget {
   final Function(String) onRatioChanged;
-
-  const InsulinToCarbRatioInput({super.key, required this.onRatioChanged});
+  final TextEditingController controller;
+  const InsulinToCarbRatioInput({super.key, required this.onRatioChanged,required this.controller});
 
   @override
   State<InsulinToCarbRatioInput> createState() => _InsulinToCarbRatioInputState();
 }
 
 class _InsulinToCarbRatioInputState extends State<InsulinToCarbRatioInput> {
-  final TextEditingController _controller = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _InsulinToCarbRatioInputState extends State<InsulinToCarbRatioInput> {
             SizedBox(
               width: 50,
               child: TextField(
-                controller: _controller,
+                controller: widget.controller,
                 keyboardType: TextInputType.number,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
