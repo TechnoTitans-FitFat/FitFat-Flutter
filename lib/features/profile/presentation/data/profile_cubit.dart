@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
-import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/end_points.dart';
-import 'package:fitfat/core/errors/exceptions.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/profile/presentation/models/profile_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,11 +55,9 @@ class UserCubit extends Cubit<UserState> {
   // }
 
 
-  userProfile({required String token}) async {
+  userProfile({ required dynamic context}) async {
     emit(UserLoading());
-        // final token = context != null
-        //     ? context.read<LoginCubit>().user?.token
-        //     : null;
+    final token = BlocProvider.of<LoginCubit>(context, listen: false).user?.token;
 
         print(token);
         if (token!.isEmpty) {

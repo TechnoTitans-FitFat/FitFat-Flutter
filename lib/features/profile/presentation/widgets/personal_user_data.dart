@@ -13,13 +13,16 @@ class PersonalUserData extends StatefulWidget {
 }
 
 class _PersonalUserDataState extends State<PersonalUserData> {
+  @override
   void initState() {
     super.initState();
-      context.read<UserCubit>().userProfile(token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTVlYjE4MGI4ZThhMDI3YmQyZDVhNyIsInVzZXJUeXBlIjoiVmVuZG9yIiwiaWF0IjoxNzQzNjM0MjMxLCJleHAiOjE3NDU0NDg2MzF9.Br53_alrT8S6jN45oqANdV2RtYWhVIH3AJ39QsSV4RM");
+    Future.microtask(() {
+      context.read<UserCubit>().userProfile(context: context);
+    });
   }
+
   @override
   Widget build(BuildContext context) {
-    context.read<UserCubit>().userProfile(token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTVlYjE4MGI4ZThhMDI3YmQyZDVhNyIsInVzZXJUeXBlIjoiVmVuZG9yIiwiaWF0IjoxNzQzNjM0MjMxLCJleHAiOjE3NDU0NDg2MzF9.Br53_alrT8S6jN45oqANdV2RtYWhVIH3AJ39QsSV4RM");
 
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
