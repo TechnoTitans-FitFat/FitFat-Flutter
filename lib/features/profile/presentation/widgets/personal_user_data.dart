@@ -1,6 +1,5 @@
 import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
-import 'package:fitfat/features/profile/presentation/models/profile_model.dart';
 import 'package:fitfat/features/profile/presentation/widgets/image_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
