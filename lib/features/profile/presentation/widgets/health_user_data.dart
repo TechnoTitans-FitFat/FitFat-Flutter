@@ -72,7 +72,7 @@ class _DietUserDataState extends State<HealthUserData> {
               const SizedBox(height: 5),
               infoText("Insulin_TO_Carb Ratio ", '1:${healthInfo.healthInfo!.insulinToCarbRatio}'),
               const SizedBox(height: 5),
-              infoText('Blood Sugar Range','${healthInfo.healthInfo!.targetBloodSugarRange!.min}-${healthInfo.healthInfo!.targetBloodSugarRange!.max}' )
+              infoText('Correction Factor','${healthInfo.healthInfo!.correctionFactor}' )
             ],
           );
         } else if (state is UserError) {

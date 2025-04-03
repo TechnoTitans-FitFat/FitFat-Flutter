@@ -28,7 +28,8 @@ class UpdateHealthInfo {
   final bool? diabetes;
   final String? diabetesType;
   final double? insulinToCarbRatio;
-  final TargetBloodSugarRange targetBloodSugarRange;
+  final TargetBloodSugarRange? targetBloodSugarRange;
+  final int? correctionFactor;
 
   UpdateHealthInfo({
      this.id,
@@ -41,7 +42,8 @@ class UpdateHealthInfo {
      this.diabetes,
      this.diabetesType,
     this.insulinToCarbRatio,
-    required this.targetBloodSugarRange,
+    this.targetBloodSugarRange,
+    this.correctionFactor
   });
 
   factory UpdateHealthInfo.fromJson(Map<String, dynamic> json) {
@@ -57,6 +59,7 @@ class UpdateHealthInfo {
       diabetesType: json['diabetesType'],
       insulinToCarbRatio: json['insulinToCarbRatio'],
       targetBloodSugarRange: TargetBloodSugarRange.fromJson(json['targetBloodSugarRange']),
+      correctionFactor: json['correctionFactor']
     );
   }
 
@@ -73,7 +76,8 @@ class UpdateHealthInfo {
     if (diabetes != null) data['diabetes'] = diabetes;
     if (diabetesType != null) data['diabetesType'] = diabetesType;
     if (insulinToCarbRatio != null) data['insulinToCarbRatio'] = insulinToCarbRatio;
-    data['targetBloodSugarRange'] = targetBloodSugarRange.toJson(); // This is required
+    if(correctionFactor!=null)data['correctionFactor'] = correctionFactor;
+    data['targetBloodSugarRange'] = targetBloodSugarRange?.toJson();
 
     return data;
   }
@@ -90,6 +94,7 @@ class UpdateHealthInfo {
     String? diabetesType,
     double? insulinToCarbRatio,
     TargetBloodSugarRange? targetBloodSugarRange,
+    int? correctionFactor
   }) {
     return UpdateHealthInfo(
       id: id ?? this.id,
@@ -103,6 +108,7 @@ class UpdateHealthInfo {
       diabetesType: diabetesType ?? this.diabetesType,
       insulinToCarbRatio: insulinToCarbRatio ?? this.insulinToCarbRatio,
       targetBloodSugarRange: targetBloodSugarRange ?? this.targetBloodSugarRange,
+      correctionFactor: correctionFactor ?? this.correctionFactor
     );
   }
 }

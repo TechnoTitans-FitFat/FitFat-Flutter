@@ -37,9 +37,9 @@ class _FirstContainerState extends State<FirstContainer> {
               const SnackBar(content: Text("Health Info Updated Successfully!")),
             );
           } else if (state is HealthInfoError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Error: ${state.message}")),
-            );
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   SnackBar(content: Text("Error: ${state.message}")),
+            // );
           }
         }, builder: (context, state) {
       return Container(
@@ -85,12 +85,11 @@ class _FirstContainerState extends State<FirstContainer> {
 
                       final updatedHealthInfo = UpdateHealthInfo(
                         dateOfBirth: dateOfBirth,
-                        targetBloodSugarRange: TargetBloodSugarRange(min: 78, max: 110),
                       );
 
                       print("🚀 Sending update request with: ${updatedHealthInfo.toJson()}");
 
-                      context.read<UpdateHealthInfoCubit>().updateHealthInfo(updatedHealthInfo);
+                      context.read<UpdateHealthInfoCubit>().updateHealthInfo(updatedHealthInfo,context: context);
                     } else {
                       print("⚠ Invalid date format received: $dob");
                     }
@@ -116,11 +115,10 @@ class _FirstContainerState extends State<FirstContainer> {
                           onChange: (value){
                             final updatedHealthInfo = UpdateHealthInfo (
                                 height: heightController.text.isNotEmpty ? int.tryParse(heightController.text): null,
-                                targetBloodSugarRange:
-                                TargetBloodSugarRange(min: 78, max: 110));
+                                );
                             context
                                 .read<UpdateHealthInfoCubit>()
-                                .updateHealthInfo(updatedHealthInfo);
+                                .updateHealthInfo(updatedHealthInfo,context: context);
                           },
                           hint: "Height",
                           lable: "Height",
@@ -152,11 +150,10 @@ class _FirstContainerState extends State<FirstContainer> {
                           onChange: (value){
                             final updatedHealthInfo = UpdateHealthInfo (
                                 weight: weightController.text.isNotEmpty ? int.tryParse(weightController.text): null,
-                                targetBloodSugarRange:
-                                TargetBloodSugarRange(min: 78, max: 110));
+                                );
                             context
                                 .read<UpdateHealthInfoCubit>()
-                                .updateHealthInfo(updatedHealthInfo);
+                                .updateHealthInfo(updatedHealthInfo,context: context);
                           },
                         ),
                       ],

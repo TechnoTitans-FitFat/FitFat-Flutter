@@ -28,9 +28,9 @@ class _GenderSelectionState extends State<GenderSelection> {
           const SnackBar(content: Text("Health Info Updated Successfully!")),
         );
       } else if (state is HealthInfoError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error: ${state.message}")),
-        );
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: Text("Error: ${state.message}")),
+        // );
       }
     }, builder: (context, state) {
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -67,12 +67,10 @@ class _GenderSelectionState extends State<GenderSelection> {
                     widget.onGenderSelected(newValue);
 
                     final updatedHealthInfo = UpdateHealthInfo (
-                        gender: newValue,
-                        targetBloodSugarRange:
-                            TargetBloodSugarRange(min: 78, max: 110));
+                        gender: newValue,);
                     context
                         .read<UpdateHealthInfoCubit>()
-                        .updateHealthInfo(updatedHealthInfo);
+                        .updateHealthInfo(updatedHealthInfo,context: context);
                   }
 
 
