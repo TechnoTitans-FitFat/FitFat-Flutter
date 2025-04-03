@@ -17,7 +17,9 @@ class _DietUserDataState extends State<HealthUserData> {
   @override
   void initState() {
     super.initState();
-    context.read<GetHealthInfoCubit>().getUserProfile();
+    Future.microtask(() {
+      context.read<GetHealthInfoCubit>().getUserProfile(context: context);
+    });
   }
 
   @override

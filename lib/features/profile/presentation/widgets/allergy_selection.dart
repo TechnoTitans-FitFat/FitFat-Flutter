@@ -25,7 +25,7 @@ class _AllergySelectionState extends State<AllergySelection> {
       listener: (context, state) {
         if (state is HealthInfoLoaded) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Health Info Updated Successfully!")),
+            const SnackBar(content: Text("Health Info Updated Successfully!")),
           );
         } else if (state is HealthInfoError) {
           ScaffoldMessenger.of(context).showSnackBar(
