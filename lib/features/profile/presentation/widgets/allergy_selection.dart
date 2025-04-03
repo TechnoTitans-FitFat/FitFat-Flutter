@@ -28,9 +28,9 @@ class _AllergySelectionState extends State<AllergySelection> {
             const SnackBar(content: Text("Health Info Updated Successfully!")),
           );
         } else if (state is HealthInfoError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Error: ${state.message}")),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   SnackBar(content: Text("Error: ${state.message}")),
+          // );
         }
       }, builder: (BuildContext context, state) {
       return Column(
@@ -64,12 +64,10 @@ class _AllergySelectionState extends State<AllergySelection> {
                 });
                 widget.onAllergySelected(_selectedAllergy!);
                 final updatedHealthInfo = UpdateHealthInfo(
-                    foodAllergies: newAllergy,
-                    targetBloodSugarRange:
-                    TargetBloodSugarRange(min: 78, max: 110));
+                    foodAllergies: newAllergy,);
                 context
                     .read<UpdateHealthInfoCubit>()
-                    .updateHealthInfo(updatedHealthInfo);
+                    .updateHealthInfo(updatedHealthInfo,context: context);
               }
             },
           ),

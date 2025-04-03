@@ -58,7 +58,7 @@ class _DiabetesTypeSelectorState extends State<DiabetesTypeSelector> {
                           TargetBloodSugarRange(min: 78, max: 110));
                       context
                           .read<UpdateHealthInfoCubit>()
-                          .updateHealthInfo(updatedHealthInfo);
+                          .updateHealthInfo(updatedHealthInfo,context: context);
                     },
                   ),
                   Text(
