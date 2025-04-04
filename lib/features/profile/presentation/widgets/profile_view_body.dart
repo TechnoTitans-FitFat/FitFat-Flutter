@@ -29,7 +29,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
       Padding(
-      padding: const EdgeInsets.only(top: 50,left: 20),
+      padding: const EdgeInsets.only(top: 50),
       //   child: Center(
       //     child: GestureDetector(
       //       onTap: () {},
