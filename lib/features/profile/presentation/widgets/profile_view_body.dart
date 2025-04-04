@@ -28,33 +28,6 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Padding(
           padding: const EdgeInsets.only(top: 50),
-          //   child: Center(
-          //     child: GestureDetector(
-          //       onTap: () {},
-          //       child: const CircleAvatar(
-          //         radius: 50,
-          //         backgroundImage: AssetImage('assets/images/female.png'),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // const SizedBox(
-          //   height: 15,
-          // ),
-          // Column(
-          //   children: [
-          //     Text(
-          //       'Mai Wael',
-          //       style: GoogleFonts.roboto(
-          //           fontSize: 18, fontWeight: FontWeight.w400),
-          //     ),
-          //     Text(
-          //       'mai@gmail.com',
-          //       style: GoogleFonts.roboto(
-          //           fontSize: 18, fontWeight: FontWeight.w400),
-          //     )
-          //   ],
-          // ),
           child: Column(
             children: [
               PersonalUserData(),
