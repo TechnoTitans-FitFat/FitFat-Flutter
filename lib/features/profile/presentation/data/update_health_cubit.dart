@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fitfat/core/api/end_points.dart';
-import 'package:fitfat/core/cache/cache_helper.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/health_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/models/update_health_model.dart';
@@ -12,6 +10,7 @@ part 'update_health_state.dart';
 class UpdateHealthInfoCubit extends Cubit<UpdateHealthInfoState> {
   final Dio _dio = Dio();
   final String apiUrl = "https://fitfat-backend.up.railway.app/api/healthInfo/";
+
 
   UpdateHealthInfoCubit() : super(HealthInfoInitial());
 
@@ -33,6 +32,7 @@ class UpdateHealthInfoCubit extends Cubit<UpdateHealthInfoState> {
       if (response.statusCode == 200) {
         final data = UpdateHealthInfo.fromJson(response.data['healthInfo']);
         emit(HealthInfoLoaded(data));
+        context.read<GetHealthInfoCubit>().getUserProfile(context: context);
         print(response.data);
       } else {
         emit(HealthInfoError("Failed to update health info"));

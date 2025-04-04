@@ -1,7 +1,9 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/profile/presentation/data/health_info_cubit.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 class CustomAppbarProfile extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbarProfile({super.key});
   @override
@@ -15,6 +17,7 @@ class CustomAppbarProfile extends StatelessWidget implements PreferredSizeWidget
         child: GestureDetector(
             onTap: () {
               Navigator.of(context).pop();
+              context.read<GetHealthInfoCubit>().getUserProfile(context: context);
             },
             child: Image.asset(
               Assets.icons.previous.path,
