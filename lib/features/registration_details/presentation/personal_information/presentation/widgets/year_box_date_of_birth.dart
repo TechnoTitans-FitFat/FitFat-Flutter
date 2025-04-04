@@ -25,7 +25,13 @@ class _YearBoxDateOfBirthState extends State<YearBoxDateOfBirth> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DropdownMenu(
-          width: MediaQuery.of(context).size.width * 0.26,
+          menuStyle: const MenuStyle(
+            backgroundColor: WidgetStatePropertyAll(
+              AppLightColor.backgroundColor,
+            ),
+          ),
+          menuHeight: 200,
+          width: MediaQuery.of(context).size.width * 0.28,
           label: Text(
             "Year",
             style: GoogleFonts.roboto(
