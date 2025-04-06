@@ -1,20 +1,23 @@
 class TargetBloodSugarRange {
-  final int? min;
-  final int? max;
+  final double? min;
+  final double? max;
 
   TargetBloodSugarRange({required this.min, required this.max});
 
   factory TargetBloodSugarRange.fromJson(Map<String, dynamic> json) {
     return TargetBloodSugarRange(
-      min: json['min'],
-      max: json['max'],
+      min: json['targetBloodSugarRange']['min'],
+      max: json['targetBloodSugarRange']['max'],
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    'min': min,
-    'max': max,
-  };
+  Map<String, dynamic> toJson() {
+  final Map<String, dynamic> data = {};
+  if (min != null) data['min'] = min;
+  if (max != null) data['max'] = max;
+
+  return data;
+  }
 }
 
 class UpdateHealthInfo {
@@ -22,14 +25,14 @@ class UpdateHealthInfo {
   final String? userId;
   final String? gender;
   final String? dateOfBirth;
-  final int? weight;
-  final int? height;
+  final double? weight;
+  final double? height;
   final String? foodAllergies;
   final bool? diabetes;
   final String? diabetesType;
   final double? insulinToCarbRatio;
   final TargetBloodSugarRange? targetBloodSugarRange;
-  final int? correctionFactor;
+  final double? correctionFactor;
 
   UpdateHealthInfo({
      this.id,
@@ -52,14 +55,16 @@ class UpdateHealthInfo {
       userId: json['userId'],
       gender: json['gender'],
       dateOfBirth: json['dateOfBirth'],
-      weight: json['weight'],
-      height: json['height'],
+      weight: (json['weight']as num?)?.toDouble(),
+      height: (json['height']as num?)?.toDouble(),
       foodAllergies: json['foodAllergies'],
       diabetes: json['diabetes'],
       diabetesType: json['diabetesType'],
-      insulinToCarbRatio: json['insulinToCarbRatio'],
-      targetBloodSugarRange: TargetBloodSugarRange.fromJson(json['targetBloodSugarRange']),
-      correctionFactor: json['correctionFactor']
+      insulinToCarbRatio: (json['insulinToCarbRatio']as num?)?.toDouble(),
+        targetBloodSugarRange: json['targetBloodSugarRange'] != null
+            ? TargetBloodSugarRange.fromJson(json['targetBloodSugarRange'])
+            : null,
+        correctionFactor: (json['correctionFactor']as num?)?.toDouble()
     );
   }
 
@@ -87,14 +92,14 @@ class UpdateHealthInfo {
     String? userId,
     String? gender,
     String? dateOfBirth,
-    int? weight,
-    int? height,
+    double? weight,
+    double? height,
     String? foodAllergies,
     bool? diabetes,
     String? diabetesType,
     double? insulinToCarbRatio,
     TargetBloodSugarRange? targetBloodSugarRange,
-    int? correctionFactor
+    double? correctionFactor
   }) {
     return UpdateHealthInfo(
       id: id ?? this.id,
