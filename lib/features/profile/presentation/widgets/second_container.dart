@@ -95,7 +95,7 @@ class _SecondContainerState extends State<SecondContainer> {
                 ),
                 CorrectionFactor(controller: correctionFactor,onFactorChanged: (value){
                   final updatedHealthInfo = UpdateHealthInfo (
-                      correctionFactor: correctionFactor.text.isNotEmpty ? int.tryParse(correctionFactor.text): null,
+                      correctionFactor: correctionFactor.text.isNotEmpty ? double.tryParse(correctionFactor.text): null,
                       );
                   context
                       .read<UpdateHealthInfoCubit>()

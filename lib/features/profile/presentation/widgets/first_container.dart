@@ -114,7 +114,7 @@ class _FirstContainerState extends State<FirstContainer> {
                         TextFieldProfile(
                           onChange: (value){
                             final updatedHealthInfo = UpdateHealthInfo (
-                                height: heightController.text.isNotEmpty ? int.tryParse(heightController.text): null,
+                                height: heightController.text.isNotEmpty ? double.tryParse(heightController.text): null,
                                 );
                             context
                                 .read<UpdateHealthInfoCubit>()
@@ -149,7 +149,7 @@ class _FirstContainerState extends State<FirstContainer> {
                           hint: "Weight",
                           onChange: (value){
                             final updatedHealthInfo = UpdateHealthInfo (
-                                weight: weightController.text.isNotEmpty ? int.tryParse(weightController.text): null,
+                                weight: weightController.text.isNotEmpty ? double.tryParse(weightController.text): null,
                                 );
                             context
                                 .read<UpdateHealthInfoCubit>()
