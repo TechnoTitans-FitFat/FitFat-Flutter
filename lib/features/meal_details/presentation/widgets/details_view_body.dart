@@ -67,11 +67,11 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
             ),
           ),
         ),
-        const Positioned(
+         Positioned(
           top: 0,
           left: 0,
           right: 0,
-          child:CustomAppBarDetails() 
+          child:CustomAppBarDetails(id:widget.meal.id,) 
           ),      
         Positioned(
           top: 300,

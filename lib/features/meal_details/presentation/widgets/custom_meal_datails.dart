@@ -1,3 +1,4 @@
+import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/gen/assets.gen.dart';
@@ -11,8 +12,8 @@ class CustomMealDatails extends StatefulWidget {
     required this.caloreis,
     required this.rating,
     required this.cookingTime,
-    required this.id, 
-    required this.imagePath, 
+    required this.id,
+    required this.imagePath,
     required this.price,
   });
   final String id;
@@ -102,28 +103,24 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                 print("تم الضغط على الصورة");
-                if (isFavourite) {
-                  favouritesCubit.deleteFromFavourite(context, widget.id);
-                } else {
-                  favouritesCubit.addToFavourite(context,widget.id);
-                  favouritesCubit.getFavourites(context);
-                }
-              },
-              child: Image.asset(
-                isFavourite
-                    ? Assets.icons.liked.path 
-                    : Assets.icons.component5.path,
-                width: 50,
-                height: 50,
-                fit: BoxFit.contain,
-              ),
+            Container(
+              height: 40,
+              width: 119,
+              decoration: BoxDecoration(
+                  color: AppLightColor.backgroundColor,
+                  borderRadius: BorderRadius.circular(21),
+                  border: Border.all(color: AppLightColor.mainColor,width: 1.4)),
+              child: Center(
+                  child: Text(
+                'Insulin Calc',
+                style: AppStyles.textStyle16.copyWith(
+                  color: AppLightColor.mainColor,
+                ),
+              )),
             )
           ],
         );
       },
-              );
+    );
   }
 }
