@@ -2,13 +2,19 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
-class DetailsBottomBar extends StatelessWidget {
+class DetailsBottomBar extends StatefulWidget {
   const DetailsBottomBar({
     super.key,
     required this.price,
   });
   final double price;
 
+  @override
+  State<DetailsBottomBar> createState() => _DetailsBottomBarState();
+}
+
+class _DetailsBottomBarState extends State<DetailsBottomBar> {
+  int count=1;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,9 +38,18 @@ class DetailsBottomBar extends StatelessWidget {
                   padding: const EdgeInsets.all(12),
                   child: Row(
                     children: [
-                      const Icon(
-                        Icons.remove,
-                        color: AppLightColor.whiteColor,
+                      GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            if (count >1){
+                              count--;
+                            }
+                          });
+                        },
+                        child: const Icon(
+                          Icons.remove,
+                          color: AppLightColor.whiteColor,
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Container(
@@ -46,15 +61,22 @@ class DetailsBottomBar extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            '1',
+                            count.toString(),
                             style: AppStyles.textStyle18,
                           ),
                         ),
                       ),
                       const SizedBox(width: 10),
-                      const Icon(
-                        Icons.add,
-                        color: AppLightColor.whiteColor,
+                      GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            count++;
+                          });
+                        },
+                        child: const Icon(
+                          Icons.add,
+                          color: AppLightColor.whiteColor,
+                        ),
                       ),
                     ],
                   ),
@@ -64,7 +86,7 @@ class DetailsBottomBar extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    price.toString(),
+                    (count * widget.price).toStringAsFixed(2),
                     style: AppStyles.textStyle24,
                   ),
                   const SizedBox(width: 8),
