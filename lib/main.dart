@@ -154,7 +154,7 @@ class MyApp extends StatelessWidget {
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          home: LoginSignUp(DioComsumer),
+          home: LoginSignUp(ApiServices),
           getPages: [
             GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
             GetPage(
@@ -163,7 +163,7 @@ class MyApp extends StatelessWidget {
                 return const OtpScreen();
               },
             ),
-            // Add OTP Screen route
+             // Add OTP Screen route
           ]
           /*  initialRoute: '/', // Define initial route
         ,*/

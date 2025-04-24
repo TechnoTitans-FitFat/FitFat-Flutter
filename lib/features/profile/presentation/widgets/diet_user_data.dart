@@ -1,5 +1,8 @@
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/main/presentaion/widgets/info_text.dart';
 import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
+import 'package:fitfat/features/profile/presentation/data/health_info_cubit.dart';
+import 'package:fitfat/features/profile/presentation/models/health_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,28 +18,31 @@ class _DietUserDataState extends State<DietUserData> {
   @override
   void initState() {
     super.initState();
-    context.read<GetDietInfoCubit>().getDietInfo();
+    context.read<GetHealthInfoCubit>().getUserProfile();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetDietInfoCubit, DietInfoState>(
+    return BlocConsumer<GetHealthInfoCubit, GetHealthInfoState>(
+      listener: (context, state) {
+        if (state is UserError) {
+          showSnackBar(context, state.message);
+        }
+      },
       builder: (context, state) {
-        print("📢 Current UI state: $state");
-
-        if (state is DietInfoLoading) {
+        if (state is UserLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is DietInfoLoaded) {
-          final dietInfo = state.dietInfo.dietInfo;
-          print("✅ Displaying data: ${dietInfo.dietType}");
+        } else if (state is UserLoaded) {
+          final healthInfo = state.dietModel;
+          print("🟢 User data loaded: ${healthInfo.healthInfo}");
 
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              infoText('Insulin-to-Carb Ratio', '1:${dietInfo.macronutrientGoals.carbs}'),
+              infoText('Insulin-to-Carb Ratio', '1:${healthInfo.healthInfo.insulinToCarbRatio}'),
             ],
           );
-        } else if (state is DietInfoError) {
+        } else if (state is UserError) {
           return Center(child: Text("❌ Error: ${state.message}"));
         }
         return const Center(child: Text("No data available"));
