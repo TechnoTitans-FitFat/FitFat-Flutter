@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class CartScreenBody extends StatelessWidget {
   final List<CartModel> cartItems;
-   CartScreenBody({super.key, required this.cartItems});
+   final VoidCallback onItemCountChanged; 
+   CartScreenBody({super.key, required this.cartItems,required this.onItemCountChanged});
 
 
   @override
@@ -13,9 +14,11 @@ class CartScreenBody extends StatelessWidget {
      itemCount: cartItems.length,
      itemBuilder: (context, index) {
        return  Padding(
-         padding:const EdgeInsets.only(bottom: 14,left: 8,top: 8),
+         padding:const EdgeInsets.only(bottom: 14,left: 4,top: 8),
          child: CartListItem(
           item: cartItems[index],
+           onCountChanged: onItemCountChanged
+          
          ),
        );
      }
