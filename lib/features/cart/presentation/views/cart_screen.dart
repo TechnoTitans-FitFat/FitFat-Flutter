@@ -1,10 +1,55 @@
+import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/core/widgets/custom_app_bar.dart';
+import 'package:fitfat/features/cart/data/models/cart_model.dart';
+import 'package:fitfat/features/cart/presentation/widgets/cart_bottom_bar.dart';
+import 'package:fitfat/features/cart/presentation/widgets/cart_screen_body.dart';
+import 'package:fitfat/features/cart/presentation/widgets/custom_button_cart.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
+   CartScreen({super.key});
 
   @override
+  final List<CartModel> cartItems = [
+      CartModel(
+        title: "Beef Bourguignon",
+        price: 60,
+        calories: 400,
+        rating: 3.3,
+        image: 'assets/images/photo.png',
+      ),
+      CartModel(
+        title: "Grilled Chicken",
+        price: 110,
+        calories: 350,
+        rating: 4.2,
+        image: 'assets/images/photo.png',
+      ),
+       CartModel(
+        title: "Beef Bourguignon",
+        price: 100,
+        calories: 400,
+        rating: 3.3,
+        image: 'assets/images/photo.png',
+      ),
+       CartModel(
+        title: "Grilled Chicken",
+        price: 110,
+        calories: 350,
+        rating: 4.2,
+        image: 'assets/images/photo.png',
+      ),
+    ];
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      backgroundColor: AppLightColor.backgroundColor,
+      appBar:  CustomAppBar(title: 'Cart'),
+      body:  Padding(
+        padding: EdgeInsets.only(left: 12, right: 16, top: 6),
+        child: CartScreenBody(cartItems: cartItems),
+      ),
+      bottomNavigationBar: CartBottomBar(cartItems: cartItems)
+    );
   }
 }
