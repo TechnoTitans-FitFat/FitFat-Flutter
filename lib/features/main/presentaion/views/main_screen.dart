@@ -102,7 +102,7 @@ class _MainScreenState extends State<MainScreen> {
     ),
      const MenuScreen(),
       const FavouritesView(),
-      const CartScreen(),
+       CartScreen(),
      const ProfileView(),
   ];
   

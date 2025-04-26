@@ -1,5 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -56,7 +57,13 @@ class CustomTextFiledSearch extends StatelessWidget {
               ),
             ),
           ),
-          Container(
+          GestureDetector(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CartScreen()));
+            },
+            child: Image.asset('assets/icons/shopping_cart_red.png')
+            )
+         /* Container(
               decoration: BoxDecoration(
                 color: AppLightColor.mainColor,
                 borderRadius: BorderRadius.circular(12),
@@ -78,7 +85,7 @@ class CustomTextFiledSearch extends StatelessWidget {
                 height: 27,
                 width: 27,
               )))
-
+              */
 
         ],
       ),
