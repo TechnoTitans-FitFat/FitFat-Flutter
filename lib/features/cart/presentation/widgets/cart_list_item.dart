@@ -34,8 +34,8 @@ class _CartListItemState extends State<CartListItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                Container(
-                  width: 150,
-                  height: 150,
+                  width: 160,
+                  height: 160,
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius:  BorderRadius.all(Radius.circular(15))),
@@ -46,10 +46,14 @@ class _CartListItemState extends State<CartListItem> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.item.title,
-                        style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.blackColor,
+                      FittedBox(
+                         fit: BoxFit.scaleDown,
+                        child: Text(
+                          widget.item.title,
+                          style: AppStyles.textStyle16.copyWith(
+                            color: AppLightColor.blackColor,
+                            fontSize: MediaQuery.of(context).size.width * 0.04,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -90,23 +94,24 @@ class _CartListItemState extends State<CartListItem> {
                     const SizedBox(height: 15),
                     Row(
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                               ((count * widget.item.price).toInt()).toString(),
-                              style: AppStyles.textStyle16.copyWith(
-                                color: AppLightColor.mainColor,
-                              ),
-                            ),
-                            const SizedBox(width: 5),
-                            Text(
-                              'EGP',
-                              style: AppStyles.textStyle16.copyWith(
-                                color: AppLightColor.blackColor,
-                              ),
-                            ),
-                          ],
+                        Text(
+                           ((count * widget.item.price).toInt()).toString(),
+                          style: AppStyles.textStyle16.copyWith(
+                            color: AppLightColor.mainColor,
+                          ),
                         ),
+                        const SizedBox(width: 5),
+                        Text(
+                          'EGP',
+                          style: AppStyles.textStyle16.copyWith(
+                            color: AppLightColor.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
                         Transform.scale(
                            scale: 0.77,
                           child: IncreaseAndDecreseCount(
@@ -128,7 +133,7 @@ class _CartListItemState extends State<CartListItem> {
                             widget.onCountChanged();
                           },
                                               ),
-                        )
+                        ),
                       ],
                     )
                     ]
