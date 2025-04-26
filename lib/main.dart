@@ -31,11 +31,13 @@ import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/update_health_cubit.dart';
 import 'package:fitfat/features/profile/presentation/views/profile_view.dart';
+import 'package:fitfat/features/profile/presentation/widgets/personal_user_data.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
     show SuggestionsCubit;
+import 'package:fitfat/features/warning/warning.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,13 +86,14 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-              GetHealthInfoCubit(apiServices)..getUserProfile(),
+              GetHealthInfoCubit(apiServices)..getUserProfile(context: context),
         ),
         BlocProvider(
           create: (context) => GetDietInfoCubit(apiServices)..getDietInfo(),
         ),
         BlocProvider(
-          create: (context) => UserCubit(DioComsumer(dio: Dio())),
+          create: (context) => UserCubit(apiServices),
+          child: const PersonalUserData(),
         ),
         BlocProvider(
             create: (context) => AccountSettingsCubit(DioComsumer(dio: Dio()))),
@@ -154,7 +157,7 @@ class MyApp extends StatelessWidget {
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          home: LoginSignUp(ApiServices),
+          home: const Warning(),
           getPages: [
             GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
             GetPage(
@@ -163,7 +166,7 @@ class MyApp extends StatelessWidget {
                 return const OtpScreen();
               },
             ),
-             // Add OTP Screen route
+            // Add OTP Screen route
           ]
           /*  initialRoute: '/', // Define initial route
         ,*/

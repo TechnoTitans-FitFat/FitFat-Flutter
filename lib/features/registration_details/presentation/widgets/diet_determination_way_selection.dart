@@ -14,7 +14,9 @@ class DietDeterminationWaySelection extends StatelessWidget {
       children: [
         Text(
           "How would you like to determine your diet information?",
-          style: TextStyle(fontWeight: AppStyles.textStyle24.fontWeight,fontSize: AppStyles.textStyle18.fontSize),
+          style: TextStyle(
+              fontWeight: AppStyles.textStyle24.fontWeight,
+              fontSize: AppStyles.textStyle18.fontSize),
         ),
         const SizedBox(
           height: 24,
@@ -31,20 +33,24 @@ class DietDeterminationWaySelection extends StatelessWidget {
                 background: AppLightColor.whiteColor,
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => InputMyDietView(
-                                userId: userId,
-                              )));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => InputMyDietView(
+                        userId: userId,
+                      ),
+                    ),
+                  );
                 },
               ),
             ),
-            const SizedBox(width: 10,),
+            const SizedBox(
+              width: 10,
+            ),
             Expanded(
               child: CustomButton(
                 // flex: 4,
                 borderColor: AppLightColor.mainColor,
-                widget: "CalCulate it For Me",
+                widget: "Calc it For Me",
                 widgetColor: AppLightColor.blackColor,
                 background: AppLightColor.whiteColor,
                 onPressed: () {

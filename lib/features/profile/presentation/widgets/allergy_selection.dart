@@ -1,3 +1,4 @@
+import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/profile/presentation/data/update_health_cubit.dart';
 import 'package:fitfat/features/profile/presentation/models/update_health_model.dart';
 import 'package:flutter/material.dart';
@@ -24,18 +25,25 @@ class _AllergySelectionState extends State<AllergySelection> {
       listener: (context, state) {
         if (state is HealthInfoLoaded) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Health Info Updated Successfully!")),
+            const SnackBar(content: Text("Health Info Updated Successfully!")),
           );
         } else if (state is HealthInfoError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Error: ${state.message}")),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   SnackBar(content: Text("Error: ${state.message}")),
+          // );
         }
       }, builder: (BuildContext context, state) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Allergies",style: TextStyle(
+            fontSize: AppStyles.textStyle16.fontSize,
+            fontWeight: AppStyles.textStyle18.fontWeight),),
+          ),
           DropdownMenu(
+            hintText: "Peanuts",
             width: MediaQuery
                 .of(context)
                 .size
@@ -56,12 +64,10 @@ class _AllergySelectionState extends State<AllergySelection> {
                 });
                 widget.onAllergySelected(_selectedAllergy!);
                 final updatedHealthInfo = UpdateHealthInfo(
-                    foodAllergies: newAllergy,
-                    targetBloodSugarRange:
-                    TargetBloodSugarRange(min: 78, max: 110));
+                    foodAllergies: newAllergy,);
                 context
                     .read<UpdateHealthInfoCubit>()
-                    .updateHealthInfo(updatedHealthInfo);
+                    .updateHealthInfo(updatedHealthInfo,context: context);
               }
             },
           ),

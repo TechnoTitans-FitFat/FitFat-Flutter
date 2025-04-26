@@ -30,7 +30,7 @@ class WeightAndHeightTextField extends StatelessWidget {
             color: AppLightColor.greyColor1,
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(5),
           ),
         ),
       ),

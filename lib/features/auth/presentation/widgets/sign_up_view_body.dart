@@ -74,7 +74,6 @@ class SignUpViewBody extends StatelessWidget {
                       sufIconNot: Icons.visibility_off,
                       sufIcon: Icons.visibility,
                       noti: 'Please enter the password',
-                      obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Password is required';
@@ -92,7 +91,6 @@ class SignUpViewBody extends StatelessWidget {
                       sufIconNot: Icons.visibility_off,
                       sufIcon: Icons.visibility,
                       noti: 'Please confirm your password',
-                      obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please confirm your password';

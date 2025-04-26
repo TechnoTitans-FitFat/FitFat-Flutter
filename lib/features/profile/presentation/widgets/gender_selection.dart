@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GenderSelection extends StatefulWidget {
-  GenderSelection({super.key, required this.onGenderSelected});
+  const GenderSelection({super.key, required this.onGenderSelected});
 
   final Function(String) onGenderSelected;
 
@@ -16,7 +16,6 @@ class GenderSelection extends StatefulWidget {
 
 class _GenderSelectionState extends State<GenderSelection> {
   String? _selectedGender;
-  bool? _isValidGender = true;
 
   List<String> items = ["Male", "Female", "Other"];
 
@@ -26,12 +25,12 @@ class _GenderSelectionState extends State<GenderSelection> {
         listener: (context, state) {
       if (state is HealthInfoLoaded) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Health Info Updated Successfully!")),
+          const SnackBar(content: Text("Health Info Updated Successfully!")),
         );
       } else if (state is HealthInfoError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error: ${state.message}")),
-        );
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: Text("Error: ${state.message}")),
+        // );
       }
     }, builder: (context, state) {
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -48,12 +47,12 @@ class _GenderSelectionState extends State<GenderSelection> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              decoration: BoxDecoration(border:Border.all(color: Colors.grey),borderRadius: BorderRadius.all(Radius.circular(8))),
+              decoration: BoxDecoration(border:Border.all(color: Colors.grey),borderRadius: const BorderRadius.all(Radius.circular(8))),
               child: DropdownButton<String>(
                 value: _selectedGender,
                 hint: const Text("Select Gender"),
                 dropdownColor: AppLightColor.whiteColor,
-                underline: SizedBox(),
+                underline: const SizedBox(),
                 items: items.map((String item) {
                   return DropdownMenuItem<String>(
                     value: item,
@@ -65,17 +64,13 @@ class _GenderSelectionState extends State<GenderSelection> {
                     setState(() {
                       _selectedGender = newValue;
                     });
-
-                    // 🔹 إرسال القيمة إلى الوظيفة المستقبلة
                     widget.onGenderSelected(newValue);
 
                     final updatedHealthInfo = UpdateHealthInfo (
-                        gender: newValue,
-                        targetBloodSugarRange:
-                            TargetBloodSugarRange(min: 78, max: 110));
+                        gender: newValue,);
                     context
                         .read<UpdateHealthInfoCubit>()
-                        .updateHealthInfo(updatedHealthInfo);
+                        .updateHealthInfo(updatedHealthInfo,context: context);
                   }
 
 

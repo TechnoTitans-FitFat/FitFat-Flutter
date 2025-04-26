@@ -34,12 +34,12 @@ class _FirstContainerState extends State<FirstContainer> {
         listener: (context, state) {
           if (state is HealthInfoLoaded) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Health Info Updated Successfully!")),
+              const SnackBar(content: Text("Health Info Updated Successfully!")),
             );
           } else if (state is HealthInfoError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Error: ${state.message}")),
-            );
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   SnackBar(content: Text("Error: ${state.message}")),
+            // );
           }
         }, builder: (context, state) {
       return Container(
@@ -76,15 +76,24 @@ class _FirstContainerState extends State<FirstContainer> {
               DateOfBirthSection(
                 onDateChanged: (String dob) {
                   setState(() {
-                    dateOfBirth = dob;
+                    List<String> parts = dob.split('/');
+                    if (parts.length == 3) {
+                      String formattedDate = "${parts[2]}-${parts[1]}-${parts[0]}"; // yyyy-MM-dd
+
+                      dateOfBirth = formattedDate;
+                      print("🗓 Formatted Date: $dateOfBirth");
+
+                      final updatedHealthInfo = UpdateHealthInfo(
+                        dateOfBirth: dateOfBirth,
+                      );
+
+                      print("🚀 Sending update request with: ${updatedHealthInfo.toJson()}");
+
+                      context.read<UpdateHealthInfoCubit>().updateHealthInfo(updatedHealthInfo,context: context);
+                    } else {
+                      print("⚠ Invalid date format received: $dob");
+                    }
                   });
-                  final updatedHealthInfo = UpdateHealthInfo (
-                      dateOfBirth: dateOfBirth,
-                      targetBloodSugarRange:
-                      TargetBloodSugarRange(min: 78, max: 110));
-                  context
-                      .read<UpdateHealthInfoCubit>()
-                      .updateHealthInfo(updatedHealthInfo);
                 },
               ),
               Row(
@@ -105,12 +114,11 @@ class _FirstContainerState extends State<FirstContainer> {
                         TextFieldProfile(
                           onChange: (value){
                             final updatedHealthInfo = UpdateHealthInfo (
-                                height: heightController.text.isNotEmpty ? int.tryParse(heightController.text): null,
-                                targetBloodSugarRange:
-                                TargetBloodSugarRange(min: 78, max: 110));
+                                height: heightController.text.isNotEmpty ? double.tryParse(heightController.text): null,
+                                );
                             context
                                 .read<UpdateHealthInfoCubit>()
-                                .updateHealthInfo(updatedHealthInfo);
+                                .updateHealthInfo(updatedHealthInfo,context: context);
                           },
                           hint: "Height",
                           lable: "Height",
@@ -141,12 +149,11 @@ class _FirstContainerState extends State<FirstContainer> {
                           hint: "Weight",
                           onChange: (value){
                             final updatedHealthInfo = UpdateHealthInfo (
-                                weight: weightController.text.isNotEmpty ? int.tryParse(weightController.text): null,
-                                targetBloodSugarRange:
-                                TargetBloodSugarRange(min: 78, max: 110));
+                                weight: weightController.text.isNotEmpty ? double.tryParse(weightController.text): null,
+                                );
                             context
                                 .read<UpdateHealthInfoCubit>()
-                                .updateHealthInfo(updatedHealthInfo);
+                                .updateHealthInfo(updatedHealthInfo,context: context);
                           },
                         ),
                       ],

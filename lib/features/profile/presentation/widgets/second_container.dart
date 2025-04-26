@@ -1,14 +1,17 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/profile/presentation/data/update_health_cubit.dart';
+import 'package:fitfat/features/profile/presentation/models/update_health_model.dart';
 import 'package:fitfat/features/profile/presentation/widgets/allergy_selection.dart';
 import 'package:fitfat/features/profile/presentation/widgets/blood_suger.dart';
 import 'package:fitfat/features/profile/presentation/widgets/carb_ration_input.dart';
+import 'package:fitfat/features/profile/presentation/widgets/correction_factor.dart';
 import 'package:fitfat/features/profile/presentation/widgets/diabetes_type_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SecondContainer extends StatefulWidget {
-   SecondContainer({super.key});
+   const SecondContainer({super.key});
 
   @override
   State<SecondContainer> createState() => _SecondContainerState();
@@ -17,6 +20,8 @@ class SecondContainer extends StatefulWidget {
 class _SecondContainerState extends State<SecondContainer> {
   String allergy = 'Peanuts';
   String dietType = 'Type 1';
+  final TextEditingController carbToRatio = TextEditingController();
+  final TextEditingController correctionFactor = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -75,13 +80,27 @@ class _SecondContainerState extends State<SecondContainer> {
                         fontSize: AppStyles.textStyle18.fontSize),
                   ),
                 ),
-                InsulinToCarbRatioInput(onRatioChanged: (String ) {  },),
+                InsulinToCarbRatioInput(onRatioChanged: (value ) {
+                  final updatedHealthInfo = UpdateHealthInfo (
+                       insulinToCarbRatio: carbToRatio.text.isNotEmpty ? double.tryParse(carbToRatio.text): null,
+                      );
+                  context
+                      .read<UpdateHealthInfoCubit>()
+                      .updateHealthInfo(updatedHealthInfo,context: context);
+                },controller: carbToRatio,),
                 Padding(
-                  padding: const EdgeInsets.only(left: 8.0,top: 8.0),
-                  child: Text("Blood Suger range",style: TextStyle(fontWeight: AppStyles.textStyle18.fontWeight,
+                  padding: const EdgeInsets.all(8),
+                  child: Text("What is your correction factor ?",style: TextStyle(fontWeight: AppStyles.textStyle18.fontWeight,
                       fontSize: AppStyles.textStyle18.fontSize)),
                 ),
-                BloodSuger(currentRange: const RangeValues(70, 180),)
+                CorrectionFactor(controller: correctionFactor,onFactorChanged: (value){
+                  final updatedHealthInfo = UpdateHealthInfo (
+                      correctionFactor: correctionFactor.text.isNotEmpty ? double.tryParse(correctionFactor.text): null,
+                      );
+                  context
+                      .read<UpdateHealthInfoCubit>()
+                      .updateHealthInfo(updatedHealthInfo,context: context);
+                },)
               ],
             ),
           )),
