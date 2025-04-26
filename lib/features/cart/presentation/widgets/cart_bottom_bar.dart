@@ -18,7 +18,7 @@ class _CartBottomBarState extends State<CartBottomBar> {
   Widget build(BuildContext context) {
      final subtotal = widget.cartItems.fold<double>(
       0,
-      (sum, item) => sum + (item.price * item.count),
+      (sum, item) => sum + (item.price * item.count).toInt(),
     );
     final tax = 50;
     final total = subtotal + tax;
