@@ -89,12 +89,11 @@ class _CartListItemState extends State<CartListItem> {
                     ),
                     const SizedBox(height: 15),
                     Row(
-                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
                             Text(
-                               (count * widget.item.price).toStringAsFixed(1),
+                               ((count * widget.item.price).toInt()).toString(),
                               style: AppStyles.textStyle16.copyWith(
                                 color: AppLightColor.mainColor,
                               ),
