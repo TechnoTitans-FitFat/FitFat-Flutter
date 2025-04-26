@@ -157,7 +157,7 @@ class MyApp extends StatelessWidget {
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          home: const Warning(),
+          home: LoginSignUp(DioComsumer(dio: Dio())),
           getPages: [
             GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
             GetPage(
