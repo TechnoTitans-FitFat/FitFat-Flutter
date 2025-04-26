@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 
 class CartListItem extends StatefulWidget {
   final CartModel item;
-  const CartListItem({super.key, required this.item});
+  final VoidCallback onCountChanged; 
+  const CartListItem({super.key, required this.item, required this.onCountChanged});
 
   @override
   State<CartListItem> createState() => _CartListItemState();
@@ -93,7 +94,7 @@ class _CartListItemState extends State<CartListItem> {
                         Row(
                           children: [
                             Text(
-                              widget.item.price.toString(),
+                               (count * widget.item.price).toStringAsFixed(1),
                               style: AppStyles.textStyle16.copyWith(
                                 color: AppLightColor.mainColor,
                               ),
@@ -114,14 +115,18 @@ class _CartListItemState extends State<CartListItem> {
                           onIncrement: () {
                             setState(() {
                               count++;
+                               widget.item.count = count;
                             });
+                            widget.onCountChanged();
                           },
                           onDecrement: () {
                             setState(() {
                               if (count > 1) {
                                 count--;
+                                widget.item.count = count;
                               }
                             });
+                            widget.onCountChanged();
                           },
                                               ),
                         )
