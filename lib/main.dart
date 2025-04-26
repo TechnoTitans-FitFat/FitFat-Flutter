@@ -37,6 +37,7 @@ import 'package:fitfat/features/registration_details/data/cubit/health_info_cubi
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
     show SuggestionsCubit;
+import 'package:fitfat/features/warning/warning.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,7 +93,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UserCubit(apiServices),
-          child: PersonalUserData(),
+          child: const PersonalUserData(),
         ),
         BlocProvider(
             create: (context) => AccountSettingsCubit(DioComsumer(dio: Dio()))),
@@ -156,7 +157,7 @@ class MyApp extends StatelessWidget {
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          home: LoginSignUp(DioComsumer(dio: Dio())),
+          home: const Warning(),
           getPages: [
             GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
             GetPage(
