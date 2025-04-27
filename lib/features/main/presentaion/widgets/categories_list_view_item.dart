@@ -13,7 +13,6 @@ class CategoriesListViewItem extends StatelessWidget {
   final bool showType;
   final String id;
 
-
   const CategoriesListViewItem({
     super.key,
     required this.title,
@@ -22,8 +21,8 @@ class CategoriesListViewItem extends StatelessWidget {
     required this.calories,
     required this.rating,
     required this.price,
-    this.showType = true, required this.id,
-  
+    this.showType = true,
+    required this.id,
   });
 
   @override
@@ -33,7 +32,7 @@ class CategoriesListViewItem extends StatelessWidget {
       shadowColor: Colors.black,
       color: AppLightColor.whiteColor,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(14),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,15 +43,22 @@ class CategoriesListViewItem extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(15))),
               child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailsView(mealId: id )));
-                  },
-                  child: Image.network(imagePath, fit: BoxFit.cover)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailsView(mealId: id)));
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    imagePath,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 15),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,8 +77,8 @@ class CategoriesListViewItem extends StatelessWidget {
                           visible: type != "Diabetes" && type != null,
                           child: Container(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 5,
+                              horizontal: 8,
+                              vertical: 4,
                             ),
                             decoration: BoxDecoration(
                               color: AppLightColor.mainColor.withOpacity(0.15),
@@ -86,11 +92,11 @@ class CategoriesListViewItem extends StatelessWidget {
                             ),
                           ),
                         ),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 5),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 5,
+                          horizontal: 8,
+                          vertical: 4,
                         ),
                         decoration: BoxDecoration(
                           color: AppLightColor.mainColor.withOpacity(0.15),

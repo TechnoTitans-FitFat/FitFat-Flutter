@@ -23,8 +23,13 @@ class _DayBoxPickDateOfBirthState extends State<DayBoxPickDateOfBirth> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DropdownMenu(
+          menuStyle: const MenuStyle(
+            backgroundColor: WidgetStatePropertyAll(
+              AppLightColor.backgroundColor,
+            ),
+          ),
           menuHeight: 200,
-          width: MediaQuery.of(context).size.width * 0.24,
+          width: MediaQuery.of(context).size.width * 0.28,
           label: Text(
             "Day",
             style: GoogleFonts.roboto(

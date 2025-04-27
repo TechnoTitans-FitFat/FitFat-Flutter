@@ -26,6 +26,12 @@ class _MonthBoxPickDateOfBirthState extends State<MonthBoxPickDateOfBirth> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DropdownMenu(
+          menuStyle: const MenuStyle(
+            backgroundColor: WidgetStatePropertyAll(
+              AppLightColor.backgroundColor,
+            ),
+          ),
+          menuHeight: 200,
           width: MediaQuery.of(context).size.width * 0.3,
           label: Text(
             "Month",

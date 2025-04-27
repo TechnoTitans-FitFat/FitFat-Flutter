@@ -5,6 +5,7 @@ import 'package:fitfat/features/profile/presentation/data/health_info_cubit.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class HealthUserData extends StatefulWidget {
   const HealthUserData({super.key});
@@ -17,7 +18,9 @@ class _DietUserDataState extends State<HealthUserData> {
   @override
   void initState() {
     super.initState();
-    context.read<GetHealthInfoCubit>().getUserProfile();
+    Future.microtask(() {
+      context.read<GetHealthInfoCubit>().getUserProfile(context: context);
+    });
   }
 
   @override
@@ -33,17 +36,19 @@ class _DietUserDataState extends State<HealthUserData> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is UserLoaded) {
           final healthInfo = state.dietModel;
-          print("🟢 User data loaded: ${healthInfo.healthInfo}");
+          DateTime dateTime =
+              DateTime.parse(healthInfo.healthInfo!.dateOfBirth);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              infoText('Gender', healthInfo.healthInfo.gender),
+              infoText('Gender', healthInfo.healthInfo!.gender),
               const SizedBox(height: 5),
-              infoText('Date Of Birth', healthInfo.healthInfo.dateOfBirth),
+              infoText(
+                  'Date Of Birth', (DateFormat('dd/MM/yyyy').format(dateTime))),
               const SizedBox(height: 5),
-              infoText('Height', '${healthInfo.healthInfo.height} cm'),
+              infoText('Height', '${healthInfo.healthInfo!.height} cm'),
               const SizedBox(height: 5),
-              infoText('Weight', '${healthInfo.healthInfo.weight} kg'),
+              infoText('Weight', '${healthInfo.healthInfo!.weight} kg'),
               const SizedBox(height: 10),
               const Divider(color: AppLightColor.blackColor, endIndent: 24),
               Text(
@@ -57,23 +62,29 @@ class _DietUserDataState extends State<HealthUserData> {
               const SizedBox(height: 15),
               infoText(
                 'Allergies',
-                healthInfo.healthInfo.foodAllergies.isNotEmpty ? healthInfo.healthInfo.foodAllergies : 'None',
+                healthInfo.healthInfo!.foodAllergies.isNotEmpty
+                    ? healthInfo.healthInfo!.foodAllergies
+                    : 'None',
               ),
               const SizedBox(height: 5),
-              infoText('Diabetes', healthInfo.healthInfo.diabetes ? "Yes" : "No"),
-              if (healthInfo.healthInfo.diabetes)
-                const SizedBox(height: 5),
-              if (healthInfo.healthInfo.diabetes)
+              if (healthInfo.healthInfo!.diabetes) const SizedBox(height: 5),
+              if (healthInfo.healthInfo!.diabetes)
                 infoText(
                   'Type of Diabetes',
-                  healthInfo.healthInfo.diabetesType.isNotEmpty ? healthInfo.healthInfo.diabetesType : 'N/A',
+                  healthInfo.healthInfo!.diabetesType.isNotEmpty
+                      ? healthInfo.healthInfo!.diabetesType
+                      : 'N/A',
                 ),
-              const SizedBox(height: 15),
-              infoText('Blood Sugar Range','${healthInfo.healthInfo.targetBloodSugarRange.min}-${healthInfo.healthInfo.targetBloodSugarRange.max}' )
+              const SizedBox(height: 5),
+              infoText("Insulin_TO_Carb Ratio ",
+                  '1:${healthInfo.healthInfo!.insulinToCarbRatio}'),
+              const SizedBox(height: 5),
+              infoText('Correction Factor',
+                  '${healthInfo.healthInfo!.correctionFactor}')
             ],
           );
         } else if (state is UserError) {
-          return Center(child: Text("Error: ${state.message}"));
+          return Center(child: Text(" ${state.message}"));
         }
         return const Center(child: Text("No data available"));
       },

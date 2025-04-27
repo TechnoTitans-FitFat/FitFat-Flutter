@@ -1,4 +1,3 @@
-
 class GetDietInfoModel {
   final bool status;
   final DietInfo dietInfo;

@@ -16,7 +16,6 @@ class SignUpViewBody extends StatelessWidget {
     return BlocConsumer<RegisterCubit, SignUpStates>(
       listener: (context, state) {
         if (state is SignUpFalier) {
-          // Show error message
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.errorMassage.toString()),
@@ -24,8 +23,6 @@ class SignUpViewBody extends StatelessWidget {
             ),
           );
         }
-
-        // No need to handle navigation here as it's handled in the cubit
       },
       builder: (context, state) {
         final cubit = context.read<RegisterCubit>();
@@ -77,7 +74,6 @@ class SignUpViewBody extends StatelessWidget {
                       sufIconNot: Icons.visibility_off,
                       sufIcon: Icons.visibility,
                       noti: 'Please enter the password',
-                      obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Password is required';
@@ -95,7 +91,6 @@ class SignUpViewBody extends StatelessWidget {
                       sufIconNot: Icons.visibility_off,
                       sufIcon: Icons.visibility,
                       noti: 'Please confirm your password',
-                      obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please confirm your password';

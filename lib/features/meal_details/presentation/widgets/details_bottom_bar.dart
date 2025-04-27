@@ -1,14 +1,22 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
+import 'package:fitfat/features/meal_details/presentation/widgets/increase_and_decrese_count.dart';
 import 'package:flutter/material.dart';
 
-class DetailsBottomBar extends StatelessWidget {
+class DetailsBottomBar extends StatefulWidget {
   const DetailsBottomBar({
     super.key,
     required this.price,
   });
   final double price;
 
+  @override
+  State<DetailsBottomBar> createState() => _DetailsBottomBarState();
+}
+
+class _DetailsBottomBarState extends State<DetailsBottomBar> {
+  int count = 1;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,48 +31,26 @@ class DetailsBottomBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: AppLightColor.mainColor,
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.remove,
-                        color: AppLightColor.whiteColor,
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        height: 24,
-                        width: 24,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(24),
-                          color: AppLightColor.whiteColor,
-                        ),
-                        child: Center(
-                          child: Text(
-                            '1',
-                            style: AppStyles.textStyle18,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      const Icon(
-                        Icons.add,
-                        color: AppLightColor.whiteColor,
-                      ),
-                    ],
-                  ),
-                ),
+              IncreaseAndDecreseCount(
+                count: count,
+                onIncrement: () {
+                  setState(() {
+                    count++;
+                  });
+                },
+                onDecrement: () {
+                  setState(() {
+                    if (count > 1) {
+                      count--;
+                    }
+                  });
+                },
               ),
               const SizedBox(height: 8),
               Row(
                 children: [
                   Text(
-                    price.toString(),
+                    (count * widget.price).toStringAsFixed(2),
                     style: AppStyles.textStyle24,
                   ),
                   const SizedBox(width: 8),
@@ -77,18 +63,23 @@ class DetailsBottomBar extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            height: 45,
-            width: 162,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: AppLightColor.mainColor,
-            ),
-            child: Center(
-              child: Text(
-                'Add To Cart',
-                style: AppStyles.textStyle16
-                    .copyWith(color: AppLightColor.whiteColor),
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>  CartScreen()));
+            },
+            child: Container(
+              height: 45,
+              width: 162,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: AppLightColor.mainColor,
+              ),
+              child: Center(
+                child: Text(
+                  'Add To Cart',
+                  style: AppStyles.textStyle16
+                      .copyWith(color: AppLightColor.whiteColor),
+                ),
               ),
             ),
           ),

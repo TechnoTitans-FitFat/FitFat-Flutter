@@ -5,44 +5,59 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PersonalUserData extends StatelessWidget {
+class PersonalUserData extends StatefulWidget {
   const PersonalUserData({super.key});
+
+  @override
+  State<PersonalUserData> createState() => _PersonalUserDataState();
+}
+
+class _PersonalUserDataState extends State<PersonalUserData> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      context.read<UserCubit>().userProfile(context: context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
-    return BlocConsumer<UserCubit,UserState>(
-        listener: ( context, state) {
-      if(state is UserError){
-        showSnackBar(context, state.message);
-      }if(state is UserLoaded){
+    return BlocConsumer<UserCubit, UserState>(
+      listener: (context, state) {
+        if (state is UserError) {
+          showSnackBar(context, state.message);
+        }
+      },
+      builder: (context, state) {
+        if (state is UserLoaded) {
           final user = state.user;
-      }
-    },
-    builder: ( context, state) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 50),
-          child: Center(
-            child: ImageUpload(),
-          ),
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        Text(
-          "yasmeen",
-          style: GoogleFonts.roboto(
-              fontSize: 18, fontWeight: FontWeight.w400),
-        ),
-        Text(
-          "yasmeenyasser701@gmail.com",
-          style: GoogleFonts.roboto(
-              fontSize: 18, fontWeight: FontWeight.w400),
-        )
-      ],
-    );
-  }
+          return Column(
+            children: [
+              const Center(
+                child: ImageUpload(),
+              ),
+              const SizedBox(height: 15),
+              Text(
+                user.username,
+                style: GoogleFonts.roboto(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400
+                ),
+              ),
+              Text(
+                user.email,
+                style: GoogleFonts.roboto(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400
+                ),
+              )
+            ],
+          );
+        }
+        return const CircularProgressIndicator();
+      },
     );
   }
 }

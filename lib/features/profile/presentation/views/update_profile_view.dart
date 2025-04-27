@@ -13,14 +13,14 @@ class UpdateProfile extends StatefulWidget {
 class _UpdateProfileState extends State<UpdateProfile> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xffFBE0E2),
-      appBar: CustomAppbarProfile(),
-      body: Padding(padding: EdgeInsets.only(top: 18,left: 18,right: 18), child: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: const Color(0xffFBE0E2),
+      appBar: const CustomAppbarProfile(),
+      body: Padding(padding: const EdgeInsets.only(top: 18,left: 18,right: 18), child: SingleChildScrollView(
         child: Column(
           children: [
-            FirstContainer(),
-            SizedBox(height: 30,),
+            const FirstContainer(),
+            const SizedBox(height: 30,),
             SecondContainer(),
           ],
         ),
