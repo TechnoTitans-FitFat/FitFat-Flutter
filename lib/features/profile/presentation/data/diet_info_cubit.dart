@@ -18,7 +18,7 @@ class GetDietInfoCubit extends Cubit<DietInfoState> {
         endpoint: 'https://fitfat-backend.up.railway.app/api/dietInfo/67e5eb180b8e8a027bd2d5a7'
       );
 
-      final data = response.data;;
+      final data = response.data;
       if (data["status"] == true) {
         final dietInfo = GetDietInfoModel.fromJson(data);
         emit(DietInfoLoaded(dietInfo));

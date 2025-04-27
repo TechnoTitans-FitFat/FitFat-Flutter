@@ -11,14 +11,14 @@ class PasswordInputField extends StatelessWidget {
   final bool showToggleIcon;
 
   const PasswordInputField({
-    Key? key,
+    super.key,
     required this.label,
     required this.controller,
     required this.obscureText,
     this.toggleVisibility,
     this.validator,
     this.showToggleIcon = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

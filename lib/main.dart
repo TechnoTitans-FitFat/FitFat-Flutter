@@ -155,24 +155,24 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CartCubit(apiServices)..addCartAndIncrement(context: context))
       ],
       child: GetMaterialApp(
-          useInheritedMediaQuery: true,
-          locale: DevicePreview.locale(context),
-          builder: DevicePreview.appBuilder,
-          debugShowCheckedModeBanner: false,
-          home: const LoginSignUp(DioComsumer),
-          getPages: [
-            GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
-            GetPage(
-              name: '/otpScreen',
-              page: () {
-                return const OtpScreen();
-              },
-            ),
-            // Add OTP Screen route
-          ]
-          /*  initialRoute: '/', // Define initial route
-        ,*/
-          ),
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      debugShowCheckedModeBanner: false,
+      home: LoginSignUp(DioComsumer(dio: Dio())),
+      getPages: [
+        GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
+        GetPage(
+          name: '/otpScreen',
+          page: () {
+            return const OtpScreen();
+          },
+        ),
+        // Add OTP Screen route
+      ]
+      // Define initial route
+      ,
+    ),
     );
   }
 }
