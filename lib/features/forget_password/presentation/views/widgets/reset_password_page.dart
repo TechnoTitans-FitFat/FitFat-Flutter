@@ -13,10 +13,10 @@ class ResetPasswordPage extends StatefulWidget {
   final TextEditingController confirmPasswordController;
 
   const ResetPasswordPage({
-    Key? key,
+    super.key,
     required this.newPasswordController,
     required this.confirmPasswordController,
-  }) : super(key: key);
+  });
 
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
@@ -40,13 +40,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           // Navigate to login screen
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => LoginSignUp(DioComsumer)),
+            MaterialPageRoute(builder: (context) => const LoginSignUp(DioComsumer)),
             (route) => false,
           );
         } else if (state.status == ForgotPasswordStatus.error) {
           // Add this condition to handle error status
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text(
                   'password mast have Capital letters "A-Z" and Small letter "a-z" and Special Character'),
               backgroundColor: Colors.red,

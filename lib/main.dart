@@ -168,8 +168,8 @@ class MyApp extends StatelessWidget {
             ),
             // Add OTP Screen route
           ]
-          /*  initialRoute: '/', // Define initial route
-        ,*/
+            // Define initial route
+        ,
           ),
     );
   }
