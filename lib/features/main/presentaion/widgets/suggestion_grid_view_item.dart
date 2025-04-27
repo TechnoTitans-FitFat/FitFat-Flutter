@@ -1,7 +1,10 @@
+import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
+import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SuggestionGridViewItem extends StatelessWidget {
   const SuggestionGridViewItem({
@@ -41,10 +44,11 @@ class SuggestionGridViewItem extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DetailsView(mealId: id, )));
+                    MaterialPageRoute(
+                        builder: (context) => DetailsView(mealId: id,)));
               },
               child: Hero(
-                tag:imageUrl ,
+                tag: imageUrl,
                 child: Container(
                   width: double.infinity,
                   height: 100,
@@ -70,8 +74,11 @@ class SuggestionGridViewItem extends StatelessWidget {
               title,
               style: AppStyles.textStyle16
                   .copyWith(color: AppLightColor.blackColor,
-                  fontSize: MediaQuery.of(context).size.width * 0.05,
-                  ),
+                fontSize: MediaQuery
+                    .of(context)
+                    .size
+                    .width * 0.05,
+              ),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),
@@ -80,7 +87,7 @@ class SuggestionGridViewItem extends StatelessWidget {
               children: [
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   decoration: BoxDecoration(
                     color: AppLightColor.mainColor.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(15),
@@ -90,8 +97,11 @@ class SuggestionGridViewItem extends StatelessWidget {
                     child: Text('$calories cal',
                         style: AppStyles.textStyle12
                             .copyWith(color: AppLightColor.mainColor,
-                            fontSize: MediaQuery.of(context).size.width * 0.034,
-                            )),
+                          fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .width * 0.034,
+                        )),
                   ),
                 ),
                 const Spacer(),
@@ -105,29 +115,43 @@ class SuggestionGridViewItem extends StatelessWidget {
                   child: Text(price.toString(),
                       style: AppStyles.textStyle16
                           .copyWith(color: AppLightColor.mainColor,
-                          fontSize: MediaQuery.of(context).size.width * 0.041,
-                          )),
+                        fontSize: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.041,
+                      )),
                 ),
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(" EGP",
                       style: AppStyles.textStyle16
                           .copyWith(color: AppLightColor.blackColor,
-                          fontSize: MediaQuery.of(context).size.width * 0.041,
-                          )),
+                        fontSize: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.041,
+                      )),
                 ),
                 const Spacer(),
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppLightColor.mainColor,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(5),
-                    child: Icon(
-                      Icons.add,
-                      color: AppLightColor.whiteColor,
-                      size: 20,
+                GestureDetector(
+                  onTap: () {
+      context.read<CartCubit>()
+        ..productId = id
+        ..quantity = 1
+        ..addCartAndIncrement(context: context);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppLightColor.mainColor,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Icon(
+                        Icons.add,
+                        color: AppLightColor.whiteColor,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ),
