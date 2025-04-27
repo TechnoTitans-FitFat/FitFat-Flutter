@@ -12,6 +12,7 @@ class FavouritesView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppLightColor.backgroundColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: AppLightColor.backgroundColor,
         title: Center(
             child: Text('My Favourites',
