@@ -16,9 +16,6 @@ class PersonalUserData extends StatelessWidget {
         showSnackBar(context, state.message);
       }if(state is UserLoaded){
           final user = state.user;
-          if (user == null) {
-            print("User's data can't loaded");
-          }
       }
     },
     builder: ( context, state) {

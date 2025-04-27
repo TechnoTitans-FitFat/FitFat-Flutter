@@ -19,7 +19,7 @@ class GetDietInfoCubit extends Cubit<DietInfoState> {
         endpoint: "${EndPoint.dietInfo}$id",
       );
 
-      final data = response.data;;
+      final data = response.data;
       if (data["status"] == true) {
         final dietInfo = GetDietInfoModel.fromJson(data);
         emit(DietInfoLoaded(dietInfo));

@@ -57,11 +57,11 @@ class CustomProfileCard extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              HealthUserData(),
+              const HealthUserData(),
               const SizedBox(
                 height: 5,
               ),
-              DietUserData(),
+              const DietUserData(),
               const SizedBox(
                 height: 5,
               ),

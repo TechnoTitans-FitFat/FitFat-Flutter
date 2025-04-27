@@ -1,5 +1,4 @@
 
-import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/cache/cache_helper.dart';
 import 'package:fitfat/features/profile/presentation/models/health_model.dart';
