@@ -20,43 +20,31 @@ class DetailsView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppLightColor.backgroundColor,
-      body: BlocBuilder<MealDetailsCubit, MealDetailsState>(
-        builder: (context, state) {
-          if (state is MealDetailsLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is MealDetailsSucess) {
-          //  print("MealDetailsSuccess Data: ${state.data}");
+     body: BlocBuilder<MealDetailsCubit, MealDetailsState>(
+  builder: (context, state) {
+    if (state is MealDetailsLoading) {
+      return const Center(child: CircularProgressIndicator());
+    } else if (state is MealDetailsSucess) {
+      final meal = state.data.first; // ✅ No need to filter by id anymore
 
-            final meals = state.data.where((m) => m.id == mealId).toList();
+      return Column(
+        children: [
+          Expanded(child: DetailsViewBody(meal: meal)),
+          DetailsBottomBar(price: meal.price),
+        ],
+      );
+    } else if (state is MealDetailsFailure) {
+      return Center(
+        child: Text(
+          "Error: ${state.errMessage}",
+          style: const TextStyle(fontSize: 16, color: Colors.red),
+        ),
+      );
+    }
+    return const SizedBox();
+  },
+),
 
-            if (meals.isEmpty) {
-              return const Center(
-                child: Text(
-                  "Meal not found!",
-                  style: TextStyle(fontSize: 18, color: Colors.red),
-                ),
-              );
-            }
-
-            final meal = meals.first;
-
-            return Column(
-              children: [
-                Expanded(child: DetailsViewBody(meal: meal)), 
-                DetailsBottomBar(price: meal.price), 
-              ],
-            );
-          } else if (state is MealDetailsFailure) {
-            return Center(
-              child: Text(
-                "Error: ${state.errMessage}",
-                style: const TextStyle(fontSize: 16, color: Colors.red),
-              ),
-            );
-          }
-          return const SizedBox();
-        },
-      ),
     );
   }
 }
