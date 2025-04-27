@@ -34,7 +34,7 @@ class EndPoint {
       '$baseUrl/api/recipes/healthy?category=allergy&allergy=ShellFish&rating=5';
   static String logout = '$baseUrl/logout';
   static String profile = "$baseUrl/api/users/";
-  static String getHealthInfo = "$baseUrl/api/healthInfo/";
+  static String getHealthInfo = "https://fitfattt.azurewebsites.net/api/healthInfo/";
   static String getDietInfo = "$baseUrl/api/dietInfo/";
   static String menu = '/api/recipes//unhealthy?';
   static const String resendOtp = '/resend-otp';
