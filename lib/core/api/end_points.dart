@@ -1,5 +1,5 @@
 class EndPoint {
-  static String baseUrl = "https://fitfat-backend.up.railway.app";
+  static String baseUrl = "https://fitfattt.azurewebsites.net";
   static String signIn = "$baseUrl/login";
   static String signUp = "$baseUrl/register";
   static String verifyEmail = "$baseUrl/verify-email";
