@@ -26,6 +26,7 @@ import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/k
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/low_carb_cubit.dart';
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
+import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
@@ -151,13 +152,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
+        BlocProvider(create: (context) => CartCubit(apiServices)..addCartAndIncrement(context: context))
       ],
       child: GetMaterialApp(
           useInheritedMediaQuery: true,
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          home: const Warning(),
+          home: const LoginSignUp(DioComsumer),
           getPages: [
             GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
             GetPage(

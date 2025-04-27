@@ -1,5 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/main/data/models/main_screen_model.dart';
+import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
 import 'package:fitfat/features/menu/data/models/menu_model.dart';
 import 'package:fitfat/features/suggestions/data/models/suggestions_model.dart';
@@ -117,6 +118,19 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
   }
 
   Widget _buildGridView(List<dynamic> data) {
+    return BlocConsumer<CartCubit, CartState>(
+        listener: (context, state) {
+          if (state is CartSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.message)),
+            );
+          } else if (state is CartFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.error)),
+            );
+          }
+        },
+        builder: (context, state) {
     return GridView.builder(
       padding: EdgeInsets.zero,
       key: ValueKey(data.length),
@@ -140,5 +154,6 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
         );
       },
     );
+  });
   }
 }
