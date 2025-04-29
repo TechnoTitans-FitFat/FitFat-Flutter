@@ -1,12 +1,15 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
-import 'package:fitfat/features/cart/data/models/cart_model.dart';
+import 'package:fitfat/features/cart/cubit/get_cart_cubit.dart';
+import 'package:fitfat/features/cart/data/models/get_cart_model.dart'; // استبدلنا المسار لاستخدام النموذج الجديد
 import 'package:fitfat/features/meal_details/presentation/widgets/increase_and_decrese_count.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartListItem extends StatefulWidget {
-  final CartModel item;
-  final VoidCallback onCountChanged; 
+  final CartItem item; // تغيير النوع إلى CartItem
+  final VoidCallback onCountChanged;
+
   const CartListItem({super.key, required this.item, required this.onCountChanged});
 
   @override
@@ -14,32 +17,42 @@ class CartListItem extends StatefulWidget {
 }
 
 class _CartListItemState extends State<CartListItem> {
-  int count = 1;
+  late int count;
+
+  @override
+  void initState() {
+    super.initState();
+    // ضبط العداد الأولي إلى قيمة quantity من CartItem
+    count = widget.item.quantity;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-       Card(
-        clipBehavior: Clip.none,
-        elevation: 3,
-        shadowColor: Colors.black,
-        color: AppLightColor.whiteColor,
-         shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15), 
-      ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-               Container(
+        Card(
+          clipBehavior: Clip.none,
+          elevation: 3,
+          shadowColor: Colors.black,
+          color: AppLightColor.whiteColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
                   width: 160,
                   height: 160,
                   decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius:  BorderRadius.all(Radius.circular(15))),
-                  child: Image.asset(widget.item.image, fit: BoxFit.cover),
+                      borderRadius: BorderRadius.all(Radius.circular(15))
+                  ),
+                  // استخدام صورة افتراضية أو صورة من API إذا كانت متوفرة
+                  child: Image.asset('assets/images/food_placeholder.png', fit: BoxFit.cover),
                 ),
                 const SizedBox(width: 14),
                 Expanded(
@@ -47,9 +60,9 @@ class _CartListItemState extends State<CartListItem> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FittedBox(
-                         fit: BoxFit.scaleDown,
+                        fit: BoxFit.scaleDown,
                         child: Text(
-                          widget.item.title,
+                          widget.item.name, // استخدام name من CartItem
                           style: AppStyles.textStyle16.copyWith(
                             color: AppLightColor.blackColor,
                             fontSize: MediaQuery.of(context).size.width * 0.04,
@@ -58,104 +71,121 @@ class _CartListItemState extends State<CartListItem> {
                       ),
                       const SizedBox(height: 10),
                       Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal:15,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppLightColor.mainColor.withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            '400 cal',
-                            style: AppStyles.textStyle12.copyWith(
-                              color: AppLightColor.mainColor,
-                            ),
-                          ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 5,
                         ),
-                        const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.star,
-                          color: Color(0xffFDE424),
-                          size: 18,
+                        decoration: BoxDecoration(
+                          color: AppLightColor.mainColor.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                        const SizedBox(width: 8),
-                        Text(
-                           widget.item.rating.toString(),
-                          style: AppStyles.textStyle16.copyWith(
-                            color: AppLightColor.blackColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 15),
-                    Row(
-                      children: [
-                        Text(
-                           ((count * widget.item.price).toInt()).toString(),
-                          style: AppStyles.textStyle16.copyWith(
+                        child: Text(
+                          '${widget.item.calories} cal', // استخدام calories من CartItem
+                          style: AppStyles.textStyle12.copyWith(
                             color: AppLightColor.mainColor,
                           ),
                         ),
-                        const SizedBox(width: 5),
-                        Text(
-                          'EGP',
-                          style: AppStyles.textStyle16.copyWith(
-                            color: AppLightColor.blackColor,
+                      ),
+                      const SizedBox(height: 10),
+                      // نزيل قسم التقييم إذا لم يكن موجودًا في CartItem
+                      // أو نستخدم قيمة افتراضية
+                      /*
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.star,
+                            color: Color(0xffFDE424),
+                            size: 18,
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Transform.scale(
-                           scale: 0.77,
-                          child: IncreaseAndDecreseCount(
-                          count: count,
-                          onIncrement: () {
-                            setState(() {
-                              count++;
-                               widget.item.count = count;
-                            });
-                            widget.onCountChanged();
-                          },
-                          onDecrement: () {
-                            setState(() {
-                              if (count > 1) {
-                                count--;
-                                widget.item.count = count;
-                              }
-                            });
-                            widget.onCountChanged();
-                          },
-                                              ),
-                        ),
-                      ],
-                    )
-                    ]
-                  )
-                )
-            ],
+                          const SizedBox(width: 8),
+                          Text(
+                            "4.5", // قيمة افتراضية
+                            style: AppStyles.textStyle16.copyWith(
+                              color: AppLightColor.blackColor,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                      */
+                      const SizedBox(height: 15),
+                      Row(
+                        children: [
+                          Text(
+                            '${widget.item.totalPrice}', // استخدام totalPrice من CartItem
+                            style: AppStyles.textStyle16.copyWith(
+                              color: AppLightColor.mainColor,
+                            ),
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            'EGP',
+                            style: AppStyles.textStyle16.copyWith(
+                              color: AppLightColor.blackColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Transform.scale(
+                            scale: 0.77,
+                            child: IncreaseAndDecreseCount(
+                              count: count,
+                              onIncrement: () {
+                                setState(() {
+                                  count++;
+                                });
+                                // استخدام Cubit لتحديث الكمية في السلة
+                                context.read<GetCartCubit>().getCart(
+                                  context: context,
+                                  id: widget.item.id,
+                                  count: count,
+                                );
+                                widget.onCountChanged();
+                              },
+                              onDecrement: () {
+                                if (count > 1) {
+                                  setState(() {
+                                    count--;
+                                  });
+                                  // استخدام Cubit لتحديث الكمية في السلة
+                                  context.read<GetCartCubit>().getCart(
+                                    context: context,
+                                    id: widget.item.id,
+                                    count: count,
+                                  );
+                                  widget.onCountChanged();
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-          ),
-          Positioned(
-             top: -5,
-             left: -5,
-             child:Container(
+        Positioned(
+          top: -5,
+          left: -5,
+          child: GestureDetector(
+            onTap: () {
+            },
+            child: Container(
               decoration: BoxDecoration(
                 color: AppLightColor.blackColor.withOpacity(.25),
-                shape: BoxShape.circle
+                shape: BoxShape.circle,
               ),
-              child: Icon(Icons.close,color: AppLightColor.whiteColor,),
-             ) ,
-          )
+              child: Icon(Icons.close, color: AppLightColor.whiteColor),
+            ),
+          ),
+        ),
       ],
-      
     );
   }
 }

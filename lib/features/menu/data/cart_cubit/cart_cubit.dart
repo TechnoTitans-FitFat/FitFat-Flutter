@@ -26,7 +26,7 @@ class CartCubit extends Cubit<CartState> {
           endpoint: 'https://fitfattt.azurewebsites.net/api/cart',
           token: token,
           data: {
-            'productId': "67e44a046fc6da5c146271a0",
+            'productId': productId,
             'quantity': 1,
           });
       if (response.statusCode == 200) {
