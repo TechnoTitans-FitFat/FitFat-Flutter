@@ -6,7 +6,7 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
-import 'package:fitfat/features/chat/presentation/views/chat_bot_view.dart';
+import 'package:fitfat/features/cart/presentation/views/payment_screen.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/forget_password/data/forget_password_remote_datasource.dart';
 import 'package:fitfat/features/forget_password/domain/repositories/forget_password_repository.dart';
@@ -158,24 +158,24 @@ class MyApp extends StatelessWidget {
                 CartCubit(apiServices)..addCartAndIncrement(context: context))
       ],
       child: GetMaterialApp(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        debugShowCheckedModeBanner: false,
-        home: ChatBotView(),
-        getPages: [
-          GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
-          GetPage(
-            name: '/otpScreen',
-            page: () {
-              return const OtpScreen();
-            },
-          ),
-          // Add OTP Screen route
-        ]
-        // Define initial route
-        ,
-      ),
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      debugShowCheckedModeBanner: false,
+      home: const PaymentScreen(),
+     /* getPages: [
+        GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
+        GetPage(
+          name: '/otpScreen',
+          page: () {
+            return const OtpScreen();
+          },
+        ),
+        // Add OTP Screen route
+      ]*/
+      // Define initial route
+      
+    ),
     );
   }
 }
