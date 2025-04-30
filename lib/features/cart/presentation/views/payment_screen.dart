@@ -1,0 +1,272 @@
+import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/widgets/custom_app_bar.dart';
+import 'package:fitfat/features/cart/data/models/cart_model.dart';
+import 'package:fitfat/features/cart/presentation/widgets/cart_bottom_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class PaymentScreen extends StatefulWidget {
+  const PaymentScreen({super.key});
+  
+
+  @override
+  State<PaymentScreen> createState() => _PaymentScreenState();
+}
+
+class _PaymentScreenState extends State<PaymentScreen> {
+  bool isChecked = false;
+  int selectedCardIndex = 0;
+  String selectedPaymentMethod = 'cash';
+ 
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppLightColor.backgroundColor,
+      appBar: const CustomAppBar(title: 'Payment Methods'),
+      body: SafeArea(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            Center(
+              child: Container(
+                width: 319,
+                height: 45,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey, // Border color
+                    width: 1.0, // Border width
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppLightColor.backgroundColor,
+                ),
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Image.asset('assets/icons/wallet.jpg'),
+                    const SizedBox(width: 15),
+                    Text(
+                      'Cash',
+                      style: GoogleFonts.openSans(
+                          fontSize: 22, fontWeight: FontWeight.w600),
+                    ),
+                    const Spacer(),
+                    Checkbox(
+                      checkColor: AppLightColor.mainColor,
+                      activeColor: AppLightColor.backgroundColor,
+                      value: selectedPaymentMethod == 'cash',
+                      onChanged: (_) {
+                        setState(() {
+                          selectedPaymentMethod = 'cash';
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              width: 319,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(12),
+                color: AppLightColor.backgroundColor,
+              ),
+              child: ExpansionTile(
+                title: Row(
+                  children: [
+                    Image.asset('assets/icons/card.jpg'),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Credit Card',
+                      style: GoogleFonts.openSans(
+                          fontSize: 22, fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                tilePadding: const EdgeInsets.symmetric(horizontal: 12),
+                childrenPadding: EdgeInsets.zero,
+                children: [
+                  Container(
+                      width: 280,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey, // Border color
+                          width: 1.0, // Border width
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                        color: AppLightColor.backgroundColor,
+                      ),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Image.asset(
+                            'assets/icons/cart1.jpg',
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            '•••• 1234',
+                            style: GoogleFonts.openSans(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey),
+                          ),
+                          const Spacer(),
+                          Radio<int>(
+                            activeColor: AppLightColor.mainColor,
+                            value: 0,
+                            groupValue: selectedCardIndex,
+                            onChanged: (int? value) {
+                              setState(() {
+                                selectedCardIndex = value!;
+                                selectedPaymentMethod = 'card';
+                              });
+                            },
+                          ),
+                        ],
+                      )),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    width: 280,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey, // Border color
+                        width: 1.0, // Border width
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                      color: AppLightColor.backgroundColor,
+                    ),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset(
+                          'assets/icons/cart2.jpg',
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          '•••• 1234',
+                          style: GoogleFonts.openSans(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey),
+                        ),
+                        const Spacer(),
+                        Radio<int>(
+                          value: 1,
+                          activeColor: AppLightColor.mainColor,
+                          groupValue: selectedCardIndex,
+                        onChanged: (int? value) {
+  setState(() {
+    selectedCardIndex = value!;
+    selectedPaymentMethod = 'card';
+  });
+},
+
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    width: 280,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey, // Border color
+                          width: 1.0, // Border width
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                        color: Color(0xffFCE9EB)),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset('assets/icons/add_icon.png'),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Add Card',
+                          style: GoogleFonts.openSans(
+                              color: AppLightColor.mainColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: 319,
+              height: 45,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey, // Border color
+                  width: 1.0, // Border width
+                ),
+                borderRadius: BorderRadius.circular(12),
+                color: AppLightColor.backgroundColor,
+              ),
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Image.asset('assets/icons/e_wallet.png'),
+                  const SizedBox(width: 15),
+                  Text(
+                    'E wallet',
+                    style: GoogleFonts.openSans(
+                        fontSize: 22, fontWeight: FontWeight.w600),
+                  ),
+                  const Spacer(),
+                  Checkbox(
+                    checkColor: AppLightColor.mainColor,
+                    activeColor: AppLightColor.backgroundColor,
+                    value: selectedPaymentMethod == 'e-wallet',
+                    onChanged: (_) {
+                      setState(() {
+                        selectedPaymentMethod = 'e-wallet';
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+       // bottomNavigationBar: CartBottomBar(cartItems: cartItems),
+    );
+  }
+}
