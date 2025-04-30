@@ -6,6 +6,7 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
+import 'package:fitfat/features/chat/data/chat_bot_cubit/chat_bot_cubit.dart';
 import 'package:fitfat/features/chat/presentation/views/chat_bot_view.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/forget_password/data/forget_password_remote_datasource.dart';
