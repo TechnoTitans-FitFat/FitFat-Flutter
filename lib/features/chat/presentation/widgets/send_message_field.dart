@@ -1,12 +1,22 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
+import 'package:fitfat/features/chat/data/chat_bot_cubit/chat_bot_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SendMessageField extends StatelessWidget {
+class SendMessageField extends StatefulWidget {
   const SendMessageField({
     super.key,
   });
 
+  @override
+  State<SendMessageField> createState() => _SendMessageFieldState();
+}
+
+class _SendMessageFieldState extends State<SendMessageField> {
+  final TextEditingController _controller = TextEditingController();
+  // final String userId;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,6 +30,7 @@ class SendMessageField extends StatelessWidget {
           children: [
             Expanded(
               child: TextField(
+                controller: _controller,
                 cursorColor: AppLightColor.mainColor,
                 decoration: InputDecoration(
                   hintText: "Type a message...",
@@ -60,7 +71,19 @@ class SendMessageField extends StatelessWidget {
                   AppLightColor.mainColor,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                final text = _controller.text.trim();
+                final userId = context.read<LoginCubit>().user?.id;
+                if (text.isNotEmpty && userId != null) {
+                  context.read<ChatBotCubit>().sendMessage(
+                        userId: userId,
+                        message: text,
+                      );
+                  _controller.clear();
+                } else {
+                  print("User ID is null or message is empty");
+                }
+              },
               icon: const Padding(
                 padding: EdgeInsets.all(5.0),
                 child: Icon(

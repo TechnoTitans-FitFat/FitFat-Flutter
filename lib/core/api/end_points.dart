@@ -38,6 +38,7 @@ class EndPoint {
   static String getDietInfo = "$baseUrl/api/dietInfo/";
   static String menu = '/api/recipes//unhealthy?';
   static const String resendOtp = '/resend-otp';
+  static const String chatBot = 'https://web-production-8f1d8.up.railway.app/recommend';
 }
 
 class ApiKey {

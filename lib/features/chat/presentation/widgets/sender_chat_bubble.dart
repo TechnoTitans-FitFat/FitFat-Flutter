@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class SenderChatBubble extends StatelessWidget {
   const SenderChatBubble({
     super.key,
+    required this.message
   });
-
+ final String message;
   @override
   Widget build(BuildContext context) {
     final maxWidth = MediaQuery.sizeOf(context).width * 0.65;
@@ -38,7 +39,7 @@ class SenderChatBubble extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              "I'm looking for low-calorie options for lunch",
+              message,
               style: AppStyles.textStyle16meduim.copyWith(
                 color: AppLightColor.secondColor,
               ),
