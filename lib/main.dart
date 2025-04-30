@@ -6,6 +6,7 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
+import 'package:fitfat/features/cart/presentation/views/payment_screen.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/forget_password/data/forget_password_remote_datasource.dart';
 import 'package:fitfat/features/forget_password/domain/repositories/forget_password_repository.dart';
@@ -159,8 +160,8 @@ class MyApp extends StatelessWidget {
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
-      home: LoginSignUp(DioComsumer(dio: Dio())),
-      getPages: [
+      home: const PaymentScreen(),
+     /* getPages: [
         GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
         GetPage(
           name: '/otpScreen',
@@ -169,9 +170,9 @@ class MyApp extends StatelessWidget {
           },
         ),
         // Add OTP Screen route
-      ]
+      ]*/
       // Define initial route
-      ,
+      
     ),
     );
   }
