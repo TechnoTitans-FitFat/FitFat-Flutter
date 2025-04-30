@@ -6,6 +6,7 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
+import 'package:fitfat/features/chat/data/chat_bot_cubit/chat_bot_cubit.dart';
 import 'package:fitfat/features/chat/presentation/views/chat_bot_view.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/forget_password/data/forget_password_remote_datasource.dart';
@@ -155,14 +156,17 @@ class MyApp extends StatelessWidget {
                 MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
         BlocProvider(
             create: (context) =>
-                CartCubit(apiServices)..addCartAndIncrement(context: context))
+                CartCubit(apiServices)..addCartAndIncrement(context: context)),
+        BlocProvider(
+            create: (context) =>
+                ChatBotCubit(DioComsumer(dio: Dio())))
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: ChatBotView(),
+        home: LoginSignUp(DioComsumer),
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(

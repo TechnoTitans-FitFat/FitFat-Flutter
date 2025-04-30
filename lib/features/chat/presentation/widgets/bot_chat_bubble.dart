@@ -1,11 +1,14 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/features/chat/data/models/chat_bot_model.dart';
 import 'package:fitfat/features/chat/presentation/widgets/meal_card.dart';
 import 'package:flutter/material.dart';
 
 class BotChatBubble extends StatelessWidget {
   const BotChatBubble({
     super.key,
+    required this.message
   });
+final ChatMessageModel message;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,15 @@ class BotChatBubble extends StatelessWidget {
             bottomRight: Radius.circular(20),
           ),
         ),
-        child: const MealCard(),
+        child: message.meal != null
+            ? MealCard(meal: message.meal!) 
+            : Text(
+                message.message ?? '',
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontSize: 16,
+                ),
+              ),
       ),
     );
   }

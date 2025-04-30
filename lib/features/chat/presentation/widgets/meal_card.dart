@@ -1,13 +1,15 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/chat/data/models/chat_bot_model.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class MealCard extends StatelessWidget {
   const MealCard({
     super.key,
+    required this.meal
   });
-
+ final ChatBotModel meal;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -16,8 +18,8 @@ class MealCard extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.asset(
-            Assets.images.main.path,
+          child: Image.network(
+            meal.image,
             height: 150,
             width: 150,
             fit: BoxFit.cover,
@@ -29,7 +31,7 @@ class MealCard extends StatelessWidget {
             children: [
               Text(
                 //title,
-                "Pasta with Egg...",
+                meal.name,
                 style: AppStyles.textStyle16.copyWith(
                   color: AppLightColor.blackColor,
                 ),
@@ -38,7 +40,7 @@ class MealCard extends StatelessWidget {
               Row(
                 spacing: 5,
                 children: [
-                  // if (showType)
+                  
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8,
@@ -49,8 +51,7 @@ class MealCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Text(
-                      // type ?? '',
-                      "Low Carb",
+                      (meal.allergy ?? []).join(', '),
                       style: AppStyles.textStyle12.copyWith(
                         color: AppLightColor.mainColor,
                       ),
@@ -67,7 +68,7 @@ class MealCard extends StatelessWidget {
                     ),
                     child: Text(
                       //'$calories cal',
-                      "500 cal",
+                      '${meal.calories} cal',
                       style: AppStyles.textStyle12.copyWith(
                         color: AppLightColor.mainColor,
                       ),
@@ -86,7 +87,7 @@ class MealCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     //rating.toStringAsFixed(1),
-                    "4.5",
+                    meal.rating.toStringAsFixed(1),
                     style: AppStyles.textStyle16.copyWith(
                       color: AppLightColor.blackColor,
                       fontSize: 14,
@@ -102,7 +103,7 @@ class MealCard extends StatelessWidget {
                     children: [
                       Text(
                         //price.toString(),
-                        r"20$",
+                        meal.price.toString(),
                         style: AppStyles.textStyle16.copyWith(
                           color: AppLightColor.mainColor,
                         ),
