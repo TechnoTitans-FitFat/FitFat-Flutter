@@ -153,7 +153,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 MenuCubit(DioComsumer(dio: Dio()))..fetchMenuData()),
-        BlocProvider(create: (context) => CartCubit(apiServices)..addCartAndIncrement(context: context))
+        BlocProvider(
+            create: (context) =>
+                CartCubit(apiServices)..addCartAndIncrement(context: context))
       ],
       child: GetMaterialApp(
       useInheritedMediaQuery: true,

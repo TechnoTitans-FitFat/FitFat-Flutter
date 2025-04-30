@@ -1,0 +1,57 @@
+import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:flutter/material.dart';
+
+class SenderChatBubble extends StatelessWidget {
+  const SenderChatBubble({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final maxWidth = MediaQuery.sizeOf(context).width * 0.65;
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth: maxWidth,
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        decoration: const BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 0),
+              color: Colors.black12,
+              blurRadius: 3,
+              spreadRadius: 0,
+            )
+          ],
+          color: AppLightColor.mainColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+            bottomLeft: Radius.circular(20),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              "I'm looking for low-calorie options for lunch",
+              style: AppStyles.textStyle16meduim.copyWith(
+                color: AppLightColor.secondColor,
+              ),
+            ),
+            Text(
+              "12:00 AM",
+              style: AppStyles.textStyle12normal.copyWith(
+                color: AppLightColor.whiteColor0,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
