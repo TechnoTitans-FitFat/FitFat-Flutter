@@ -22,7 +22,7 @@ class GetCartCubit extends Cubit<CartState> {
         return;
       }
       final response = await api.getRequest(
-        endpoint: 'https://fitfat-backend.up.railway.app/api/cart',
+        endpoint: 'https://fitfattt.azurewebsites.net/api/cart',
          token: token
       );
 
