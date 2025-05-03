@@ -7,6 +7,7 @@ class CartItem {
   final int quantity;
   final double totalPrice;
   final double totalCalories;
+  final String image;
 
   CartItem({
     required this.id,
@@ -17,10 +18,12 @@ class CartItem {
     required this.quantity,
     required this.totalPrice,
     required this.totalCalories,
+    required this.image
   });
 
   factory CartItem.fromJson(Map<String, dynamic> json) {
     return CartItem(
+      image: json['image'],
       id: json['_id'],
       productId: json['productId'],
       name: json['name'],
