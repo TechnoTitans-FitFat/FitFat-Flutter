@@ -2,6 +2,7 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/cubit/get_cart_cubit.dart';
 import 'package:fitfat/features/cart/data/models/get_cart_model.dart'; // استبدلنا المسار لاستخدام النموذج الجديد
+import 'package:fitfat/features/meal_details/data/card_cubit/decrement_cubit.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/increase_and_decrese_count.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +11,8 @@ class CartListItem extends StatefulWidget {
   final CartItem item; // تغيير النوع إلى CartItem
   final VoidCallback onCountChanged;
 
-  const CartListItem({super.key, required this.item, required this.onCountChanged});
+  const CartListItem(
+      {super.key, required this.item, required this.onCountChanged});
 
   @override
   State<CartListItem> createState() => _CartListItemState();
@@ -22,7 +24,6 @@ class _CartListItemState extends State<CartListItem> {
   @override
   void initState() {
     super.initState();
-    // ضبط العداد الأولي إلى قيمة quantity من CartItem
     count = widget.item.quantity;
   }
 
@@ -49,10 +50,8 @@ class _CartListItemState extends State<CartListItem> {
                   height: 160,
                   decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(15))
-                  ),
-                  // استخدام صورة افتراضية أو صورة من API إذا كانت متوفرة
-                  child: Image.asset('assets/images/food_placeholder.png', fit: BoxFit.cover),
+                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                  child: Image.network(widget.item.image, fit: BoxFit.cover),
                 ),
                 const SizedBox(width: 14),
                 Expanded(
@@ -80,7 +79,8 @@ class _CartListItemState extends State<CartListItem> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(
-                          '${widget.item.calories} cal', // استخدام calories من CartItem
+                          '${widget.item.calories} cal',
+                          // استخدام calories من CartItem
                           style: AppStyles.textStyle12.copyWith(
                             color: AppLightColor.mainColor,
                           ),
@@ -112,7 +112,8 @@ class _CartListItemState extends State<CartListItem> {
                       Row(
                         children: [
                           Text(
-                            '${widget.item.totalPrice}', // استخدام totalPrice من CartItem
+                            '${widget.item.totalPrice}',
+                            // استخدام totalPrice من CartItem
                             style: AppStyles.textStyle16.copyWith(
                               color: AppLightColor.mainColor,
                             ),
@@ -131,35 +132,45 @@ class _CartListItemState extends State<CartListItem> {
                         children: [
                           Transform.scale(
                             scale: 0.77,
-                            child: IncreaseAndDecreseCount(
-                              count: count,
-                              onIncrement: () {
-                                setState(() {
-                                  count++;
-                                });
-                                // استخدام Cubit لتحديث الكمية في السلة
-                                context.read<GetCartCubit>().getCart(
-                                  context: context,
-                                  id: widget.item.id,
-                                  count: count,
+                            child: BlocConsumer<DecrementCubit, DecrementState>(listener: (context, state) {
+                              if (state is DecrementSuccess) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(state.message)),
                                 );
-                                widget.onCountChanged();
-                              },
-                              onDecrement: () {
-                                if (count > 1) {
+                              } else if (state is DecrementFailure) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(state.error)),
+                                );
+                              }
+                            }, builder: (context, state) {
+                              return IncreaseAndDecreseCount(
+                                count: count,
+                                onIncrement: () {
                                   setState(() {
-                                    count--;
+                                    count++;
                                   });
-                                  // استخدام Cubit لتحديث الكمية في السلة
                                   context.read<GetCartCubit>().getCart(
-                                    context: context,
-                                    id: widget.item.id,
-                                    count: count,
-                                  );
+                                        context: context,
+                                        id: widget.item.id,
+                                        count: count,
+                                      );
                                   widget.onCountChanged();
-                                }
-                              },
-                            ),
+                                },
+                                onDecrement: () {
+                                  if (count > 1) {
+                                    setState(() {
+                                      context.read<DecrementCubit>().decrement(context: context,productId: widget.item.productId);
+                                      count--;
+                                    });
+                                    // استخدام Cubit لتحديث الكمية في السلة
+                                    context.read<GetCartCubit>().getCart(
+                                          context: context,
+                                          id: widget.item.id,
+                                          count: count,
+                                        );
+                                    widget.onCountChanged();
+                                  }
+                                });})
                           ),
                         ],
                       )
@@ -174,8 +185,7 @@ class _CartListItemState extends State<CartListItem> {
           top: -5,
           left: -5,
           child: GestureDetector(
-            onTap: () {
-            },
+            onTap: () {},
             child: Container(
               decoration: BoxDecoration(
                 color: AppLightColor.blackColor.withOpacity(.25),

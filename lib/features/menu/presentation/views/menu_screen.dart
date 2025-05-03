@@ -60,7 +60,7 @@ class MenuScreen extends StatelessWidget {
                 }
               },
               builder: (context, state) {
-                return CustomSuggestionsGridView(gridType: GridType.menu);
+                return const CustomSuggestionsGridView(gridType: GridType.menu);
               }),
           ],
         ),

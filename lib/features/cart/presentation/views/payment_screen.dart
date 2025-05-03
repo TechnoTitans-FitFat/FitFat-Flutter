@@ -281,7 +281,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ],
         ),
       ),
-        bottomNavigationBar: CartBottomBar(cartItems: cartItems),
     );
   }
 }
