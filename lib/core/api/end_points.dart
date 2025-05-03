@@ -3,13 +3,13 @@ class EndPoint {
   static String signIn = "$baseUrl/login";
   static String signUp = "$baseUrl/register";
   static String verifyEmail = "$baseUrl/verify-email";
-  static String home = '/api/recipes/healthy?';
+  static String home = '$baseUrl/api/recipes/healthy?';
   static String meal_details = '$baseUrl/api/recipes/';
   static String healthInfo =
       'https://fitfat-backend.up.railway.app/api/healthInfo';
   static String dietInfo = '$baseUrl/api/dietInfo';
-  static String suggestions = '/api/recipes/healthy?';
-  static String favourites = 'api/favorites';
+  static String suggestions = '$baseUrl/api/recipes/healthy?';
+  static String favourites = '$baseUrl/api/favorites';
   static String dietview =
       '$baseUrl/api/recipes/healthy?category=diet&rating=5';
   static String ketoView =
@@ -36,8 +36,9 @@ class EndPoint {
   static String profile = "$baseUrl/api/users/";
   static String getHealthInfo = "https://fitfattt.azurewebsites.net/api/healthInfo/";
   static String getDietInfo = "$baseUrl/api/dietInfo/";
-  static String menu = '/api/recipes//unhealthy?';
+  static String menu = '$baseUrl/api/recipes//unhealthy?';
   static const String resendOtp = '/resend-otp';
+  static const String chatBot = 'https://web-production-8f1d8.up.railway.app/recommend';
 }
 
 class ApiKey {
