@@ -14,6 +14,21 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+  final List<CartModel> cartItems = [
+  CartModel(
+      title: "Beef Bourguignon",
+      price: 60,
+      calories: 400,
+      rating: 3.3,
+      image: 'assets/images/photo.png',
+      count: 1),
+  CartModel(
+      title: "Grilled Chicken",
+      price: 90,
+      calories: 350,
+      rating: 4.2,
+      image: 'assets/images/photo.png'),
+];
   bool isChecked = false;
   int selectedCardIndex = 0;
   String selectedPaymentMethod = 'cash';
@@ -266,7 +281,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ],
         ),
       ),
-       // bottomNavigationBar: CartBottomBar(cartItems: cartItems),
     );
   }
 }
