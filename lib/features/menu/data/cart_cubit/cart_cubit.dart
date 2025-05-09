@@ -27,7 +27,7 @@ class CartCubit extends Cubit<CartState> {
           token: token,
           data: {
             'productId': productId,
-            'quantity': 1,
+            'quantity': quantity,
           });
       if (response.statusCode == 200) {
         emit(CartSuccess(message: "Product added successfully"));
