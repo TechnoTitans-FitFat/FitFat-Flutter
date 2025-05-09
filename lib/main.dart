@@ -4,8 +4,6 @@ import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
-import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
-import 'package:fitfat/features/auth/presentation/widgets/otp_screen.dart';
 import 'package:fitfat/features/cart/cubit/get_cart_cubit.dart';
 import 'package:fitfat/features/chat/data/chat_bot_cubit/chat_bot_cubit.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
@@ -37,6 +35,7 @@ import 'package:fitfat/features/profile/presentation/data/update_health_cubit.da
 import 'package:fitfat/features/profile/presentation/widgets/personal_user_data.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
+import 'package:fitfat/features/search/presentation/views/search_page.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
     show SuggestionsCubit;
@@ -167,8 +166,9 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: LoginSignUp(DioComsumer(dio:Dio())),
-        getPages: [
+        home: const SearchPage()
+        
+       /* getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(
             name: '/otpScreen',
@@ -179,7 +179,7 @@ class MyApp extends StatelessWidget {
           // Add OTP Screen route
         ]
         // Define initial route
-        ,
+        ,*/
       ),
     );
   }
