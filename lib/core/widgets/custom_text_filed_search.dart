@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTextFiledSearch extends StatelessWidget {
+  final void Function(String)? onSubmitted;
   const CustomTextFiledSearch({
-    super.key,
+    super.key,this.onSubmitted
   });
 
   @override
@@ -22,6 +23,7 @@ class CustomTextFiledSearch extends StatelessWidget {
             width: 280,
             decoration: const BoxDecoration(),
             child: TextField(
+              onSubmitted:onSubmitted ,
               decoration: InputDecoration(
                 fillColor: AppLightColor.whiteColor,
                 filled: true,
