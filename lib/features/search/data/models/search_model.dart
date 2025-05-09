@@ -10,6 +10,7 @@ class SearchHistory {
       title: List<String>.from(json['title']),
     );
   }
+  factory SearchHistory.empty() => SearchHistory(name: [], title: []);
 
   Map<String, dynamic> toJson() {
     return {
