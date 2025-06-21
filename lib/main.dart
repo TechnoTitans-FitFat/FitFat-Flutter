@@ -38,6 +38,7 @@ import 'package:fitfat/features/profile/presentation/data/update_health_cubit.da
 import 'package:fitfat/features/profile/presentation/widgets/personal_user_data.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
+import 'package:fitfat/features/search/presentation/views/search_page.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
     show SuggestionsCubit;
@@ -169,7 +170,8 @@ class MyApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
-        home: LoginSignUp(DioComsumer(dio:Dio())),
+        home: LoginSignUp(DioComsumer(dio: Dio())),
+        
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(

@@ -281,6 +281,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ],
         ),
       ),
+
+        bottomNavigationBar:const CartBottomBar(cartItems: [],),
+
     );
   }
 }
