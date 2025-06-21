@@ -85,6 +85,7 @@ class ApiServices {
     final cancelToken = createCancelToken();
     return await dio.delete(
       endpoint,
+      data: data,
       options: Options(
         headers: {
           'Content-Type': 'application/json',

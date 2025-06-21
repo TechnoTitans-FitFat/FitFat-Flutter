@@ -1,14 +1,15 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/cart/cubit/delete_cart_cubit.dart';
 import 'package:fitfat/features/cart/cubit/get_cart_cubit.dart';
-import 'package:fitfat/features/cart/data/models/get_cart_model.dart'; // استبدلنا المسار لاستخدام النموذج الجديد
+import 'package:fitfat/features/cart/data/models/get_cart_model.dart';
 import 'package:fitfat/features/meal_details/data/card_cubit/decrement_cubit.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/increase_and_decrese_count.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartListItem extends StatefulWidget {
-  final CartItem item; // تغيير النوع إلى CartItem
+  final CartItem item;
   final VoidCallback onCountChanged;
 
   const CartListItem(
@@ -61,7 +62,7 @@ class _CartListItemState extends State<CartListItem> {
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          widget.item.name, // استخدام name من CartItem
+                          widget.item.name,
                           style: AppStyles.textStyle16.copyWith(
                             color: AppLightColor.blackColor,
                             fontSize: MediaQuery.of(context).size.width * 0.04,
@@ -80,15 +81,12 @@ class _CartListItemState extends State<CartListItem> {
                         ),
                         child: Text(
                           '${widget.item.calories} cal',
-                          // استخدام calories من CartItem
                           style: AppStyles.textStyle12.copyWith(
                             color: AppLightColor.mainColor,
                           ),
                         ),
                       ),
                       const SizedBox(height: 10),
-                      // نزيل قسم التقييم إذا لم يكن موجودًا في CartItem
-                      // أو نستخدم قيمة افتراضية
                       /*
                       Row(
                         children: [
@@ -99,7 +97,7 @@ class _CartListItemState extends State<CartListItem> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            "4.5", // قيمة افتراضية
+                            "4.5",
                             style: AppStyles.textStyle16.copyWith(
                               color: AppLightColor.blackColor,
                               fontSize: 14,
@@ -113,7 +111,6 @@ class _CartListItemState extends State<CartListItem> {
                         children: [
                           Text(
                             '${widget.item.totalPrice}',
-                            // استخدام totalPrice من CartItem
                             style: AppStyles.textStyle16.copyWith(
                               color: AppLightColor.mainColor,
                             ),
@@ -131,47 +128,53 @@ class _CartListItemState extends State<CartListItem> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Transform.scale(
-                            scale: 0.77,
-                            child: BlocConsumer<DecrementCubit, DecrementState>(listener: (context, state) {
-                              if (state is DecrementSuccess) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(state.message)),
-                                );
-                              } else if (state is DecrementFailure) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(state.error)),
-                                );
-                              }
-                            }, builder: (context, state) {
-                              return IncreaseAndDecreseCount(
-                                count: count,
-                                onIncrement: () {
-                                  setState(() {
-                                    count++;
-                                  });
-                                  context.read<GetCartCubit>().getCart(
-                                        context: context,
-                                        id: widget.item.id,
-                                        count: count,
-                                      );
-                                  widget.onCountChanged();
-                                },
-                                onDecrement: () {
-                                  if (count > 1) {
-                                    setState(() {
-                                      context.read<DecrementCubit>().decrement(context: context,productId: widget.item.productId);
-                                      count--;
+                              scale: 0.77,
+                              child:
+                                  BlocConsumer<DecrementCubit, DecrementState>(
+                                      listener: (context, state) {
+                                if (state is DecrementSuccess) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(state.message)),
+                                  );
+                                } else if (state is DecrementFailure) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(state.error)),
+                                  );
+                                }
+                              }, builder: (context, state) {
+                                return IncreaseAndDecreseCount(
+                                    count: count,
+                                    onIncrement: () {
+                                      setState(() {
+                                        count++;
+                                      });
+                                      context.read<GetCartCubit>().getCart(
+                                            context: context,
+                                            id: widget.item.id,
+                                            count: count,
+                                          );
+                                      widget.onCountChanged();
+                                    },
+                                    onDecrement: () {
+                                      if (count > 1) {
+                                        setState(() {
+                                          context
+                                              .read<DecrementCubit>()
+                                              .decrement(
+                                                  context: context,
+                                                  productId:
+                                                      widget.item.productId);
+                                          count--;
+                                        });
+                                        context.read<GetCartCubit>().getCart(
+                                              context: context,
+                                              id: widget.item.id,
+                                              count: count,
+                                            );
+                                        widget.onCountChanged();
+                                      }
                                     });
-                                    // استخدام Cubit لتحديث الكمية في السلة
-                                    context.read<GetCartCubit>().getCart(
-                                          context: context,
-                                          id: widget.item.id,
-                                          count: count,
-                                        );
-                                    widget.onCountChanged();
-                                  }
-                                });})
-                          ),
+                              })),
                         ],
                       )
                     ],
@@ -182,19 +185,36 @@ class _CartListItemState extends State<CartListItem> {
           ),
         ),
         Positioned(
-          top: -5,
-          left: -5,
-          child: GestureDetector(
-            onTap: () {},
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppLightColor.blackColor.withOpacity(.25),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(Icons.close, color: AppLightColor.whiteColor),
-            ),
-          ),
-        ),
+            top: -5,
+            left: -5,
+            child: BlocConsumer<DeleteCubit, DeleteState>(
+                listener: (context, state) {
+              if (state is DeleteSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text((state).message)),
+                );
+                context.read<GetCartCubit>().getCart(context: context);
+              } else if (state is DeleteFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text((state).error)),
+                );
+              }
+            }, builder: (context, state) {
+              return GestureDetector(
+                onTap: () {
+                  context.read<DeleteCubit>().delete(
+                      context: context, productId: widget.item.productId);
+                  print("prodeuct id: ${widget.item.productId}");
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppLightColor.blackColor.withOpacity(.25),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.close, color: AppLightColor.whiteColor),
+                ),
+              );
+            })),
       ],
     );
   }
