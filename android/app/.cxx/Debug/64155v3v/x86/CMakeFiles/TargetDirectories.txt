@@ -1,0 +1,2 @@
+D:/projects flutter/FitFat-Flutter-/android/app/.cxx/Debug/64155v3v/x86/CMakeFiles/edit_cache.dir
+D:/projects flutter/FitFat-Flutter-/android/app/.cxx/Debug/64155v3v/x86/CMakeFiles/rebuild_cache.dir
