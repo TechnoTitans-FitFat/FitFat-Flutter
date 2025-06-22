@@ -1,4 +1,4 @@
-import 'package:fitfat/features/search/data/models/search_model.dart';
+/*import 'package:fitfat/features/search/data/models/search_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -26,3 +26,4 @@ class SearchStorage {
     }
   }
 }
+*/

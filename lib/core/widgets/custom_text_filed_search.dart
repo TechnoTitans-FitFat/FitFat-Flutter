@@ -1,6 +1,7 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
+import 'package:fitfat/features/search/presentation/views/search_page.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,43 +19,54 @@ class CustomTextFiledSearch extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Container(
-            height: 50,
-            width: 280,
-            decoration: const BoxDecoration(),
-            child: TextField(
-              onSubmitted:onSubmitted ,
-              decoration: InputDecoration(
-                fillColor: AppLightColor.whiteColor,
-                filled: true,
-                hintText: "Search",
-                hintStyle: AppStyles.textStyle16.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: AppLightColor.whiteColor0),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  borderSide: const BorderSide(
-                    color: AppLightColor.whiteColor,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) =>const SearchPage()),
+              );
+            },
+            child: AbsorbPointer(
+              child: Container(
+                height: 50,
+                width: 280,
+                decoration: const BoxDecoration(),
+                child: TextField(
+                  onSubmitted:onSubmitted ,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    fillColor: AppLightColor.whiteColor,
+                    filled: true,
+                    hintText: "Search",
+                    hintStyle: AppStyles.textStyle16.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: AppLightColor.whiteColor0),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      borderSide: const BorderSide(
+                        color: AppLightColor.whiteColor,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      borderSide: const BorderSide(
+                        color: AppLightColor.mainColor,
+                      ),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      borderSide: const BorderSide(
+                        color: AppLightColor.whiteColor,
+                      ),
+                    ),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Image.asset(Assets.icons.searchNormal.path),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  borderSide: const BorderSide(
-                    color: AppLightColor.mainColor,
-                  ),
-                ),
-                disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  borderSide: const BorderSide(
-                    color: AppLightColor.whiteColor,
-                  ),
-                ),
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Image.asset(Assets.icons.searchNormal.path),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
                 ),
               ),
             ),
@@ -65,30 +77,6 @@ class CustomTextFiledSearch extends StatelessWidget {
             },
             child: Image.asset('assets/icons/shopping_cart_red.png')
             )
-         /* Container(
-              decoration: BoxDecoration(
-                color: AppLightColor.mainColor,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              height: 50,
-              width: 50,
-              child: Center(
-                  child: SvgPicture.asset(
-                    Assets.icons.filter,
-                fit: BoxFit.fill,
-                height: 27,
-                width: 27,
-              )))
-              */
-
         ],
       ),
     );
