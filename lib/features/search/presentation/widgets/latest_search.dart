@@ -1,21 +1,18 @@
+import 'package:fitfat/features/search/presentation/widgets/latest_search_item.dart';
 import 'package:flutter/material.dart';
 
 class LatestSearch extends StatelessWidget {
-  final List<String> recent;
-
-  const LatestSearch({super.key, this.recent = const []});
+  
+  const LatestSearch({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (recent.isEmpty) {
-      return const Text("No recent searches.");
-    }
-
-    return Wrap(
-      spacing: 8,
-      children: recent.map((text) {
-        return Chip(label: Text(text));
-      }).toList(),
+    return Column(
+      children: [
+        LatestSearchItem(title: 'tuna'),
+         LatestSearchItem(title: 'tuna'),
+          LatestSearchItem(title: 'tuna'),
+      ],
     );
-  }
+}
 }
