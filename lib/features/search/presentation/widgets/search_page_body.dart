@@ -1,3 +1,4 @@
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/search/data/search_cubit/search_cubit.dart';
 import 'package:fitfat/features/search/data/search_history/search_history_cubit.dart';
 import 'package:fitfat/features/search/presentation/widgets/search_result_item.dart';
@@ -22,8 +23,13 @@ class _SearchPageBodyState extends State<SearchPageBody> {
 
  @override
   void initState() {
-    super.initState();
+     super.initState();
+
+  final token = context.read<LoginCubit>().user?.token;
+
+  if (token != null) {
     context.read<SearchHistoryCubit>().getLatestSearches(context);
+  }
   }
   
  void _onSearch(String query) {
