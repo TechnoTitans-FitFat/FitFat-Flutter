@@ -7,29 +7,34 @@ class OfferModel {
   final String calories;
   final String id;
   final double offerPrice;
-  final double rating; 
+  final double rating;
 
-  OfferModel( 
-      {required this.image,
-      required this.name,
-      required this.price,
-      required this.calories,
-      required this.id,
-      required this.offerPrice,
-      required this.rating,
-      });
+  OfferModel({
+    required this.image,
+    required this.name,
+    required this.price,
+    required this.calories,
+    required this.id,
+    required this.offerPrice,
+    required this.rating,
+  });
 
   factory OfferModel.fromJson(Map<String, dynamic> jsonData) {
-    final priceValue = jsonData[ApiKey.price];
     return OfferModel(
-        image: jsonData[ApiKey.image],
-        name: jsonData[ApiKey.name],
-        price: priceValue is num ? priceValue.toDouble() : 0.0,
-        calories: jsonData[ApiKey.calories].toString(),
-        id : jsonData[ApiKey.id],
-        offerPrice: jsonData[ApiKey.offerPrice],
-        rating: jsonData[ApiKey.rating],
-        );
+      image: jsonData[ApiKey.image]?.toString() ?? '',
+      name: jsonData[ApiKey.name]?.toString() ?? '',
+      price: _toDouble(jsonData[ApiKey.price]),
+      calories: jsonData[ApiKey.calories]?.toString() ?? '0',
+      id: jsonData[ApiKey.id]?.toString() ?? '',
+      offerPrice: _toDouble(jsonData[ApiKey.offerPrice]),
+      rating: _toDouble(jsonData[ApiKey.rating]),
+    );
+  }
 
+  static double _toDouble(dynamic value) {
+    if (value == null) return 0.0;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value) ?? 0.0;
+    return 0.0;
   }
 }
