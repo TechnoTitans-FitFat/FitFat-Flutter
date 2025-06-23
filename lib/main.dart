@@ -39,6 +39,7 @@ import 'package:fitfat/features/profile/presentation/widgets/personal_user_data.
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/search/data/search_cubit/search_cubit.dart';
+import 'package:fitfat/features/search/data/search_history/search_history_cubit.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
     show SuggestionsCubit;
@@ -165,8 +166,10 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 ChatBotCubit(DioComsumer(dio: Dio()))),
          BlocProvider(
-             create: (context) => SearchCubit(DioComsumer(dio: Dio())),
-),
+             create: (context) => SearchCubit(DioComsumer(dio: Dio())),),
+             BlocProvider(
+            create: (context) =>
+                SearchHistoryCubit(DioComsumer(dio: Dio()))..getLatestSearches(context)),
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
