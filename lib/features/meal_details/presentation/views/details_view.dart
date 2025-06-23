@@ -30,7 +30,7 @@ class DetailsView extends StatelessWidget {
       return Column(
         children: [
           Expanded(child: DetailsViewBody(meal: meal)),
-          DetailsBottomBar(price: meal.price),
+          DetailsBottomBar(price: meal.price,id: meal.id,),
         ],
       );
     } else if (state is MealDetailsFailure) {
