@@ -40,6 +40,7 @@ class EndPoint {
   static const String resendOtp = '/resend-otp';
   static const String chatBot = 'https://web-production-8f1d8.up.railway.app/recommend';
   static const String search='https://fitfattt.azurewebsites.net/api/recipes/search?';
+  static const String searchHistory = 'https://fitfattt.azurewebsites.net/api/recipes/search';
 }
 
 class ApiKey {
