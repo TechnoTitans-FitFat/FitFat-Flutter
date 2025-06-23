@@ -31,6 +31,7 @@ import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/v
 import 'package:fitfat/features/meal_details/data/card_cubit/decrement_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
+import 'package:fitfat/features/offers/data/offer_cubit/offer_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
@@ -170,6 +171,9 @@ class MyApp extends StatelessWidget {
              BlocProvider(
             create: (context) =>
                 SearchHistoryCubit(DioComsumer(dio: Dio()))..getLatestSearches(context)),
+                 BlocProvider(
+            create: (context) =>
+                OfferCubit(DioComsumer(dio: Dio()))..fetchOffersData()),
       ],
       child: GetMaterialApp(
         useInheritedMediaQuery: true,
