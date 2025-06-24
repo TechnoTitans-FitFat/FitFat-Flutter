@@ -1,41 +1,38 @@
-import 'package:fitfat/features/search/presentation/widgets/search_storage.dart';
+import 'package:fitfat/features/search/presentation/widgets/latest_search_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fitfat/features/search/data/search_history/search_history_cubit.dart';
 
-
-class LatestSearch extends StatefulWidget {
+class LatestSearch extends StatelessWidget {
   const LatestSearch({super.key});
 
   @override
-  State<LatestSearch> createState() => _LatestSearchState();
-}
-
-class _LatestSearchState extends State<LatestSearch> {
-  List<String> recent = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadHistory();
-  }
-
-  Future<void> _loadHistory() async {
-    final history = await SearchStorage.loadSearchHistory();
-    setState(() {
-      recent = history.name;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (recent.isEmpty) {
-      return const Text("No recent searches.");
-    }
+    return BlocBuilder<SearchHistoryCubit, SearchHistoryState>(
+      builder: (context, state) {
+        if (state is SearchHistoryLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is SearchHistoryLoaded) {
+          final historyList = state.history;
 
-    return Wrap(
-      spacing: 8,
-      children: recent.map((text) {
-        return Chip(label: Text(text));
-      }).toList(),
+          if (historyList.isEmpty) {
+            return const Text("No recent searches");
+          }
+
+          return Column(
+            children: historyList.map((title) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6),
+                child: LatestSearchItem(title: title),
+              );
+            }).toList(),
+          );
+        } else if (state is SearchHistoryFailure) {
+          return Text(state.message);
+        } else {
+          return const SizedBox.shrink(); // in case of initial state
+        }
+      },
     );
   }
 }

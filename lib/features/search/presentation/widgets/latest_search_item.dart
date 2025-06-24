@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class LatestSearchItem extends StatelessWidget {
   const LatestSearchItem({super.key, required this.title});
+  
   final String title;
   @override
   Widget build(BuildContext context) {
