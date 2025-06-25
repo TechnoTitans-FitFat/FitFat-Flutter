@@ -80,7 +80,9 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
         const SizedBox(
           height: 30,
         ),
-        const HealthInformationUpperText(),
+        HealthInformationUpperText(
+          userId: widget.userId,
+        ),
         const SizedBox(
           height: 20,
         ),

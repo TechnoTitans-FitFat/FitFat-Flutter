@@ -94,7 +94,9 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
         const SizedBox(
           height: 30,
         ),
-        const HealthInformationUpperTextTwo(),
+        HealthInformationUpperTextTwo(
+          userId: widget.userId,
+        ),
         const SizedBox(
           height: 30,
         ),
