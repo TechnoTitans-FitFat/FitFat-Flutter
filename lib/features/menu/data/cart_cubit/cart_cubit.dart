@@ -29,6 +29,7 @@ class CartCubit extends Cubit<CartState> {
             'productId': productId,
             'quantity': quantity,
           });
+      print('🔁 Sending to server: productId=$productId, quantity=$quantity');
       if (response.statusCode == 200) {
         emit(CartSuccess(message: "Product added successfully"));
         print("Product added successfully");
