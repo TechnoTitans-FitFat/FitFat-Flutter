@@ -6,7 +6,7 @@ class EndPoint {
   static String home = '$baseUrl/api/recipes/healthy?';
   static String meal_details = '$baseUrl/api/recipes/';
   static String healthInfo =
-      'https://fitfat-backend.up.railway.app/api/healthInfo';
+      'https://fitfattt.azurewebsites.net/api/healthInfo';
   static String dietInfo = '$baseUrl/api/dietInfo';
   static String suggestions = '$baseUrl/api/recipes/healthy?';
   static String favourites = '$baseUrl/api/favorites';
@@ -23,7 +23,8 @@ class EndPoint {
 
   static String diabetsView =
       '$baseUrl/api/recipes/healthy?diabetes=true&rating=5';
-  static String allergyView = '$baseUrl/api/recipes/healthy?category=allergy&rating=5';
+  static String allergyView =
+      '$baseUrl/api/recipes/healthy?category=allergy&rating=5';
   static String lactoseView =
       '$baseUrl/api/recipes/healthy?category=allergy&allergy=Lactose&rating=5';
   static String peanutsView =
@@ -34,12 +35,15 @@ class EndPoint {
       '$baseUrl/api/recipes/healthy?category=allergy&allergy=ShellFish&rating=5';
   static String logout = '$baseUrl/logout';
   static String profile = "$baseUrl/api/users/";
-  static String getHealthInfo = "https://fitfattt.azurewebsites.net/api/healthInfo/";
+  static String getHealthInfo =
+      "https://fitfattt.azurewebsites.net/api/healthInfo/";
   static String getDietInfo = "$baseUrl/api/dietInfo/";
   static String menu = '$baseUrl/api/recipes//unhealthy?';
   static const String resendOtp = '/resend-otp';
-  static const String chatBot = 'https://web-production-8f1d8.up.railway.app/recommend';
-  static const String search='https://fitfattt.azurewebsites.net/api/recipes/search?';
+  static const String chatBot =
+      'https://web-production-8f1d8.up.railway.app/recommend';
+  static const String search =
+      'https://fitfattt.azurewebsites.net/api/recipes/search?';
 }
 
 class ApiKey {

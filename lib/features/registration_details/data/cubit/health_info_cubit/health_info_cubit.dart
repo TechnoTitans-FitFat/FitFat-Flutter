@@ -21,6 +21,7 @@ class HealthInfoCubit extends Cubit<HealthInfoState> {
     required String userId,
     String diabetesType = "",
     double insulinRatio = 0.0,
+    required double correctionfactor,
   }) async {
     try {
       emit(HealthInfoLoading());
@@ -34,6 +35,7 @@ class HealthInfoCubit extends Cubit<HealthInfoState> {
         'dateOfBirth': dateOfBirth,
         'gender': gender,
         'targetBloodSugarRange': targetBloodSugarRange,
+        "correctionFactor": correctionfactor
       };
 
       // Only add these fields if diabetes is present

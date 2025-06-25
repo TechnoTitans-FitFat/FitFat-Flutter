@@ -4,14 +4,15 @@ import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class GenderSection extends StatefulWidget {
   const GenderSection({
     super.key,
     required this.onSelectGender,
+    this.errorText,
   });
 
   final void Function(String) onSelectGender;
+  final String? errorText;
 
   @override
   _GenderSectionState createState() => _GenderSectionState();
@@ -65,6 +66,18 @@ class _GenderSectionState extends State<GenderSection> {
               ),
             ],
           ),
+          if (widget.errorText != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                widget.errorText!,
+                style: GoogleFonts.roboto(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.red,
+                ),
+              ),
+            ),
         ],
       ),
     );
