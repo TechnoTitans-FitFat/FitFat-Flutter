@@ -9,19 +9,22 @@ class WeightAndHeightTextField extends StatelessWidget {
     required this.text,
     required this.controller,
     required this.onChanged,
+    this.errorText,
   });
 
   final String text;
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.3,
+      width: MediaQuery.of(context).size.width * 0.4,
       child: TextField(
         controller: controller,
         onChanged: onChanged,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           labelText: text,
           labelStyle: GoogleFonts.roboto(
@@ -31,6 +34,12 @@ class WeightAndHeightTextField extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
+          ),
+          errorText: errorText,
+          errorStyle: GoogleFonts.roboto(
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: Colors.red,
           ),
         ),
       ),

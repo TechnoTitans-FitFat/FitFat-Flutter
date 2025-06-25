@@ -30,6 +30,7 @@ class HealthInfoTwoBody extends StatefulWidget {
 class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
   double insulinToCardRatio = 0.0;
   bool hasDiabetes = false;
+  double correctionFactor = 0.0;
 
   @override
   void initState() {
@@ -49,6 +50,12 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
   void updateInsulinToCardRatio(double ratio) {
     setState(() {
       insulinToCardRatio = ratio;
+    });
+  }
+
+  void updateCorrectionFactor(double ratio) {
+    setState(() {
+      correctionFactor = ratio;
     });
   }
 
@@ -104,6 +111,7 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
               gender: widget.selectedGender,
               foodAllergies: widget.foodAllergies,
               userId: widget.userId,
+              onCorrectionFactor: updateCorrectionFactor,
             ),
           ),
         ),

@@ -46,14 +46,12 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
   void updateFoodAllergies(String allergy, bool isSelected) {
     setState(() {
       if (allergy == "None") {
-        // If "None" is selected, set or clear it
         foodAllergies = isSelected ? "None" : "";
       } else {
-        // Otherwise, handle other allergy selection
         if (isSelected) {
           foodAllergies = allergy;
         } else if (foodAllergies == allergy) {
-          foodAllergies = ""; // Clear it if unselected
+          foodAllergies = "";
         }
       }
     });
@@ -62,7 +60,6 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
   void updateDiabetes(bool hasDiabetes) {
     setState(() {
       diabetes = hasDiabetes;
-      // Reset diabetes type if user selects "No"
       if (!hasDiabetes) {
         diabetesType = "";
       }
@@ -85,16 +82,16 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
         ),
         const HealthInformationUpperText(),
         const SizedBox(
-          height: 30,
+          height: 20,
         ),
         CustomContainerProfileSetUp(
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 FoodAllergyQuestionSection(
                   anyFoodAllergies: foodAllergies,

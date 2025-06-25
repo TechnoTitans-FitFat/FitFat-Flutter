@@ -24,11 +24,8 @@ class CustomTextField extends StatefulWidget {
   final String? hint;
   final Function(String)? onchange;
   final String? noti;
-  // Add validator parameter
   final String? Function(String?)? validator;
-  // Add obscureText option to override default behavior
   final bool? obscureText;
-  // Add keyboard type parameter
   final TextInputType? keyboardType;
 
   @override
@@ -45,7 +42,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: TextFormField(
         controller: widget.controller,
-        // Use custom validator if provided, otherwise use default behavior
         validator: widget.validator ??
             (data) {
               if (data == null || data.isEmpty) {
@@ -60,10 +56,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
               return null;
             },
         onChanged: widget.onchange,
-        // Use custom obscureText if provided, otherwise use default behavior
         obscureText: widget.obscureText ??
             (widget.sufIcon != null ? !passwordVisible : false),
-        // Use provided keyboard type or default to text
         keyboardType: widget.keyboardType ?? TextInputType.text,
         decoration: InputDecoration(
           prefixIcon: widget.icon != null

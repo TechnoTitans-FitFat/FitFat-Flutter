@@ -7,9 +7,13 @@ class WeightAndHeightSection extends StatefulWidget {
   const WeightAndHeightSection({
     super.key,
     required this.onWeightHeightChanged,
+    this.weightError,
+    this.heightError,
   });
 
   final void Function(String weight, String height) onWeightHeightChanged;
+  final String? weightError;
+  final String? heightError;
 
   @override
   _WeightAndHeightSectionState createState() => _WeightAndHeightSectionState();
@@ -29,48 +33,51 @@ class _WeightAndHeightSectionState extends State<WeightAndHeightSection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Weight & Height",
-              style: GoogleFonts.roboto(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: AppLightColor.blackColor,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Weight & Height",
+            style: GoogleFonts.roboto(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: AppLightColor.blackColor,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              WeightAndHeightTextField(
+                text: "Weight",
+                controller: weightController,
+                onChanged: (value) {
+                  widget.onWeightHeightChanged(
+                      weightController.text, heightController.text);
+                },
+                errorText: widget.weightError,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                WeightAndHeightTextField(
-                  text: "Weight",
-                  controller: weightController,
-                  onChanged: (value) {
-                    widget.onWeightHeightChanged(
-                        weightController.text, heightController.text);
-                  },
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                WeightAndHeightTextField(
-                  text: "Height",
-                  controller: heightController,
-                  onChanged: (value) {
-                    widget.onWeightHeightChanged(
-                        weightController.text, heightController.text);
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
-        ));
+              const SizedBox(
+                width: 10,
+              ),
+              WeightAndHeightTextField(
+                text: "Height",
+                controller: heightController,
+                onChanged: (value) {
+                  widget.onWeightHeightChanged(
+                      weightController.text, heightController.text);
+                },
+                errorText: widget.heightError,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
+    );
   }
 }
