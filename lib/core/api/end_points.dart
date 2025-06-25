@@ -44,6 +44,10 @@ class EndPoint {
       'https://web-production-8f1d8.up.railway.app/recommend';
   static const String search =
       'https://fitfattt.azurewebsites.net/api/recipes/search?';
+  static const String searchHistory =
+      'https://fitfattt.azurewebsites.net/api/recipes/search';
+  static const String offer =
+      'https://fitfattt.azurewebsites.net/api/recipes/offer';
 }
 
 class ApiKey {
@@ -76,4 +80,5 @@ class ApiKey {
   static String otp = "otp";
   static String diet = "diet";
   static String allergy = "allergy";
+  static String offerPrice = 'offerPrice';
 }

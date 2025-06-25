@@ -146,6 +146,11 @@ class _CartListItemState extends State<CartListItem> {
                                     count: count,
                                     onIncrement: () {
                                       setState(() {
+                                        context.read<GetCartCubit>().getCart(
+                                          context: context,
+                                          id: widget.item.id,
+                                          count: count,
+                                        );
                                         count++;
                                       });
                                       context.read<GetCartCubit>().getCart(

@@ -1,4 +1,6 @@
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/search/data/search_cubit/search_cubit.dart';
+import 'package:fitfat/features/search/data/search_history/search_history_cubit.dart';
 import 'package:fitfat/features/search/presentation/widgets/search_result_item.dart';
 import 'package:fitfat/features/search/presentation/widgets/search_text_filed.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,17 @@ class SearchPageBody extends StatefulWidget {
 class _SearchPageBodyState extends State<SearchPageBody> {
   bool hasSearched = false;
 
+ @override
+  void initState() {
+     super.initState();
+
+  final token = context.read<LoginCubit>().user?.token;
+
+  if (token != null) {
+    context.read<SearchHistoryCubit>().getLatestSearches(context);
+  }
+  }
+  
  void _onSearch(String query) {
   if (query.trim().isEmpty) return;
   print("Searching for: $query"); 
@@ -48,7 +61,7 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Latest Search', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: AppLightColor.mainColor)),
-                        const LatestSearch(),
+                        LatestSearch(),
                         const SizedBox(height: 25),
                         Text('Meal Dishes', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: AppLightColor.mainColor)),
                         const SizedBox(height: 10),

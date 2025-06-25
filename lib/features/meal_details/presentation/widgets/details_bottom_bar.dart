@@ -2,14 +2,15 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/increase_and_decrese_count.dart';
+import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsBottomBar extends StatefulWidget {
-  const DetailsBottomBar({
-    super.key,
-    required this.price,
-  });
+  DetailsBottomBar({super.key, required this.price, required this.id});
+
   final double price;
+  String? id;
 
   @override
   State<DetailsBottomBar> createState() => _DetailsBottomBarState();
@@ -17,6 +18,7 @@ class DetailsBottomBar extends StatefulWidget {
 
 class _DetailsBottomBarState extends State<DetailsBottomBar> {
   int count = 1;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,26 +65,45 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
               ),
             ],
           ),
-          GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>  CartScreen()));
-            },
-            child: Container(
-              height: 45,
-              width: 162,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: AppLightColor.mainColor,
-              ),
-              child: Center(
-                child: Text(
-                  'Add To Cart',
-                  style: AppStyles.textStyle16
-                      .copyWith(color: AppLightColor.whiteColor),
+          BlocConsumer<CartCubit, CartState>(listener: (context, state) {
+            if (state is CartSuccess) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.message)),
+              );
+            } else if (state is CartFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.error)),
+              );
+            }
+          }, builder: (context, state) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CartScreen()));
+                context.read<CartCubit>()
+                  ..productId = widget.id
+                  ..quantity = count
+                  ..addCartAndIncrement(context: context);
+              },
+              child: Container(
+                height: 45,
+                width: 162,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppLightColor.mainColor,
+                ),
+                child: Center(
+                  child: Text(
+                    'Add To Cart',
+                    style: AppStyles.textStyle16
+                        .copyWith(color: AppLightColor.whiteColor),
+                  ),
                 ),
               ),
-            ),
-          ),
+            );
+          })
         ],
       ),
     );
