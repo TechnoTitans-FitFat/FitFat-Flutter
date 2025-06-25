@@ -5,6 +5,7 @@ import 'package:fitfat/features/cart/cubit/get_cart_cubit.dart';
 import 'package:fitfat/features/cart/data/models/get_cart_model.dart';
 import 'package:fitfat/features/meal_details/data/card_cubit/decrement_cubit.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/increase_and_decrese_count.dart';
+import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,8 +13,11 @@ class CartListItem extends StatefulWidget {
   final CartItem item;
   final VoidCallback onCountChanged;
 
-  const CartListItem(
-      {super.key, required this.item, required this.onCountChanged});
+  CartListItem({
+    super.key,
+    required this.item,
+    required this.onCountChanged,
+  });
 
   @override
   State<CartListItem> createState() => _CartListItemState();
@@ -146,36 +150,28 @@ class _CartListItemState extends State<CartListItem> {
                                     count: count,
                                     onIncrement: () {
                                       setState(() {
-                                        context.read<GetCartCubit>().getCart(
-                                          context: context,
-                                          id: widget.item.id,
-                                          count: count,
-                                        );
                                         count++;
+                                        context.read<CartCubit>()
+                                          ..productId = widget.item.productId
+                                          ..quantity = 1
+                                          ..addCartAndIncrement(
+                                              context: context);
+                                        print("count: $count");
+                                        context.read<GetCartCubit>().getCart(context: context);
                                       });
-                                      context.read<GetCartCubit>().getCart(
-                                            context: context,
-                                            id: widget.item.id,
-                                            count: count,
-                                          );
                                       widget.onCountChanged();
                                     },
                                     onDecrement: () {
                                       if (count > 1) {
                                         setState(() {
+                                          count--;
                                           context
                                               .read<DecrementCubit>()
                                               .decrement(
                                                   context: context,
                                                   productId:
                                                       widget.item.productId);
-                                          count--;
                                         });
-                                        context.read<GetCartCubit>().getCart(
-                                              context: context,
-                                              id: widget.item.id,
-                                              count: count,
-                                            );
                                         widget.onCountChanged();
                                       }
                                     });
