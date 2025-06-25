@@ -1,8 +1,8 @@
 import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/core/widgets/custom_app_bar.dart';
 import 'package:fitfat/features/cart/cubit/get_cart_cubit.dart';
 import 'package:fitfat/features/cart/presentation/widgets/cart_bottom_bar.dart';
 import 'package:fitfat/features/cart/presentation/widgets/cart_screen_body.dart';
+import 'package:fitfat/features/cart/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +24,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppLightColor.backgroundColor,
-        appBar: const CustomAppBar(title: 'Cart'),
+        appBar: const CustomAppBarCart(title: 'Cart'),
         body: BlocBuilder<GetCartCubit, CartState>(
           builder: (context, state) {
             if (state is CartLoading) {

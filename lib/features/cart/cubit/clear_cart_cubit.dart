@@ -28,7 +28,7 @@ class ClearCartCubit extends Cubit<ClearState> {
       );
 
       if (response.statusCode == 200) {
-        emit(ClearSuccess(message: "Product deleted successfully"));
+        emit(ClearSuccess(message: "Cart cleared successfully"));
       } else if (response.statusCode == 400) {
         final body = jsonDecode(response.data);
         final errorMessage =
