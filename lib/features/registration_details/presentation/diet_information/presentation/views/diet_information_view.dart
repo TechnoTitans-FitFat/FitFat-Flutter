@@ -2,6 +2,7 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/current_page_indicator_section.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/custom_container_profile_set_up.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/diet_determination_way_selection.dart';
+import 'package:fitfat/features/registration_details/presentation/widgets/skip_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -37,6 +38,9 @@ class DietInformationView extends StatelessWidget {
                         color: AppLightColor.mainColor,
                       ),
                     ),
+                    SkipButton(
+                      userId: userId,
+                    )
                   ],
                 ),
                 const SizedBox(

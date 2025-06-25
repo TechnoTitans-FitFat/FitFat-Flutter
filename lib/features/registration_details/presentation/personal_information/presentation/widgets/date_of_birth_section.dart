@@ -10,9 +10,11 @@ class DateOfBirthSection extends StatefulWidget {
   const DateOfBirthSection({
     super.key,
     required this.onDateChanged,
+    this.errorText,
   });
 
   final ValueChanged<String> onDateChanged;
+  final String? errorText;
 
   @override
   _DateOfBirthSectionState createState() => _DateOfBirthSectionState();
@@ -57,7 +59,7 @@ class _DateOfBirthSectionState extends State<DateOfBirthSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Date of birth",
+          "Date of Birth",
           style: GoogleFonts.roboto(
             fontSize: 20,
             fontWeight: FontWeight.w500,
@@ -82,6 +84,18 @@ class _DateOfBirthSectionState extends State<DateOfBirthSection> {
             ),
           ],
         ),
+        if (widget.errorText != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              widget.errorText!,
+              style: GoogleFonts.roboto(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: Colors.red,
+              ),
+            ),
+          ),
       ],
     );
   }

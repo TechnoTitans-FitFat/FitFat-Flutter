@@ -12,7 +12,6 @@ class InputMyDietViewBody extends StatefulWidget {
 }
 
 class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
-  // Diet preferences state
   final List<String> _dietTypes = [
     'Balanced',
     'Low Carb',
@@ -23,53 +22,9 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
   ];
   String _selectedDietType = 'Balanced';
 
-  // Macronutrient values
   double _proteinPercentage = 30;
   double _carbsPercentage = 40;
   double _fatPercentage = 30;
-
-  // Meal frequency
-  final double _mealsPerDay = 3;
-
-  // Calorie goal
-  final double _calorieGoal = 2000;
-
-  // Food preferences
-  final List<String> _foodPreferences = [];
-  final List<String> _availableFoods = [
-    'Chicken',
-    'Beef',
-    'Fish',
-    'Eggs',
-    'Dairy',
-    'Fruits',
-    'Vegetables',
-    'Nuts',
-    'Grains',
-    'Legumes'
-  ];
-
-  void _saveDietInformation() {
-    // Here you would save the diet information to your state management solution
-    // For example, using a provider, bloc, or passing to the next page
-
-    // Example of data to save
-    final Map<String, dynamic> dietInfo = {
-      'dietType': _selectedDietType,
-      'proteinPercentage': _proteinPercentage,
-      'carbsPercentage': _carbsPercentage,
-      'fatPercentage': _fatPercentage,
-      'mealsPerDay': _mealsPerDay.toInt(),
-      'calorieGoal': _calorieGoal.toInt(),
-      'foodPreferences': _foodPreferences,
-    };
-
-    // Print for debugging
-    print('Diet information saved: $dietInfo');
-
-    // Navigate to the next page (journey start)
-    Navigator.of(context).pushNamed('/journey_start');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,10 +76,7 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
               );
             }).toList(),
           ),
-
           const SizedBox(height: 24),
-
-          // Macronutrient sliders - ensure they always sum to 100%
           Text(
             "Macronutrient Distribution",
             style: GoogleFonts.roboto(
@@ -142,7 +94,6 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
             onChanged: (value) {
               setState(() {
                 _proteinPercentage = value;
-                // Adjust carbs and fat to maintain 100% total
                 double remaining = 100 - _proteinPercentage;
                 double ratio =
                     _carbsPercentage / (_carbsPercentage + _fatPercentage);
@@ -159,7 +110,6 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
             onChanged: (value) {
               setState(() {
                 _carbsPercentage = value;
-                // Adjust protein and fat to maintain 100% total
                 double remaining = 100 - _carbsPercentage;
                 double ratio =
                     _proteinPercentage / (_proteinPercentage + _fatPercentage);
@@ -176,7 +126,6 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
             onChanged: (value) {
               setState(() {
                 _fatPercentage = value;
-                // Adjust protein and carbs to maintain 100% total
                 double remaining = 100 - _fatPercentage;
                 double ratio = _proteinPercentage /
                     (_proteinPercentage + _carbsPercentage);
@@ -193,7 +142,6 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
             onChanged: (value) {
               setState(() {
                 _fatPercentage = value;
-                // Adjust protein and carbs to maintain 100% total
                 double remaining = 100 - _fatPercentage;
                 double ratio = _proteinPercentage /
                     (_proteinPercentage + _carbsPercentage);
