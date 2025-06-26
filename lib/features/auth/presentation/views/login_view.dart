@@ -22,7 +22,7 @@ class Login extends StatelessWidget {
       if (state is LoginLoading) {
       } else if (state is LoginSucess) {
         ShowDialog(context, 'Great to see you again');
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => const MainScreen(),

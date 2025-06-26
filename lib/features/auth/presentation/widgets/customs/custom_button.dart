@@ -2,13 +2,13 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class CustomBottom extends StatelessWidget {
-  // ignore: use_key_in_widget_constructors
-  CustomBottom({this.ontap, this.text});
+  const CustomBottom(
+      {super.key, this.ontap, this.text, required this.isLoading});
 
-  VoidCallback? ontap;
-  String? text;
+  final VoidCallback? ontap;
+  final String? text;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +23,21 @@ class CustomBottom extends StatelessWidget {
             color: AppLightColor.mainColor,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Center(
-            child: Text(
-              text!,
-              style: AppStyles.textStyle15.copyWith(
-                color: AppLightColor.whiteColor,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-          ),
+          child: isLoading == true
+              ? const Center(
+                  child: CircularProgressIndicator(
+                    color: AppLightColor.whiteColor,
+                  ),
+                )
+              : Center(
+                  child: Text(
+                    text!,
+                    style: AppStyles.textStyle15.copyWith(
+                      color: AppLightColor.whiteColor,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
         ),
       ),
     );

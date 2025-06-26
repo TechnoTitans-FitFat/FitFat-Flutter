@@ -117,8 +117,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 backgroundColor: Colors.green,
               ),
             );
-
-            // Use pushReplacement instead of push to avoid stacking screens
+            Navigator.pop(context);
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
