@@ -4,8 +4,18 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 
 class InsulinDialog extends StatefulWidget {
-  const InsulinDialog({super.key});
+ const InsulinDialog({
+    super.key,
+    required this.carbValue,
+    required this.correctionFactor,
+    required this.insulinToCarbRatio,
+    required this.onDoseCalculated,
+  });
 
+  final String carbValue;
+  final double correctionFactor;
+  final double insulinToCarbRatio;
+  final void Function(double) onDoseCalculated;
   @override
   State<InsulinDialog> createState() => _InsulinDialogState();
 }
@@ -14,12 +24,34 @@ class _InsulinDialogState extends State<InsulinDialog> {
   final TextEditingController currentController = TextEditingController();
   final TextEditingController targetController = TextEditingController();
 
-  double? result;
+   double? correctionDose;
+  double? carbDose;
+  double? totalDose;
 
-  double calculateInsulin(double current, double target, {double correctionFactor = 50}) {
-    double dose = (current - target) / correctionFactor;
-    return dose > 0 ? dose : 0;
+  double parseCarb(String carbString) {
+    return double.tryParse(carbString.replaceAll(RegExp(r'[^0-9.]'), '')) ?? 0.0;
   }
+
+  void calculateDose() {
+    final current = double.tryParse(currentController.text);
+    final target = double.tryParse(targetController.text);
+    final carbs = parseCarb(widget.carbValue);
+
+    if (current != null && target != null) {
+      final corrDose = (current - target) / widget.correctionFactor;
+      final corrected = (corrDose > 0 ? corrDose : 0).toDouble();
+      final carbCover = (carbs / widget.insulinToCarbRatio).toDouble();
+      final total = (corrected + carbCover).toDouble();
+      widget.onDoseCalculated(total); 
+
+      setState(() {
+        correctionDose = corrected;
+        carbDose = carbCover;
+        totalDose = total;
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +81,7 @@ class _InsulinDialogState extends State<InsulinDialog> {
                 width: 200,
                 height: 60,
                 child: ElevatedButton(
-                  onPressed: () {
-                    double? current = double.tryParse(currentController.text);
-                    double? target = double.tryParse(targetController.text);
-
-                    if (current != null && target != null) {
-                      setState(() {
-                        result = calculateInsulin(current, target);
-                      });
-                    }
-                  },
+                  onPressed: calculateDose,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppLightColor.mainColor,
                     shape: RoundedRectangleBorder(
@@ -74,13 +97,16 @@ class _InsulinDialogState extends State<InsulinDialog> {
               ),
             ),
             const SizedBox(height: 20),
-            if (result != null)
-              Center(
-                child: Text(
-                  'Recommended Dose: ${result!.toStringAsFixed(1)} units',
-                  style: AppStyles.textStyle16.copyWith(color: AppLightColor.mainColor),
-                ),
-              )
+            if (totalDose!= null)
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Correction Dose: ${correctionDose!.toStringAsFixed(1)} units', style: AppStyles.textStyle16),
+                    Text('Carb Coverage Dose: ${carbDose!.toStringAsFixed(1)} units', style: AppStyles.textStyle16),
+                    const SizedBox(height: 10),
+                    Text('Total Insulin Dose: ${totalDose!.toStringAsFixed(1)} units', style: AppStyles.textStyle16.copyWith(color: AppLightColor.mainColor)),
+                  ],
+                )
           ],
         ),
       ),
