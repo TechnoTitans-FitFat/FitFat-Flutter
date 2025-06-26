@@ -108,6 +108,7 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
                         rating: widget.meal.rating,
                         imagePath: widget.meal.image, 
                         price: widget.meal.price,  
+                        carb: widget.meal.carb
                       ),
                       const SizedBox(
                         height: 25,

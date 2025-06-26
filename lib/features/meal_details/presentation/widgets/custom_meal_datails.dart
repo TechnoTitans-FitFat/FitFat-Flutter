@@ -1,8 +1,6 @@
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/insulin_calc.dart';
-import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +14,7 @@ class CustomMealDatails extends StatefulWidget {
     required this.id,
     required this.imagePath,
     required this.price,
+    required this.carb,
   });
   final String id;
   final String title;
@@ -24,6 +23,7 @@ class CustomMealDatails extends StatefulWidget {
   final String cookingTime;
   final String imagePath;
   final double price;
+  final String carb;
 
   @override
   State<CustomMealDatails> createState() => _CustomMealDatailsState();
@@ -104,7 +104,11 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
                 ],
               ),
             ),
-           const InsulinCalc()
+            InsulinCalc(
+              carbValue: widget.carb, 
+              correctionFactor: 5, 
+              insulinToCarbRatio: 7,
+            )
           ],
         );
       },
