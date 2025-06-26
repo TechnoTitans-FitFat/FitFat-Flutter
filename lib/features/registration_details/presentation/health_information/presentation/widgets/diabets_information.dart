@@ -22,6 +22,9 @@ class DiabetsInformation extends StatefulWidget {
     required this.foodAllergies,
     required this.userId,
     this.onCorrectionFactor,
+    required this.bloodSugarRange,
+    this.onDiabetesTypeChanged, // Added
+    this.diabetesType = '', // Added
   });
 
   final double initialInsulinRatio;
@@ -33,7 +36,10 @@ class DiabetsInformation extends StatefulWidget {
   final String dateOfBirth;
   final String gender;
   final String foodAllergies;
+  final RangeValues bloodSugarRange;
   final String userId;
+  final Function(String)? onDiabetesTypeChanged; // Added
+  final String diabetesType; // Added
 
   @override
   State<DiabetsInformation> createState() => _DiabetsInformationState();
@@ -51,6 +57,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
     super.initState();
     insulinRatio = widget.initialInsulinRatio;
     correctionFactor = 0.0;
+    diabetesType = widget.diabetesType; // Initialize with widget value
   }
 
   void _submitHealthInfo() async {
@@ -69,8 +76,8 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
       isLoading = true;
     });
     final Map<String, int> targetBloodSugarRange = {
-      'min': 70,
-      'max': 180,
+      "min": widget.bloodSugarRange.start.toInt(),
+      "max": widget.bloodSugarRange.end.toInt(),
     };
 
     try {
@@ -128,6 +135,16 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
             MaterialPageRoute(
               builder: (context) => DietInformationView(
                 userId: widget.userId,
+                selectedGender: widget.gender,
+                bloodSugarRange: widget.bloodSugarRange,
+                dateOfBirth: widget.dateOfBirth,
+                height: widget.height.toString(),
+                weight: widget.weight.toString(),
+                diabetes: hasDiabetes,
+                foodAllergies: widget.foodAllergies,
+                diabetesType: diabetesType, // Added
+                insulinRatio: insulinRatio, // Added
+                correctionFactor: correctionFactor, // Added
               ),
             ),
           );
@@ -161,6 +178,9 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                 setState(() {
                   diabetesType = type;
                 });
+                if (widget.onDiabetesTypeChanged != null) {
+                  widget.onDiabetesTypeChanged!(type); // Call callback
+                }
               },
             ),
             if (hasDiabetes) ...[
@@ -171,6 +191,9 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                   setState(() {
                     diabetesType = type;
                   });
+                  if (widget.onDiabetesTypeChanged != null) {
+                    widget.onDiabetesTypeChanged!(type); // Call callback
+                  }
                 },
               ),
               const SizedBox(height: 20),

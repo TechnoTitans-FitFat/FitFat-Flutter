@@ -32,45 +32,46 @@ class _DiabetesTypeSelectorState extends State<DiabetesTypeSelector> {
           );
         }
       },
-      builder: (context, state){
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(width: 10),
-          Row(
-            children: _diabetesTypes.map((String type) {
-              return Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Radio<String>(
-                    value: type,
-                    groupValue: _selectedDiabetesType,
-                    activeColor: Colors.red,
-                    onChanged: (String? value) {
-                      setState(() {
-                        _selectedDiabetesType = value;
-
-                      });
-                      widget.onDiabetesTypeSelected(value!)?.call(value ?? '');
-                      final updatedHealthInfo = UpdateHealthInfo(
-                          diabetesType: value,
-                          targetBloodSugarRange:
-                          TargetBloodSugarRange(min: 78, max: 110));
-                      context
-                          .read<UpdateHealthInfoCubit>()
-                          .updateHealthInfo(updatedHealthInfo,context: context);
-                    },
-                  ),
-                  Text(
-                    type,
-                    style: TextStyle(fontSize: AppStyles.textStyle18.fontSize,fontWeight: AppStyles.textStyle18.fontWeight),
-                  ),
-                ],
-              );
-            }).toList(),
-          ),
-        ],
-      );
+      builder: (context, state) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(width: 10),
+            Row(
+              children: _diabetesTypes.map((String type) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Radio<String>(
+                      value: type,
+                      groupValue: _selectedDiabetesType,
+                      activeColor: Colors.red,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _selectedDiabetesType = value;
+                        });
+                        widget.onDiabetesTypeSelected(value!)?.call(value);
+                        final updatedHealthInfo = UpdateHealthInfo(
+                            diabetesType: value,
+                            targetBloodSugarRange:
+                                TargetBloodSugarRange(min: 78, max: 110));
+                        context.read<UpdateHealthInfoCubit>().updateHealthInfo(
+                            updatedHealthInfo,
+                            context: context);
+                      },
+                    ),
+                    Text(
+                      type,
+                      style: TextStyle(
+                          fontSize: AppStyles.textStyle18.fontSize,
+                          fontWeight: AppStyles.textStyle18.fontWeight),
+                    ),
+                  ],
+                );
+              }).toList(),
+            ),
+          ],
+        );
       },
     );
   }

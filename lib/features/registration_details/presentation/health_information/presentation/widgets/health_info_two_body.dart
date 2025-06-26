@@ -14,6 +14,8 @@ class HealthInfoTwoBody extends StatefulWidget {
     required this.foodAllergies,
     required this.diabetes,
     required this.userId,
+    required this.bloodSugarRange,
+    this.diabetesType = '', // Added diabetesType with default empty string
   });
   final String selectedGender;
   final String dateOfBirth;
@@ -22,6 +24,8 @@ class HealthInfoTwoBody extends StatefulWidget {
   final String foodAllergies;
   final bool diabetes;
   final String userId;
+  final RangeValues bloodSugarRange;
+  final String diabetesType; // New parameter
 
   @override
   State<HealthInfoTwoBody> createState() => _HealthInfoTwoBodyState();
@@ -31,11 +35,13 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
   double insulinToCardRatio = 0.0;
   bool hasDiabetes = false;
   double correctionFactor = 0.0;
+  String diabetesType = ''; // Added state for diabetesType
 
   @override
   void initState() {
     super.initState();
     hasDiabetes = widget.diabetes;
+    diabetesType = widget.diabetesType; // Initialize with widget value
   }
 
   void updateDiabetesStatus(bool status) {
@@ -43,6 +49,7 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
       hasDiabetes = status;
       if (!status) {
         insulinToCardRatio = 0.0;
+        diabetesType = ''; // Reset diabetesType if no diabetes
       }
     });
   }
@@ -59,28 +66,28 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
     });
   }
 
+  void updateDiabetesType(String type) {
+    setState(() {
+      diabetesType = type;
+    });
+  }
+
   void navigateToDietInfo() {
-    // Create a complete health info object to pass to the next screen or save
-    final Map<String, dynamic> healthInfo = {
-      "gender": widget.selectedGender,
-      "dateOfBirth": widget.dateOfBirth,
-      "weight": double.tryParse(widget.weight) ?? 0.0,
-      "height": double.tryParse(widget.height) ?? 0.0,
-      "foodAllergies": widget.foodAllergies,
-      "diabetes": hasDiabetes,
-      "insulinToCardRatio": insulinToCardRatio,
-    };
-
-    // Print for debugging (you can remove this in production)
-    print("Health Info to be saved: $healthInfo");
-
-    // Navigate to the next screen
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => DietInformationView(
           userId: widget.userId,
-          // healthInfo: healthInfo,
+          selectedGender: widget.selectedGender,
+          bloodSugarRange: widget.bloodSugarRange,
+          dateOfBirth: widget.dateOfBirth,
+          height: widget.height,
+          weight: widget.weight,
+          diabetes: hasDiabetes,
+          foodAllergies: widget.foodAllergies,
+          diabetesType: diabetesType, // Pass diabetesType
+          insulinRatio: insulinToCardRatio, // Pass insulin ratio
+          correctionFactor: correctionFactor, // Pass correction factor
         ),
       ),
     );
@@ -95,7 +102,22 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
           height: 30,
         ),
         HealthInformationUpperTextTwo(
+          dateOfBirth: widget.dateOfBirth,
+          height: widget.height,
+          weight: widget.weight,
+          selectedGender: widget.selectedGender,
+          foodAllergies: widget.foodAllergies,
+          targetBloodSugarRange: {
+            "min": widget.bloodSugarRange.start.toInt(),
+            "max": widget.bloodSugarRange.end.toInt(),
+          },
           userId: widget.userId,
+          onDiabetesChanged: updateDiabetesStatus,
+          onCorrectionFactor: updateCorrectionFactor,
+          initialInsulinRatio: insulinToCardRatio,
+          onDiabetesTypeChanged: updateDiabetesType, // Pass update function
+          diabetesType: diabetesType, // Pass diabetesType
+          correctionFactor: correctionFactor, // Pass correctionFactor
         ),
         const SizedBox(
           height: 30,
@@ -114,6 +136,9 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
               foodAllergies: widget.foodAllergies,
               userId: widget.userId,
               onCorrectionFactor: updateCorrectionFactor,
+              bloodSugarRange: widget.bloodSugarRange,
+              onDiabetesTypeChanged: updateDiabetesType, // Pass update function
+              diabetesType: diabetesType, // Pass diabetesType
             ),
           ),
         ),

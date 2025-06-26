@@ -82,6 +82,10 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
         ),
         HealthInformationUpperText(
           userId: widget.userId,
+          dateOfBirth: widget.dateOfBirth,
+          height: widget.height,
+          weight: widget.weight,
+          selectedGender: widget.selectedGender,
         ),
         const SizedBox(
           height: 20,
@@ -157,17 +161,20 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
                       NextButton(
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HealthInfoTwo(
-                                    dateOfBirth: widget.dateOfBirth,
-                                    diabetes: diabetes,
-                                    foodAllergies: foodAllergies,
-                                    height: widget.height,
-                                    selectedGender: widget.selectedGender,
-                                    weight: widget.weight,
-                                    userId: widget.userId),
-                              ));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HealthInfoTwo(
+                                dateOfBirth: widget.dateOfBirth,
+                                diabetes: diabetes,
+                                foodAllergies: foodAllergies,
+                                height: widget.height,
+                                selectedGender: widget.selectedGender,
+                                weight: widget.weight,
+                                userId: widget.userId,
+                                bloodSugarRange: currentRange,
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ],

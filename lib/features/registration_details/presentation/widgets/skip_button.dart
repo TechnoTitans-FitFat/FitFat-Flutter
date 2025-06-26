@@ -3,7 +3,7 @@ import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:intl/intl.dart';
 import '../../../main/presentaion/views/main_screen.dart';
 import '../../data/cubit/diet_info_cubit/diet_info_state.dart';
 import '../../data/cubit/health_info_cubit/health_info_state.dart';
@@ -61,21 +61,27 @@ class SkipButton extends StatelessWidget {
         mealPreferences: selectedMealType ?? "Vegetarian",
         userId: userId,
       );
+      String? result;
+      if (dateOfBirth != null) {
+        final inputFormat = DateFormat('dd/MM/yyyy');
+        final dateTime = inputFormat.parse(dateOfBirth!);
+        final utcDateTime = dateTime.toUtc();
+        final outputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        result = outputFormat.format(utcDateTime);
+      }
 
-      // Submit health information
-      final int diabetesValue = hasDiabetes ?? false ? 1 : 0;
       await healthInfoCubit.postHealthInfo(
         foodAllergies: foodAllergies ?? "",
-        diabetes: diabetesValue,
+        diabetes: hasDiabetes ?? false ? 1 : 0,
         weight: weight ?? 50,
         height: height ?? 150,
-        dateOfBirth: dateOfBirth ?? "1990-01-01T00:00:00.000Z",
+        dateOfBirth: result ?? "1990-01-01T00:00:00.000Z",
         gender: gender ?? "Female",
         targetBloodSugarRange: targetBloodSugarRange ?? {"min": 70, "max": 180},
         userId: userId,
-        diabetesType: diabetesType ?? "",
-        insulinRatio: insulinRatio ?? 0.0,
-        correctionfactor: correctionFactor ?? 0.0,
+        diabetesType: diabetesType ?? "", // Pass diabetesType
+        insulinRatio: insulinRatio ?? 0.0, // Pass insulinRatio
+        correctionfactor: correctionFactor ?? 0.0, // Pass correctionFactor
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
