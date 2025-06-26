@@ -7,8 +7,33 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DietInformationView extends StatelessWidget {
-  const DietInformationView({super.key, required this.userId});
+  const DietInformationView({
+    super.key,
+    required this.userId,
+    required this.selectedGender,
+    required this.dateOfBirth,
+    required this.weight,
+    required this.height,
+    required this.foodAllergies,
+    required this.diabetes,
+    required this.bloodSugarRange,
+    this.diabetesType = '', // Added
+    this.insulinRatio = 0.0, // Added
+    this.correctionFactor = 0.0, // Added
+  });
+
   final String userId;
+  final String selectedGender;
+  final String dateOfBirth;
+  final String weight;
+  final String height;
+  final String foodAllergies;
+  final bool diabetes;
+  final RangeValues bloodSugarRange;
+  final String diabetesType; // Added
+  final double insulinRatio; // Added
+  final double correctionFactor; // Added
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +64,21 @@ class DietInformationView extends StatelessWidget {
                       ),
                     ),
                     SkipButton(
+                      hasDiabetes: diabetes,
                       userId: userId,
-                    )
+                      dateOfBirth: dateOfBirth,
+                      foodAllergies: foodAllergies,
+                      gender: selectedGender,
+                      height: int.parse(height),
+                      weight: int.parse(weight),
+                      targetBloodSugarRange: {
+                        "min": bloodSugarRange.start.toInt(),
+                        "max": bloodSugarRange.end.toInt(),
+                      },
+                      diabetesType: diabetesType, // Added
+                      insulinRatio: insulinRatio, // Added
+                      correctionFactor: correctionFactor, // Added
+                    ),
                   ],
                 ),
                 const SizedBox(

@@ -12,6 +12,7 @@ class HealthInfoTwo extends StatelessWidget {
     required this.foodAllergies,
     required this.diabetes,
     required this.userId,
+    required this.bloodSugarRange,
   });
   final String selectedGender;
   final String dateOfBirth;
@@ -20,6 +21,7 @@ class HealthInfoTwo extends StatelessWidget {
   final String foodAllergies;
   final bool diabetes;
   final String userId;
+  final RangeValues bloodSugarRange;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class HealthInfoTwo extends StatelessWidget {
         selectedGender: selectedGender,
         weight: weight,
         userId: userId,
+        bloodSugarRange: bloodSugarRange,
       ),
     );
   }
