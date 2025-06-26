@@ -8,8 +8,33 @@ class HealthInformationUpperTextTwo extends StatelessWidget {
   const HealthInformationUpperTextTwo({
     super.key,
     required this.userId,
+    required this.foodAllergies,
+    required this.targetBloodSugarRange,
+    required this.selectedGender,
+    required this.dateOfBirth,
+    required this.weight,
+    required this.height,
+    required this.onCorrectionFactor,
+    required this.onDiabetesChanged,
+    required this.initialInsulinRatio,
+    required this.onDiabetesTypeChanged, // Added
+    required this.diabetesType, // Added
+    required this.correctionFactor, // Added
   });
   final String userId;
+  final String foodAllergies;
+  final Map<String, int> targetBloodSugarRange;
+  final String selectedGender;
+  final String dateOfBirth;
+  final String weight;
+  final String height;
+  final void Function(double ratio) onCorrectionFactor;
+  final void Function(bool status) onDiabetesChanged;
+  final double initialInsulinRatio;
+  final void Function(String type) onDiabetesTypeChanged; // Added
+  final String diabetesType; // Added
+  final double correctionFactor; // Added
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,7 +55,17 @@ class HealthInformationUpperTextTwo extends StatelessWidget {
               ),
               SkipButton(
                 userId: userId,
-              )
+                foodAllergies: foodAllergies,
+                targetBloodSugarRange: targetBloodSugarRange,
+                dateOfBirth: dateOfBirth,
+                gender: selectedGender,
+                height: int.parse(height),
+                weight: int.parse(weight),
+                correctionFactor: correctionFactor,
+                hasDiabetes: true, // Assuming diabetes is relevant
+                insulinRatio: initialInsulinRatio,
+                diabetesType: diabetesType, // Pass diabetesType
+              ),
             ],
           ),
           const SizedBox(

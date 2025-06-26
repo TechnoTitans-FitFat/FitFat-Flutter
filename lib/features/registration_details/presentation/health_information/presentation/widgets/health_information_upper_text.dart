@@ -8,9 +8,16 @@ class HealthInformationUpperText extends StatelessWidget {
   const HealthInformationUpperText({
     super.key,
     required this.userId,
+    required this.selectedGender,
+    required this.dateOfBirth,
+    required this.weight,
+    required this.height,
   });
   final String userId;
-
+  final String selectedGender;
+  final String dateOfBirth;
+  final String weight;
+  final String height;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,6 +36,10 @@ class HealthInformationUpperText extends StatelessWidget {
             ),
             SkipButton(
               userId: userId,
+              dateOfBirth: dateOfBirth,
+              gender: selectedGender,
+              height: int.parse(height),
+              weight: int.parse(weight),
             )
           ]),
           const SizedBox(
