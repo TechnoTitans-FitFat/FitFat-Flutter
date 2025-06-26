@@ -23,7 +23,7 @@ class CustomBottom extends StatelessWidget {
             color: AppLightColor.mainColor,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: isLoading == true
+          child: isLoading
               ? const Center(
                   child: CircularProgressIndicator(
                     color: AppLightColor.whiteColor,

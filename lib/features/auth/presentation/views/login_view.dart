@@ -8,6 +8,8 @@ import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/Cubit/blocs/auth_bloc/login_state.dart';
+
 class Login extends StatelessWidget {
   Login({super.key});
 
@@ -18,21 +20,25 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(
-        listener: (BuildContext context, state) {
-      if (state is LoginLoading) {
-      } else if (state is LoginSucess) {
-        ShowDialog(context, 'Great to see you again');
-        Navigator.pushReplacement(
+      listener: (BuildContext context, state) {
+        if (state is LoginSuccess) {
+          showSnackBar(context, 'Great to see you again');
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => const MainScreen(),
-            ));
-      } else if (state is LoginFalier) {
-        showSnackBar(context, state.errorMassage);
-      }
-    }, builder: (context, state) {
-      return const Scaffold(
-          backgroundColor: AppLightColor.whiteColor, body: LoginViewBody());
-    });
+            ),
+          );
+        } else if (state is LoginFailure) {
+          showSnackBar(context, state.errorMessage);
+        }
+      },
+      builder: (context, state) {
+        return const Scaffold(
+          backgroundColor: AppLightColor.whiteColor,
+          body: LoginViewBody(),
+        );
+      },
+    );
   }
 }

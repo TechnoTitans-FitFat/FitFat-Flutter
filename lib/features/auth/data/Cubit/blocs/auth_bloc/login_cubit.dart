@@ -4,14 +4,14 @@ import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/cache/cache_helper.dart';
 import 'package:fitfat/core/errors/exceptions.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_state.dart';
 import 'package:fitfat/features/auth/data/Cubit/models/sign_in_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
-  LoginCubit(this.api) : super(LoginLoading());
+  LoginCubit(this.api) : super(LoginInitial());
   final ApiConsumer api;
   final apiService = ApiServices(Dio());
   GlobalKey<FormState> signInFormKey = GlobalKey();
@@ -28,41 +28,33 @@ class LoginCubit extends Cubit<LoginStates> {
       });
 
       user = SignInModel.fromJson(response);
-      print("Received Token: ${user?.token}");
-
       if (user?.token == null || user!.token.isEmpty) {
-        emit(LoginFalier(errorMassage: "Invalid token received"));
+        emit(LoginFailure(errorMessage: "Invalid token received"));
         return;
       }
 
       try {
         final decodedToken = JwtDecoder.decode(user!.token);
-        print("Decoded Token: $decodedToken");
-
         if (!decodedToken.containsKey(ApiKey.id)) {
-          emit(LoginSucess());
+          emit(LoginSuccess());
           return;
         }
 
         await CacheHelper().saveData(key: ApiKey.token, value: user!.token);
         await CacheHelper()
             .saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
-
-        print("Login successful, emitting success state...");
-        emit(LoginSucess());
+        emit(LoginSuccess());
       } catch (e) {
-        emit(LoginFalier(errorMassage: "Error decoding token ${e.toString()}"));
+        emit(
+            LoginFailure(errorMessage: "Error decoding token ${e.toString()}"));
       }
-      print(response.toString());
     } on ServerException catch (e) {
-      emit(LoginFalier(errorMassage: e.errModel.errMessage));
+      emit(LoginFailure(errorMessage: e.errModel.errMessage));
     } on DioException catch (e) {
-      print("Response data: ${e.response?.data}");
-      print("Response status code: ${e.response?.statusCode}");
-      emit(LoginFalier(errorMassage: "Dio error: ${e.message}"));
+      emit(LoginFailure(errorMessage: "Dio error: ${e.message}"));
     } catch (e) {
-      emit(LoginFalier(
-          errorMassage: "An unexpected error occurred ${e.toString()}"));
+      emit(LoginFailure(
+          errorMessage: "An unexpected error occurred ${e.toString()}"));
     }
   }
 }
