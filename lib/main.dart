@@ -33,11 +33,8 @@ import 'package:fitfat/features/meal_details/data/card_cubit/decrement_cubit.dar
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:fitfat/features/offers/data/offer_cubit/offer_cubit.dart';
-import 'package:fitfat/features/profile/presentation/data/diet_info_cubit.dart';
-import 'package:fitfat/features/profile/presentation/data/profile_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
-import 'package:fitfat/features/profile/presentation/data/update_health_cubit.dart';
-import 'package:fitfat/features/profile/presentation/widgets/personal_user_data.dart';
+import 'package:fitfat/features/profile/presentation/cubit/profile_cubit/profile_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/search/data/search_cubit/search_cubit.dart';
@@ -50,7 +47,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'core/cache/cache_helper.dart';
-import 'features/profile/presentation/data/health_info_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,7 +69,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => ClearCartCubit(apiServices)),
         BlocProvider(create: (context) => DeleteCubit(apiServices)),
-        BlocProvider(create: (context) => UpdateHealthInfoCubit()),
         BlocProvider(create: (context) => DecrementCubit(apiServices)),
         BlocProvider(
           create: (context) => ForgotPasswordCubit(
@@ -94,18 +89,8 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        BlocProvider(create: (context)=> GetCartCubit(apiServices)),
-        BlocProvider(
-          create: (context) =>
-              GetHealthInfoCubit(apiServices)..getUserProfile(context: context),
-        ),
-        BlocProvider(
-          create: (context) => GetDietInfoCubit(apiServices)..getDietInfo(),
-        ),
-        BlocProvider(
-          create: (context) => UserCubit(apiServices),
-          child: const PersonalUserData(),
-        ),
+        BlocProvider(create: (context) => GetCartCubit(apiServices)),
+        BlocProvider(create: (context) => UserProfileCubit()),
         BlocProvider(
             create: (context) => AccountSettingsCubit(DioComsumer(dio: Dio()))),
         BlocProvider(
@@ -166,14 +151,14 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 CartCubit(apiServices)..addCartAndIncrement(context: context)),
         BlocProvider(
-            create: (context) =>
-                ChatBotCubit(DioComsumer(dio: Dio()))),
-         BlocProvider(
-             create: (context) => SearchCubit(DioComsumer(dio: Dio())),),
-             BlocProvider(
-            create: (context) =>
-                SearchHistoryCubit(DioComsumer(dio: Dio()))..getLatestSearches(context)),
-                 BlocProvider(
+            create: (context) => ChatBotCubit(DioComsumer(dio: Dio()))),
+        BlocProvider(
+          create: (context) => SearchCubit(DioComsumer(dio: Dio())),
+        ),
+        BlocProvider(
+            create: (context) => SearchHistoryCubit(DioComsumer(dio: Dio()))
+              ..getLatestSearches(context)),
+        BlocProvider(
             create: (context) =>
                 OfferCubit(DioComsumer(dio: Dio()))..fetchOffersData()),
       ],
@@ -183,7 +168,6 @@ class MyApp extends StatelessWidget {
         builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
         home: LoginSignUp(DioComsumer(dio: Dio())),
-        
         getPages: [
           GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
           GetPage(
