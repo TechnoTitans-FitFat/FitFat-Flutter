@@ -1,5 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_state.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_button.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_textfield.dart';
 import 'package:fitfat/features/forget_password/presentation/views/forget_password_page.dart';
@@ -70,7 +71,6 @@ class LoginViewBody extends StatelessWidget {
                   sufIcon: Icons.visibility,
                   noti: 'Please, Enter your password',
                   validator: _validatePassword,
-                  // Removed obscureText: true to allow internal toggle logic
                 ),
                 const SizedBox(height: 16),
                 GestureDetector(
@@ -96,17 +96,26 @@ class LoginViewBody extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 32),
-                CustomBottom(
-                  isLoading: false,
-                  text: 'Sign In',
-                  ontap: () {
-                    if (context
-                        .read<LoginCubit>()
-                        .signInFormKey
-                        .currentState!
-                        .validate()) {
-                      context.read<LoginCubit>().signIn();
+                BlocBuilder<LoginCubit, LoginStates>(
+                  builder: (context, state) {
+                    if (state is LoginLoading) {
+                      return const CustomBottom(
+                        isLoading: true,
+                      );
                     }
+                    return CustomBottom(
+                      isLoading: false,
+                      text: 'Sign In',
+                      ontap: () {
+                        if (context
+                            .read<LoginCubit>()
+                            .signInFormKey
+                            .currentState!
+                            .validate()) {
+                          context.read<LoginCubit>().signIn();
+                        }
+                      },
+                    );
                   },
                 ),
                 const SizedBox(height: 16),

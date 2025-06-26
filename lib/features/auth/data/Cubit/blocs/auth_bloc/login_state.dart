@@ -1,12 +1,12 @@
-part of 'login_cubit.dart';
-
 abstract class LoginStates {}
+
+class LoginInitial extends LoginStates {}
 
 class LoginLoading extends LoginStates {}
 
-class LoginSucess extends LoginStates {}
+class LoginSuccess extends LoginStates {}
 
-class LoginFalier extends LoginStates {
-  String? errorMassage;
-  LoginFalier({this.errorMassage});
+class LoginFailure extends LoginStates {
+  String? errorMessage;
+  LoginFailure({this.errorMessage});
 }

@@ -19,7 +19,6 @@ class RegisterCubit extends Cubit<SignUpStates> {
 
   SignUpModel? user;
 
-  // Reset function to clear form fields and reset state
   void reset() {
     signUpName.clear();
     signUpEmail.clear();
@@ -69,7 +68,6 @@ class RegisterCubit extends Cubit<SignUpStates> {
     try {
       emit(VerifyEmailLoading());
 
-      // Validate inputs
       if (email.isEmpty || otp.isEmpty || userId.isEmpty) {
         emit(VerifyEmailFailure(
             errorMessage: "Email, OTP, or User ID is missing"));
