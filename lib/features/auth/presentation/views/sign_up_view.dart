@@ -12,21 +12,16 @@ class SignUp extends StatelessWidget {
     return BlocConsumer<RegisterCubit, SignUpStates>(
       listener: (context, state) {
         if (state is SignUpLoading) {
-          // Show a loading indicator (optional)
-          // You can use a dialog or a SnackBar to indicate loading
         } else if (state is SignUpSucess) {
-          // Navigate to OTP screen with email and userId
           Navigator.pushNamed(
             context,
             "/otpScreen",
             arguments: {
               "email": state.email,
-              "userId": state
-                  .userId, // Ensure userId is included in SignUpSucess state
+              "userId": state.userId,
             },
           );
         } else if (state is SignUpFalier) {
-          // Show error message
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.errorMassage.toString())),
           );
@@ -40,10 +35,6 @@ class SignUp extends StatelessWidget {
               SignUpViewBody(
                 tabController: tabController,
               ),
-              if (state is SignUpLoading)
-                const Center(
-                  child: CircularProgressIndicator(),
-                ),
             ],
           ),
         );

@@ -5,8 +5,6 @@ import 'package:fitfat/core/errors/exceptions.dart';
 import 'package:fitfat/features/auth/data/Cubit/models/sign_up_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-
 part 'sign_up_states.dart';
 
 class RegisterCubit extends Cubit<SignUpStates> {
@@ -21,6 +19,15 @@ class RegisterCubit extends Cubit<SignUpStates> {
 
   SignUpModel? user;
 
+  // Reset function to clear form fields and reset state
+  void reset() {
+    signUpName.clear();
+    signUpEmail.clear();
+    signUpPassword.clear();
+    confirmPassword.clear();
+    emit(SignUpInitial());
+  }
+
   Future<void> signUp(BuildContext context) async {
     try {
       emit(SignUpLoading());
@@ -31,12 +38,7 @@ class RegisterCubit extends Cubit<SignUpStates> {
         "password": signUpPassword.text,
         "confirmPassword": confirmPassword.text,
       };
-
-      print("Sign-Up Request Data: $requestData");
-
       final response = await api.post(EndPoint.signUp, data: requestData);
-
-      print("Sign-Up Response: $response");
 
       if (response is Map<String, dynamic>) {
         final bool status = response["status"] == true;
@@ -45,10 +47,6 @@ class RegisterCubit extends Cubit<SignUpStates> {
 
         if (status) {
           emit(SignUpSucess(email: signUpEmail.text, userId: userId));
-
-          // Navigate to OTP screen with email and userId
-          Get.toNamed('/otpScreen',
-              parameters: {'email': signUpEmail.text, 'userId': userId});
           return;
         } else {
           emit(SignUpFalier(errorMassage: message));
@@ -87,13 +85,7 @@ class RegisterCubit extends Cubit<SignUpStates> {
         "email": email,
         "otp": otp,
       };
-
-      print("Verify Email Request Data: $requestData");
-
       final response = await api.post(EndPoint.verifyEmail, data: requestData);
-
-      print("Verify Email Response: $response");
-
       if (response is Map<String, dynamic>) {
         final bool status = response["status"] == true;
         final String message = response["message"] ?? "No message";
@@ -132,12 +124,7 @@ class RegisterCubit extends Cubit<SignUpStates> {
         "email": email,
       };
 
-      print("Resend OTP Request Data: $requestData");
-
       final response = await api.post(EndPoint.resendOtp, data: requestData);
-
-      print("Resend OTP Response: $response");
-
       if (response is Map<String, dynamic>) {
         final bool status = response["status"] == true;
         final String message = response["message"] ?? "OTP resent successfully";
@@ -162,7 +149,6 @@ class RegisterCubit extends Cubit<SignUpStates> {
     }
   }
 
-  // Clean up resources when no longer needed
   @override
   Future<void> close() {
     signUpName.dispose();
