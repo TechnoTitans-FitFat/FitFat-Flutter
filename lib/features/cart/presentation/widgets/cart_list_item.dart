@@ -63,14 +63,10 @@ class _CartListItemState extends State<CartListItem> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          widget.item.name,
-                          style: AppStyles.textStyle16.copyWith(
-                            color: AppLightColor.blackColor,
-                            fontSize: MediaQuery.of(context).size.width * 0.04,
-                          ),
+                      Text(
+                        widget.item.name,
+                        style: AppStyles.textStyle16.copyWith(
+                          color: AppLightColor.blackColor,
                         ),
                       ),
                       const SizedBox(height: 10),
