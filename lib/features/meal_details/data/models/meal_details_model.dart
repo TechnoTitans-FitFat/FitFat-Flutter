@@ -14,6 +14,7 @@ class MealDetailsModel {
     required this.cookingTime,
     required this.rating,
     required this.id,
+    required this.allergy, 
   });
 
   final String image;
@@ -28,6 +29,7 @@ class MealDetailsModel {
   final String cookingTime;
   final double rating;
   final String id;
+  final List<String> allergy; 
 
   factory MealDetailsModel.fromJson(Map<String, dynamic> jsonData) {
     // print("Full API Response in Model: $jsonData");
@@ -51,6 +53,9 @@ class MealDetailsModel {
       cookingTime: jsonData[ApiKey.cookingTime]?.toString() ?? '0 min',
       rating: ratingValue is num ? ratingValue.toDouble() : 0.0,
       price: priceValue is num ? priceValue.toDouble() : 0.0,
+      allergy: (jsonData['allergy'] as List<dynamic>?)
+        ?.map((e) => e.toString())
+        .toList() ?? [],
     );
   }
 }
