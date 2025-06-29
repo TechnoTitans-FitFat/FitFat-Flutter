@@ -1,5 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:fitfat/features/search/data/models/search_model.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,13 @@ class SearchResultItem extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
-              child: Image.network(recipe.image, fit: BoxFit.cover),
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailsView(mealId: recipe.id,)));
+                },
+                child: Image.network(recipe.image, fit: BoxFit.cover)),
             ),
             const SizedBox(width: 20),
             Expanded(
