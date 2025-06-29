@@ -2,6 +2,7 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
+import 'package:fitfat/features/chat/presentation/views/chat_bot_view.dart';
 import 'package:fitfat/features/favourites/presentation/views/favourites_view.dart';
 import 'package:fitfat/features/main/presentaion/widgets/auto_scroll_panner.dart';
 import 'package:fitfat/features/main/presentaion/widgets/categories_list.dart';
@@ -109,8 +110,8 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       const MenuScreen(),
+      const ChatBotView(),
       const FavouritesView(),
-      CartScreen(),
       const ProfileScreen(),
     ];
 
