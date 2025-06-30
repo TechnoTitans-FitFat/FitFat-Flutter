@@ -7,8 +7,10 @@ import 'package:fitfat/features/profile/presentation/widgets/profile_info_text_w
 import 'package:flutter/material.dart';
 
 class ProfileInfoLoaded extends StatelessWidget {
-  const ProfileInfoLoaded({super.key, required this.state});
+  const ProfileInfoLoaded(
+      {super.key, required this.state, required this.initialData});
   final UserProfileLoaded state;
+  final Map<String, dynamic> initialData;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,9 @@ class ProfileInfoLoaded extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ProfileInfoTextWithEditButton(),
+        ProfileInfoTextWithEditButton(
+          initialData: initialData,
+        ),
         const SizedBox(height: 20),
         GeneralInfoSection(healthInfo: healthInfo),
         const DividerSection(),

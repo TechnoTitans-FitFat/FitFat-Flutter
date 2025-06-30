@@ -67,8 +67,11 @@ class _SplashBodyState extends State<SplashBody>
           AnimatedOpacity(
               opacity: _opacity,
               duration: const Duration(seconds: 1),
-              child: SvgPicture.asset('assets/images/FITFAT LOGO 1.svg',height: 175,width: 175,)
-              ),
+              child: SvgPicture.asset(
+                'assets/images/FITFAT LOGO 1.svg',
+                height: 175,
+                width: 175,
+              )),
         ],
       ),
     );
@@ -99,7 +102,6 @@ class _SplashBodyState extends State<SplashBody>
         Get.to(() => const LoginSignUp(DioComsumer),
             transition: Transition.fadeIn,
             duration: const Duration(milliseconds: 250));
-            
       }
     });
   }

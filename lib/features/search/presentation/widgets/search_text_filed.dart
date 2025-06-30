@@ -5,28 +5,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class SearchTextFiled extends StatelessWidget {
-  final void Function(String) onSubmitted; 
+  final void Function(String) onSubmitted;
 
   const SearchTextFiled({super.key, required this.onSubmitted});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 35,bottom: 5 ),
+      padding: const EdgeInsets.only(top: 35, bottom: 5),
       child: Center(
         child: Container(
           height: 50,
           width: 330,
           decoration: const BoxDecoration(),
           child: TextField(
-            onSubmitted: onSubmitted, 
+            onSubmitted: onSubmitted,
             decoration: InputDecoration(
               fillColor: AppLightColor.whiteColor,
               filled: true,
               hintText: "Search",
               hintStyle: AppStyles.textStyle16.copyWith(
                 fontWeight: FontWeight.w400,
-                color: AppLightColor.whiteColor0,
+                color: AppLightColor.whiteColor,
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),

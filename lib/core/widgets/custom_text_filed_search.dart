@@ -8,9 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTextFiledSearch extends StatelessWidget {
   final void Function(String)? onSubmitted;
-  const CustomTextFiledSearch({
-    super.key,this.onSubmitted
-  });
+  const CustomTextFiledSearch({super.key, this.onSubmitted});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,7 @@ class CustomTextFiledSearch extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) =>const SearchPage()),
+                MaterialPageRoute(builder: (_) => const SearchPage()),
               );
             },
             child: AbsorbPointer(
@@ -32,7 +30,7 @@ class CustomTextFiledSearch extends StatelessWidget {
                 width: 280,
                 decoration: const BoxDecoration(),
                 child: TextField(
-                  onSubmitted:onSubmitted ,
+                  onSubmitted: onSubmitted,
                   readOnly: true,
                   decoration: InputDecoration(
                     fillColor: AppLightColor.whiteColor,
@@ -40,7 +38,7 @@ class CustomTextFiledSearch extends StatelessWidget {
                     hintText: "Search",
                     hintStyle: AppStyles.textStyle16.copyWith(
                         fontWeight: FontWeight.w400,
-                        color: AppLightColor.whiteColor0),
+                        color: AppLightColor.whiteColor),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50),
                       borderSide: const BorderSide(
@@ -72,11 +70,11 @@ class CustomTextFiledSearch extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CartScreen()));
-            },
-            child: Image.asset('assets/icons/shopping_cart_red.png')
-            )
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CartScreen()));
+              },
+              child: Image.asset('assets/icons/shopping_cart_red.png'))
         ],
       ),
     );

@@ -20,7 +20,9 @@ class SuggestionView extends StatelessWidget {
           child: Column(
             children: [
               CustomTextFiledSearch(),
-              CustomSuggestionsGridView(gridType: GridType.suggestions,)
+              CustomSuggestionsGridView(
+                gridType: GridType.suggestions,
+              )
             ],
           ),
         ),

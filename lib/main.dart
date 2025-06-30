@@ -2,6 +2,11 @@ import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
+import 'package:fitfat/core/cubit/theme/theme_cubit.dart';
+import 'package:fitfat/core/cubit/theme/theme_state.dart';
+import 'package:fitfat/core/extensions/theme_cubit_extension.dart';
+import 'package:fitfat/core/theme/dark_theme.dart';
+import 'package:fitfat/core/theme/light_theme.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
@@ -90,6 +95,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(create: (context) => GetCartCubit(apiServices)),
+        BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => UserProfileCubit()),
         BlocProvider(
             create: (context) => AccountSettingsCubit(DioComsumer(dio: Dio()))),
@@ -162,24 +168,31 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 OfferCubit(DioComsumer(dio: Dio()))..fetchOffersData()),
       ],
-      child: GetMaterialApp(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        debugShowCheckedModeBanner: false,
-        home: LoginSignUp(DioComsumer(dio: Dio())),
-        getPages: [
-          GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
-          GetPage(
-            name: '/otpScreen',
-            page: () {
-              return const OtpScreen();
-            },
-          ),
-          // Add OTP Screen route
-        ]
-        // Define initial route
-        ,
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          return GetMaterialApp(
+            useInheritedMediaQuery: true,
+            locale: DevicePreview.locale(context),
+            builder: DevicePreview.appBuilder,
+            debugShowCheckedModeBanner: false,
+            theme: darkTheme,
+            darkTheme: darkTheme,
+            themeMode: context.themeCubit.themeMode,
+            home: LoginSignUp(DioComsumer(dio: Dio())),
+            getPages: [
+              GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
+              GetPage(
+                name: '/otpScreen',
+                page: () {
+                  return const OtpScreen();
+                },
+              ),
+              // Add OTP Screen route
+            ]
+            // Define initial route
+            ,
+          );
+        },
       ),
     );
   }

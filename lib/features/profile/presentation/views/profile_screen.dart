@@ -44,7 +44,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 50),
                     const ProfileHeder(),
                     const SizedBox(height: 30),
-                    ProfileInfoCard(state: state),
+                    ProfileInfoCard(
+                      state: state,
+                    ),
                     const SizedBox(height: 20),
                     GeneralSettingsSection(
                         context: context, isDarkMode: isDarkMode),
