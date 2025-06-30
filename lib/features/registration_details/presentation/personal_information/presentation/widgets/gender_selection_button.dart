@@ -22,7 +22,7 @@ class GenderSelectionButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color:
-              isSelected ? AppLightColor.mainColor : AppLightColor.whiteColor0,
+              isSelected ? AppLightColor.mainColor : AppLightColor.whiteColor,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: AppLightColor.mainColor, width: 2),
         ),

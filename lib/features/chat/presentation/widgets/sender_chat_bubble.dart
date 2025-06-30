@@ -3,11 +3,8 @@ import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class SenderChatBubble extends StatelessWidget {
-  const SenderChatBubble({
-    super.key,
-    required this.message
-  });
- final String message;
+  const SenderChatBubble({super.key, required this.message});
+  final String message;
   @override
   Widget build(BuildContext context) {
     final maxWidth = MediaQuery.sizeOf(context).width * 0.65;
@@ -47,7 +44,7 @@ class SenderChatBubble extends StatelessWidget {
             Text(
               "12:00 AM",
               style: AppStyles.textStyle12normal.copyWith(
-                color: AppLightColor.whiteColor0,
+                color: AppLightColor.whiteColor,
               ),
             )
           ],

@@ -21,15 +21,15 @@ class PasswordTextField extends StatelessWidget {
             const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppLightColor.whiteColor0),
+          borderSide: const BorderSide(color: AppLightColor.whiteColor),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppLightColor.whiteColor0),
+          borderSide: const BorderSide(color: AppLightColor.whiteColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppLightColor.whiteColor0),
+          borderSide: const BorderSide(color: AppLightColor.whiteColor),
         ),
       ),
     );

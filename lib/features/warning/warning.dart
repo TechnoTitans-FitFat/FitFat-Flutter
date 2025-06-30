@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 
 class Warning extends StatelessWidget {
@@ -14,7 +15,7 @@ class Warning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: AppLightColor.backgroundColor,
+      backgroundColor: context.theme.whiteColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       contentPadding: EdgeInsets.zero,
       content: Column(
@@ -25,7 +26,8 @@ class Warning extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.yellow[700],
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(20)),
             ),
             child: Row(
               children: [
@@ -71,7 +73,8 @@ class Warning extends StatelessWidget {
                   children: [
                     Text(
                       allergen.capitalize(),
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                     Text(
                       'This dish contains $allergen',
@@ -106,25 +109,29 @@ class Warning extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
                       backgroundColor: AppLightColor.backgroundColor,
                     ),
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Choose another', style: TextStyle(color: Colors.grey)),
+                    child: const Text('Choose another',
+                        style: TextStyle(color: Colors.grey)),
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
                       backgroundColor: AppLightColor.mainColor,
                     ),
                     onPressed: () {
                       Navigator.pop(context);
-                      onConfirm(); 
+                      onConfirm();
                     },
-                    child: const Text('Add anyway', style: TextStyle(color: AppLightColor.whiteColor)),
+                    child: const Text('Add anyway',
+                        style: TextStyle(color: AppLightColor.whiteColor)),
                   ),
                 ),
               ],
