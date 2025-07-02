@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/current_page_indicator_section.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/skip_button.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class HealthInformationUpperTextTwo extends StatelessWidget {
                 style: GoogleFonts.roboto(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
-                  color: AppLightColor.mainColor,
+                  color: context.theme.mainColor,
                 ),
               ),
               SkipButton(

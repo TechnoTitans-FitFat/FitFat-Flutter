@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/widgets/auto_scroll_panner.dart';
@@ -15,7 +15,7 @@ class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppLightColor.backgroundColor,
+      backgroundColor:  context.theme.backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
@@ -38,7 +38,7 @@ class MenuScreen extends StatelessWidget {
                 fit: BoxFit.scaleDown,
                 child: Text('See all',
                     style: AppStyles.textStyle16.copyWith(
-                      color: AppLightColor.greyColor,
+                      color: context.theme.greyColor,
                       fontSize: MediaQuery
                           .of(context)
                           .size

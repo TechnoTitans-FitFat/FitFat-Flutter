@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/registration_details/presentation/health_information/presentation/views/health_info_two.dart';
 import 'package:fitfat/features/registration_details/presentation/health_information/presentation/widgets/food_allergy_question_section.dart';
 import 'package:fitfat/features/registration_details/presentation/health_information/presentation/widgets/health_information_upper_text.dart';
@@ -6,7 +7,6 @@ import 'package:fitfat/features/registration_details/presentation/widgets/next_b
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../core/constants/light_colors.dart';
 
 class HealthInfoOneBody extends StatefulWidget {
   const HealthInfoOneBody({
@@ -109,7 +109,7 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
                   style: GoogleFonts.roboto(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
-                    color: AppLightColor.blackColor,
+                    color: context.theme.blackColor,
                   ),
                 ),
                 Row(
@@ -120,7 +120,7 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
                       style: GoogleFonts.roboto(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: Colors.grey,
+                        color: context.theme.greyColor,
                       ),
                     ),
                     SizedBox(
@@ -130,8 +130,8 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
                         min: 70,
                         max: 180,
                         divisions: 11,
-                        activeColor: AppLightColor.mainColor,
-                        inactiveColor: Colors.grey,
+                        activeColor: context.theme.mainColor,
+                        inactiveColor: context.theme.greyColor,
                         onChanged: (RangeValues newRange) {
                           setState(() {
                             currentRange = newRange;
@@ -147,7 +147,7 @@ class _HealthInfoOneBodyState extends State<HealthInfoOneBody> {
                       style: GoogleFonts.roboto(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: Colors.grey,
+                        color: context.theme.greyColor,
                       ),
                     ),
                   ],

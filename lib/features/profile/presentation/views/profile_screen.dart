@@ -1,9 +1,9 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/profile/presentation/widgets/general_settings_section.dart';
 import 'package:fitfat/features/profile/presentation/widgets/profile_heder.dart';
 import 'package:fitfat/features/profile/presentation/widgets/profile_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fitfat/core/constants/light_colors.dart';
 import '../../../auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import '../cubit/profile_cubit/profile_cubit.dart';
 import '../cubit/profile_cubit/profile_state.dart';
@@ -31,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppLightColor.secondColor,
+      backgroundColor: context.theme.secondColor,
       body: BlocBuilder<UserProfileCubit, UserProfileState>(
         builder: (context, state) {
           return SingleChildScrollView(

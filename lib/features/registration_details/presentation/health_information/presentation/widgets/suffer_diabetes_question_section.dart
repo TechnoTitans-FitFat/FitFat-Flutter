@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/registration_details/presentation/health_information/presentation/widgets/custom_card_answer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,7 +27,7 @@ class SufferDiabetesQuestionSection extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: AppLightColor.blackColor,
+            color: context.theme.blackColor,
           ),
         ),
         const SizedBox(height: 15),

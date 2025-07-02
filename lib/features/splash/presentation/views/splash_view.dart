@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/splash/presentation/widgets/splash_body.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,9 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: SplashBody());
+    return  Scaffold(
+      backgroundColor: context.theme.backgroundColor,
+      body:const SplashBody()
+      );
   }
 }
