@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -85,18 +86,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8D7DA),
+      backgroundColor: context.theme.secondColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF8D7DA),
+        backgroundColor: context.theme.secondColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon:  Icon(Icons.arrow_back, color: context.theme.blackColor),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title:  Text(
           'Edit Profile',
           style: TextStyle(
-            color: Colors.red,
+            color: context.theme.mainColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -156,16 +157,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               child: ElevatedButton(
                 onPressed: _updateProfile,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
+                  backgroundColor: context.theme.mainColor,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text(
+                child:  Text(
                   'Update Profile',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: context.theme.whiteColor,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -205,9 +206,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     };
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Profile updated successfully!'),
-        backgroundColor: Colors.green,
+       SnackBar(
+        content:const Text('Profile updated successfully!'),
+        backgroundColor: context.theme.green,
       ),
     );
 
@@ -271,12 +272,12 @@ class GeneralInfoSection extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+             Text(
               'Date of Birth',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Colors.black,
+                color: context.theme.blackColor,
               ),
             ),
             const SizedBox(height: 8),
@@ -434,7 +435,7 @@ class HealthInfoSection extends StatelessWidget {
                   value: 'Type 1',
                   groupValue: selectedDiabetesType,
                   onChanged: onDiabetesTypeChanged,
-                  activeColor: Colors.red,
+                  activeColor: context.theme.mainColor,
                 ),
                 const Text('Type 1'),
                 const SizedBox(width: 20),
@@ -442,7 +443,7 @@ class HealthInfoSection extends StatelessWidget {
                   value: 'Type 2',
                   groupValue: selectedDiabetesType,
                   onChanged: onDiabetesTypeChanged,
-                  activeColor: Colors.red,
+                  activeColor: context.theme.mainColor,
                 ),
                 const Text('Type 2'),
               ],

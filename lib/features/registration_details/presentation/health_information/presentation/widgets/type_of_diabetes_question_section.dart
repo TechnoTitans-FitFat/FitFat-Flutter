@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,7 +22,7 @@ class TypeOfDiabetesQuestionSection extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: AppLightColor.blackColor,
+            color: context.theme.blackColor,
           ),
         ),
         const SizedBox(height: 15),
@@ -33,7 +33,7 @@ class TypeOfDiabetesQuestionSection extends StatelessWidget {
               style: GoogleFonts.roboto(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: AppLightColor.blackColor,
+                color: context.theme.blackColor,
               ),
               children: [
                 TextSpan(
@@ -50,7 +50,7 @@ class TypeOfDiabetesQuestionSection extends StatelessWidget {
           ),
           value: 'Type 1',
           groupValue: selectedType,
-          activeColor: Colors.red,
+          activeColor: context.theme.mainColor,
           onChanged: (value) => onTypeSelected?.call(value ?? ''),
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
@@ -62,7 +62,7 @@ class TypeOfDiabetesQuestionSection extends StatelessWidget {
               style: GoogleFonts.roboto(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: AppLightColor.blackColor,
+                color: context.theme.blackColor,
               ),
               children: [
                 TextSpan(
@@ -79,7 +79,7 @@ class TypeOfDiabetesQuestionSection extends StatelessWidget {
           ),
           value: 'Type 2',
           groupValue: selectedType,
-          activeColor: Colors.red,
+          activeColor: context.theme.mainColor,
           onChanged: (value) => onTypeSelected?.call(value ?? ''),
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 0, vertical: 0),

@@ -1,7 +1,7 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/profile/presentation/widgets/account_settings_item.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/light_colors.dart';
 
 class GenaralSettingsList extends StatelessWidget {
   const GenaralSettingsList({
@@ -28,7 +28,7 @@ class GenaralSettingsList extends StatelessWidget {
           trailing: Switch(
             value: isDarkMode,
             onChanged: (bool value) {},
-            activeColor: AppLightColor.mainColor,
+            activeColor: context.theme.mainColor,
           ),
         ),
         const AccountSettingsItem(

@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,12 +19,12 @@ class AccountSettingsItem extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppLightColor.secondColor,
+            color: context.theme.secondColor,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(
             icon,
-            color: AppLightColor.mainColor,
+            color: context.theme.mainColor,
             size: 20,
           ),
         ),
@@ -35,16 +35,16 @@ class AccountSettingsItem extends StatelessWidget {
             style: GoogleFonts.openSans(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: AppLightColor.blackColor,
+              color: context.theme.blackColor,
             ),
           ),
         ),
         if (trailing != null) trailing!,
         if (trailing == null)
-          const Icon(
+           Icon(
             Icons.arrow_forward_ios,
             size: 16,
-            color: AppLightColor.greyColor,
+            color: context.theme.greyColor,
           ),
       ],
     );

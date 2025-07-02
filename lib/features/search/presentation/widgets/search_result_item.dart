@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:fitfat/features/search/data/models/search_model.dart';
@@ -15,7 +16,7 @@ class SearchResultItem extends StatelessWidget {
     return Card(
       elevation: 3,
       shadowColor: Colors.black,
-      color: AppLightColor.whiteColor,
+      color: context.theme.whiteColor,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
@@ -24,9 +25,9 @@ class SearchResultItem extends StatelessWidget {
             Container(
               width: 150,
               height: 150,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
+              decoration:  BoxDecoration(
+                color: context.theme.whiteColor,
+                borderRadius:const BorderRadius.all(Radius.circular(15)),
               ),
               child: GestureDetector(
                 onTap: (){
@@ -43,9 +44,7 @@ class SearchResultItem extends StatelessWidget {
                 children: [
                   Text(
                     recipe.name,
-                    style: AppStyles.textStyle16.copyWith(
-                      color: AppLightColor.blackColor,
-                    ),
+                    style: AppStyles.textStyle16
                   ),
                   const SizedBox(height: 10),
                   Container(
@@ -54,13 +53,13 @@ class SearchResultItem extends StatelessWidget {
                       vertical: 5,
                     ),
                     decoration: BoxDecoration(
-                      color: AppLightColor.mainColor.withOpacity(0.15),
+                      color: context.theme.mainColor.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Text(
                       '${recipe.calories} cal',
                       style: AppStyles.textStyle12.copyWith(
-                        color: AppLightColor.mainColor,
+                        color: context.theme.mainColor,
                       ),
                     ),
                   ),
@@ -91,15 +90,13 @@ class SearchResultItem extends StatelessWidget {
                           Text(
                             recipe.price.toString(),
                             style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.mainColor,
+                              color: context.theme.mainColor,
                             ),
                           ),
                           const SizedBox(width: 5),
                           Text(
                             'EGP',
-                            style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.blackColor,
-                            ),
+                            style: AppStyles.textStyle16
                           ),
                         ],
                       ),

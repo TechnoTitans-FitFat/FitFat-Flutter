@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/profile/presentation/cubit/profile_cubit/profile_cubit.dart';
 import 'package:fitfat/features/profile/presentation/cubit/profile_cubit/profile_state.dart';
 import 'package:fitfat/features/profile/presentation/widgets/loading_profile_header.dart';
@@ -23,7 +23,7 @@ class ProfileHeder extends StatelessWidget {
                 height: 80,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: AppLightColor.whiteColor, width: 3),
+                  border: Border.all(color: context.theme.whiteColor, width: 3),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
@@ -41,20 +41,20 @@ class ProfileHeder extends StatelessWidget {
                           errorBuilder: (context, error, stackTrace) {
                             return Container(
                               color: Colors.grey.shade300,
-                              child: const Icon(
+                              child:  Icon(
                                 Icons.person,
                                 size: 40,
-                                color: Colors.grey,
+                                color: context.theme.greyColor,
                               ),
                             );
                           },
                         )
                       : Container(
                           color: Colors.grey.shade300,
-                          child: const Icon(
+                          child:  Icon(
                             Icons.person,
                             size: 40,
-                            color: AppLightColor.greyColor,
+                            color: context.theme.greyColor,
                           ),
                         ),
                 ),
@@ -65,7 +65,7 @@ class ProfileHeder extends StatelessWidget {
                 style: GoogleFonts.openSans(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
-                  color: AppLightColor.blackColor,
+                  color: context.theme.blackColor,
                 ),
               ),
               const SizedBox(height: 4),
@@ -73,7 +73,7 @@ class ProfileHeder extends StatelessWidget {
                 state.userProfile.email,
                 style: GoogleFonts.openSans(
                   fontSize: 16,
-                  color: AppLightColor.greyColor,
+                  color: context.theme.greyColor,
                 ),
               ),
             ],
@@ -81,11 +81,11 @@ class ProfileHeder extends StatelessWidget {
         } else if (state is UserProfileError) {
           return Column(
             children: [
-              const Icon(Icons.error, size: 40, color: AppLightColor.mainColor),
+               Icon(Icons.error, size: 40, color: context.theme.mainColor),
               const SizedBox(height: 8),
               Text(
                 'Error: ${state.message}',
-                style: const TextStyle(color: AppLightColor.mainColor),
+                style:  TextStyle(color: context.theme.mainColor),
               ),
             ],
           );

@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,7 +22,7 @@ class DiabetesTypeSection extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: Colors.black,
+            color: context.theme.blackColor,
           ),
         ),
         const SizedBox(height: 15),
@@ -30,7 +31,7 @@ class DiabetesTypeSection extends StatelessWidget {
             Radio<String>(
               value: 'Type 1',
               groupValue: diabetesType,
-              activeColor: Colors.red,
+              activeColor: context.theme.mainColor,
               onChanged: (value) {
                 if (value != null) {
                   onDiabetesTypeChanged(value);
@@ -64,7 +65,7 @@ class DiabetesTypeSection extends StatelessWidget {
             Radio<String>(
               value: 'Type 2',
               groupValue: diabetesType,
-              activeColor: Colors.red,
+              activeColor: context.theme.mainColor,
               onChanged: (value) {
                 if (value != null) {
                   onDiabetesTypeChanged(value);

@@ -1,4 +1,5 @@
 import 'package:fitfat/core/api/dio_comsumer.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
@@ -98,7 +99,7 @@ class AccountSettingsView extends StatelessWidget {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFEE2E2),
+                      color: context.theme.secondColor,
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Column(
@@ -112,7 +113,8 @@ class AccountSettingsView extends StatelessWidget {
                             children: [
                               IconButton(
                                 icon: const Icon(Icons.arrow_back,
-                                    color: Colors.red),
+                                    color: Colors.red
+                                    ),
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },

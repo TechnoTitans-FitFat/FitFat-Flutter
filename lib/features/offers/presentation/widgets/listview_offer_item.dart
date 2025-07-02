@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/offers/data/model/offer_model.dart';
 import 'package:fitfat/gen/assets.gen.dart';
@@ -14,8 +15,8 @@ class ListviewOfferItem extends StatelessWidget {
       children: [
        Card(
         elevation: 3,
-        shadowColor: Colors.black,
-        color: AppLightColor.whiteColor,
+        shadowColor: context.theme.blackColor,
+        color: context.theme.whiteColor,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
@@ -24,9 +25,9 @@ class ListviewOfferItem extends StatelessWidget {
               Container(
                 width: 150,
                 height: 150,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                decoration:  BoxDecoration(
+                  color: context.theme.whiteColor,
+                  borderRadius:const BorderRadius.all(Radius.circular(15)),
                 ),
                 child: Image.network(item.image, fit: BoxFit.cover),
               ),
@@ -38,7 +39,7 @@ class ListviewOfferItem extends StatelessWidget {
                     Text(
                       item.name,
                       style: AppStyles.textStyle16.copyWith(
-                        color: AppLightColor.blackColor,
+                        color: context.theme.blackColor,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -48,13 +49,13 @@ class ListviewOfferItem extends StatelessWidget {
                         vertical: 5,
                       ),
                       decoration: BoxDecoration(
-                        color: AppLightColor.mainColor.withOpacity(0.15),
+                        color: context.theme.mainColor.withOpacity(0.15),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Text(
                         '${item.calories} cal',
                         style: AppStyles.textStyle12.copyWith(
-                          color: AppLightColor.mainColor,
+                          color: context.theme.mainColor,
                         ),
                       ),
                     ),
@@ -70,7 +71,7 @@ class ListviewOfferItem extends StatelessWidget {
                         Text(
                           item.rating.toStringAsFixed(1),
                           style: AppStyles.textStyle16.copyWith(
-                            color: AppLightColor.blackColor,
+                            color: context.theme.blackColor,
                             fontSize: 14,
                           ),
                         ),
@@ -84,10 +85,10 @@ class ListviewOfferItem extends StatelessWidget {
                         Text(
                           item.price.toString(),
                           style: AppStyles.textStyle16.copyWith(
-                            color: AppLightColor.blackColor.withOpacity(.2),
+                            color: context.theme.blackColor.withOpacity(.2),
                             decoration: TextDecoration.lineThrough,
                             decorationColor:
-                                AppLightColor.blackColor.withOpacity(.2),
+                                 context.theme.blackColor.withOpacity(.2),
                             decorationThickness: 1.5,
                           ),
                         ),
@@ -95,10 +96,10 @@ class ListviewOfferItem extends StatelessWidget {
                         Text(
                           'EGP',
                           style: AppStyles.textStyle16.copyWith(
-                            color: AppLightColor.blackColor.withOpacity(.2),
+                            color: context.theme.blackColor.withOpacity(.2),
                             decoration: TextDecoration.lineThrough,
                             decorationColor:
-                                AppLightColor.blackColor.withOpacity(.2),
+                                context.theme.blackColor.withOpacity(.2),
                             decorationThickness: 1.5,
                           ),
                         ),
@@ -112,14 +113,14 @@ class ListviewOfferItem extends StatelessWidget {
                             Text(
                               item.offerPrice.toString(),
                               style: AppStyles.textStyle16.copyWith(
-                                color: AppLightColor.mainColor,
+                                color: context.theme.mainColor,
                               ),
                             ),
                             const SizedBox(width: 5),
                             Text(
                               'EGP',
                               style: AppStyles.textStyle16.copyWith(
-                                color: AppLightColor.blackColor,
+                                color: context.theme.blackColor,
                               ),
                             ),
                           ],
