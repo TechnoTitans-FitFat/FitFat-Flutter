@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,12 +21,12 @@ class CustomCardAnswer extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? AppLightColor.mainColor : Colors.white,
+          color: isSelected ? context.theme.mainColor : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isSelected
-                ? AppLightColor.mainColor
-                : AppLightColor.blackColor.withOpacity(.1),
+                ? context.theme.mainColor
+                : context.theme.blackColor.withOpacity(.1),
             width: 1.5,
           ),
         ),
@@ -35,7 +35,7 @@ class CustomCardAnswer extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: isSelected ? Colors.white : AppLightColor.blackColor,
+            color: isSelected ? context.theme.whiteColor : context.theme.blackColor,
           ),
         ),
       ),

@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,14 +22,14 @@ class LabelWithValueItem extends StatelessWidget {
             style: GoogleFonts.openSans(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: AppLightColor.blackColor,
+              color: context.theme.blackColor,
             ),
           ),
           Text(
             value,
             style: GoogleFonts.openSans(
               fontSize: 15,
-              color: AppLightColor.greyColor,
+              color: context.theme.greyColor,
               fontWeight: FontWeight.w600,
             ),
           ),

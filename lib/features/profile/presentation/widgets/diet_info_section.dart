@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/profile/data/model/diet_info.dart';
 import 'package:fitfat/features/profile/presentation/widgets/diet_info_list.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class DietInfoSection extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: AppLightColor.blackColor,
+            color: context.theme.blackColor,
           ),
         ),
         DietInfoList(dietInfo: dietInfo)

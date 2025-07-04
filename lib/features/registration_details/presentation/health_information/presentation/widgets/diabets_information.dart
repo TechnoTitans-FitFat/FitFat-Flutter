@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_state.dart';
 import 'package:fitfat/features/registration_details/presentation/diet_information/presentation/views/diet_information_view.dart';
@@ -110,7 +111,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError ? Colors.red : Colors.green,
+        backgroundColor: isError ? context.theme.mainColor : context.theme.green,
         duration: const Duration(seconds: 3),
       ),
     );
@@ -228,7 +229,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   isLoading
-                      ? const CircularProgressIndicator(color: Colors.red)
+                      ?  CircularProgressIndicator(color: context.theme.mainColor)
                       : NextButton(
                           onPressed: _submitHealthInfo,
                         ),

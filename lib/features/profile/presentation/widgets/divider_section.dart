@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 
 class DividerSection extends StatelessWidget {
@@ -13,8 +13,8 @@ class DividerSection extends StatelessWidget {
         const SizedBox(height: 20),
         SizedBox(
           width: MediaQuery.sizeOf(context).width * 0.65,
-          child: const Divider(
-            color: AppLightColor.greyColor,
+          child:  Divider(
+            color: context.theme.greyColor,
           ),
         ),
         const SizedBox(height: 20),

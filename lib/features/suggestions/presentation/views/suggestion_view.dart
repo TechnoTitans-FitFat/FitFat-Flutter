@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/widgets/custom_app_bar.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_suggestion_grid_view.dart';
@@ -9,10 +9,10 @@ class SuggestionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: AppLightColor.backgroundColor,
-      appBar: CustomAppBar(title: 'Suggestion'),
-      body: SingleChildScrollView(
+    return  Scaffold(
+      backgroundColor: context.theme.backgroundColor,
+      appBar:const CustomAppBar(title: 'Suggestion'),
+      body:const SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: 15,

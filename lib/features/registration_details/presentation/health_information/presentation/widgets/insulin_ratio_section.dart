@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,7 +22,7 @@ class InsulinToCardRatioSection extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: Colors.black,
+            color: context.theme.blackColor,
           ),
         ),
         const SizedBox(height: 8),
@@ -40,20 +40,20 @@ class InsulinToCardRatioSection extends StatelessWidget {
               width: 35,
               height: 35,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
+                border: Border.all(color: context.theme.greyColor),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 textAlign: TextAlign.center,
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                   hintText: "10",
                   hintStyle: TextStyle(
                     fontSize: 14,
-                    color: AppLightColor.greyColor,
+                    color: context.theme.greyColor,
                   ),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(vertical: 10),
+                  contentPadding:const EdgeInsets.symmetric(vertical: 10),
                 ),
                 initialValue:
                     insulinToCardRatio > 0 ? insulinToCardRatio.toString() : '',

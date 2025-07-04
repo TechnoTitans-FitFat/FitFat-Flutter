@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/current_page_indicator_section.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/custom_container_profile_set_up.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/diet_determination_way_selection.dart';
@@ -37,7 +37,7 @@ class DietInformationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppLightColor.secondColor,
+      backgroundColor: context.theme.secondColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -60,7 +60,7 @@ class DietInformationView extends StatelessWidget {
                       style: GoogleFonts.roboto(
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
-                        color: AppLightColor.mainColor,
+                        color: context.theme.mainColor,
                       ),
                     ),
                     SkipButton(

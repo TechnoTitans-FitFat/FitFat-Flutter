@@ -1,11 +1,12 @@
+import 'package:fitfat/core/cubit/theme/theme_cubit.dart';
 import 'package:fitfat/core/cubit/theme/theme_state.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/profile/presentation/widgets/account_settings_item.dart';
-import 'package:fitfat/features/settings/presentation/views/account_settings_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/constants/light_colors.dart';
-import '../../../../core/cubit/theme/theme_cubit.dart';
+import '../../../settings/presentation/views/account_settings_view.dart';
 
 class GenaralSettingsList extends StatelessWidget {
   const GenaralSettingsList({super.key});
@@ -32,7 +33,7 @@ class GenaralSettingsList extends StatelessWidget {
                 onChanged: (bool value) {
                   themeCubit.toggleTheme();
                 },
-                activeColor: AppLightColor.mainColor,
+                activeColor: context.theme.mainColor,
               ),
             );
           },

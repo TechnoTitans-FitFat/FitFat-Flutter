@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/profile/presentation/views/update_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +23,7 @@ class ProfileInfoTextWithEditButton extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 20,
             fontWeight: FontWeight.w500,
-            color: AppLightColor.mainColor,
+            color: context.theme.mainColor,
           ),
         ),
         GestureDetector(
@@ -41,9 +41,9 @@ class ProfileInfoTextWithEditButton extends StatelessWidget {
                   ));
             }
           },
-          child: const Icon(
+          child: Icon(
             Icons.edit,
-            color: AppLightColor.mainColor,
+            color: context.theme.mainColor,
             size: 20,
           ),
         ),

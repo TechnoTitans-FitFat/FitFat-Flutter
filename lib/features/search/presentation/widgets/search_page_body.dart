@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/search/data/search_cubit/search_cubit.dart';
 import 'package:fitfat/features/search/data/search_history/search_history_cubit.dart';
@@ -60,14 +61,14 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Latest Search', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: AppLightColor.mainColor)),
+                        Text('Latest Search', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: context.theme.mainColor)),
                         LatestSearch(),
                         const SizedBox(height: 25),
-                        Text('Meal Dishes', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: AppLightColor.mainColor)),
+                        Text('Meal Dishes', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: context.theme.mainColor)),
                         const SizedBox(height: 10),
                         const MealDishes(),
                         const SizedBox(height: 25),
-                        Text('Most Popular Search', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: AppLightColor.mainColor)),
+                        Text('Most Popular Search', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: context.theme.mainColor)),
                         const SizedBox(height: 10),
                         MostPopularSearch(onTapItem: _onSearch),
                       ],
