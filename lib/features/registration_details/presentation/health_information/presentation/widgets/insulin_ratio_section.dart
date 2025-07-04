@@ -2,15 +2,15 @@ import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InsulinRatioSection extends StatelessWidget {
-  const InsulinRatioSection({
+class InsulinToCardRatioSection extends StatelessWidget {
+  const InsulinToCardRatioSection({
     super.key,
-    required this.insulinRatio,
-    required this.onInsulinRatioChanged,
+    required this.insulinToCardRatio,
+    required this.onInsulinToCardRatioChanged,
   });
 
-  final double insulinRatio;
-  final ValueChanged<double> onInsulinRatioChanged;
+  final double insulinToCardRatio;
+  final ValueChanged<double> onInsulinToCardRatioChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +55,11 @@ class InsulinRatioSection extends StatelessWidget {
                   border: InputBorder.none,
                   contentPadding:const EdgeInsets.symmetric(vertical: 10),
                 ),
-                initialValue: insulinRatio > 0 ? insulinRatio.toString() : '',
+                initialValue:
+                    insulinToCardRatio > 0 ? insulinToCardRatio.toString() : '',
                 onChanged: (value) {
                   final ratio = double.tryParse(value) ?? 0.0;
-                  onInsulinRatioChanged(ratio);
+                  onInsulinToCardRatioChanged(ratio);
                 },
               ),
             ),

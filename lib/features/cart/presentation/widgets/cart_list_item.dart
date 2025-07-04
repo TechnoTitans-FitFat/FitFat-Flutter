@@ -136,10 +136,6 @@ class _CartListItemState extends State<CartListItem> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text(state.message)),
                                   );
-                                } else if (state is DecrementFailure) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(state.error)),
-                                  );
                                 }
                               }, builder: (context, state) {
                                 return IncreaseAndDecreseCount(
@@ -153,7 +149,9 @@ class _CartListItemState extends State<CartListItem> {
                                           ..addCartAndIncrement(
                                               context: context);
                                         print("count: $count");
-                                        context.read<GetCartCubit>().getCart(context: context);
+                                        context
+                                            .read<GetCartCubit>()
+                                            .getCart(context: context);
                                       });
                                       widget.onCountChanged();
                                     },
@@ -191,10 +189,6 @@ class _CartListItemState extends State<CartListItem> {
                   SnackBar(content: Text((state).message)),
                 );
                 context.read<GetCartCubit>().getCart(context: context);
-              } else if (state is DeleteFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text((state).error)),
-                );
               }
             }, builder: (context, state) {
               return GestureDetector(

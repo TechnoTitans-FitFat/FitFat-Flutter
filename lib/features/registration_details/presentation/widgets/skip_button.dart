@@ -21,7 +21,7 @@ class SkipButton extends StatelessWidget {
   final bool? hasDiabetes;
   final Map<String, int>? targetBloodSugarRange;
   final String? diabetesType;
-  final double? insulinRatio;
+  final double? insulinToCardRatio;
   final double? correctionFactor;
 
   const SkipButton({
@@ -38,7 +38,7 @@ class SkipButton extends StatelessWidget {
     this.hasDiabetes,
     this.targetBloodSugarRange,
     this.diabetesType,
-    this.insulinRatio,
+    this.insulinToCardRatio,
     this.correctionFactor,
   });
 
@@ -80,7 +80,8 @@ class SkipButton extends StatelessWidget {
         targetBloodSugarRange: targetBloodSugarRange ?? {"min": 70, "max": 180},
         userId: userId,
         diabetesType: diabetesType ?? "", // Pass diabetesType
-        insulinRatio: insulinRatio ?? 0.0, // Pass insulinRatio
+        insulinToCardRatio:
+            insulinToCardRatio ?? 0.0, // Pass insulinToCardRatio
         correctionfactor: correctionFactor ?? 0.0, // Pass correctionFactor
       );
     } catch (e) {

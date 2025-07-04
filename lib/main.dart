@@ -1,5 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
+import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/api_services.dart';
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/core/cubit/theme/theme_cubit.dart';
@@ -39,6 +40,8 @@ import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_detail
 import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:fitfat/features/offers/data/offer_cubit/offer_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
+import 'package:fitfat/features/profile/presentation/cubit/diet_info_cubit/update_diet_info_cubit.dart';
+import 'package:fitfat/features/profile/presentation/cubit/health_info_cubit/update_health_info_cubit.dart';
 import 'package:fitfat/features/profile/presentation/cubit/profile_cubit/profile_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
@@ -74,6 +77,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => ClearCartCubit(apiServices)),
         BlocProvider(create: (context) => DeleteCubit(apiServices)),
+        BlocProvider(create: (context) => UpdateDietInfoCubit()),
+        BlocProvider(
+          create: (context) => UpdateHealthInfoCubit(),
+        ),
         BlocProvider(create: (context) => DecrementCubit(apiServices)),
         BlocProvider(
           create: (context) => ForgotPasswordCubit(
@@ -175,7 +182,7 @@ class MyApp extends StatelessWidget {
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,
             debugShowCheckedModeBanner: false,
-            theme: darkTheme,
+            theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: context.themeCubit.themeMode,
             home: LoginSignUp(DioComsumer(dio: Dio())),

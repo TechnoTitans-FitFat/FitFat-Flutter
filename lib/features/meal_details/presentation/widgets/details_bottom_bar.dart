@@ -37,11 +37,11 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
         .map((e) => e.trim())
         .toList();
 
-    final mealAllergies = widget.meal.allergy
-        .map((e) => e.toLowerCase())
-        .toList();
+    final mealAllergies =
+        widget.meal.allergy.map((e) => e.toLowerCase()).toList();
 
-    final hasAllergy = mealAllergies.any((item) => userAllergies.contains(item));
+    final hasAllergy =
+        mealAllergies.any((item) => userAllergies.contains(item));
     final matched = userAllergies.firstWhere(
       (a) => mealAllergies.contains(a),
       orElse: () => '',
@@ -70,9 +70,9 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
       context: context,
       builder: (context) {
         return Warning(
-        allergen: allergen,
-        onConfirm: () => _addToCart(context),
-      );
+          allergen: allergen,
+          onConfirm: () => _addToCart(context),
+        );
       },
     );
   }
@@ -99,9 +99,12 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Text((count * widget.price).toStringAsFixed(2), style: AppStyles.textStyle24),
+                  Text((count * widget.price).toStringAsFixed(2),
+                      style: AppStyles.textStyle24),
                   const SizedBox(width: 8),
-                  Text('EGB', style: AppStyles.textStyle24.copyWith(color: AppLightColor.mainColor)),
+                  Text('EGB',
+                      style: AppStyles.textStyle24
+                          .copyWith(color: AppLightColor.mainColor)),
                 ],
               ),
             ],
@@ -109,9 +112,8 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
           BlocConsumer<CartCubit, CartState>(
             listener: (context, state) {
               if (state is CartSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-              } else if (state is CartFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text(state.message)));
               }
             },
             builder: (context, state) {
@@ -125,7 +127,9 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
                     color: AppLightColor.mainColor,
                   ),
                   child: Center(
-                    child: Text('Add To Cart', style: AppStyles.textStyle16.copyWith(color: AppLightColor.whiteColor)),
+                    child: Text('Add To Cart',
+                        style: AppStyles.textStyle16
+                            .copyWith(color: AppLightColor.whiteColor)),
                   ),
                 ),
               );

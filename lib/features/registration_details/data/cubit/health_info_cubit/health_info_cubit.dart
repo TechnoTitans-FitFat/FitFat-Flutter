@@ -19,8 +19,8 @@ class HealthInfoCubit extends Cubit<HealthInfoState> {
     required String gender,
     required Map<String, int> targetBloodSugarRange,
     required String userId,
-    String diabetesType = "",
-    double insulinRatio = 0.0,
+    required String diabetesType,
+    required double insulinToCardRatio,
     required double correctionfactor,
   }) async {
     try {
@@ -35,14 +35,10 @@ class HealthInfoCubit extends Cubit<HealthInfoState> {
         'dateOfBirth': dateOfBirth,
         'gender': gender,
         'targetBloodSugarRange': targetBloodSugarRange,
-        "correctionFactor": correctionfactor
+        "correctionFactor": correctionfactor,
+        "insulinToCarbRatio": insulinToCardRatio,
+        "diabetesType": diabetesType
       };
-
-      // Only add these fields if diabetes is present
-      if (diabetes == 1) {
-        data['diabetesType'] = diabetesType;
-        data['insulinRatio'] = insulinRatio;
-      }
 
       final response = await api.post(
         "${EndPoint.healthInfo}/$userId",
