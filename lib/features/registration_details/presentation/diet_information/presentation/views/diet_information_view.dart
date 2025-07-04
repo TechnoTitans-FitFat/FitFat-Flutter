@@ -18,7 +18,7 @@ class DietInformationView extends StatelessWidget {
     required this.diabetes,
     required this.bloodSugarRange,
     this.diabetesType = '', // Added
-    this.insulinRatio = 0.0, // Added
+    this.insulinToCardRatio = 0.0, // Added
     this.correctionFactor = 0.0, // Added
   });
 
@@ -31,7 +31,7 @@ class DietInformationView extends StatelessWidget {
   final bool diabetes;
   final RangeValues bloodSugarRange;
   final String diabetesType; // Added
-  final double insulinRatio; // Added
+  final double insulinToCardRatio; // Added
   final double correctionFactor; // Added
 
   @override
@@ -75,9 +75,9 @@ class DietInformationView extends StatelessWidget {
                         "min": bloodSugarRange.start.toInt(),
                         "max": bloodSugarRange.end.toInt(),
                       },
-                      diabetesType: diabetesType, // Added
-                      insulinRatio: insulinRatio, // Added
-                      correctionFactor: correctionFactor, // Added
+                      diabetesType: diabetesType,
+                      insulinToCardRatio: insulinToCardRatio,
+                      correctionFactor: correctionFactor,
                     ),
                   ],
                 ),

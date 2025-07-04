@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fitfat/features/profile/presentation/widgets/general_settings_section.dart';
 import 'package:fitfat/features/profile/presentation/widgets/profile_heder.dart';
 import 'package:fitfat/features/profile/presentation/widgets/profile_info_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fitfat/core/constants/light_colors.dart';
 import '../../../auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import '../cubit/profile_cubit/profile_cubit.dart';
@@ -21,6 +21,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
+    _fetchProfile();
+  }
+
+  void _fetchProfile() {
     final token =
         BlocProvider.of<LoginCubit>(context, listen: false).user?.token;
     if (token != null) {
@@ -49,7 +53,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     const SizedBox(height: 20),
                     GeneralSettingsSection(
-                        context: context, isDarkMode: isDarkMode),
+                      context: context,
+                    ),
                     const SizedBox(height: 30),
                   ],
                 ),

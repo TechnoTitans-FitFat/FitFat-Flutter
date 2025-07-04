@@ -12,8 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DiabetsInformation extends StatefulWidget {
   const DiabetsInformation({
     super.key,
-    this.initialInsulinRatio = 0.0,
-    this.onInsulinRatioChanged,
+    this.initialInsulinToCardRatio = 0.0,
+    this.onInsulinToCardRatioChanged,
     required this.onDiabetesChanged,
     required this.weight,
     required this.height,
@@ -27,8 +27,8 @@ class DiabetsInformation extends StatefulWidget {
     this.diabetesType = '', // Added
   });
 
-  final double initialInsulinRatio;
-  final Function(double)? onInsulinRatioChanged;
+  final double initialInsulinToCardRatio;
+  final Function(double)? onInsulinToCardRatioChanged;
   final Function(double)? onCorrectionFactor;
   final Function(bool) onDiabetesChanged;
   final int weight;
@@ -46,7 +46,7 @@ class DiabetsInformation extends StatefulWidget {
 }
 
 class _DiabetsInformationState extends State<DiabetsInformation> {
-  late double insulinRatio;
+  late double insulinToCardRatio;
   bool hasDiabetes = false;
   String diabetesType = "";
   bool isLoading = false;
@@ -55,7 +55,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
   @override
   void initState() {
     super.initState();
-    insulinRatio = widget.initialInsulinRatio;
+    insulinToCardRatio = widget.initialInsulinToCardRatio;
     correctionFactor = 0.0;
     diabetesType = widget.diabetesType; // Initialize with widget value
   }
@@ -95,7 +95,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
         targetBloodSugarRange: targetBloodSugarRange,
         userId: widget.userId,
         diabetesType: diabetesType,
-        insulinRatio: insulinRatio,
+        insulinToCardRatio: insulinToCardRatio,
         correctionfactor: correctionFactor,
       );
     } catch (e) {
@@ -143,7 +143,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                 diabetes: hasDiabetes,
                 foodAllergies: widget.foodAllergies,
                 diabetesType: diabetesType, // Added
-                insulinRatio: insulinRatio, // Added
+                insulinToCardRatio: insulinToCardRatio, // Added
                 correctionFactor: correctionFactor, // Added
               ),
             ),
@@ -168,7 +168,7 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                   hasDiabetes = value;
                   if (!value) {
                     diabetesType = "";
-                    insulinRatio = 0.0;
+                    insulinToCardRatio = 0.0;
                     correctionFactor = 0.0;
                   }
                 });
@@ -197,14 +197,14 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
                 },
               ),
               const SizedBox(height: 20),
-              InsulinRatioSection(
-                insulinRatio: insulinRatio,
-                onInsulinRatioChanged: (ratio) {
+              InsulinToCardRatioSection(
+                insulinToCardRatio: insulinToCardRatio,
+                onInsulinToCardRatioChanged: (ratio) {
                   setState(() {
-                    insulinRatio = ratio;
+                    insulinToCardRatio = ratio;
                   });
-                  if (widget.onInsulinRatioChanged != null) {
-                    widget.onInsulinRatioChanged!(ratio);
+                  if (widget.onInsulinToCardRatioChanged != null) {
+                    widget.onInsulinToCardRatioChanged!(ratio);
                   }
                 },
               ),

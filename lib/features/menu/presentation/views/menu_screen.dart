@@ -20,35 +20,33 @@ class MenuScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              const CustomTextFiledSearch(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: AutoScrollPanner(),
-          ),
-          const CustomTitle(title: 'Categories'),
-          const CategoriesMenuList(),
-          const SizedBox(height: 25,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomTitle(title: 'Most Popular'),
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text('See all',
-                    style: AppStyles.textStyle16.copyWith(
-                      color: AppLightColor.greyColor,
-                      fontSize: MediaQuery
-                          .of(context)
-                          .size
-                          .width * 0.039,
-                    )),
-              )
-            ],
-          ),
-          BlocConsumer<CartCubit, CartState>(
-              listener: (context, state) {
+              const CustomTextFiledSearch(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: AutoScrollPanner(),
+              ),
+              const CustomTitle(title: 'Categories'),
+              const CategoriesMenuList(),
+              const SizedBox(
+                height: 25,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const CustomTitle(title: 'Most Popular'),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text('See all',
+                        style: AppStyles.textStyle16.copyWith(
+                          color: AppLightColor.greyColor,
+                          fontSize: MediaQuery.of(context).size.width * 0.039,
+                        )),
+                  )
+                ],
+              ),
+              BlocConsumer<CartCubit, CartState>(listener: (context, state) {
                 if (state is CartSuccess) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(state.message)),
@@ -58,13 +56,13 @@ class MenuScreen extends StatelessWidget {
                     SnackBar(content: Text(state.error)),
                   );
                 }
-              },
-              builder: (context, state) {
+              }, builder: (context, state) {
                 return const CustomSuggestionsGridView(gridType: GridType.menu);
               }),
-          ],
+            ],
+          ),
         ),
       ),
-    ),);
+    );
   }
 }

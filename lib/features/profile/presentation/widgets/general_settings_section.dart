@@ -7,11 +7,9 @@ class GeneralSettingsSection extends StatelessWidget {
   const GeneralSettingsSection({
     super.key,
     required this.context,
-    required this.isDarkMode,
   });
 
   final BuildContext context;
-  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,7 @@ class GeneralSettingsSection extends StatelessWidget {
               color: AppLightColor.mainColor,
             ),
           ),
-          GenaralSettingsList(isDarkMode: isDarkMode)
+          GenaralSettingsList()
         ],
       ),
     );

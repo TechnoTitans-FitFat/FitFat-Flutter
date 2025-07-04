@@ -16,7 +16,7 @@ class HealthInformationUpperTextTwo extends StatelessWidget {
     required this.height,
     required this.onCorrectionFactor,
     required this.onDiabetesChanged,
-    required this.initialInsulinRatio,
+    required this.initialInsulinToCardRatio,
     required this.onDiabetesTypeChanged, // Added
     required this.diabetesType, // Added
     required this.correctionFactor, // Added
@@ -30,7 +30,7 @@ class HealthInformationUpperTextTwo extends StatelessWidget {
   final String height;
   final void Function(double ratio) onCorrectionFactor;
   final void Function(bool status) onDiabetesChanged;
-  final double initialInsulinRatio;
+  final double initialInsulinToCardRatio;
   final void Function(String type) onDiabetesTypeChanged; // Added
   final String diabetesType; // Added
   final double correctionFactor; // Added
@@ -63,7 +63,7 @@ class HealthInformationUpperTextTwo extends StatelessWidget {
                 weight: int.parse(weight),
                 correctionFactor: correctionFactor,
                 hasDiabetes: true, // Assuming diabetes is relevant
-                insulinRatio: initialInsulinRatio,
+                insulinToCardRatio: initialInsulinToCardRatio,
                 diabetesType: diabetesType, // Pass diabetesType
               ),
             ],

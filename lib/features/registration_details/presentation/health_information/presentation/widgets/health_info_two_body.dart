@@ -86,7 +86,7 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
           diabetes: hasDiabetes,
           foodAllergies: widget.foodAllergies,
           diabetesType: diabetesType, // Pass diabetesType
-          insulinRatio: insulinToCardRatio, // Pass insulin ratio
+          insulinToCardRatio: insulinToCardRatio, // Pass insulin to card ratio
           correctionFactor: correctionFactor, // Pass correction factor
         ),
       ),
@@ -114,7 +114,7 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
           userId: widget.userId,
           onDiabetesChanged: updateDiabetesStatus,
           onCorrectionFactor: updateCorrectionFactor,
-          initialInsulinRatio: insulinToCardRatio,
+          initialInsulinToCardRatio: insulinToCardRatio,
           onDiabetesTypeChanged: updateDiabetesType, // Pass update function
           diabetesType: diabetesType, // Pass diabetesType
           correctionFactor: correctionFactor, // Pass correctionFactor
@@ -126,8 +126,8 @@ class _HealthInfoTwoBodyState extends State<HealthInfoTwoBody> {
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: DiabetsInformation(
-              initialInsulinRatio: insulinToCardRatio,
-              onInsulinRatioChanged: updateInsulinToCardRatio,
+              initialInsulinToCardRatio: insulinToCardRatio,
+              onInsulinToCardRatioChanged: updateInsulinToCardRatio,
               onDiabetesChanged: updateDiabetesStatus,
               weight: int.parse(widget.weight),
               height: int.parse(widget.height),

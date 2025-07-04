@@ -10,9 +10,14 @@ import 'package:fitfat/features/main/presentaion/widgets/custom_suggestion_grid_
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_title.dart';
 import 'package:fitfat/features/menu/presentation/views/menu_screen.dart';
+import 'package:fitfat/features/profile/presentation/cubit/profile_cubit/profile_cubit.dart'
+    show UserProfileCubit;
 import 'package:fitfat/features/profile/presentation/views/profile_screen.dart';
 import 'package:fitfat/features/suggestions/presentation/views/suggestion_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

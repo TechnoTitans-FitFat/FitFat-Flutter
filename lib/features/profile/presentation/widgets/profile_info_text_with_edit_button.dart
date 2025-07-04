@@ -1,7 +1,10 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/profile/presentation/views/update_profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 
 class ProfileInfoTextWithEditButton extends StatelessWidget {
   const ProfileInfoTextWithEditButton({
@@ -25,13 +28,18 @@ class ProfileInfoTextWithEditButton extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => EditProfileScreen(
-                    initialData: initialData,
-                  ),
-                ));
+            final id =
+                BlocProvider.of<LoginCubit>(context, listen: false).user?.id;
+            if (id != null) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditProfileScreen(
+                      initialData: initialData,
+                      userId: id,
+                    ),
+                  ));
+            }
           },
           child: const Icon(
             Icons.edit,

@@ -2,9 +2,10 @@ import 'package:fitfat/features/profile/presentation/cubit/profile_cubit/profile
 import 'package:fitfat/features/profile/presentation/widgets/diet_info_section.dart';
 import 'package:fitfat/features/profile/presentation/widgets/divider_section.dart';
 import 'package:fitfat/features/profile/presentation/widgets/general_info_section.dart';
-import 'package:fitfat/features/profile/presentation/widgets/health_info_section.dart';
 import 'package:fitfat/features/profile/presentation/widgets/profile_info_text_with_edit_button.dart';
 import 'package:flutter/material.dart';
+
+import 'health_info_section.dart';
 
 class ProfileInfoLoaded extends StatelessWidget {
   const ProfileInfoLoaded(

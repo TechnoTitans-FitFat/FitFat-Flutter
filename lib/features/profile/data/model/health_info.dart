@@ -13,8 +13,10 @@ class HealthInfo {
   final String diabetesType;
   final double correctionFactor;
   final int version;
+  final int insulinToCardRatio;
 
   HealthInfo({
+    required this.insulinToCardRatio,
     required this.targetBloodSugarRange,
     required this.id,
     required this.userId,
@@ -31,6 +33,7 @@ class HealthInfo {
 
   factory HealthInfo.fromJson(Map<String, dynamic> json) {
     return HealthInfo(
+      insulinToCardRatio: json["insulinToCarbRatio"] ?? 0.0,
       targetBloodSugarRange:
           TargetBloodSugarRange.fromJson(json['targetBloodSugarRange'] ?? {}),
       id: json['_id'] ?? '',
@@ -65,21 +68,22 @@ class HealthInfo {
     };
   }
 
-  HealthInfo copyWith({
-    TargetBloodSugarRange? targetBloodSugarRange,
-    String? id,
-    String? userId,
-    String? gender,
-    DateTime? dateOfBirth,
-    double? weight,
-    double? height,
-    String? foodAllergies,
-    bool? diabetes,
-    String? diabetesType,
-    double? correctionFactor,
-    int? version,
-  }) {
+  HealthInfo copyWith(
+      {TargetBloodSugarRange? targetBloodSugarRange,
+      String? id,
+      String? userId,
+      String? gender,
+      DateTime? dateOfBirth,
+      double? weight,
+      double? height,
+      String? foodAllergies,
+      bool? diabetes,
+      String? diabetesType,
+      double? correctionFactor,
+      int? version,
+      int? insulinToCardRatio}) {
     return HealthInfo(
+      insulinToCardRatio: insulinToCardRatio ?? this.insulinToCardRatio,
       targetBloodSugarRange:
           targetBloodSugarRange ?? this.targetBloodSugarRange,
       id: id ?? this.id,

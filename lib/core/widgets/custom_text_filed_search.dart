@@ -4,7 +4,6 @@ import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
 import 'package:fitfat/features/search/presentation/views/search_page.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTextFiledSearch extends StatelessWidget {
   final void Function(String)? onSubmitted;
@@ -38,7 +37,7 @@ class CustomTextFiledSearch extends StatelessWidget {
                     hintText: "Search",
                     hintStyle: AppStyles.textStyle16.copyWith(
                         fontWeight: FontWeight.w400,
-                        color: AppLightColor.whiteColor),
+                        color: AppLightColor.greyColor),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50),
                       borderSide: const BorderSide(
@@ -59,7 +58,10 @@ class CustomTextFiledSearch extends StatelessWidget {
                     ),
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Image.asset(Assets.icons.searchNormal.path),
+                      child: Image.asset(
+                        Assets.icons.searchNormal.path,
+                        color: AppLightColor.greyColor,
+                      ),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50),

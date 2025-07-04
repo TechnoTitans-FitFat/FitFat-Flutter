@@ -11,8 +11,8 @@ import 'package:fitfat/features/main/data/main_screen_cubit/main_screen_cubit.da
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart';
 
 enum GridType { mainScreen, suggestions, menu }
+
 class CustomSuggestionsGridView extends StatefulWidget {
-  
   final GridType gridType;
 
   const CustomSuggestionsGridView({super.key, required this.gridType});
@@ -105,6 +105,7 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
     }
     return const SizedBox();
   }
+
   Widget _buildMenuGrid(BuildContext context, MenuState state) {
     if (state is MenuLoading) {
       return const Center(child: CircularProgressIndicator());
@@ -118,42 +119,36 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
   }
 
   Widget _buildGridView(List<dynamic> data) {
-    return BlocConsumer<CartCubit, CartState>(
-        listener: (context, state) {
-          if (state is CartSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
-          } else if (state is CartFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.error)),
-            );
-          }
-        },
-        builder: (context, state) {
-    return GridView.builder(
-      padding: EdgeInsets.zero,
-      key: ValueKey(data.length),
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 15,
-        mainAxisSpacing: 15,
-        mainAxisExtent: 220,
-      ),
-      itemCount: data.length,
-      itemBuilder: (context, index) {
-        final item = data[index];
-        return SuggestionGridViewItem(
-          imageUrl: item.image,
-          title: item.name,
-          calories: item.calories,
-          price: item.price,
-          id: item.id,
+    return BlocConsumer<CartCubit, CartState>(listener: (context, state) {
+      if (state is CartSuccess) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(state.message)),
         );
-      },
-    );
-  });
+      }
+    }, builder: (context, state) {
+      return GridView.builder(
+        padding: EdgeInsets.zero,
+        key: ValueKey(data.length),
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
+          mainAxisExtent: 220,
+        ),
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          final item = data[index];
+          return SuggestionGridViewItem(
+            imageUrl: item.image,
+            title: item.name,
+            calories: item.calories,
+            price: item.price,
+            id: item.id,
+          );
+        },
+      );
+    });
   }
 }

@@ -43,9 +43,12 @@ class SuggestionGridViewItem extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
+                Navigator.push(
+                    context,
                     MaterialPageRoute(
-                        builder: (context) => DetailsView(mealId: id,)));
+                        builder: (context) => DetailsView(
+                              mealId: id,
+                            )));
               },
               child: Hero(
                 tag: imageUrl,
@@ -72,12 +75,9 @@ class SuggestionGridViewItem extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               title,
-              style: AppStyles.textStyle16
-                  .copyWith(color: AppLightColor.blackColor,
-                fontSize: MediaQuery
-                    .of(context)
-                    .size
-                    .width * 0.05,
+              style: AppStyles.textStyle16.copyWith(
+                color: AppLightColor.blackColor,
+                fontSize: MediaQuery.of(context).size.width * 0.05,
               ),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
@@ -87,7 +87,7 @@ class SuggestionGridViewItem extends StatelessWidget {
               children: [
                 Container(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   decoration: BoxDecoration(
                     color: AppLightColor.mainColor.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(15),
@@ -95,50 +95,41 @@ class SuggestionGridViewItem extends StatelessWidget {
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text('$calories cal',
-                        style: AppStyles.textStyle12
-                            .copyWith(color: AppLightColor.mainColor,
-                          fontSize: MediaQuery
-                              .of(context)
-                              .size
-                              .width * 0.034,
+                        style: AppStyles.textStyle12.copyWith(
+                          color: AppLightColor.mainColor,
+                          fontSize: MediaQuery.of(context).size.width * 0.034,
                         )),
                   ),
                 ),
                 const Spacer(),
               ],
             ),
-            const SizedBox(height: 8),
+            //const SizedBox(height: 8),
             Row(
               children: [
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(price.toString(),
-                      style: AppStyles.textStyle16
-                          .copyWith(color: AppLightColor.mainColor,
-                        fontSize: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.041,
+                      style: AppStyles.textStyle16.copyWith(
+                        color: AppLightColor.mainColor,
+                        fontSize: MediaQuery.of(context).size.width * 0.041,
                       )),
                 ),
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(" EGP",
-                      style: AppStyles.textStyle16
-                          .copyWith(color: AppLightColor.blackColor,
-                        fontSize: MediaQuery
-                            .of(context)
-                            .size
-                            .width * 0.041,
+                      style: AppStyles.textStyle16.copyWith(
+                        color: AppLightColor.blackColor,
+                        fontSize: MediaQuery.of(context).size.width * 0.041,
                       )),
                 ),
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-      context.read<CartCubit>()
-        ..productId = id
-        ..quantity = 1
-        ..addCartAndIncrement(context: context);
+                    context.read<CartCubit>()
+                      ..productId = id
+                      ..quantity = 1
+                      ..addCartAndIncrement(context: context);
                   },
                   child: Container(
                     decoration: BoxDecoration(
