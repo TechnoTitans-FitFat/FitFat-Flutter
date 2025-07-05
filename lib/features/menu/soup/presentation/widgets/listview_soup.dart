@@ -23,7 +23,10 @@ class ListviewSoup extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemCount: meals.length,
             itemBuilder: (context, index) {
-              return ListViewItemSoup(meal: meals[index]);
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: ListViewItemSoup(meal: meals[index]),
+              );
             },
           );
         } else {
