@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -20,25 +20,25 @@ class CustomCircularPercentIndecitor extends StatelessWidget {
       child: CircularPercentIndicator(
         animation: true,
         circularStrokeCap: CircularStrokeCap.round,
-        linearGradient: const LinearGradient(
+        linearGradient: LinearGradient(
           colors: [
-            AppLightColor.mainColor,
-            AppLightColor.mainColor,
+            context.theme.mainColor,
+            context.theme.mainColor,
           ],
           stops: [0.0, 0.1],
         ),
-        progressBorderColor: AppLightColor.greyColor,
+        progressBorderColor: context.theme.greyColor,
         radius: 40,
         lineWidth: 5,
         percent: percentage,
         startAngle: 0,
-        backgroundColor: AppLightColor.greyColor,
+        backgroundColor: context.theme.greyColor,
         center: Text(
           "$step of 3",
           style: GoogleFonts.roboto(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: AppLightColor.blackColor,
+            color: context.theme.blackColor,
           ),
         ),
       ),

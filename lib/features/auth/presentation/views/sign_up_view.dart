@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/sign_up_view_body.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class SignUp extends StatelessWidget {
       },
       builder: (BuildContext context, SignUpStates state) {
         return Scaffold(
-          backgroundColor: AppLightColor.whiteColor,
+          backgroundColor: context.theme.whiteColor,
           body: Stack(
             children: [
               SignUpViewBody(

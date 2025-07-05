@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_app_bar.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
@@ -16,7 +16,7 @@ class HighCarbScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppLightColor.backgroundColor,
+        backgroundColor: context.theme.backgroundColor,
         appBar: const CustomAppBar(title: 'High-Carb'),
         body: SingleChildScrollView(
           child: Column(
@@ -31,28 +31,28 @@ class HighCarbScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 25),
                 child: Text('Discover',
                     style: AppStyles.textStyle24
-                        .copyWith(color: AppLightColor.mainColor),
+                        .copyWith(color: context.theme.mainColor),
                     textAlign: TextAlign.left),
               ),
               const SizedBox(
                 height: 30,
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 25),
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
                 child: Row(
                   children: [
                     CustomElvatedButton(
                       text: 'All',
-                      butttonColor: AppLightColor.mainColor,
-                      textColor: AppLightColor.whiteColor,
+                      butttonColor: context.theme.mainColor,
+                      textColor: context.theme.whiteColor,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     CustomElvatedButton(
                       text: 'Popular',
-                      butttonColor: AppLightColor.whiteColor,
-                      textColor: AppLightColor.mainColor,
+                      butttonColor: context.theme.whiteColor,
+                      textColor: context.theme.mainColor,
                     ),
                   ],
                 ),

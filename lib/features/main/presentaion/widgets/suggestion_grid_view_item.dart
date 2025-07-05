@@ -1,5 +1,4 @@
-import 'package:fitfat/core/api/end_points.dart';
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
@@ -26,10 +25,10 @@ class SuggestionGridViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppLightColor.whiteColor,
+        color: context.theme.whiteColor,
         boxShadow: [
           BoxShadow(
-            color: AppLightColor.blackColor.withOpacity(0.25),
+            color: context.theme.blackColor.withOpacity(0.25),
             blurRadius: 3,
             offset: const Offset(0, 3),
           ),
@@ -58,7 +57,7 @@ class SuggestionGridViewItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: AppLightColor.blackColor.withOpacity(0.25),
+                        color: context.theme.blackColor.withOpacity(0.25),
                         blurRadius: 3,
                         offset: const Offset(4, 0),
                       ),
@@ -76,7 +75,7 @@ class SuggestionGridViewItem extends StatelessWidget {
             Text(
               title,
               style: AppStyles.textStyle16.copyWith(
-                color: AppLightColor.blackColor,
+                color: context.theme.blackColor,
                 fontSize: MediaQuery.of(context).size.width * 0.05,
               ),
               overflow: TextOverflow.ellipsis,
@@ -89,14 +88,14 @@ class SuggestionGridViewItem extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   decoration: BoxDecoration(
-                    color: AppLightColor.mainColor.withOpacity(0.15),
+                    color: context.theme.mainColor.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text('$calories cal',
                         style: AppStyles.textStyle12.copyWith(
-                          color: AppLightColor.mainColor,
+                          color: context.theme.mainColor,
                           fontSize: MediaQuery.of(context).size.width * 0.034,
                         )),
                   ),
@@ -111,7 +110,7 @@ class SuggestionGridViewItem extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                   child: Text(price.toString(),
                       style: AppStyles.textStyle16.copyWith(
-                        color: AppLightColor.mainColor,
+                        color: context.theme.mainColor,
                         fontSize: MediaQuery.of(context).size.width * 0.041,
                       )),
                 ),
@@ -119,7 +118,7 @@ class SuggestionGridViewItem extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                   child: Text(" EGP",
                       style: AppStyles.textStyle16.copyWith(
-                        color: AppLightColor.blackColor,
+                        color: context.theme.blackColor,
                         fontSize: MediaQuery.of(context).size.width * 0.041,
                       )),
                 ),
@@ -133,14 +132,14 @@ class SuggestionGridViewItem extends StatelessWidget {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppLightColor.mainColor,
+                      color: context.theme.mainColor,
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(5),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
                       child: Icon(
                         Icons.add,
-                        color: AppLightColor.whiteColor,
+                        color: context.theme.whiteColor,
                         size: 20,
                       ),
                     ),

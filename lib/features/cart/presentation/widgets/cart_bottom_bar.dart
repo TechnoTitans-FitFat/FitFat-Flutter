@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/data/models/get_cart_model.dart';
 import 'package:fitfat/features/cart/presentation/widgets/custom_button_cart.dart';
@@ -28,8 +28,8 @@ class _CartBottomBarState extends State<CartBottomBar> {
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(40), topRight: Radius.circular(40)),
-            color: AppLightColor.whiteColor,
-            border: Border.all(color: AppLightColor.whiteColor, width: 2)),
+            color: context.theme.whiteColor,
+            border: Border.all(color: context.theme.whiteColor, width: 2)),
         child: Padding(
           padding: const EdgeInsets.all(26),
           child: Column(
@@ -41,15 +41,15 @@ class _CartBottomBarState extends State<CartBottomBar> {
                 children: [
                   Text('Subtotal',
                       style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.blackColor.withOpacity(.5))),
+                          color: context.theme.blackColor.withOpacity(.5))),
                   Row(
                     children: [
                       Text(subtotal.toStringAsFixed(0),
                           style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.blackColor.withOpacity(.5))),
+                              color: context.theme.blackColor.withOpacity(.5))),
                       Text(' EGP',
                           style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.blackColor.withOpacity(.5)))
+                              color: context.theme.blackColor.withOpacity(.5)))
                     ],
                   )
                 ],
@@ -62,15 +62,15 @@ class _CartBottomBarState extends State<CartBottomBar> {
                 children: [
                   Text('Tax and Fees',
                       style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.blackColor.withOpacity(.5))),
+                          color: context.theme.blackColor.withOpacity(.5))),
                   Row(
                     children: [
                       Text(tax.toStringAsFixed(0),
                           style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.blackColor.withOpacity(.5))),
+                              color: context.theme.blackColor.withOpacity(.5))),
                       Text(' EGP',
                           style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.blackColor.withOpacity(.5)))
+                              color: context.theme.blackColor.withOpacity(.5)))
                     ],
                   )
                 ],
@@ -83,15 +83,15 @@ class _CartBottomBarState extends State<CartBottomBar> {
                 children: [
                   Text('Total',
                       style: AppStyles.textStyle16
-                          .copyWith(color: AppLightColor.mainColor)),
+                          .copyWith(color: context.theme.mainColor)),
                   Row(
                     children: [
                       Text(total.toStringAsFixed(0),
                           style: AppStyles.textStyle16
-                              .copyWith(color: AppLightColor.mainColor)),
+                              .copyWith(color: context.theme.mainColor)),
                       Text(' EGP',
                           style: AppStyles.textStyle16
-                              .copyWith(color: AppLightColor.blackColor))
+                              .copyWith(color: context.theme.blackColor))
                     ],
                   )
                 ],
@@ -99,9 +99,9 @@ class _CartBottomBarState extends State<CartBottomBar> {
               const SizedBox(
                 height: 20,
               ),
-              const Center(
+              Center(
                   child: CustomButtonCart(
-                color: AppLightColor.mainColor,
+                color: context.theme.mainColor,
                 text: 'Checkout',
               )),
             ],

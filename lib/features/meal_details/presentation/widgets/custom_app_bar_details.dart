@@ -1,10 +1,11 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 
-class CustomAppBarDetails extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBarDetails extends StatelessWidget
+    implements PreferredSizeWidget {
   final String id;
 
   const CustomAppBarDetails({super.key, required this.id});
@@ -15,7 +16,7 @@ class CustomAppBarDetails extends StatelessWidget implements PreferredSizeWidget
     bool isFavourite = favouritesCubit.favourites.any((fav) => fav.id == id);
 
     return AppBar(
-      backgroundColor: AppLightColor.transpernt,
+      backgroundColor: context.theme.transparent,
       leading: Padding(
         padding: const EdgeInsets.only(left: 16),
         child: GestureDetector(

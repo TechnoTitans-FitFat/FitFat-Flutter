@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_animated_toggle.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -22,16 +22,16 @@ class CustomImageAuth extends StatelessWidget {
             Container(
               height: 200,
               width: double.infinity,
-              color: AppLightColor.mainColor.withOpacity(
+              color: context.theme.mainColor.withOpacity(
                 0.2,
               ),
             ),
             Container(
               height: 15,
               width: double.infinity,
-              decoration: const BoxDecoration(
-                color: AppLightColor.whiteColor,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: context.theme.whiteColor,
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(40),
                   topRight: Radius.circular(40),
                 ),

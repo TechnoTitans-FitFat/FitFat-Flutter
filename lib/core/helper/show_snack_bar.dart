@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 
 void showSnackBar(BuildContext context, massage) {
@@ -21,25 +21,24 @@ void ShowDialog(BuildContext context, massage) {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: AppLightColor.whiteColor,
+                  color: context.theme.whiteColor,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-
                       const SizedBox(
                         height: 8,
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Success',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 32,
-                              color: AppLightColor.green),
+                              color: context.theme.green),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -47,7 +46,7 @@ void ShowDialog(BuildContext context, massage) {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           massage,
-                          style: const TextStyle(color: AppLightColor.greyColor),
+                          style: TextStyle(color: context.theme.greyColor),
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.visible,
                         ),
@@ -59,15 +58,19 @@ void ShowDialog(BuildContext context, massage) {
               Positioned(
                 top: -30,
                 child: CircleAvatar(
-                  backgroundColor: AppLightColor.green,
+                  backgroundColor: context.theme.green,
                   maxRadius: 32,
                   child: Card(
-                    color: AppLightColor.green,
-                    elevation:16,
-                    shadowColor: AppLightColor.green,
+                    color: context.theme.green,
+                    elevation: 16,
+                    shadowColor: context.theme.green,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
-                    child: const Icon(Icons.check,color: AppLightColor.whiteColor,size: 64,),
+                    child: Icon(
+                      Icons.check,
+                      color: context.theme.whiteColor,
+                      size: 64,
+                    ),
                   ),
                 ),
               ),

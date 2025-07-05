@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/presentation/views/payment_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +12,8 @@ class CustomButtonCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const PaymentScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const PaymentScreen()));
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
@@ -26,7 +26,7 @@ class CustomButtonCart extends StatelessWidget {
       child: Text(
         text,
         style: AppStyles.textStyle16.copyWith(
-            color: AppLightColor.whiteColor, fontWeight: FontWeight.w700),
+            color: context.theme.whiteColor, fontWeight: FontWeight.w700),
       ),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class CustomCard extends StatelessWidget {
   final String text;
   final double height;
   final double width;
-   final VoidCallback onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +24,13 @@ class CustomCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Card(
-          color: AppLightColor.whiteColor,
+          color: context.theme.whiteColor,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: Text(
               text,
               style: AppStyles.textStyle12
-                  .copyWith(color: AppLightColor.mainColor),
+                  .copyWith(color: context.theme.mainColor),
               textAlign: TextAlign.center,
             ),
           ),

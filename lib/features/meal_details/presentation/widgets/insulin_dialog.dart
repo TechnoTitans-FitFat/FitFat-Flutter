@@ -1,10 +1,10 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/text_field_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 
 class InsulinDialog extends StatefulWidget {
- const InsulinDialog({
+  const InsulinDialog({
     super.key,
     required this.carbValue,
     required this.correctionFactor,
@@ -24,12 +24,13 @@ class _InsulinDialogState extends State<InsulinDialog> {
   final TextEditingController currentController = TextEditingController();
   final TextEditingController targetController = TextEditingController();
 
-   double? correctionDose;
+  double? correctionDose;
   double? carbDose;
   double? totalDose;
 
   double parseCarb(String carbString) {
-    return double.tryParse(carbString.replaceAll(RegExp(r'[^0-9.]'), '')) ?? 0.0;
+    return double.tryParse(carbString.replaceAll(RegExp(r'[^0-9.]'), '')) ??
+        0.0;
   }
 
   void calculateDose() {
@@ -42,7 +43,7 @@ class _InsulinDialogState extends State<InsulinDialog> {
       final corrected = (corrDose > 0 ? corrDose : 0).toDouble();
       final carbCover = (carbs / widget.insulinToCarbRatio).toDouble();
       final total = (corrected + carbCover).toDouble();
-      widget.onDoseCalculated(total); 
+      widget.onDoseCalculated(total);
 
       setState(() {
         correctionDose = corrected;
@@ -52,11 +53,10 @@ class _InsulinDialogState extends State<InsulinDialog> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppLightColor.whiteColor1,
+      backgroundColor: context.theme.whiteColor1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(31),
       ),
@@ -66,9 +66,15 @@ class _InsulinDialogState extends State<InsulinDialog> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: Text('Insulin Dose Calculator', style: AppStyles.textStyle20)),
+            Center(
+                child: Text('Insulin Dose Calculator',
+                    style: AppStyles.textStyle20)),
             const SizedBox(height: 30),
-           TextFieldDialog(label: 'Current Blood Glucose (mg/dL)',hint: 'Enter your current blood sugar',controller: currentController,),
+            TextFieldDialog(
+              label: 'Current Blood Glucose (mg/dL)',
+              hint: 'Enter your current blood sugar',
+              controller: currentController,
+            ),
             const SizedBox(height: 15),
             TextFieldDialog(
               label: 'Target Blood Glucose (mg/dL)',
@@ -83,7 +89,7 @@ class _InsulinDialogState extends State<InsulinDialog> {
                 child: ElevatedButton(
                   onPressed: calculateDose,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppLightColor.mainColor,
+                    backgroundColor: context.theme.mainColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -91,22 +97,30 @@ class _InsulinDialogState extends State<InsulinDialog> {
                   ),
                   child: Text(
                     "Calculate Dose",
-                    style: AppStyles.textStyle20.copyWith(color: AppLightColor.whiteColor),
+                    style: AppStyles.textStyle20
+                        .copyWith(color: context.theme.whiteColor),
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 20),
-            if (totalDose!= null)
+            if (totalDose != null)
               Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Correction Dose: ${correctionDose!.toStringAsFixed(1)} units', style: AppStyles.textStyle16),
-                    Text('Carb Coverage Dose: ${carbDose!.toStringAsFixed(1)} units', style: AppStyles.textStyle16),
-                    const SizedBox(height: 10),
-                    Text('Total Insulin Dose: ${totalDose!.toStringAsFixed(1)} units', style: AppStyles.textStyle16.copyWith(color: AppLightColor.mainColor)),
-                  ],
-                )
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                      'Correction Dose: ${correctionDose!.toStringAsFixed(1)} units',
+                      style: AppStyles.textStyle16),
+                  Text(
+                      'Carb Coverage Dose: ${carbDose!.toStringAsFixed(1)} units',
+                      style: AppStyles.textStyle16),
+                  const SizedBox(height: 10),
+                  Text(
+                      'Total Insulin Dose: ${totalDose!.toStringAsFixed(1)} units',
+                      style: AppStyles.textStyle16
+                          .copyWith(color: context.theme.mainColor)),
+                ],
+              )
           ],
         ),
       ),

@@ -1,16 +1,16 @@
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/extensions/custom_extension.dart';
+import 'package:fitfat/core/theme/app_light_colors.dart';
 
 final lightThemeEx = CustomThemeExtension(
-  backgroundColor: AppLightColor.backgroundColor,
-  whiteColor: AppLightColor.whiteColor,
-  whiteColor1: AppLightColor.whiteColor1,
-  mainColor: AppLightColor.mainColor,
-  blackColor: AppLightColor.blackColor,
-  blackColor2: AppLightColor.blackColor_2,
-  greyColor: AppLightColor.greyColor,
-  greyColor1: AppLightColor.greyColor1,
-  green: AppLightColor.green,
-  secondColor: AppLightColor.secondColor,
-  transparent: AppLightColor.transpernt,
+  backgroundColor: AppLightColors.backgroundColor,
+  whiteColor: AppLightColors.whiteColor,
+  whiteColor1: AppLightColors.whiteColor1,
+  mainColor: AppLightColors.mainColor,
+  blackColor: AppLightColors.blackColor,
+  blackColor2: AppLightColors.blackColor_2,
+  greyColor: AppLightColors.greyColor,
+  greyColor1: AppLightColors.greyColor1,
+  green: AppLightColors.green,
+  secondColor: AppLightColors.secondColor,
+  transparent: AppLightColors.transpernt,
 );

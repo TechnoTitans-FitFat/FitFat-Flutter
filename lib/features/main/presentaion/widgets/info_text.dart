@@ -1,10 +1,9 @@
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget infoText(String title, String value) {
+Widget infoText(String title, String value, dynamic context) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 4.0),
+    padding: EdgeInsets.symmetric(vertical: 4.0),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -12,7 +11,7 @@ Widget infoText(String title, String value) {
             style: GoogleFonts.roboto(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
-                color: AppLightColor.blackColor)),
+                color: context.theme.blackColor)),
         Text(value,
             style: GoogleFonts.roboto(
                 fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),
@@ -20,4 +19,3 @@ Widget infoText(String title, String value) {
     ),
   );
 }
-

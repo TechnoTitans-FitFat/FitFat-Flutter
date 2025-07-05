@@ -1,8 +1,8 @@
 import 'package:fitfat/core/api/dio_comsumer.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_state.dart';
@@ -40,7 +40,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           // Navigate to login screen
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const LoginSignUp(DioComsumer)),
+            MaterialPageRoute(
+                builder: (context) => const LoginSignUp(DioComsumer)),
             (route) => false,
           );
         } else if (state.status == ForgotPasswordStatus.error) {
@@ -55,9 +56,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppLightColor.backgroundColor,
+        backgroundColor: context.theme.backgroundColor,
         appBar: AppBar(
-          backgroundColor: AppLightColor.backgroundColor,
+          backgroundColor: context.theme.backgroundColor,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -80,7 +81,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       "Your New Password Must Be Different from Previously Used Password",
                       textAlign: TextAlign.center,
                       style: AppStyles.textStyle15.copyWith(
-                        color: AppLightColor.blackColor,
+                        color: context.theme.blackColor,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -93,7 +94,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       Text(
                         "New Password",
                         style: AppStyles.textStyle15.copyWith(
-                          color: AppLightColor.greyColor1,
+                          color: context.theme.greyColor1,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -111,18 +112,18 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             },
                           ),
                           hintStyle: AppStyles.textStyle12Light.copyWith(
-                            color: AppLightColor.greyColor,
+                            color: context.theme.greyColor,
                           ),
-                          focusColor: AppLightColor.mainColor,
+                          focusColor: context.theme.mainColor,
                           hintText: "Enter your new password",
-                          focusedBorder: const UnderlineInputBorder(
+                          focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: AppLightColor.mainColor,
+                              color: context.theme.mainColor,
                             ),
                           ),
-                          border: const UnderlineInputBorder(
+                          border: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: AppLightColor.mainColor,
+                              color: context.theme.mainColor,
                             ),
                           ),
                         ),
@@ -144,7 +145,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       Text(
                         "Confirm Password",
                         style: AppStyles.textStyle15.copyWith(
-                          color: AppLightColor.greyColor1,
+                          color: context.theme.greyColor1,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -152,18 +153,18 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         controller: widget.confirmPasswordController,
                         decoration: InputDecoration(
                           hintStyle: AppStyles.textStyle12Light.copyWith(
-                            color: AppLightColor.greyColor,
+                            color: context.theme.greyColor,
                           ),
-                          focusColor: AppLightColor.mainColor,
+                          focusColor: context.theme.mainColor,
                           hintText: "Confirm your new password",
-                          focusedBorder: const UnderlineInputBorder(
+                          focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: AppLightColor.mainColor,
+                              color: context.theme.mainColor,
                             ),
                           ),
-                          border: const UnderlineInputBorder(
+                          border: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: AppLightColor.mainColor,
+                              color: context.theme.mainColor,
                             ),
                           ),
                         ),
@@ -185,7 +186,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppLightColor.mainColor,
+                        backgroundColor: context.theme.mainColor,
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -202,7 +203,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       child: Text(
                         'Reset Password',
                         style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.whiteColor,
+                          color: context.theme.whiteColor,
                           fontWeight: FontWeight.w800,
                         ),
                       ),

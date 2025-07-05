@@ -1,6 +1,6 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/light_colors.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
@@ -61,7 +61,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         keyboardType: widget.keyboardType ?? TextInputType.text,
         decoration: InputDecoration(
           prefixIcon: widget.icon != null
-              ? Icon(widget.icon, color: AppLightColor.greyColor)
+              ? Icon(widget.icon, color: context.theme.greyColor)
               : null,
           suffixIcon: (widget.sufIcon != null && widget.sufIconNot != null)
               ? IconButton(
@@ -72,13 +72,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   },
                   icon: Icon(
                     passwordVisible ? widget.sufIcon : widget.sufIconNot,
-                    color: AppLightColor.greyColor,
+                    color: context.theme.greyColor,
                   ),
                 )
               : null,
           hintText: widget.hint,
           hintStyle: AppStyles.textStyle13.copyWith(
-            color: AppLightColor.greyColor,
+            color: context.theme.greyColor,
             fontWeight: FontWeight.w500,
           ),
           focusedBorder: buildBorder(),
@@ -93,7 +93,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   OutlineInputBorder buildBorder({bool isError = false}) {
     return OutlineInputBorder(
       borderSide: BorderSide(
-          color: isError ? AppLightColor.mainColor : AppLightColor.greyColor),
+          color: isError ? context.theme.mainColor : context.theme.greyColor),
       borderRadius: BorderRadius.circular(8),
     );
   }

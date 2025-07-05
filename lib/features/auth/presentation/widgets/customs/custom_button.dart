@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -20,20 +20,20 @@ class CustomBottom extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: 55,
           decoration: BoxDecoration(
-            color: AppLightColor.mainColor,
+            color: context.theme.mainColor,
             borderRadius: BorderRadius.circular(8),
           ),
           child: isLoading
-              ? const Center(
+              ? Center(
                   child: CircularProgressIndicator(
-                    color: AppLightColor.whiteColor,
+                    color: context.theme.whiteColor,
                   ),
                 )
               : Center(
                   child: Text(
                     text!,
                     style: AppStyles.textStyle15.copyWith(
-                      color: AppLightColor.whiteColor,
+                      color: context.theme.whiteColor,
                       fontWeight: FontWeight.w800,
                     ),
                   ),

@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +28,7 @@ class NoMessageBody extends StatelessWidget {
             child: Text(
               "I can help you find meals that match your preferences, dietary needs, or health conditions.",
               style: AppStyles.textStyle15.copyWith(
-                color: AppLightColor.greyColor,
+                color: context.theme.greyColor,
               ),
               textAlign: TextAlign.center,
             ),

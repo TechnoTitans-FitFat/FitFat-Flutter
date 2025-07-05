@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/login_view_body.dart';
@@ -34,9 +34,9 @@ class Login extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return const Scaffold(
-          backgroundColor: AppLightColor.whiteColor,
-          body: LoginViewBody(),
+        return Scaffold(
+          backgroundColor: context.theme.whiteColor,
+          body: const LoginViewBody(),
         );
       },
     );

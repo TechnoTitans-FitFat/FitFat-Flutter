@@ -1,7 +1,6 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_bottom_nav_bar.dart';
-import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
 import 'package:fitfat/features/chat/presentation/views/chat_bot_view.dart';
 import 'package:fitfat/features/favourites/presentation/views/favourites_view.dart';
 import 'package:fitfat/features/main/presentaion/widgets/auto_scroll_panner.dart';
@@ -10,14 +9,9 @@ import 'package:fitfat/features/main/presentaion/widgets/custom_suggestion_grid_
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_title.dart';
 import 'package:fitfat/features/menu/presentation/views/menu_screen.dart';
-import 'package:fitfat/features/profile/presentation/cubit/profile_cubit/profile_cubit.dart'
-    show UserProfileCubit;
 import 'package:fitfat/features/profile/presentation/views/profile_screen.dart';
 import 'package:fitfat/features/suggestions/presentation/views/suggestion_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -100,7 +94,7 @@ class _MainScreenState extends State<MainScreen> {
                         fit: BoxFit.scaleDown,
                         child: Text('See all',
                             style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.greyColor,
+                              color: context.theme.greyColor,
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.039,
                             )),
@@ -121,7 +115,7 @@ class _MainScreenState extends State<MainScreen> {
     ];
 
     return Scaffold(
-        backgroundColor: AppLightColor.backgroundColor,
+        backgroundColor: context.theme.backgroundColor,
         body: screens[selectedIndex],
         bottomNavigationBar: CustomBottomNavBar(
           selectedIndex: selectedIndex,

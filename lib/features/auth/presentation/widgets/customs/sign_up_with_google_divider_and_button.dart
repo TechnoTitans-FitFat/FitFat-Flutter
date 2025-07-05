@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/or_sign_in_w_ith_row.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/sign_up_with_google_button.dart';
@@ -23,7 +23,7 @@ class SignUpWithGoogleDividerAndButton extends StatelessWidget {
             Text(
               "Already have an account?",
               style: AppStyles.textStyle13.copyWith(
-                color: AppLightColor.blackColor,
+                color: context.theme.blackColor,
               ),
             ),
             TextButton(
@@ -38,7 +38,7 @@ class SignUpWithGoogleDividerAndButton extends StatelessWidget {
               child: Text(
                 "login",
                 style: AppStyles.textStyle13.copyWith(
-                  color: AppLightColor.mainColor,
+                  color: context.theme.mainColor,
                 ),
               ),
             )

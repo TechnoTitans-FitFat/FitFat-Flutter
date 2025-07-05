@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/auth/presentation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 import '../../views/login_view.dart';
@@ -36,7 +36,7 @@ class _AnimatedToggleState extends State<AnimatedToggle>
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: AppLightColor.backgroundColor,
+                color: context.theme.backgroundColor,
               ),
             ),
             child: TabBar(
@@ -44,10 +44,10 @@ class _AnimatedToggleState extends State<AnimatedToggle>
               controller: _tabController,
               indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: AppLightColor.mainColor,
+                color: context.theme.mainColor,
               ),
-              labelColor: AppLightColor.whiteColor,
-              unselectedLabelColor: AppLightColor.mainColor,
+              labelColor: context.theme.whiteColor,
+              unselectedLabelColor: context.theme.mainColor,
               tabs: const [
                 Tab(
                   child: SizedBox(

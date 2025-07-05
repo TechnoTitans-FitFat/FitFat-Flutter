@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_state.dart';
@@ -84,9 +84,9 @@ class _OtpPageState extends State<OtpPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppLightColor.backgroundColor,
+        backgroundColor: context.theme.backgroundColor,
         appBar: AppBar(
-          backgroundColor: AppLightColor.backgroundColor,
+          backgroundColor: context.theme.backgroundColor,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -107,7 +107,7 @@ class _OtpPageState extends State<OtpPage> {
                     textAlign: TextAlign.center,
                     "Please Enter The Code Sent To",
                     style: AppStyles.textStyle15.copyWith(
-                      color: AppLightColor.blackColor,
+                      color: context.theme.blackColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -118,7 +118,7 @@ class _OtpPageState extends State<OtpPage> {
                     textAlign: TextAlign.center,
                     widget.email,
                     style: AppStyles.textStyle15.copyWith(
-                      color: AppLightColor.blackColor,
+                      color: context.theme.blackColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -136,21 +136,21 @@ class _OtpPageState extends State<OtpPage> {
                       borderRadius: BorderRadius.circular(5),
                       fieldHeight: 50,
                       fieldWidth: 40,
-                      activeFillColor: AppLightColor.whiteColor,
-                      selectedFillColor: AppLightColor.backgroundColor,
-                      activeColor: AppLightColor.blackColor,
-                      selectedColor: AppLightColor.mainColor,
-                      inactiveFillColor: AppLightColor.backgroundColor,
-                      inactiveColor: AppLightColor.greyColor,
+                      activeFillColor: context.theme.whiteColor,
+                      selectedFillColor: context.theme.backgroundColor,
+                      activeColor: context.theme.blackColor,
+                      selectedColor: context.theme.mainColor,
+                      inactiveFillColor: context.theme.backgroundColor,
+                      inactiveColor: context.theme.greyColor,
                     ),
-                    cursorColor: AppLightColor.mainColor,
+                    cursorColor: context.theme.mainColor,
                     animationDuration: const Duration(milliseconds: 300),
                     enableActiveFill: true,
                     errorAnimationController: errorController,
                     controller: widget.otpController,
                     keyboardType: TextInputType.number,
                     textStyle: AppStyles.textStyle16.copyWith(
-                      color: AppLightColor.blackColor,
+                      color: context.theme.blackColor,
                     ),
                     boxShadows: const [
                       BoxShadow(
@@ -180,7 +180,7 @@ class _OtpPageState extends State<OtpPage> {
 
                     return ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppLightColor.mainColor,
+                        backgroundColor: context.theme.mainColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -197,18 +197,18 @@ class _OtpPageState extends State<OtpPage> {
                               }
                             },
                       child: isLoading
-                          ? const SizedBox(
+                          ? SizedBox(
                               width: 24,
                               height: 24,
                               child: CircularProgressIndicator(
-                                color: AppLightColor.whiteColor,
+                                color: context.theme.whiteColor,
                                 strokeWidth: 3,
                               ),
                             )
                           : Text(
                               'Verify OTP',
                               style: AppStyles.textStyle16.copyWith(
-                                color: AppLightColor.whiteColor,
+                                color: context.theme.whiteColor,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),

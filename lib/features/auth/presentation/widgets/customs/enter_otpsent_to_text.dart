@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -19,14 +19,14 @@ class EnterOtpsentToText extends StatelessWidget {
         Text(
           "Enter OTP sent to",
           style: AppStyles.textStyle13.copyWith(
-            color: AppLightColor.greyColor,
+            color: context.theme.greyColor,
           ),
         ),
         const SizedBox(width: 5),
         Text(
           email,
           style: AppStyles.textStyle13.copyWith(
-            color: AppLightColor.blackColor,
+            color: context.theme.blackColor,
           ),
         )
       ],

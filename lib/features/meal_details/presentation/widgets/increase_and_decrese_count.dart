@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +17,9 @@ class IncreaseAndDecreseCount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-                  color: AppLightColor.mainColor,
-                  borderRadius: BorderRadius.circular(24),
-                ),
+        color: context.theme.mainColor,
+        borderRadius: BorderRadius.circular(24),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Row(
@@ -27,9 +27,9 @@ class IncreaseAndDecreseCount extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: onDecrement,
-              child: const Icon(
+              child: Icon(
                 Icons.remove,
-                color: AppLightColor.whiteColor,
+                color: context.theme.whiteColor,
               ),
             ),
             const SizedBox(width: 10),
@@ -38,7 +38,7 @@ class IncreaseAndDecreseCount extends StatelessWidget {
               width: 24,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
-                color: AppLightColor.whiteColor,
+                color: context.theme.whiteColor,
               ),
               child: Center(
                 child: Text(
@@ -50,9 +50,9 @@ class IncreaseAndDecreseCount extends StatelessWidget {
             const SizedBox(width: 10),
             GestureDetector(
               onTap: onIncrement,
-              child: const Icon(
+              child: Icon(
                 Icons.add,
-                color: AppLightColor.whiteColor,
+                color: context.theme.whiteColor,
               ),
             ),
           ],

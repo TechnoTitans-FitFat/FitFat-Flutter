@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +18,9 @@ class CustomTitle extends StatelessWidget {
         fit: BoxFit.scaleDown,
         child: Text(
           title,
-          style: AppStyles.textStyle24.copyWith(color: AppLightColor.mainColor,
-          fontSize: MediaQuery.of(context).size.width * 0.06,
+          style: AppStyles.textStyle24.copyWith(
+            color: context.theme.mainColor,
+            fontSize: MediaQuery.of(context).size.width * 0.06,
           ),
         ),
       ),

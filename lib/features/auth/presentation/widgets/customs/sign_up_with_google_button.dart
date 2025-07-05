@@ -1,11 +1,80 @@
-import 'package:dio/dio.dart';
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class SignUpWithGoogleButton extends StatelessWidget {
+class SignUpWithGoogleButton extends StatefulWidget {
   const SignUpWithGoogleButton({super.key});
+
+  @override
+  State<SignUpWithGoogleButton> createState() => _SignUpWithGoogleButtonState();
+}
+
+class _SignUpWithGoogleButtonState extends State<SignUpWithGoogleButton> {
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'profile',
+    ],
+  );
+
+  bool _isLoading = false;
+
+  Future<void> _handleGoogleSignIn() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      // Trigger the Google Sign-In flow
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      if (googleUser != null) {
+        // User successfully signed in
+        print('Google Sign-In successful!');
+        print('Email: ${googleUser.email}');
+        print('Name: ${googleUser.displayName}');
+        print('Photo: ${googleUser.photoUrl}');
+
+        // Navigate to main screen
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MainScreen(),
+            ));
+        // Show success message
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Welcome ${googleUser.displayName}!'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
+      } else {
+        print('Google Sign-In was cancelled by user');
+      }
+    } catch (error) {
+      print('Google Sign-In Error: $error');
+
+      // Show error message to user
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Sign-in failed: ${error.toString()}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,62 +84,16 @@ class SignUpWithGoogleButton extends StatelessWidget {
         vertical: 10,
       ),
       child: ElevatedButton(
-        onPressed: () async {
-          try {
-            final GoogleSignInAccount? googleUser = await LoginApi.login();
-
-            // Null-aware access to authentication
-            final idToken = await googleUser?.authentication;
-
-            if (idToken?.idToken case String token) {
-              final result = await LoginApi.sendGoogleTokenToBackend(token);
-
-              if (result.isSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Sign In Successful"),
-                    backgroundColor: Colors.green,
-                  ),
-                );
-
-                // Null-coalescing for default values
-                final String userToken = result.data?['token'] ?? 'No token';
-                final String? userEmail = googleUser?.email;
-                final String? userName = googleUser?.displayName;
-
-                print('Received token: $userToken');
-                print('User email: $userEmail');
-                print('User name: $userName');
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content:
-                        Text("Authentication Error: ${result.errorMessage}"),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
-            } else {
-              throw Exception('Failed to obtain ID token');
-            }
-          } catch (e) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Sign In Failed: ${e.toString()}"),
-                backgroundColor: Colors.red,
-              ),
-            );
-          }
-        },
+        onPressed: _isLoading ? null : _handleGoogleSignIn,
         style: ButtonStyle(
-          backgroundColor: const WidgetStatePropertyAll(
-            AppLightColor.whiteColor,
+          backgroundColor: WidgetStatePropertyAll(
+            context.theme.whiteColor,
           ),
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
-              side: const BorderSide(
-                color: AppLightColor.greyColor,
+              side: BorderSide(
+                color: context.theme.greyColor,
                 width: 1,
               ),
             ),
@@ -82,77 +105,38 @@ class SignUpWithGoogleButton extends StatelessWidget {
             spacing: 20,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 15,
-                width: 15,
-                child: CircleAvatar(
-                  backgroundColor: AppLightColor.whiteColor,
-                  child: Image(
-                    image: AssetImage('assets/icons/google.png'),
+              if (_isLoading)
+                SizedBox(
+                  height: 15,
+                  width: 15,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      context.theme.greyColor,
+                    ),
+                  ),
+                )
+              else
+                SizedBox(
+                  height: 15,
+                  width: 15,
+                  child: CircleAvatar(
+                    backgroundColor: context.theme.whiteColor,
+                    child: const Image(
+                      image: AssetImage('assets/icons/google.png'),
+                    ),
                   ),
                 ),
-              ),
               Text(
-                "Sign in with Google",
+                _isLoading ? "Signing in..." : "Sign in with Google",
                 style: AppStyles.textStyle13.copyWith(
-                  color: AppLightColor.greyColor,
+                  color: context.theme.greyColor,
                 ),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class LoginApi {
-  static final _googleSignIn = GoogleSignIn();
-  static final Dio _dio = Dio();
-
-  static Future<GoogleSignInAccount?> login() => _googleSignIn.signIn();
-
-  static Future<ApiResult> sendGoogleTokenToBackend(String idToken) async {
-    try {
-      final response = await _dio.get(
-        'https://fitfat-backend.up.railway.app/auth/google',
-        queryParameters: {'token': idToken},
-      );
-
-      return ApiResult.success(response.data);
-    } on DioException catch (e) {
-      return ApiResult.failure(e.response?.data?['message'] ??
-          e.message ??
-          'Unknown authentication error');
-    } catch (e) {
-      return ApiResult.failure(e.toString());
-    }
-  }
-}
-
-// Simple wrapper class for API results
-class ApiResult {
-  final bool isSuccess;
-  final Map<String, dynamic>? data;
-  final String? errorMessage;
-
-  ApiResult._({
-    required this.isSuccess,
-    this.data,
-    this.errorMessage,
-  });
-
-  factory ApiResult.success(Map<String, dynamic> data) {
-    return ApiResult._(
-      isSuccess: true,
-      data: data,
-    );
-  }
-
-  factory ApiResult.failure(String message) {
-    return ApiResult._(
-      isSuccess: false,
-      errorMessage: message,
     );
   }
 }

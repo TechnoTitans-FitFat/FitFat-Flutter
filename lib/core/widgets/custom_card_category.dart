@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,8 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CustomCardCategory extends StatelessWidget {
   const CustomCardCategory({
     super.key,
-    required this.text, required this.img,
-
+    required this.text,
+    required this.img,
   });
   final String text;
   final String img;
@@ -17,10 +17,10 @@ class CustomCardCategory extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Container(
         decoration: BoxDecoration(
-          color: AppLightColor.whiteColor,
+          color: context.theme.whiteColor,
           boxShadow: [
             BoxShadow(
-              color: AppLightColor.blackColor.withOpacity(0.25),
+              color: context.theme.blackColor.withOpacity(0.25),
               blurRadius: 3,
               offset: const Offset(0, 3),
             ),
@@ -34,23 +34,25 @@ class CustomCardCategory extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           child: Column(
-           mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.min,
             children: [
-             SvgPicture.asset(
-              img,
-              height: 70,
-              width: 70,
+              SvgPicture.asset(
+                img,
+                height: 70,
+                width: 70,
               ),
-              const SizedBox(height: 4,),      
+              const SizedBox(
+                height: 4,
+              ),
               FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
                   text,
-                    style: AppStyles.textStyle16.copyWith(color: AppLightColor.mainColor,
+                  style: AppStyles.textStyle16.copyWith(
+                    color: context.theme.mainColor,
                     fontSize: MediaQuery.of(context).size.width * 0.04,
-                    ),
-                     
-                 ),
+                  ),
+                ),
               ),
             ],
           ),
