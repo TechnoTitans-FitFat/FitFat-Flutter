@@ -1,6 +1,7 @@
 import 'package:fitfat/core/widgets/custom_card_category.dart';
 import 'package:fitfat/features/menu/chicken/presentation/views/chicken_view.dart';
 import 'package:fitfat/features/menu/sandwich/presentation/views/sandwich_view.dart';
+import 'package:fitfat/features/menu/soup/presentation/views/soup_view.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesMenuList extends StatelessWidget {
@@ -34,10 +35,15 @@ class CategoriesMenuList extends StatelessWidget {
             )
         ),
         Expanded(
-            child: CustomCardCategory(
-          text: 'Soup',
-          img: 'assets/icons/soupp.svg',
-        )
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const SoupView()));
+              },
+              child:const CustomCardCategory(
+                        text: 'Soup',
+                        img: 'assets/icons/soupp.svg',
+                      ),
+            )
         )
       ],
     );
