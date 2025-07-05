@@ -1,19 +1,16 @@
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
-import 'package:fitfat/features/search/data/models/search_model.dart';
+import 'package:fitfat/features/menu/sandwich/data/models/sandwich_model.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
-class SearchResultItem extends StatelessWidget {
-  final SearchRecipeModel recipe;
-
-  const SearchResultItem({super.key, required this.recipe});
-
+class ListViewItemSandwich extends StatelessWidget {
+  const ListViewItemSandwich({super.key, required this.meal});
+final SandwichModel meal;
   @override
   Widget build(BuildContext context) {
-    return Card(
+     return Card(
       elevation: 3,
       shadowColor: Colors.black,
       color: context.theme.whiteColor,
@@ -33,9 +30,9 @@ class SearchResultItem extends StatelessWidget {
                 onTap: (){
                   Navigator.push(context,
                     MaterialPageRoute(
-                        builder: (context) => DetailsView(mealId: recipe.id,)));
+                        builder: (context) => DetailsView(mealId: meal.id,)));
                 },
-                child: Image.network(recipe.image, fit: BoxFit.cover)),
+                child: Image.network(meal.image, fit: BoxFit.cover)),
             ),
             const SizedBox(width: 20),
             Expanded(
@@ -43,7 +40,7 @@ class SearchResultItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    recipe.name,
+                    meal.name,
                     style: AppStyles.textStyle16
                   ),
                   const SizedBox(height: 10),
@@ -57,7 +54,7 @@ class SearchResultItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Text(
-                      '${recipe.calories} cal',
+                      '${meal.calories} cal',
                       style: AppStyles.textStyle12.copyWith(
                         color: context.theme.mainColor,
                       ),
@@ -73,7 +70,7 @@ class SearchResultItem extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        recipe.rating.toStringAsFixed(1),
+                        meal.rating.toStringAsFixed(1),
                         style: AppStyles.textStyle16.copyWith(
                           fontSize: 14,
                         ),
@@ -87,7 +84,7 @@ class SearchResultItem extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            recipe.price.toString(),
+                            meal.price.toString(),
                             style: AppStyles.textStyle16.copyWith(
                               color: context.theme.mainColor,
                             ),

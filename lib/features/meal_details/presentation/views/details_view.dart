@@ -41,7 +41,10 @@ class DetailsView extends StatelessWidget {
 
                   return Column(
                     children: [
-                      Expanded(child: DetailsViewBody(meal: meal)),
+                      Expanded(child: DetailsViewBody(
+                        meal: meal,
+                        healthInfo: healthInfo,
+                        )),
                       DetailsBottomBar(
                         price: meal.price,
                         id: meal.id,

@@ -4,15 +4,18 @@ import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart
 import 'package:fitfat/features/meal_details/presentation/widgets/custom_app_bar_details.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/custom_meal_datails.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/nutrients_list.dart';
+import 'package:fitfat/features/profile/data/model/health_info.dart';
 import 'package:flutter/material.dart';
 
 class DetailsViewBody extends StatefulWidget {
   const DetailsViewBody({
     super.key,
     required this.meal,
+    required this.healthInfo,
   });
 
   final MealDetailsModel meal;
+  final HealthInfo healthInfo;
 
   @override
   State<DetailsViewBody> createState() => _DetailsViewBodyState();
@@ -99,6 +102,7 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomMealDatails(
+                                healthInfo: widget.healthInfo,
                                 id: widget.meal.id,
                                 title: widget.meal.name,
                                 caloreis: '${widget.meal.calories} cal',

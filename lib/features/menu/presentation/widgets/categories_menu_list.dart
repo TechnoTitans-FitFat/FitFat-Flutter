@@ -1,4 +1,7 @@
 import 'package:fitfat/core/widgets/custom_card_category.dart';
+import 'package:fitfat/features/menu/chicken/presentation/views/chicken_view.dart';
+import 'package:fitfat/features/menu/sandwich/presentation/views/sandwich_view.dart';
+import 'package:fitfat/features/menu/soup/presentation/views/soup_view.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesMenuList extends StatelessWidget {
@@ -6,26 +9,41 @@ class CategoriesMenuList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return  Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Expanded(
-            child: CustomCardCategory(
-          text: 'Chicken',
-          img: 'assets/icons/chickenn.svg',
-        )
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChickenView()));
+              },
+              child:const CustomCardCategory(
+                        text: 'Chicken',
+                        img: 'assets/icons/chickenn.svg',
+                      ),
+            )
         ),
         Expanded(
-            child: CustomCardCategory(
-          text: 'Sandwich',
-          img: 'assets/icons/sandowichh.svg',
-        )
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const SandwichView()));
+              },
+              child:const CustomCardCategory(
+                        text: 'Sandwich',
+                        img: 'assets/icons/sandowichh.svg',
+                      ),
+            )
         ),
         Expanded(
-            child: CustomCardCategory(
-          text: 'Soup',
-          img: 'assets/icons/soupp.svg',
-        )
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const SoupView()));
+              },
+              child:const CustomCardCategory(
+                        text: 'Soup',
+                        img: 'assets/icons/soupp.svg',
+                      ),
+            )
         )
       ],
     );

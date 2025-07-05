@@ -1,8 +1,10 @@
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/favourites/data/favourites_cubit/favourites_cubit.dart';
 import 'package:fitfat/features/meal_details/presentation/widgets/insulin_calc.dart';
+import 'package:fitfat/features/profile/data/model/health_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class CustomMealDatails extends StatefulWidget {
   const CustomMealDatails({
@@ -15,6 +17,7 @@ class CustomMealDatails extends StatefulWidget {
     required this.imagePath,
     required this.price,
     required this.carb,
+    required this.healthInfo
   });
   final String id;
   final String title;
@@ -24,6 +27,7 @@ class CustomMealDatails extends StatefulWidget {
   final String imagePath;
   final double price;
   final String carb;
+  final HealthInfo healthInfo;
 
   @override
   State<CustomMealDatails> createState() => _CustomMealDatailsState();
@@ -40,6 +44,7 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
 
   @override
   Widget build(BuildContext context) {
+    
     return BlocBuilder<FavouritesCubit, FavouritesState>(
       builder: (context, state) {
         final favouritesCubit = context.watch<FavouritesCubit>();
@@ -104,10 +109,11 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
                 ],
               ),
             ),
+            
             InsulinCalc(
-              carbValue: widget.carb, 
-              correctionFactor: 5, 
-              insulinToCarbRatio: 7,
+              carbValue: widget.carb,  
+              correctionFactor: widget.healthInfo.correctionFactor, 
+              insulinToCarbRatio: widget.healthInfo.insulinToCardRatio.toDouble(),
             )
           ],
         );
