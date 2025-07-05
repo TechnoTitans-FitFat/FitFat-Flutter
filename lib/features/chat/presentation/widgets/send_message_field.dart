@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/chat/data/chat_bot_cubit/chat_bot_cubit.dart';
@@ -22,7 +22,7 @@ class _SendMessageFieldState extends State<SendMessageField> {
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.1,
       width: double.infinity,
-      color: AppLightColor.whiteColor,
+      color: context.theme.whiteColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Row(
@@ -31,7 +31,7 @@ class _SendMessageFieldState extends State<SendMessageField> {
             Expanded(
               child: TextField(
                 controller: _controller,
-                cursorColor: AppLightColor.mainColor,
+                cursorColor: context.theme.mainColor,
                 decoration: InputDecoration(
                   hintText: "Type a message...",
                   hintStyle: AppStyles.textStyle13,
@@ -44,8 +44,8 @@ class _SendMessageFieldState extends State<SendMessageField> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25),
-                    borderSide: const BorderSide(
-                      color: AppLightColor.mainColor,
+                    borderSide: BorderSide(
+                      color: context.theme.mainColor,
                       width: 1.5,
                     ),
                   ),
@@ -66,9 +66,9 @@ class _SendMessageFieldState extends State<SendMessageField> {
               ),
             ),
             IconButton(
-              style: const ButtonStyle(
+              style: ButtonStyle(
                 backgroundColor: WidgetStatePropertyAll(
-                  AppLightColor.mainColor,
+                  context.theme.mainColor,
                 ),
               ),
               onPressed: () {
@@ -84,11 +84,11 @@ class _SendMessageFieldState extends State<SendMessageField> {
                   print("User ID is null or message is empty");
                 }
               },
-              icon: const Padding(
+              icon: Padding(
                 padding: EdgeInsets.all(5.0),
                 child: Icon(
                   Icons.send_rounded,
-                  color: AppLightColor.whiteColor,
+                  color: context.theme.whiteColor,
                 ),
               ),
             )

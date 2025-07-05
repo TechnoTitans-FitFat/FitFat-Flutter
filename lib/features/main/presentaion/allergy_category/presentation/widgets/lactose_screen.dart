@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_app_bar.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
@@ -17,7 +17,7 @@ class LactoseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppLightColor.backgroundColor,
+        backgroundColor: context.theme.backgroundColor,
         appBar: const CustomAppBar(title: 'Lactose'),
         body: SingleChildScrollView(
           child: Column(
@@ -32,28 +32,28 @@ class LactoseScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 25),
                 child: Text('Discover',
                     style: AppStyles.textStyle24
-                        .copyWith(color: AppLightColor.mainColor),
+                        .copyWith(color: context.theme.mainColor),
                     textAlign: TextAlign.left),
               ),
               const SizedBox(
                 height: 30,
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 25),
                 child: Row(
                   children: [
                     CustomElvatedButton(
                       text: 'All',
-                      butttonColor: AppLightColor.mainColor,
-                      textColor: AppLightColor.whiteColor,
+                      butttonColor: context.theme.mainColor,
+                      textColor: context.theme.whiteColor,
                     ),
                     SizedBox(
                       width: 15,
                     ),
                     CustomElvatedButton(
                       text: 'Popular',
-                      butttonColor: AppLightColor.whiteColor,
-                      textColor: AppLightColor.mainColor,
+                      butttonColor: context.theme.whiteColor,
+                      textColor: context.theme.mainColor,
                     ),
                   ],
                 ),
@@ -85,8 +85,9 @@ class LactoseScreen extends StatelessWidget {
                       getId: (item) => item.id,
                       getName: (item) => item.name,
                       getImage: (item) => item.image,
-                      getType: (item) =>
-                          item.allergy.isNotEmpty ? item.allergy.first : "Unknown",
+                      getType: (item) => item.allergy.isNotEmpty
+                          ? item.allergy.first
+                          : "Unknown",
                       getCalories: (item) => item.calories,
                       getPrice: (item) => item
                           .price, // Ensure it's converted to string if needed

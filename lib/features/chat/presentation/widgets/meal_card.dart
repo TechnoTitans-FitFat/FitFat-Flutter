@@ -1,15 +1,12 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/chat/data/models/chat_bot_model.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class MealCard extends StatelessWidget {
-  const MealCard({
-    super.key,
-    required this.meal
-  });
- final ChatBotModel meal;
+  const MealCard({super.key, required this.meal});
+  final ChatBotModel meal;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -33,27 +30,26 @@ class MealCard extends StatelessWidget {
                 //title,
                 meal.name,
                 style: AppStyles.textStyle16.copyWith(
-                  color: AppLightColor.blackColor,
+                  color: context.theme.blackColor,
                 ),
               ),
               const SizedBox(height: 10),
               Row(
                 spacing: 5,
                 children: [
-                  
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8,
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: AppLightColor.mainColor.withOpacity(0.15),
+                      color: context.theme.mainColor.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Text(
                       (meal.allergy ?? []).join(', '),
                       style: AppStyles.textStyle12.copyWith(
-                        color: AppLightColor.mainColor,
+                        color: context.theme.mainColor,
                       ),
                     ),
                   ),
@@ -63,14 +59,14 @@ class MealCard extends StatelessWidget {
                       vertical: 5,
                     ),
                     decoration: BoxDecoration(
-                      color: AppLightColor.mainColor.withOpacity(0.15),
+                      color: context.theme.mainColor.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Text(
                       //'$calories cal',
                       '${meal.calories} cal',
                       style: AppStyles.textStyle12.copyWith(
-                        color: AppLightColor.mainColor,
+                        color: context.theme.mainColor,
                       ),
                     ),
                   ),
@@ -89,7 +85,7 @@ class MealCard extends StatelessWidget {
                     //rating.toStringAsFixed(1),
                     meal.rating.toStringAsFixed(1),
                     style: AppStyles.textStyle16.copyWith(
-                      color: AppLightColor.blackColor,
+                      color: context.theme.blackColor,
                       fontSize: 14,
                     ),
                   ),
@@ -105,14 +101,14 @@ class MealCard extends StatelessWidget {
                         //price.toString(),
                         meal.price.toString(),
                         style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.mainColor,
+                          color: context.theme.mainColor,
                         ),
                       ),
                       const SizedBox(width: 5),
                       Text(
                         'EGP',
                         style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.blackColor,
+                          color: context.theme.blackColor,
                         ),
                       ),
                     ],

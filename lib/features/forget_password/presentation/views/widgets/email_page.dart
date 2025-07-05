@@ -1,5 +1,6 @@
 // email_page.dart
-import 'package:fitfat/core/constants/light_colors.dart';
+
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:fitfat/features/forget_password/presentation/views/widgets/email_with_field.dart';
@@ -22,9 +23,9 @@ class _EmailPageState extends State<EmailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppLightColor.backgroundColor,
+      backgroundColor: context.theme.backgroundColor,
       appBar: AppBar(
-        backgroundColor: AppLightColor.backgroundColor,
+        backgroundColor: context.theme.backgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,7 +47,7 @@ class _EmailPageState extends State<EmailPage> {
                     textAlign: TextAlign.center,
                     "Please Enter Your Email Address To Receive a Verification Code",
                     style: AppStyles.textStyle15.copyWith(
-                      color: AppLightColor.blackColor,
+                      color: context.theme.blackColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -58,7 +59,7 @@ class _EmailPageState extends State<EmailPage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppLightColor.mainColor,
+                    backgroundColor: context.theme.mainColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -72,7 +73,7 @@ class _EmailPageState extends State<EmailPage> {
                   child: Text(
                     "Send OTP Code",
                     style: AppStyles.textStyle16.copyWith(
-                      color: AppLightColor.whiteColor,
+                      color: context.theme.whiteColor,
                       fontWeight: FontWeight.w800,
                     ),
                   ),

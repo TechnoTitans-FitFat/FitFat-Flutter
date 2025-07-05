@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +16,8 @@ class SenderChatBubble extends StatelessWidget {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-        decoration: const BoxDecoration(
-          boxShadow: [
+        decoration: BoxDecoration(
+          boxShadow: const [
             BoxShadow(
               offset: Offset(0, 0),
               color: Colors.black12,
@@ -25,8 +25,8 @@ class SenderChatBubble extends StatelessWidget {
               spreadRadius: 0,
             )
           ],
-          color: AppLightColor.mainColor,
-          borderRadius: BorderRadius.only(
+          color: context.theme.mainColor,
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
             bottomLeft: Radius.circular(20),
@@ -38,13 +38,13 @@ class SenderChatBubble extends StatelessWidget {
             Text(
               message,
               style: AppStyles.textStyle16meduim.copyWith(
-                color: AppLightColor.secondColor,
+                color: context.theme.secondColor,
               ),
             ),
             Text(
               "12:00 AM",
               style: AppStyles.textStyle12normal.copyWith(
-                color: AppLightColor.whiteColor,
+                color: context.theme.whiteColor,
               ),
             )
           ],

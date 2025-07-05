@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class EmailWithField extends StatelessWidget {
         Text(
           "Email Address",
           style: AppStyles.textStyle15.copyWith(
-            color: AppLightColor.greyColor1,
+            color: context.theme.greyColor1,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -23,18 +23,18 @@ class EmailWithField extends StatelessWidget {
           controller: emailController,
           decoration: InputDecoration(
             hintStyle: AppStyles.textStyle12Light.copyWith(
-              color: AppLightColor.greyColor,
+              color: context.theme.greyColor,
             ),
-            focusColor: AppLightColor.mainColor,
+            focusColor: context.theme.mainColor,
             hintText: "Enter your Email Address",
-            focusedBorder: const UnderlineInputBorder(
+            focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
-                color: AppLightColor.mainColor,
+                color: context.theme.mainColor,
               ),
             ),
-            border: const UnderlineInputBorder(
+            border: UnderlineInputBorder(
               borderSide: BorderSide(
-                color: AppLightColor.mainColor,
+                color: context.theme.mainColor,
               ),
             ),
           ),

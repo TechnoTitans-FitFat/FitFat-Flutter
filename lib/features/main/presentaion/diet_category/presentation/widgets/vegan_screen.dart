@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_app_bar.dart';
 import 'package:fitfat/core/widgets/custom_elvated_button.dart';
@@ -15,68 +15,69 @@ class VeganScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-     backgroundColor: AppLightColor.backgroundColor,
-      appBar:const CustomAppBar(title: 'Vegan'),
-      body:SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
-            child: CustomTextFiledSearch(),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 25),
-            child: Text('Discover',
-                style: AppStyles.textStyle24
-                    .copyWith(color: AppLightColor.mainColor),
-                textAlign: TextAlign.left),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 25),
-            child: Row(
-              children: [
-                CustomElvatedButton(
-                  text: 'All',
-                  butttonColor: AppLightColor.mainColor,
-                  textColor: AppLightColor.whiteColor,
+    return Scaffold(
+        backgroundColor: context.theme.backgroundColor,
+        appBar: const CustomAppBar(title: 'Vegan'),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: CustomTextFiledSearch(),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: Text('Discover',
+                    style: AppStyles.textStyle24
+                        .copyWith(color: context.theme.mainColor),
+                    textAlign: TextAlign.left),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: Row(
+                  children: [
+                    CustomElvatedButton(
+                      text: 'All',
+                      butttonColor: context.theme.mainColor,
+                      textColor: context.theme.whiteColor,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    CustomElvatedButton(
+                      text: 'Popular',
+                      butttonColor: context.theme.whiteColor,
+                      textColor: context.theme.mainColor,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: 15,
-                ),
-                CustomElvatedButton(
-                  text: 'Popular',
-                  butttonColor: AppLightColor.whiteColor,
-                  textColor: AppLightColor.mainColor,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          BlocConsumer<VeganCubit, VeganState>(
-            listener: (context, state) {},
-            builder: (context, state) {
-              if (state is VeganLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is VeganFailure) {
-                return Center(
-                  child: Text(
-                    state.errMessage,
-                    style: AppStyles.textStyle16.copyWith(color: Colors.red),
-                  ),
-                );
-              } else if (state is VeganSuccess) {
-                // Convert API response to required format
-                final List<DietModel> dietList = state.data;
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              BlocConsumer<VeganCubit, VeganState>(
+                listener: (context, state) {},
+                builder: (context, state) {
+                  if (state is VeganLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is VeganFailure) {
+                    return Center(
+                      child: Text(
+                        state.errMessage,
+                        style:
+                            AppStyles.textStyle16.copyWith(color: Colors.red),
+                      ),
+                    );
+                  } else if (state is VeganSuccess) {
+                    // Convert API response to required format
+                    final List<DietModel> dietList = state.data;
 
                     return CategoriesListView<DietModel>(
                       items: dietList,
@@ -90,14 +91,13 @@ class VeganScreen extends StatelessWidget {
                           .price, // Ensure it's converted to string if needed
                       getRating: (item) => item.rating,
                     );
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-    )
-    );
+        ));
   }
 }

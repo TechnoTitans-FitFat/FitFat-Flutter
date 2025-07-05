@@ -1,15 +1,16 @@
-import 'package:fitfat/core/constants/light_colors.dart';
-import 'package:fitfat/core/utils/app_styles.dart';
-import 'package:fitfat/features/auth/presentation/widgets/customs/enter_otpsent_to_text.dart';
-import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
-import 'package:fitfat/gen/assets.gen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'dart:async';
 
+import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
+import 'package:fitfat/features/auth/presentation/widgets/customs/enter_otpsent_to_text.dart';
+import 'package:fitfat/features/registration_details/presentation/personal_information/presentation/views/personal_information_view.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/route_manager.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
+import '../../../../gen/assets.gen.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -105,7 +106,7 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppLightColor.whiteColor,
+      backgroundColor: context.theme.whiteColor,
       body: BlocConsumer<RegisterCubit, SignUpStates>(
         listener: (context, state) {
           if (!mounted) return;
@@ -167,7 +168,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   Text(
                     "Email Verification",
                     style: AppStyles.textStyle22.copyWith(
-                      color: AppLightColor.blackColor,
+                      color: context.theme.blackColor,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -184,21 +185,21 @@ class _OtpScreenState extends State<OtpScreen> {
                       borderRadius: BorderRadius.circular(5),
                       fieldHeight: 50,
                       fieldWidth: 40,
-                      activeFillColor: AppLightColor.whiteColor,
-                      selectedFillColor: AppLightColor.backgroundColor,
-                      activeColor: AppLightColor.blackColor,
-                      selectedColor: AppLightColor.mainColor,
-                      inactiveFillColor: AppLightColor.backgroundColor,
-                      inactiveColor: AppLightColor.greyColor,
+                      activeFillColor: context.theme.whiteColor,
+                      selectedFillColor: context.theme.backgroundColor,
+                      activeColor: context.theme.blackColor,
+                      selectedColor: context.theme.mainColor,
+                      inactiveFillColor: context.theme.backgroundColor,
+                      inactiveColor: context.theme.greyColor,
                     ),
-                    cursorColor: AppLightColor.mainColor,
+                    cursorColor: context.theme.mainColor,
                     animationDuration: const Duration(milliseconds: 300),
                     enableActiveFill: true,
                     errorAnimationController: errorController,
                     controller: textEditingController,
                     keyboardType: TextInputType.number,
                     textStyle: AppStyles.textStyle16.copyWith(
-                      color: AppLightColor.blackColor,
+                      color: context.theme.blackColor,
                     ),
                     boxShadows: const [
                       BoxShadow(
@@ -233,7 +234,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         ? const Center(child: CircularProgressIndicator())
                         : ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppLightColor.mainColor,
+                              backgroundColor: context.theme.mainColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
                                   8,
@@ -245,7 +246,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             child: Text(
                               "Verify",
                               style: AppStyles.textStyle16.copyWith(
-                                color: AppLightColor.whiteColor,
+                                color: context.theme.whiteColor,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
@@ -258,7 +259,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       Text(
                         "Didn't receive the code?",
                         style: AppStyles.textStyle13.copyWith(
-                          color: AppLightColor.greyColor,
+                          color: context.theme.greyColor,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -273,7 +274,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                   ? "Resend"
                                   : "Resend in ${resendCountdown}s"),
                           style: AppStyles.textStyle13.copyWith(
-                            color: AppLightColor.mainColor,
+                            color: context.theme.mainColor,
                           ),
                         ),
                       ),

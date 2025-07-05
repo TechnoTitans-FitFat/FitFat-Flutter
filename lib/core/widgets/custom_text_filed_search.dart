@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
 import 'package:fitfat/features/search/presentation/views/search_page.dart';
@@ -32,35 +32,35 @@ class CustomTextFiledSearch extends StatelessWidget {
                   onSubmitted: onSubmitted,
                   readOnly: true,
                   decoration: InputDecoration(
-                    fillColor: AppLightColor.whiteColor,
+                    fillColor: context.theme.whiteColor,
                     filled: true,
                     hintText: "Search",
                     hintStyle: AppStyles.textStyle16.copyWith(
                         fontWeight: FontWeight.w400,
-                        color: AppLightColor.greyColor),
+                        color: context.theme.greyColor),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50),
-                      borderSide: const BorderSide(
-                        color: AppLightColor.whiteColor,
+                      borderSide: BorderSide(
+                        color: context.theme.whiteColor,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50),
-                      borderSide: const BorderSide(
-                        color: AppLightColor.mainColor,
+                      borderSide: BorderSide(
+                        color: context.theme.mainColor,
                       ),
                     ),
                     disabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50),
-                      borderSide: const BorderSide(
-                        color: AppLightColor.whiteColor,
+                      borderSide: BorderSide(
+                        color: context.theme.whiteColor,
                       ),
                     ),
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Image.asset(
                         Assets.icons.searchNormal.path,
-                        color: AppLightColor.greyColor,
+                        color: context.theme.greyColor,
                       ),
                     ),
                     border: OutlineInputBorder(

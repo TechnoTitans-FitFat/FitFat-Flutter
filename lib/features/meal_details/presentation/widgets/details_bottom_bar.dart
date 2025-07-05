@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
 import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart';
@@ -104,7 +104,7 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
                   const SizedBox(width: 8),
                   Text('EGB',
                       style: AppStyles.textStyle24
-                          .copyWith(color: AppLightColor.mainColor)),
+                          .copyWith(color: context.theme.mainColor)),
                 ],
               ),
             ],
@@ -124,12 +124,12 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
                   width: 162,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: AppLightColor.mainColor,
+                    color: context.theme.mainColor,
                   ),
                   child: Center(
                     child: Text('Add To Cart',
                         style: AppStyles.textStyle16
-                            .copyWith(color: AppLightColor.whiteColor)),
+                            .copyWith(color: context.theme.whiteColor)),
                   ),
                 ),
               );

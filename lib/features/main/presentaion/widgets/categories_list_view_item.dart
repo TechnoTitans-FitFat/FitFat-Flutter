@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class CategoriesListViewItem extends StatelessWidget {
     return Card(
       elevation: 3,
       shadowColor: Colors.black,
-      color: AppLightColor.whiteColor,
+      color: context.theme.whiteColor,
       child: Padding(
         padding: const EdgeInsets.all(14),
         child: Row(
@@ -66,7 +66,7 @@ class CategoriesListViewItem extends StatelessWidget {
                   Text(
                     title,
                     style: AppStyles.textStyle16.copyWith(
-                      color: AppLightColor.blackColor,
+                      color: context.theme.blackColor,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -81,13 +81,13 @@ class CategoriesListViewItem extends StatelessWidget {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: AppLightColor.mainColor.withOpacity(0.15),
+                              color: context.theme.mainColor.withOpacity(0.15),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Text(
                               type ?? '',
                               style: AppStyles.textStyle12.copyWith(
-                                color: AppLightColor.mainColor,
+                                color: context.theme.mainColor,
                               ),
                             ),
                           ),
@@ -99,13 +99,13 @@ class CategoriesListViewItem extends StatelessWidget {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: AppLightColor.mainColor.withOpacity(0.15),
+                          color: context.theme.mainColor.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(
                           '$calories cal',
                           style: AppStyles.textStyle12.copyWith(
-                            color: AppLightColor.mainColor,
+                            color: context.theme.mainColor,
                           ),
                         ),
                       ),
@@ -123,7 +123,7 @@ class CategoriesListViewItem extends StatelessWidget {
                       Text(
                         rating.toStringAsFixed(1),
                         style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.blackColor,
+                          color: context.theme.blackColor,
                           fontSize: 14,
                         ),
                       ),
@@ -138,14 +138,14 @@ class CategoriesListViewItem extends StatelessWidget {
                           Text(
                             price.toString(),
                             style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.mainColor,
+                              color: context.theme.mainColor,
                             ),
                           ),
                           const SizedBox(width: 5),
                           Text(
                             'EGP',
                             style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.blackColor,
+                              color: context.theme.blackColor,
                             ),
                           ),
                         ],

@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/main/data/models/main_screen_model.dart';
 import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
@@ -67,8 +67,8 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
                   onPressed: () {
                     suggestionsCubit.prevPage();
                   },
-                  child: const Text("Previous",
-                      style: TextStyle(color: AppLightColor.mainColor)),
+                  child: Text("Previous",
+                      style: TextStyle(color: context.theme.mainColor)),
                 ),
               ElevatedButton(
                 onPressed: () {
@@ -81,8 +81,8 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
                     });
                   }
                 },
-                child: const Text("Next",
-                    style: TextStyle(color: AppLightColor.mainColor)),
+                child: Text("Next",
+                    style: TextStyle(color: context.theme.mainColor)),
               ),
             ],
           ),

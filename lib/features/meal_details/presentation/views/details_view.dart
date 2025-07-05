@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_state.dart';
@@ -26,7 +26,7 @@ class DetailsView extends StatelessWidget {
       BlocProvider.of<UserProfileCubit>(context).getUserProfile(token: token);
     }
     return Scaffold(
-      backgroundColor: AppLightColor.backgroundColor,
+      backgroundColor: context.theme.backgroundColor,
       body: BlocBuilder<MealDetailsCubit, MealDetailsState>(
         builder: (context, mealState) {
           if (mealState is MealDetailsLoading) {

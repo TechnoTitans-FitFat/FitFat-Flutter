@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/widgets/custom_app_bar.dart';
 import 'package:fitfat/features/cart/data/models/cart_model.dart';
 import 'package:fitfat/features/cart/presentation/widgets/cart_bottom_bar.dart';
@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
-  
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -15,29 +14,28 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   final List<CartModel> cartItems = [
-  CartModel(
-      title: "Beef Bourguignon",
-      price: 60,
-      calories: 400,
-      rating: 3.3,
-      image: 'assets/images/photo.png',
-      count: 1),
-  CartModel(
-      title: "Grilled Chicken",
-      price: 90,
-      calories: 350,
-      rating: 4.2,
-      image: 'assets/images/photo.png'),
-];
+    CartModel(
+        title: "Beef Bourguignon",
+        price: 60,
+        calories: 400,
+        rating: 3.3,
+        image: 'assets/images/photo.png',
+        count: 1),
+    CartModel(
+        title: "Grilled Chicken",
+        price: 90,
+        calories: 350,
+        rating: 4.2,
+        image: 'assets/images/photo.png'),
+  ];
   bool isChecked = false;
   int selectedCardIndex = 0;
   String selectedPaymentMethod = 'cash';
- 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppLightColor.backgroundColor,
+      backgroundColor: context.theme.backgroundColor,
       appBar: const CustomAppBar(title: 'Payment Methods'),
       body: SafeArea(
         child: Column(
@@ -55,7 +53,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     width: 1.0, // Border width
                   ),
                   borderRadius: BorderRadius.circular(12),
-                  color: AppLightColor.backgroundColor,
+                  color: context.theme.backgroundColor,
                 ),
                 child: Row(
                   children: [
@@ -71,8 +69,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                     const Spacer(),
                     Checkbox(
-                      checkColor: AppLightColor.mainColor,
-                      activeColor: AppLightColor.backgroundColor,
+                      checkColor: context.theme.mainColor,
+                      activeColor: context.theme.backgroundColor,
                       value: selectedPaymentMethod == 'cash',
                       onChanged: (_) {
                         setState(() {
@@ -92,7 +90,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(12),
-                color: AppLightColor.backgroundColor,
+                color: context.theme.backgroundColor,
               ),
               child: ExpansionTile(
                 title: Row(
@@ -118,7 +116,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           width: 1.0, // Border width
                         ),
                         borderRadius: BorderRadius.circular(12),
-                        color: AppLightColor.backgroundColor,
+                        color: context.theme.backgroundColor,
                       ),
                       child: Row(
                         children: [
@@ -140,7 +138,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           ),
                           const Spacer(),
                           Radio<int>(
-                            activeColor: AppLightColor.mainColor,
+                            activeColor: context.theme.mainColor,
                             value: 0,
                             groupValue: selectedCardIndex,
                             onChanged: (int? value) {
@@ -164,7 +162,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         width: 1.0, // Border width
                       ),
                       borderRadius: BorderRadius.circular(12),
-                      color: AppLightColor.backgroundColor,
+                      color: context.theme.backgroundColor,
                     ),
                     child: Row(
                       children: [
@@ -187,15 +185,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         const Spacer(),
                         Radio<int>(
                           value: 1,
-                          activeColor: AppLightColor.mainColor,
+                          activeColor: context.theme.mainColor,
                           groupValue: selectedCardIndex,
-                        onChanged: (int? value) {
-  setState(() {
-    selectedCardIndex = value!;
-    selectedPaymentMethod = 'card';
-  });
-},
-
+                          onChanged: (int? value) {
+                            setState(() {
+                              selectedCardIndex = value!;
+                              selectedPaymentMethod = 'card';
+                            });
+                          },
                         ),
                       ],
                     ),
@@ -225,7 +222,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         Text(
                           'Add Card',
                           style: GoogleFonts.openSans(
-                              color: AppLightColor.mainColor,
+                              color: context.theme.mainColor,
                               fontSize: 15,
                               fontWeight: FontWeight.w600),
                         )
@@ -250,7 +247,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   width: 1.0, // Border width
                 ),
                 borderRadius: BorderRadius.circular(12),
-                color: AppLightColor.backgroundColor,
+                color: context.theme.backgroundColor,
               ),
               child: Row(
                 children: [
@@ -266,8 +263,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                   const Spacer(),
                   Checkbox(
-                    checkColor: AppLightColor.mainColor,
-                    activeColor: AppLightColor.backgroundColor,
+                    checkColor: context.theme.mainColor,
+                    activeColor: context.theme.backgroundColor,
                     value: selectedPaymentMethod == 'e-wallet',
                     onChanged: (_) {
                       setState(() {
@@ -281,9 +278,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ],
         ),
       ),
-
-        bottomNavigationBar:const CartBottomBar(cartItems: [],),
-
+      bottomNavigationBar: const CartBottomBar(
+        cartItems: [],
+      ),
     );
   }
 }

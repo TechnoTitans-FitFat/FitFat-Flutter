@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/cubit/delete_cart_cubit.dart';
 import 'package:fitfat/features/cart/cubit/get_cart_cubit.dart';
@@ -41,7 +41,7 @@ class _CartListItemState extends State<CartListItem> {
           clipBehavior: Clip.none,
           elevation: 3,
           shadowColor: Colors.black,
-          color: AppLightColor.whiteColor,
+          color: context.theme.whiteColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
@@ -66,7 +66,7 @@ class _CartListItemState extends State<CartListItem> {
                       Text(
                         widget.item.name,
                         style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.blackColor,
+                          color: context.theme.blackColor,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -76,13 +76,13 @@ class _CartListItemState extends State<CartListItem> {
                           vertical: 5,
                         ),
                         decoration: BoxDecoration(
-                          color: AppLightColor.mainColor.withOpacity(0.15),
+                          color: context.theme.mainColor.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(
                           '${widget.item.calories} cal',
                           style: AppStyles.textStyle12.copyWith(
-                            color: AppLightColor.mainColor,
+                            color: context.theme.mainColor,
                           ),
                         ),
                       ),
@@ -112,14 +112,14 @@ class _CartListItemState extends State<CartListItem> {
                           Text(
                             '${widget.item.totalPrice}',
                             style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.mainColor,
+                              color: context.theme.mainColor,
                             ),
                           ),
                           const SizedBox(width: 5),
                           Text(
                             'EGP',
                             style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.blackColor,
+                              color: context.theme.blackColor,
                             ),
                           ),
                         ],
@@ -199,10 +199,10 @@ class _CartListItemState extends State<CartListItem> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppLightColor.blackColor.withOpacity(.25),
+                    color: context.theme.blackColor.withOpacity(.25),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(Icons.close, color: AppLightColor.whiteColor),
+                  child: Icon(Icons.close, color: context.theme.whiteColor),
                 ),
               );
             })),

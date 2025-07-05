@@ -1,10 +1,11 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class IntgredientMeal extends StatelessWidget {
   const IntgredientMeal({
-    super.key, required this.ingredients,
+    super.key,
+    required this.ingredients,
   });
   final List<String> ingredients;
 
@@ -16,9 +17,9 @@ class IntgredientMeal extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.circle,
-                color: AppLightColor.blackColor,
+                color: context.theme.blackColor,
                 size: 8,
               ),
               const SizedBox(width: 10),
@@ -30,9 +31,9 @@ class IntgredientMeal extends StatelessWidget {
           ),
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.circle,
-                color: AppLightColor.blackColor,
+                color: context.theme.blackColor,
                 size: 8,
               ),
               const SizedBox(width: 10),
@@ -44,9 +45,9 @@ class IntgredientMeal extends StatelessWidget {
           ),
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.circle,
-                color: AppLightColor.blackColor,
+                color: context.theme.blackColor,
                 size: 8,
               ),
               const SizedBox(width: 10),
@@ -58,9 +59,9 @@ class IntgredientMeal extends StatelessWidget {
           ),
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.circle,
-                color: AppLightColor.blackColor,
+                color: context.theme.blackColor,
                 size: 8,
               ),
               const SizedBox(width: 10),
@@ -72,9 +73,9 @@ class IntgredientMeal extends StatelessWidget {
           ),
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.circle,
-                color: AppLightColor.blackColor,
+                color: context.theme.blackColor,
                 size: 8,
               ),
               const SizedBox(width: 10),
@@ -86,9 +87,9 @@ class IntgredientMeal extends StatelessWidget {
           ),
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.circle,
-                color: AppLightColor.blackColor,
+                color: context.theme.blackColor,
                 size: 8,
               ),
               const SizedBox(width: 10),

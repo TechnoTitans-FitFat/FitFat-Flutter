@@ -1,5 +1,5 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 
 class PasswordInputField extends StatelessWidget {
@@ -28,7 +28,7 @@ class PasswordInputField extends StatelessWidget {
         Text(
           label,
           style: AppStyles.textStyle15.copyWith(
-            color: AppLightColor.greyColor1,
+            color: context.theme.greyColor1,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -44,18 +44,18 @@ class PasswordInputField extends StatelessWidget {
                   )
                 : null,
             hintStyle: AppStyles.textStyle12Light.copyWith(
-              color: AppLightColor.greyColor,
+              color: context.theme.greyColor,
             ),
-            focusColor: AppLightColor.mainColor,
+            focusColor: context.theme.mainColor,
             hintText: "Enter your password",
-            focusedBorder: const UnderlineInputBorder(
+            focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
-                color: AppLightColor.mainColor,
+                color: context.theme.mainColor,
               ),
             ),
-            border: const UnderlineInputBorder(
+            border: UnderlineInputBorder(
               borderSide: BorderSide(
-                color: AppLightColor.mainColor,
+                color: context.theme.mainColor,
               ),
             ),
           ),

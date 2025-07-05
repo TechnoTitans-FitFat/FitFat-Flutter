@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_state.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_button.dart';
@@ -48,7 +48,7 @@ class LoginViewBody extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            color: AppLightColor.whiteColor,
+            color: context.theme.whiteColor,
           ),
           child: Form(
             key: context.read<LoginCubit>().signInFormKey,
@@ -82,14 +82,14 @@ class LoginViewBody extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(right: 55),
+                        padding: const EdgeInsets.only(right: 55),
                         child: Text(
                           'Forgot password',
-                          style: TextStyle(color: AppLightColor.greyColor),
+                          style: TextStyle(color: context.theme.greyColor),
                         ),
                       ),
                     ],
@@ -119,24 +119,24 @@ class LoginViewBody extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 16),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
                         width: 80,
                         child:
-                            Divider(color: AppLightColor.greyColor, height: 8),
+                            Divider(color: context.theme.greyColor, height: 8),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text('Or signUp with'),
                       ),
                       SizedBox(
                         width: 80,
                         child:
-                            Divider(color: AppLightColor.greyColor, height: 8),
+                            Divider(color: context.theme.greyColor, height: 8),
                       ),
                     ],
                   ),
@@ -150,7 +150,7 @@ class LoginViewBody extends StatelessWidget {
                       icon: SizedBox(
                         width: 25,
                         child: CircleAvatar(
-                          backgroundColor: AppLightColor.whiteColor,
+                          backgroundColor: context.theme.whiteColor,
                           child: Assets.icons.google.image(),
                         ),
                       ),

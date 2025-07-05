@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/allergy_state.dart';
 import 'package:fitfat/features/main/presentaion/allergy_category/data/allergy_cubit/allregy_cubit.dart';
@@ -45,7 +45,7 @@ class _AllergyViewBodyState extends State<AllergyViewBody> {
             child: Text(
               'Categories',
               style: AppStyles.textStyle24
-                  .copyWith(color: AppLightColor.mainColor),
+                  .copyWith(color: context.theme.mainColor),
             ),
           ),
           Padding(
@@ -109,24 +109,24 @@ class _AllergyViewBodyState extends State<AllergyViewBody> {
             child: Text(
               'Discover',
               style: AppStyles.textStyle24
-                  .copyWith(color: AppLightColor.mainColor),
+                  .copyWith(color: context.theme.mainColor),
             ),
           ),
           const SizedBox(height: 30),
-          const Padding(
-            padding: EdgeInsets.only(left: 25),
+          Padding(
+            padding: const EdgeInsets.only(left: 25),
             child: Row(
               children: [
                 CustomElvatedButton(
                   text: 'All',
-                  butttonColor: AppLightColor.mainColor,
-                  textColor: AppLightColor.whiteColor,
+                  butttonColor: context.theme.mainColor,
+                  textColor: context.theme.whiteColor,
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 CustomElvatedButton(
                   text: 'Popular',
-                  butttonColor: AppLightColor.whiteColor,
-                  textColor: AppLightColor.mainColor,
+                  butttonColor: context.theme.whiteColor,
+                  textColor: context.theme.mainColor,
                 ),
               ],
             ),

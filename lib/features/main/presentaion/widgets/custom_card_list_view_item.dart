@@ -1,4 +1,4 @@
-import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +8,11 @@ class CustomCardListViewItem extends StatelessWidget {
   final String imagePath;
   final String? type;
   final String calories;
-  final double rating; 
+  final double rating;
   final int price;
   final bool showType;
   final bool isFavourite;
-   final VoidCallback onFavouriteTap;
+  final VoidCallback onFavouriteTap;
   const CustomCardListViewItem({
     super.key,
     required this.title,
@@ -31,7 +31,7 @@ class CustomCardListViewItem extends StatelessWidget {
     return Card(
       elevation: 3,
       shadowColor: Colors.black,
-      color: AppLightColor.whiteColor,
+      color: context.theme.whiteColor,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
@@ -42,7 +42,7 @@ class CustomCardListViewItem extends StatelessWidget {
               height: 150,
               decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius:  BorderRadius.all(Radius.circular(15))),
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
               child: Image.network(imagePath, fit: BoxFit.cover),
             ),
             const SizedBox(width: 20),
@@ -53,7 +53,7 @@ class CustomCardListViewItem extends StatelessWidget {
                   Text(
                     title,
                     style: AppStyles.textStyle16.copyWith(
-                      color: AppLightColor.blackColor,
+                      color: context.theme.blackColor,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -66,30 +66,30 @@ class CustomCardListViewItem extends StatelessWidget {
                             vertical: 5,
                           ),
                           decoration: BoxDecoration(
-                            color: AppLightColor.mainColor.withOpacity(0.15),
+                            color: context.theme.mainColor.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
                             type ?? '',
                             style: AppStyles.textStyle12.copyWith(
-                              color: AppLightColor.mainColor,
+                              color: context.theme.mainColor,
                             ),
                           ),
                         ),
                       const SizedBox(width: 10),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal:15,
+                          horizontal: 15,
                           vertical: 5,
                         ),
                         decoration: BoxDecoration(
-                          color: AppLightColor.mainColor.withOpacity(0.15),
+                          color: context.theme.mainColor.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(
                           '$calories cal',
                           style: AppStyles.textStyle12.copyWith(
-                            color: AppLightColor.mainColor,
+                            color: context.theme.mainColor,
                           ),
                         ),
                       ),
@@ -105,9 +105,9 @@ class CustomCardListViewItem extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                         rating.toStringAsFixed(1),
+                        rating.toStringAsFixed(1),
                         style: AppStyles.textStyle16.copyWith(
-                          color: AppLightColor.blackColor,
+                          color: context.theme.blackColor,
                           fontSize: 14,
                         ),
                       ),
@@ -122,14 +122,14 @@ class CustomCardListViewItem extends StatelessWidget {
                           Text(
                             price.toString(),
                             style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.mainColor,
+                              color: context.theme.mainColor,
                             ),
                           ),
                           const SizedBox(width: 5),
                           Text(
                             'EGP',
                             style: AppStyles.textStyle16.copyWith(
-                              color: AppLightColor.blackColor,
+                              color: context.theme.blackColor,
                             ),
                           ),
                         ],
@@ -142,13 +142,11 @@ class CustomCardListViewItem extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                           ),
-
-                          child: Image.asset( 
-                              isFavourite ? Assets.icons.liked.path  :  Assets.icons.add.path
-                              ),
-
+                          child: Image.asset(isFavourite
+                              ? Assets.icons.liked.path
+                              : Assets.icons.add.path),
                         ),
-                        ),
+                      ),
                     ],
                   ),
                 ],
