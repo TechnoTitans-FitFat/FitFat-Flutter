@@ -23,7 +23,10 @@ class ListviewSandwich extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemCount: meals.length,
             itemBuilder: (context, index) {
-              return ListViewItemSandwich(meal: meals[index]);
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: ListViewItemSandwich(meal: meals[index]),
+              );
             },
           );
         } else {

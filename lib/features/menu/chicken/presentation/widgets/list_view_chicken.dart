@@ -24,7 +24,10 @@ class ListViewChicken extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemCount: meals.length,
             itemBuilder: (context, index) {
-              return ListViewItemChicken(meal: meals[index]);
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: ListViewItemChicken(meal: meals[index]),
+              );
             },
           );
         } else {
