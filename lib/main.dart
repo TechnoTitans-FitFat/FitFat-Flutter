@@ -37,6 +37,7 @@ import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/l
 import 'package:fitfat/features/main/presentaion/diet_category/data/diet_cubit/vegan_cubit.dart';
 import 'package:fitfat/features/meal_details/data/card_cubit/decrement_cubit.dart';
 import 'package:fitfat/features/meal_details/data/meal_details_cubit/meal_details_cubit.dart';
+import 'package:fitfat/features/menu/chicken/data/chicken_cubit/chicken_cubit.dart';
 import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:fitfat/features/offers/data/offer_cubit/offer_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
@@ -174,6 +175,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 OfferCubit(DioComsumer(dio: Dio()))..fetchOffersData()),
+         BlocProvider(
+            create: (context) =>
+                ChickenCubit(DioComsumer(dio: Dio()))..fetchChickenRecipes()),        
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {

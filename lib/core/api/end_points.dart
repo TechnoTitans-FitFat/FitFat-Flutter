@@ -48,6 +48,10 @@ class EndPoint {
       'https://fitfattt.azurewebsites.net/api/recipes/search';
   static const String offer =
       'https://fitfattt.azurewebsites.net/api/recipes/offer';
+  static const String chicken = 'https://fitfattt.azurewebsites.net/api/recipes/search?page=1&limit=10&type=Meat';
+  static const String sandwich = 'https://fitfattt.azurewebsites.net/api/recipes/search?page=1&limit=10&type=Sandwich';
+  static const String soup = 'https://fitfattt.azurewebsites.net/api/recipes/search?page=1&limit=10&type=Soup';
+
 }
 
 class ApiKey {
