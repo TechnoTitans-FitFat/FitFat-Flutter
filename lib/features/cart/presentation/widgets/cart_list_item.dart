@@ -1,4 +1,5 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/cubit/delete_cart_cubit.dart';
 import 'package:fitfat/features/cart/cubit/get_cart_cubit.dart';
@@ -134,7 +135,12 @@ class _CartListItemState extends State<CartListItem> {
                                       listener: (context, state) {
                                 if (state is DecrementSuccess) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(state.message)),
+                                    customSnackBar(
+                                      context,
+                                      "Success",
+                                      "Decrement Success : ${state.message}",
+                                      SnackBarType.success,
+                                    ),
                                   );
                                 }
                               }, builder: (context, state) {
@@ -186,7 +192,12 @@ class _CartListItemState extends State<CartListItem> {
                 listener: (context, state) {
               if (state is DeleteSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text((state).message)),
+                  customSnackBar(
+                    context,
+                    "Success",
+                    "Delete from cart Success : ${state.message}",
+                    SnackBarType.success,
+                  ),
                 );
                 context.read<GetCartCubit>().getCart(context: context);
               }

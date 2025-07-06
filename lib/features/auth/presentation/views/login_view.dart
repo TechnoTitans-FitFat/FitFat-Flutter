@@ -22,7 +22,14 @@ class Login extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginStates>(
       listener: (BuildContext context, state) {
         if (state is LoginSuccess) {
-          showSnackBar(context, 'Great to see you again');
+          ScaffoldMessenger.of(context).showSnackBar(
+            customSnackBar(
+              context,
+              "Success",
+              "Great to see you again",
+              SnackBarType.success,
+            ),
+          );
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -30,7 +37,14 @@ class Login extends StatelessWidget {
             ),
           );
         } else if (state is LoginFailure) {
-          showSnackBar(context, state.errorMessage);
+          ScaffoldMessenger.of(context).showSnackBar(
+            customSnackBar(
+              context,
+              "Error",
+              "Unexpected error occurred!",
+              SnackBarType.error,
+            ),
+          );
         }
       },
       builder: (context, state) {

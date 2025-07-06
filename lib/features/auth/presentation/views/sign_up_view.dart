@@ -1,4 +1,5 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/sign_up_view_body.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,12 @@ class SignUp extends StatelessWidget {
           );
         } else if (state is SignUpFalier) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.errorMassage.toString())),
+            customSnackBar(
+              context,
+              "Error",
+              "Unexpected error occurred!",
+              SnackBarType.error,
+            ),
           );
         }
       },

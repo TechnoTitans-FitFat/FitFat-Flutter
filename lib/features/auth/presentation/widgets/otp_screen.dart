@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/enter_otpsent_to_text.dart';
@@ -42,7 +43,12 @@ class _OtpScreenState extends State<OtpScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (email.isEmpty || userId.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Invalid arguments received.")),
+          customSnackBar(
+            context,
+            "Error",
+            "Invalid arguments received.",
+            SnackBarType.error,
+          ),
         );
         Get.back();
         return;
@@ -89,12 +95,12 @@ class _OtpScreenState extends State<OtpScreen> {
     if (currentText.length != 6) {
       // Trigger shake animation on PinCodeTextField
       errorController?.add(ErrorAnimationType.shake);
-
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please enter a 6-digit OTP"),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
+        customSnackBar(
+          context,
+          "Warning",
+          "Please enter a 6-digit OTP",
+          SnackBarType.warning,
         ),
       );
       return;
@@ -113,9 +119,11 @@ class _OtpScreenState extends State<OtpScreen> {
 
           if (state is VerifyEmailSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Email Verified Successfully!"),
-                backgroundColor: Colors.green,
+              customSnackBar(
+                context,
+                "Success",
+                "Email Verified Successfully!",
+                SnackBarType.success,
               ),
             );
             Navigator.pop(context);
@@ -126,25 +134,31 @@ class _OtpScreenState extends State<OtpScreen> {
                         PersonalInformationView(userId: userId)));
           } else if (state is VerifyEmailFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-                backgroundColor: Colors.red,
+              customSnackBar(
+                context,
+                "Error",
+                "Verify Faild : ${state.errorMessage}",
+                SnackBarType.error,
               ),
             );
           } else if (state is ResendOtpSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.successMessage),
-                backgroundColor: Colors.green,
+              customSnackBar(
+                context,
+                "Success",
+                "Verify Success : ${state.successMessage}",
+                SnackBarType.success,
               ),
             );
             // Restart the resend timer
             startResendTimer();
           } else if (state is ResendOtpFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-                backgroundColor: Colors.red,
+              customSnackBar(
+                context,
+                "Error",
+                "Resend OTP Faild : ${state.errorMessage}",
+                SnackBarType.error,
               ),
             );
           }

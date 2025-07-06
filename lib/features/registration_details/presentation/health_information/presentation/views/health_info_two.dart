@@ -26,7 +26,7 @@ class HealthInfoTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.mainColor,
+      backgroundColor: context.theme.secondColor,
       body: HealthInfoTwoBody(
         dateOfBirth: dateOfBirth,
         diabetes: diabetes,

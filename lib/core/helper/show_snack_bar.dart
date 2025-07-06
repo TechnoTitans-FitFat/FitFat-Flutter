@@ -1,81 +1,95 @@
-import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 
-void showSnackBar(BuildContext context, massage) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(massage)));
-}
+enum SnackBarType { success, error, warning }
 
-void ShowDialog(BuildContext context, massage) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Dialog(
-          backgroundColor: Colors.transparent,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: Stack(
-            alignment: Alignment.center,
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: context.theme.whiteColor,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Success',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 32,
-                              color: context.theme.green),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          massage,
-                          style: TextStyle(color: context.theme.greyColor),
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.visible,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                top: -30,
-                child: CircleAvatar(
-                  backgroundColor: context.theme.green,
-                  maxRadius: 32,
-                  child: Card(
-                    color: context.theme.green,
-                    elevation: 16,
-                    shadowColor: context.theme.green,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32)),
-                    child: Icon(
-                      Icons.check,
-                      color: context.theme.whiteColor,
-                      size: 64,
-                    ),
-                  ),
-                ),
+SnackBar customSnackBar(
+  BuildContext context,
+  String title,
+  String subtitle,
+  SnackBarType type,
+) {
+  IconData icon;
+  Color snackBarBackgroundColor;
+
+  switch (type) {
+    case SnackBarType.success:
+      icon = Icons.check_circle;
+      snackBarBackgroundColor = const Color.fromARGB(255, 201, 253, 216);
+      break;
+    case SnackBarType.error:
+      icon = Icons.error;
+      snackBarBackgroundColor = const Color.fromARGB(255, 255, 195, 195);
+      break;
+    case SnackBarType.warning:
+      icon = Icons.warning;
+      snackBarBackgroundColor = const Color.fromARGB(255, 253, 239, 199);
+      break;
+  }
+
+  return SnackBar(
+    elevation: 1,
+    behavior: SnackBarBehavior.floating,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
+    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+    content: Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(50),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 3,
+                offset: const Offset(0, 2),
               ),
             ],
-          ));
-    },
+          ),
+          child: Icon(
+            icon,
+            color: type == SnackBarType.success
+                ? const Color.fromARGB(255, 141, 221, 145)
+                : type == SnackBarType.error
+                    ? const Color.fromARGB(255, 241, 165, 165)
+                    : const Color.fromARGB(255, 243, 188, 139),
+            size: 20,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.black87,
+                        ) ??
+                    const TextStyle(color: Colors.black87, fontSize: 16),
+              ),
+              Text(
+                subtitle,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.black54,
+                        ) ??
+                    const TextStyle(color: Colors.black54, fontSize: 13),
+              ),
+            ],
+          ),
+        ),
+        IconButton(
+          icon: const Icon(Icons.close, size: 20),
+          color: Colors.black54,
+          onPressed: () {},
+        ),
+      ],
+    ),
+    backgroundColor: snackBarBackgroundColor,
+    duration: const Duration(seconds: 4),
   );
 }

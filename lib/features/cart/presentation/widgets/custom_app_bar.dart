@@ -1,4 +1,5 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/cubit/clear_cart_cubit.dart';
 import 'package:fitfat/features/cart/cubit/get_cart_cubit.dart';
@@ -48,12 +49,22 @@ class CustomAppBarCart extends StatelessWidget implements PreferredSizeWidget {
         BlocConsumer<ClearCartCubit, ClearState>(listener: (context, state) {
           if (state is ClearSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text((state).message)),
+              customSnackBar(
+                context,
+                "Success",
+                "Clear Cart Success : ${state.message}",
+                SnackBarType.success,
+              ),
             );
             context.read<GetCartCubit>().getCart(context: context);
           } else if (state is ClearFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text((state).error)),
+              customSnackBar(
+                context,
+                "Error",
+                "Clear Cart Faild : ${state.error}",
+                SnackBarType.error,
+              ),
             );
           }
         }, builder: (context, state) {

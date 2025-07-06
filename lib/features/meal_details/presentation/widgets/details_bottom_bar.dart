@@ -1,4 +1,5 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
 import 'package:fitfat/features/meal_details/data/models/meal_details_model.dart';
@@ -112,8 +113,14 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
           BlocConsumer<CartCubit, CartState>(
             listener: (context, state) {
               if (state is CartSuccess) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(state.message)));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  customSnackBar(
+                    context,
+                    "Success",
+                    "Cart Success : ${state.message}",
+                    SnackBarType.success,
+                  ),
+                );
               }
             },
             builder: (context, state) {

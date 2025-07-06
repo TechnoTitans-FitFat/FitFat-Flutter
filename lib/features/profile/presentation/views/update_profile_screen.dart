@@ -381,7 +381,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.dispose();
   }
 }
-
 // Reusable Stateless Widgets
 
 class GeneralInfoSection extends StatelessWidget {

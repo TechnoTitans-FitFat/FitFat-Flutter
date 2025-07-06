@@ -1,4 +1,5 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,7 +19,7 @@ class CustomListTileButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppLightColor.whiteColor,
+        color: context.theme.whiteColor,
         borderRadius: BorderRadius.circular(12),
       ),
       child: ElevatedButton(
@@ -33,7 +34,7 @@ class CustomListTileButton extends StatelessWidget {
             Colors.transparent,
           ),
           overlayColor: WidgetStateProperty.all(
-            AppLightColor.mainColor.withOpacity(
+            context.theme.mainColor.withOpacity(
               0.2,
             ),
           ),
@@ -49,18 +50,18 @@ class CustomListTileButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15),
           child: Row(
-            // spacing: 10,
+            spacing: 10,
             children: [
               Icon(
                 icon,
-                color: AppLightColor.greyColor,
+                color: context.theme.greyColor,
               ),
               Text(
                 title,
                 style: GoogleFonts.roboto(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: AppLightColor.blackColor,
+                  color: context.theme.blackColor,
                 ),
               ),
             ],

@@ -1,5 +1,6 @@
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,12 +33,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       listener: (context, state) {
         if (state.status == ForgotPasswordStatus.resetSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Password reset successfully'),
-              backgroundColor: Colors.green,
+            customSnackBar(
+              context,
+              "Success",
+              'Password reset successfully',
+              SnackBarType.success,
             ),
           );
-          // Navigate to login screen
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -47,10 +49,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         } else if (state.status == ForgotPasswordStatus.error) {
           // Add this condition to handle error status
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                  'password mast have Capital letters "A-Z" and Small letter "a-z" and Special Character'),
-              backgroundColor: Colors.red,
+            customSnackBar(
+              context,
+              "Warning",
+              'password mast have Capital letters "A-Z" and Small letter "a-z" and Special Character',
+              SnackBarType.warning,
             ),
           );
         }
