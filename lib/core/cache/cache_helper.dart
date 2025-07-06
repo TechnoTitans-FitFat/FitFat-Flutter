@@ -1,66 +1,84 @@
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
-  static late SharedPreferences sharedPreferences;
+  static SharedPreferences? _sharedPreferences;
 
-  // Remove the recursive property definition
-  // String? token = CacheHelper().getData(key: "token"); <- THIS CAUSED THE STACK OVERFLOW
-
-  // Initialize cache
+  // Initialize SharedPreferences
   static Future<void> init() async {
-    sharedPreferences = await SharedPreferences.getInstance();
+    _sharedPreferences = await SharedPreferences.getInstance();
+    debugPrint("CacheHelper initialized");
   }
 
-  String? getDataString({required String key}) {
-    return sharedPreferences.getString(key);
+  // Ensure SharedPreferences is initialized
+  static Future<SharedPreferences> _getPrefs() async {
+    if (_sharedPreferences == null) {
+      await init();
+    }
+    return _sharedPreferences!;
   }
 
-  static String? getToken() {
-    return sharedPreferences.getString("token");
+  // Get string data
+  static Future<String?> getDataString({required String key}) async {
+    final prefs = await _getPrefs();
+    final value = prefs.getString(key);
+    debugPrint("CacheHelper getDataString: key=$key, value=$value");
+    return value;
   }
 
-  Future<bool> saveData({required String key, required dynamic value}) async {
+  // Get token specifically
+  static Future<String?> getToken() async {
+    final prefs = await _getPrefs();
+    final token = prefs.getString("token");
+    debugPrint("CacheHelper getToken: token=$token");
+    return token;
+  }
+
+  // Save data with type checking
+  static Future<bool> saveData(
+      {required String key, required dynamic value}) async {
+    final prefs = await _getPrefs();
+    debugPrint("CacheHelper saveData: key=$key, value=$value");
     if (value is bool) {
-      return await sharedPreferences.setBool(key, value);
-    }
-
-    if (value is String) {
-      return await sharedPreferences.setString(key, value);
-    }
-
-    if (value is int) {
-      return await sharedPreferences.setInt(key, value);
+      return await prefs.setBool(key, value);
+    } else if (value is String) {
+      return await prefs.setString(key, value);
+    } else if (value is int) {
+      return await prefs.setInt(key, value);
+    } else if (value is double) {
+      return await prefs.setDouble(key, value);
     } else {
-      return await sharedPreferences.setDouble(key, value);
+      throw Exception("Unsupported data type for SharedPreferences");
     }
   }
 
-  dynamic getData({required String key}) {
-    return sharedPreferences.get(key);
+  // Get generic data
+  static Future<dynamic> getData({required String key}) async {
+    final prefs = await _getPrefs();
+    final value = prefs.get(key);
+    debugPrint("CacheHelper getData: key=$key, value=$value");
+    return value;
   }
 
-  Future<bool> removeData({required String key}) async {
-    return await sharedPreferences.remove(key);
+  // Remove specific key
+  static Future<bool> removeData({required String key}) async {
+    final prefs = await _getPrefs();
+    debugPrint("CacheHelper removeData: key=$key");
+    return await prefs.remove(key);
   }
 
-  Future<bool> containsKey({required String key}) async {
-    return sharedPreferences.containsKey(key);
+  // Check if key exists
+  static Future<bool> containsKey({required String key}) async {
+    final prefs = await _getPrefs();
+    final exists = prefs.containsKey(key);
+    debugPrint("CacheHelper containsKey: key=$key, exists=$exists");
+    return exists;
   }
 
-  Future<bool> clearData({required String key}) async {
-    return sharedPreferences.clear();
-  }
-
-  Future<dynamic> put({
-    required String key,
-    required dynamic value,
-  }) async {
-    if (value is String) {
-      return await sharedPreferences.setString(key, value);
-    } else if (value is bool) {
-      return await sharedPreferences.setBool(key, value);
-    } else {
-      return await sharedPreferences.setInt(key, value);
-    }
+  // Clear all data
+  static Future<bool> clearData() async {
+    final prefs = await _getPrefs();
+    debugPrint("CacheHelper clearData");
+    return await prefs.clear();
   }
 }

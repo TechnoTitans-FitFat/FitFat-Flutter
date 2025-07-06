@@ -1,3 +1,5 @@
+import 'package:fitfat/core/helper/show_snack_bar.dart';
+import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_state.dart';
 import 'package:fitfat/features/registration_details/presentation/widgets/activity_radio_button.dart';
@@ -73,10 +75,11 @@ class _CalculatrBodyState extends State<CalculatrBody> {
 
   void _showSnackBar(String message, {bool isError = false}) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: isError ? Colors.red : Colors.green,
-        duration: const Duration(seconds: 3),
+      customSnackBar(
+        context,
+        isError ? "Error" : "Success",
+        message,
+        isError ? SnackBarType.error : SnackBarType.success,
       ),
     );
   }
@@ -97,7 +100,7 @@ class _CalculatrBodyState extends State<CalculatrBody> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const MainScreen(),
+              builder: (context) => LoginSignUp(context),
             ),
           );
         } else if (state is DietInfoFailure) {

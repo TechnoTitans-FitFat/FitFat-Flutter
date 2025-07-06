@@ -1,4 +1,6 @@
 import 'package:fitfat/core/constants/light_colors.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
+import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/registration_details/data/cubit/diet_info_cubit/diet_info_cubit.dart';
 import 'package:fitfat/features/registration_details/data/cubit/health_info_cubit/health_info_cubit.dart';
 import 'package:flutter/material.dart';
@@ -86,9 +88,11 @@ class SkipButton extends StatelessWidget {
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: ${e.toString()}'),
-          backgroundColor: Colors.red,
+        customSnackBar(
+          context,
+          "Error",
+          "Unexpected error occurred!",
+          SnackBarType.error,
         ),
       );
     }
@@ -110,16 +114,18 @@ class SkipButton extends StatelessWidget {
               isLoading = false;
               dietSuccess = true;
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Diet information saved successfully!'),
-                  backgroundColor: Colors.green,
+                customSnackBar(
+                  context,
+                  "Success",
+                  "Diet Info Added Successfully",
+                  SnackBarType.success,
                 ),
               );
               if (dietSuccess && healthSuccess) {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const MainScreen(),
+                    builder: (context) => LoginSignUp(isLoading),
                   ),
                 );
               }
@@ -127,9 +133,11 @@ class SkipButton extends StatelessWidget {
               isLoading = false;
               dietSuccess = false;
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Error: ${state.errMessage}'),
-                  backgroundColor: Colors.red,
+                customSnackBar(
+                  context,
+                  "Error",
+                  "Diet Info failed to save",
+                  SnackBarType.error,
                 ),
               );
             }
@@ -143,16 +151,18 @@ class SkipButton extends StatelessWidget {
               isLoading = false;
               healthSuccess = true;
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Health information saved successfully!'),
-                  backgroundColor: Colors.green,
+                customSnackBar(
+                  context,
+                  "Success",
+                  "Health information saved successfully!",
+                  SnackBarType.success,
                 ),
               );
               if (dietSuccess && healthSuccess) {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const MainScreen(),
+                    builder: (context) => LoginSignUp(isLoading),
                   ),
                 );
               }
@@ -160,9 +170,11 @@ class SkipButton extends StatelessWidget {
               isLoading = false;
               healthSuccess = false;
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Error: ${state.errMessage}'),
-                  backgroundColor: Colors.red,
+                customSnackBar(
+                  context,
+                  "Error",
+                  "Health info failed to save",
+                  SnackBarType.error,
                 ),
               );
             }

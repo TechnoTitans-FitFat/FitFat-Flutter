@@ -1,4 +1,5 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/main/data/models/main_screen_model.dart';
 import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:fitfat/features/menu/data/menu_cubit/menu_cubit.dart';
@@ -38,8 +39,6 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
         return BlocBuilder<MenuCubit, MenuState>(
           builder: (context, state) => _buildMenuGrid(context, state),
         );
-      default:
-        return const SizedBox();
     }
   }
 
@@ -122,7 +121,12 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
     return BlocConsumer<CartCubit, CartState>(listener: (context, state) {
       if (state is CartSuccess) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(state.message)),
+          customSnackBar(
+            context,
+            "Success",
+            "Cart Success : ${state.message}",
+            SnackBarType.success,
+          ),
         );
       }
     }, builder: (context, state) {

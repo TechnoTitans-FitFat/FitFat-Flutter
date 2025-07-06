@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordWidget extends StatelessWidget {
@@ -30,7 +31,7 @@ class ChangePasswordWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.theme.whiteColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -41,21 +42,21 @@ class ChangePasswordWidget extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  const Icon(Icons.lock, color: Colors.red),
+                  Icon(Icons.lock, color: context.theme.mainColor),
                   const SizedBox(width: 16),
-                  const Text(
+                  Text(
                     'Change Password',
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: context.theme.blackColor),
                   ),
                   const Spacer(),
                   Icon(
                     isExpanded
                         ? Icons.keyboard_arrow_up
                         : Icons.keyboard_arrow_down,
-                    color: Colors.grey,
+                    color: context.theme.greyColor1,
                   ),
                 ],
               ),

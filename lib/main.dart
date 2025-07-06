@@ -176,15 +176,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 OfferCubit(DioComsumer(dio: Dio()))..fetchOffersData()),
-         BlocProvider(
+        BlocProvider(
             create: (context) =>
-                ChickenCubit(DioComsumer(dio: Dio()))..fetchChickenRecipes()), 
-          BlocProvider(
+                ChickenCubit(DioComsumer(dio: Dio()))..fetchChickenRecipes()),
+        BlocProvider(
+            create: (context) => SandwichCubit(DioComsumer(dio: Dio()))
+              ..fetchSandwichsRecipes()),
+        BlocProvider(
             create: (context) =>
-                SandwichCubit(DioComsumer(dio: Dio()))..fetchSandwichsRecipes()), 
-          BlocProvider(
-            create: (context) =>
-                SoupCubit(DioComsumer(dio: Dio()))..fetchSoupRecipes()),                        
+                SoupCubit(DioComsumer(dio: Dio()))..fetchSoupRecipes()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {

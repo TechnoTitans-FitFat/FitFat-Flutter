@@ -3,6 +3,7 @@ import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:fitfat/gen/assets.gen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -21,29 +22,41 @@ class _SplashBodyState extends State<SplashBody>
   late Animation<Offset> slidingAnimation;
 
   double _opacity = 0.0;
+
   @override
   void initState() {
     super.initState();
 
+    debugPrint("SplashBody: initState started");
     initSlidingAnimation();
 
-    checkLoginStatus();
+    // Check login status after delay for splash animation
+    Future.microtask(() async {
+      debugPrint("SplashBody: Starting login status check");
+      await Future.delayed(const Duration(seconds: 2));
+      debugPrint("SplashBody: Delay completed, checking login status");
+      await checkLoginStatus();
+    });
+
+    // Fade in logo
     Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         _opacity = 1.0;
+        debugPrint("SplashBody: Logo opacity set to 1.0");
       });
     });
   }
 
   @override
   void dispose() {
-    super.dispose();
-
+    debugPrint("SplashBody: Disposing animationController");
     animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("SplashBody: Building UI");
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +71,6 @@ class _SplashBodyState extends State<SplashBody>
                       style: TextStyle(
                         color: AppLightColor.mainColor,
                         fontSize: 30,
-                        // fontFamily: 'NunitoSans',
                         fontWeight: FontWeight.w600,
                       ),
                     ));
@@ -78,31 +90,46 @@ class _SplashBodyState extends State<SplashBody>
   }
 
   void initSlidingAnimation() {
+    debugPrint("SplashBody: Initializing animation");
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 1));
-
     slidingAnimation =
         Tween<Offset>(begin: const Offset(-2, 0), end: Offset.zero)
             .animate(animationController);
     animationController.forward();
+    debugPrint("SplashBody: Animation started");
   }
 
   Future<void> checkLoginStatus() async {
-    final prefs = await SharedPreferences.getInstance();
-    final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    debugPrint("checkLoginStatus: Starting");
+    try {
+      debugPrint("checkLoginStatus: Accessing SharedPreferences");
+      final prefs = await SharedPreferences.getInstance();
+      final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+      debugPrint("checkLoginStatus: isLoggedIn=$isLoggedIn");
 
-    Future.delayed(const Duration(seconds: 2), () {
-      if (isLoggedIn) {
-        // Navigate to NextPage if logged in
-        Get.to(() => const MainScreen(),
+      final token = prefs.getString('token');
+      debugPrint("checkLoginStatus: token=$token");
+
+      if (isLoggedIn && token != null && token.isNotEmpty) {
+        debugPrint(
+            "checkLoginStatus: Valid login data found, navigating to MainScreen");
+        Get.off(() => const MainScreen(),
             transition: Transition.circularReveal,
             duration: const Duration(milliseconds: 250));
       } else {
-        // Navigate to Login Screen if not logged in
-        Get.to(() => const LoginSignUp(DioComsumer),
+        debugPrint(
+            "checkLoginStatus: No valid login data, navigating to LoginSignUp");
+        Get.off(() => const LoginSignUp(DioComsumer),
             transition: Transition.fadeIn,
             duration: const Duration(milliseconds: 250));
       }
-    });
+    } catch (e, stackTrace) {
+      debugPrint("checkLoginStatus: Error=$e");
+      debugPrint("checkLoginStatus: StackTrace=$stackTrace");
+      Get.off(() => const LoginSignUp(DioComsumer),
+          transition: Transition.fadeIn,
+          duration: const Duration(milliseconds: 250));
+    }
   }
 }

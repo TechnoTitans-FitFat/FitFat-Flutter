@@ -1,3 +1,4 @@
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_state.dart';
 import 'package:fitfat/features/forget_password/presentation/views/widgets/email_page.dart'
@@ -73,15 +74,13 @@ class _ForgotPasswordFlowState extends State<ForgotPasswordFlow> {
           Navigator.pop(context);
 
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                  'Password reset successfully! Please login with your new password.'),
-              backgroundColor: Colors.green,
-              duration: Duration(seconds: 3),
+            customSnackBar(
+              context,
+              "Success",
+              'Password reset successfully! Please login with your new password.',
+              SnackBarType.success,
             ),
           );
-
-          // Reset the cubit state after successful password reset
           context.read<ForgotPasswordCubit>().resetState();
         }
       },

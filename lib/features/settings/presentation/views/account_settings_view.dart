@@ -1,5 +1,6 @@
 import 'package:fitfat/core/api/dio_comsumer.dart';
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
 import 'package:fitfat/features/forget_password/presentation/cubit/forget_password_cubit.dart';
@@ -113,8 +114,7 @@ class AccountSettingsView extends StatelessWidget {
                             children: [
                               IconButton(
                                 icon: const Icon(Icons.arrow_back,
-                                    color: Colors.red
-                                    ),
+                                    color: Colors.red),
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
@@ -176,9 +176,12 @@ class AccountSettingsView extends StatelessWidget {
                               final otp = cubit.otpController.text;
                               if (otp.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text('Please enter the OTP code')),
+                                  customSnackBar(
+                                    context,
+                                    "Error",
+                                    "Please enter the OTP",
+                                    SnackBarType.error,
+                                  ),
                                 );
                                 return;
                               }
@@ -192,8 +195,7 @@ class AccountSettingsView extends StatelessWidget {
                               cubit.showOTPField();
                               final email =
                                   context.read<LoginCubit>().user!.email;
-                              print("Sending OTP to email: $email");
-                              // Send OTP to user's email
+
                               context
                                   .read<ForgotPasswordCubit>()
                                   .sendPasswordResetOtp(email);

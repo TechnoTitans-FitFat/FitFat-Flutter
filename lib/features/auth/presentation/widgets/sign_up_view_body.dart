@@ -1,3 +1,4 @@
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/sign_up_cubit.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_button.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_textfield.dart';
@@ -73,9 +74,11 @@ class SignUpViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is SignUpFalier) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.errorMassage.toString()),
-              backgroundColor: Colors.red,
+            customSnackBar(
+              context,
+              "Error",
+              "SignUp faild : ${state.errorMassage}",
+              SnackBarType.error,
             ),
           );
         }

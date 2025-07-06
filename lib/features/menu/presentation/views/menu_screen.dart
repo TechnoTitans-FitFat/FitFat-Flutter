@@ -1,4 +1,5 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/core/widgets/custom_text_filed_search.dart';
 import 'package:fitfat/features/main/presentaion/widgets/auto_scroll_panner.dart';
@@ -49,11 +50,21 @@ class MenuScreen extends StatelessWidget {
               BlocConsumer<CartCubit, CartState>(listener: (context, state) {
                 if (state is CartSuccess) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.message)),
+                    customSnackBar(
+                      context,
+                      "Success",
+                      "Cart Success : ${state.message}",
+                      SnackBarType.success,
+                    ),
                   );
                 } else if (state is CartFailure) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.error)),
+                    customSnackBar(
+                      context,
+                      "Error",
+                      "Cart Failed : Unexpected error occurred",
+                      SnackBarType.error,
+                    ),
                   );
                 }
               }, builder: (context, state) {

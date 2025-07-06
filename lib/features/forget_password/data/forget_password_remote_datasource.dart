@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class ForgotPasswordRemoteDatasource {
   final Dio _dio = Dio();
 
-  static const String _baseUrl = 'https://fitfat-backend.up.railway.app';
+  static const String _baseUrl = 'https://fitfattt.azurewebsites.net/';
 
   Future<Map<String, dynamic>> sendPasswordResetOtp(String email) async {
     try {
