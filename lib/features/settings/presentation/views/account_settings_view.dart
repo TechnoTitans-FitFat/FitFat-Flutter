@@ -41,14 +41,24 @@ class AccountSettingsView extends StatelessWidget {
 
             if (state.errorMessage.isNotEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.errorMessage)),
+                customSnackBar(
+                  context,
+                  "Error",
+                  "Account Setting faild: ${state.errorMessage}",
+                  SnackBarType.success,
+                ),
               );
               context.read<AccountSettingsCubit>().clearMessages();
             }
 
             if (state.successMessage.isNotEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.successMessage)),
+                customSnackBar(
+                  context,
+                  "Success",
+                  "Account Setting success: ${state.successMessage}",
+                  SnackBarType.success,
+                ),
               );
               context.read<AccountSettingsCubit>().clearMessages();
             }
@@ -59,18 +69,32 @@ class AccountSettingsView extends StatelessWidget {
             switch (state.status) {
               case ForgotPasswordStatus.otpSent:
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('OTP sent to your email')),
+                  customSnackBar(
+                    context,
+                    "Success",
+                    "OTP sent to your email",
+                    SnackBarType.success,
+                  ),
                 );
                 break;
               case ForgotPasswordStatus.otpVerified:
-                context.read<AccountSettingsCubit>().setOtpVerified(true);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('OTP verified successfully')),
+                  customSnackBar(
+                    context,
+                    "Success",
+                    'OTP verified successfully',
+                    SnackBarType.success,
+                  ),
                 );
                 break;
               case ForgotPasswordStatus.resetSuccess:
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Password reset successfully')),
+                  customSnackBar(
+                    context,
+                    "Success",
+                    'Password reset successfully',
+                    SnackBarType.success,
+                  ),
                 );
                 context
                     .read<AccountSettingsCubit>()
@@ -78,8 +102,12 @@ class AccountSettingsView extends StatelessWidget {
                 break;
               case ForgotPasswordStatus.error:
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                      content: Text(state.errorMessage ?? 'An error occurred')),
+                  customSnackBar(
+                    context,
+                    "Error",
+                    'An error occurred',
+                    SnackBarType.error,
+                  ),
                 );
                 break;
               default:
@@ -153,17 +181,24 @@ class AccountSettingsView extends StatelessWidget {
                               if (cubit.newPasswordController.text !=
                                   cubit.confirmPasswordController.text) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('Passwords do not match')),
+                                  customSnackBar(
+                                    context,
+                                    "Error",
+                                    'Passwords do not match',
+                                    SnackBarType.error,
+                                  ),
                                 );
                                 return;
                               }
 
                               if (cubit.newPasswordController.text.length < 6) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text(
-                                          'Password must be at least 6 characters')),
+                                  customSnackBar(
+                                    context,
+                                    "Warning",
+                                    'Password must be at least 6 characters',
+                                    SnackBarType.warning,
+                                  ),
                                 );
                                 return;
                               }

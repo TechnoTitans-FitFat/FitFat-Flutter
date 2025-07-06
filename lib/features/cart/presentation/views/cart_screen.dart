@@ -1,5 +1,7 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/cart/cubit/get_cart_cubit.dart';
+import 'package:fitfat/features/cart/presentation/views/payment_screen.dart'
+    show PaymentScreen;
 import 'package:fitfat/features/cart/presentation/widgets/cart_bottom_bar.dart';
 import 'package:fitfat/features/cart/presentation/widgets/cart_screen_body.dart';
 import 'package:fitfat/features/cart/presentation/widgets/custom_app_bar.dart';
@@ -49,7 +51,17 @@ class _CartScreenState extends State<CartScreen> {
         bottomNavigationBar:
             BlocBuilder<GetCartCubit, CartState>(builder: (context, state) {
           if (state is CartLoaded) {
-            return CartBottomBar(cartItems: state.cart.cartItems);
+            return CartBottomBar(
+              cartItems: state.cart.cartItems,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PaymentScreen(),
+                  ),
+                );
+              },
+            );
           } else {
             return const SizedBox.shrink();
           }

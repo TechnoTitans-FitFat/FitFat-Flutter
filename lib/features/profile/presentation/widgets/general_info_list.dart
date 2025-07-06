@@ -22,7 +22,11 @@ class GeneralInfoList extends StatelessWidget {
         ),
         LabelWithValueItem(
           label: 'Date of Birth',
-          value: healthInfo?.dateOfBirth.toString().split(' ')[0] ?? 'N/A',
+          value: healthInfo != null
+              ? '${healthInfo!.dateOfBirth.day.toString().padLeft(2, '0')}/'
+                  '${healthInfo!.dateOfBirth.month.toString().padLeft(2, '0')}/'
+                  '${healthInfo!.dateOfBirth.year}'
+              : 'N/A',
         ),
         LabelWithValueItem(
           label: 'Height',

@@ -1,11 +1,9 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/diet_info_cubit/update_diet_info_cubit.dart';
 import '../cubit/health_info_cubit/update_health_info_cubit.dart';
-import 'general_info_section.dart';
-import 'health_info_section.dart';
-import 'nutrition_info_section.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final String userId;
@@ -174,10 +172,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               _heightController.text = healthInfo.height.toString();
               _weightController.text = healthInfo.weight.toString();
               _selectedGender = healthInfo.gender;
-              _selectedMonth =
-                  healthInfo.dateOfBirth.month.toString().padLeft(2, '0');
-              _selectedDay =
-                  healthInfo.dateOfBirth.day.toString().padLeft(2, '0');
+              _selectedMonth = healthInfo.dateOfBirth.month.toString();
+              _selectedDay = healthInfo.dateOfBirth.day.toString();
               _selectedYear = healthInfo.dateOfBirth.year.toString();
               _selectedAllergy = healthInfo.foodAllergies;
               _selectedDiabetesType = healthInfo.diabetesType;
@@ -285,9 +281,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void _showSnackBar(BuildContext context, String message, Color color) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Profile updated successfully!'),
-        backgroundColor: context.theme.green,
+      customSnackBar(
+        context,
+        "Success",
+        "Account Setting success: $message",
+        SnackBarType.success,
       ),
     );
   }
@@ -314,16 +312,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         mealPreferences: _selectedMealPreference,
       );
 
+      final day = int.tryParse(_selectedDay) ?? 1;
+      print('Selected day: \'$_selectedDay\', parsed day: $day');
+      final dateOfBirth = DateTime.utc(
+        int.parse(_selectedYear),
+        int.parse(_monthToNumber(_selectedMonth)),
+        day,
+      );
+      print('Date sent to backend: $dateOfBirth');
       final healthInfo = HealthInfo(
         foodAllergies: _selectedAllergy,
         diabetes: _selectedDiabetesType.isNotEmpty,
         weight: int.tryParse(_weightController.text) ?? 0,
         height: int.tryParse(_heightController.text) ?? 0,
-        dateOfBirth: DateTime(
-          int.parse(_selectedYear),
-          int.parse(_monthToNumber(_selectedMonth)),
-          int.parse(_selectedDay.padLeft(2, '0')),
-        ),
+        dateOfBirth: dateOfBirth,
         gender: _selectedGender,
         targetBloodSugarRange: const BloodSugarRange(min: 50, max: 120),
         diabetesType: _selectedDiabetesType,

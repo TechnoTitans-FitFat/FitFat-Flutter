@@ -20,30 +20,44 @@ class _SplashBodyState extends State<SplashBody>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> slidingAnimation;
-
   double _opacity = 0.0;
 
   @override
   void initState() {
     super.initState();
-
     debugPrint("SplashBody: initState started");
+
     initSlidingAnimation();
 
-    // Check login status after delay for splash animation
-    Future.microtask(() async {
+    // Initialize SharedPreferences and check login status
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       debugPrint("SplashBody: Starting login status check");
-      await Future.delayed(const Duration(seconds: 2));
-      debugPrint("SplashBody: Delay completed, checking login status");
-      await checkLoginStatus();
+      try {
+        debugPrint("SplashBody: Preloading SharedPreferences");
+        await SharedPreferences
+            .getInstance(); // Preload to ensure initialization
+        debugPrint("SplashBody: SharedPreferences preloaded");
+        await Future.delayed(
+            const Duration(seconds: 1)); // Reduced for faster testing
+        debugPrint("SplashBody: Delay completed, checking login status");
+        await checkLoginStatus();
+      } catch (e, stackTrace) {
+        debugPrint("SplashBody: initState error=$e");
+        debugPrint("SplashBody: initState stackTrace=$stackTrace");
+        Get.off(() => const LoginSignUp(DioComsumer),
+            transition: Transition.fadeIn,
+            duration: const Duration(milliseconds: 250));
+      }
     });
 
     // Fade in logo
     Future.delayed(const Duration(seconds: 1), () {
-      setState(() {
-        _opacity = 1.0;
-        debugPrint("SplashBody: Logo opacity set to 1.0");
-      });
+      if (mounted) {
+        setState(() {
+          _opacity = 1.0;
+          debugPrint("SplashBody: Logo opacity set to 1.0");
+        });
+      }
     });
   }
 
@@ -105,6 +119,8 @@ class _SplashBodyState extends State<SplashBody>
     try {
       debugPrint("checkLoginStatus: Accessing SharedPreferences");
       final prefs = await SharedPreferences.getInstance();
+      debugPrint("checkLoginStatus: SharedPreferences accessed");
+
       final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
       debugPrint("checkLoginStatus: isLoggedIn=$isLoggedIn");
 

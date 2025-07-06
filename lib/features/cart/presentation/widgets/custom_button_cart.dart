@@ -1,20 +1,18 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
-import 'package:fitfat/features/cart/presentation/views/payment_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomButtonCart extends StatelessWidget {
-  const CustomButtonCart({super.key, required this.color, required this.text});
+  const CustomButtonCart(
+      {super.key, required this.color, required this.text, this.onPressed});
 
   final Color color;
   final String text;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const PaymentScreen()));
-      },
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         shape: RoundedRectangleBorder(

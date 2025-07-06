@@ -1,8 +1,11 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/core/widgets/custom_app_bar.dart';
+import 'package:fitfat/features/cart/cubit/clear_cart_cubit.dart';
 import 'package:fitfat/features/cart/data/models/cart_model.dart';
-import 'package:fitfat/features/cart/presentation/widgets/cart_bottom_bar.dart';
+import 'package:fitfat/features/cart/presentation/widgets/custom_button_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -278,8 +281,26 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const CartBottomBar(
-        cartItems: [],
+      bottomNavigationBar: SizedBox(
+        height: 200,
+        child: Center(
+            child: CustomButtonCart(
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              customSnackBar(
+                context,
+                "Success",
+                "Payment success : your order has been placed",
+                SnackBarType.success,
+              ),
+            );
+            context.read<ClearCartCubit>().clear(context: context);
+          },
+          color: context.theme.mainColor,
+          text: 'Checkout',
+        )),
       ),
     );
   }

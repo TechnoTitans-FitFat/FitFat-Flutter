@@ -41,17 +41,19 @@ class EndPoint {
   static String menu = '$baseUrl/api/recipes//unhealthy?';
   static const String resendOtp = '/resend-otp';
   static const String chatBot =
-      'https://web-production-8f1d8.up.railway.app/recommend';
+      'https://web-production-33ff.up.railway.app/recommend';
   static const String search =
       'https://fitfattt.azurewebsites.net/api/recipes/search?';
   static const String searchHistory =
       'https://fitfattt.azurewebsites.net/api/recipes/search';
   static const String offer =
       'https://fitfattt.azurewebsites.net/api/recipes/offer';
-  static const String chicken = 'https://fitfattt.azurewebsites.net/api/recipes/search?page=1&limit=10&type=Meat';
-  static const String sandwich = 'https://fitfattt.azurewebsites.net/api/recipes/search?page=1&limit=10&type=Sandwich';
-  static const String soup = 'https://fitfattt.azurewebsites.net/api/recipes/search?page=1&limit=10&type=Soup';
-
+  static const String chicken =
+      'https://fitfattt.azurewebsites.net/api/recipes/search?page=1&limit=10&type=Meat';
+  static const String sandwich =
+      'https://fitfattt.azurewebsites.net/api/recipes/search?page=1&limit=10&type=Sandwich';
+  static const String soup =
+      'https://fitfattt.azurewebsites.net/api/recipes/search?page=1&limit=10&type=Soup';
 }
 
 class ApiKey {

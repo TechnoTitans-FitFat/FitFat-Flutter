@@ -5,8 +5,6 @@ import 'package:fitfat/features/profile/presentation/widgets/general_info_sectio
 import 'package:fitfat/features/profile/presentation/widgets/profile_info_text_with_edit_button.dart';
 import 'package:flutter/material.dart';
 
-import 'health_info_section.dart';
-
 class ProfileInfoLoaded extends StatelessWidget {
   const ProfileInfoLoaded(
       {super.key, required this.state, required this.initialData});
@@ -29,8 +27,6 @@ class ProfileInfoLoaded extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         GeneralInfoSection(healthInfo: healthInfo),
-        const DividerSection(),
-        HealthInfoSection(healthInfo: healthInfo),
         const DividerSection(),
         DietInfoSection(dietInfo: dietInfo)
       ],
