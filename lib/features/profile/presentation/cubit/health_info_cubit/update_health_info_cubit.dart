@@ -2,12 +2,15 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:fitfat/features/profile/data/model/health_info.dart';
+import 'package:equatable/equatable.dart';
 
 part 'update_health_info_state.dart';
 
 class UpdateHealthInfoCubit extends Cubit<UpdateHealthInfoState> {
   UpdateHealthInfoCubit() : super(UpdateHealthInfoInitial());
 
+  // Fetch health information for a user
   Future<void> fetchHealthInfo(String id) async {
     try {
       emit(UpdateHealthInfoLoading());
@@ -27,6 +30,7 @@ class UpdateHealthInfoCubit extends Cubit<UpdateHealthInfoState> {
     }
   }
 
+  // Update health information for a user
   Future<void> updateHealthInfo(String id, HealthInfo healthInfo) async {
     try {
       emit(UpdateHealthInfoLoading());
@@ -83,7 +87,7 @@ class HealthInfo extends Equatable {
       targetBloodSugarRange:
           BloodSugarRange.fromJson(json['targetBloodSugarRange']),
       diabetesType: json['diabetesType'] as String,
-      insulinToCarbRatio: (json['insulinToCardRatio'] as num).toDouble(),
+      insulinToCarbRatio: (json['insulinToCarbRatio'] as num).toDouble(),
       correctionFactor: (json['correctionFactor'] as num).toDouble(),
     );
   }
@@ -98,7 +102,7 @@ class HealthInfo extends Equatable {
       'gender': gender,
       'targetBloodSugarRange': targetBloodSugarRange.toJson(),
       'diabetesType': diabetesType,
-      'insulinToCardRatio': insulinToCarbRatio,
+      'insulinToCarbRatio': insulinToCarbRatio,
       'correctionFactor': correctionFactor,
     };
   }
