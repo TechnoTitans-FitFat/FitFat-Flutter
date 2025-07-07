@@ -1,9 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fitfat/core/api/api_consumer.dart';
 import 'package:fitfat/core/api/end_points.dart';
 import 'package:fitfat/core/errors/exceptions.dart';
+import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:fitfat/features/suggestions/data/models/suggestions_model.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'suggestions_state.dart';
@@ -19,49 +22,74 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
 
   SuggestionsCubit(this.apiConsumer) : super(SuggestionsInitial());
 
-  void fetchSuggestionsData({bool isInitialLoad = false}) async{
-    if (!hasMore) return;
+ void fetchSuggestionsData(BuildContext context, {bool isInitialLoad = false}) async {
+  if (!hasMore) return;
 
-    if (isInitialLoad) {
-      page = 1;
-      hasMore = true;
-      paginatedData.clear();
-      currentPageIndex = 0;
-      debugPrint("Before Emitting Loading State.......");
-      emit(SuggestionsLoading());
-      debugPrint("After Emitting Loading State.......");
-    }
-        final String url = "${EndPoint.suggestions}${EndPoint.suggestions.contains('?') ? '&' : '?'}page=$page&limit=$limit";
-
-  debugPrint("Requesting: $url"); 
-       try {
-      final response = await apiConsumer.get(url);
- 
- debugPrint("Fetching page: $page"); 
-  debugPrint("API Response: $response");
-
-      if (response is Map<String, dynamic> && response.containsKey('recipes')) {
-        List<SuggestionsModel> newData = (response['recipes'] as List)
-            .map((item) => SuggestionsModel.fromJson(item))
-            .toList();
-            debugPrint("Fetched ${newData.length} new items");
-            int totalPages = response['totalPages'] ?? 1; 
-            int currentPage = response['currentPage'] ?? 1;
-
-        if (newData.isEmpty || currentPage >= totalPages) {
-          hasMore = false;
-        }else{
-          page++;
-        }
-          paginatedData.add(newData);
-        emit(SuggestionsSuccess(data: paginatedData[currentPageIndex]));
-      } else {
-        emit(SuggestionsFailure(errMessage: "Invalid data format"));
-      }
-    } on ServerException catch (e) {
-      emit(SuggestionsFailure(errMessage: e.errModel.errMessage));
-    }
+  if (isInitialLoad) {
+    page = 1;
+    hasMore = true;
+    paginatedData.clear();
+    currentPageIndex = 0;
+    debugPrint("Before Emitting Loading State.......");
+    emit(SuggestionsLoading());
+    debugPrint("After Emitting Loading State.......");
   }
+
+ 
+  final token = context.read<LoginCubit>().user?.token;
+  debugPrint("Token from LoginCubit: $token");
+
+  if (token == null) {
+    emit(SuggestionsFailure(errMessage: 'User not logged in'));
+    return;
+  }
+
+  
+  final String url = "${EndPoint.suggestions}${EndPoint.suggestions.contains('?') ? '&' : '?'}page=$page&limit=$limit";
+  debugPrint("Requesting: $url");
+
+  try {
+    
+    final response = await apiConsumer.get(
+      url,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    debugPrint("Fetching page: $page");
+    debugPrint("API Response: $response");
+
+    if (response is Map<String, dynamic> && response.containsKey('recipes')) {
+      List<SuggestionsModel> newData = (response['recipes'] as List)
+          .map((item) => SuggestionsModel.fromJson(item))
+          .toList();
+      debugPrint("Fetched ${newData.length} new items");
+      int totalPages = response['totalPages'] ?? 1;
+      int currentPage = response['currentPage'] ?? 1;
+
+      if (newData.isEmpty || currentPage >= totalPages) {
+        hasMore = false;
+      } else {
+        page++;
+      }
+
+      paginatedData.add(newData);
+      emit(SuggestionsSuccess(data: paginatedData[currentPageIndex]));
+    } else {
+      emit(SuggestionsFailure(errMessage: "Invalid data format"));
+    }
+  } on ServerException catch (e) {
+    emit(SuggestionsFailure(errMessage: e.errModel.errMessage));
+  } on DioException catch (e) {
+    emit(SuggestionsFailure(errMessage: "Dio error: ${e.message}"));
+  } catch (e) {
+    emit(SuggestionsFailure(errMessage: "Unexpected error occurred"));
+  }
+}
+
    void nextPage() {
     if (currentPageIndex < paginatedData.length - 1) {
       currentPageIndex++;

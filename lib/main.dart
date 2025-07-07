@@ -124,7 +124,7 @@ class MyApp extends StatelessWidget {
             create: (context) => MealDetailsCubit(DioComsumer(dio: Dio()))),
         BlocProvider(
             create: (context) => SuggestionsCubit(DioComsumer(dio: Dio()))
-              ..fetchSuggestionsData()),
+              ..fetchSuggestionsData(context)),
         BlocProvider(
           create: (context) => FavouritesCubit(DioComsumer(dio: Dio())),
         ),

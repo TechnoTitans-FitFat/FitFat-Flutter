@@ -32,28 +32,25 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
   int count = 1;
 
   void _checkAllergyAndAddToCart(BuildContext context) {
-    final userAllergies = widget.healthInfo.foodAllergies
-        .toLowerCase()
-        .split(',')
-        .map((e) => e.trim())
-        .toList();
+  final userAllergies = widget.healthInfo.foodAllergies
+      .toLowerCase()
+      .split(',')
+      .map((e) => e.trim())
+      .toList();
 
-    final mealAllergies =
-        widget.meal.allergy.map((e) => e.toLowerCase()).toList();
+  final mealAllergies =
+      widget.meal.allergy.map((e) => e.toLowerCase()).toList();
 
-    final hasAllergy =
-        mealAllergies.any((item) => userAllergies.contains(item));
-    final matched = userAllergies.firstWhere(
-      (a) => mealAllergies.contains(a),
-      orElse: () => '',
-    );
+  final hasMatch = mealAllergies.any((item) => userAllergies.contains(item));
 
-    if (hasAllergy) {
-      _showAllergenDialog(context, matched);
-    } else {
-      _addToCart(context);
-    }
+ 
+  if (!hasMatch) {
+    final firstUserAllergy = userAllergies.isNotEmpty ? userAllergies.first : '';
+    _showAllergenDialog(context, firstUserAllergy); 
+  } else {
+    _addToCart(context);
   }
+}
 
   void _addToCart(BuildContext context) {
     Navigator.push(
