@@ -76,7 +76,7 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
                     suggestionsCubit.nextPage();
                   } else {
                     setState(() {
-                      suggestionsCubit.fetchSuggestionsData();
+                      suggestionsCubit.fetchSuggestionsData(context);
                     });
                   }
                 },
