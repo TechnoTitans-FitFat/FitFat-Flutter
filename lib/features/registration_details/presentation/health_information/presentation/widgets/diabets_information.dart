@@ -10,6 +10,7 @@ import 'package:fitfat/features/registration_details/presentation/health_informa
 import 'package:fitfat/features/registration_details/presentation/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class DiabetsInformation extends StatefulWidget {
   const DiabetsInformation({
@@ -87,12 +88,26 @@ class _DiabetsInformationState extends State<DiabetsInformation> {
 
       final int diabetesValue = hasDiabetes ? 1 : 0;
 
+      // Convert date from dd/MM/yyyy to ISO format
+      String formattedDateOfBirth;
+      try {
+        final inputFormat = DateFormat('dd/MM/yyyy');
+        final localDate = inputFormat.parse(widget.dateOfBirth);
+        final utcDateTime =
+            DateTime.utc(localDate.year, localDate.month, localDate.day);
+        final outputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        formattedDateOfBirth = outputFormat.format(utcDateTime);
+      } catch (e) {
+        // Fallback to default date if parsing fails
+        formattedDateOfBirth = "1990-01-01T00:00:00.000Z";
+      }
+
       await healthInfoCubit.postHealthInfo(
         foodAllergies: widget.foodAllergies,
         diabetes: diabetesValue,
         weight: widget.weight,
         height: widget.height,
-        dateOfBirth: widget.dateOfBirth,
+        dateOfBirth: formattedDateOfBirth,
         gender: widget.gender,
         targetBloodSugarRange: targetBloodSugarRange,
         userId: widget.userId,

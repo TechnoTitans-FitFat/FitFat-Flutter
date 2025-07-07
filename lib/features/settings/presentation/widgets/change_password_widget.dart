@@ -1,4 +1,5 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordWidget extends StatelessWidget {
@@ -96,6 +97,9 @@ class ChangePasswordWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     TextField(
+                      style: AppStyles.textStyle16.copyWith(
+                        color: context.theme.blackColor,
+                      ),
                       controller: otpController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
@@ -104,7 +108,7 @@ class ChangePasswordWidget extends StatelessWidget {
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
-                        fillColor: Colors.grey[100],
+                        fillColor: context.theme.backgroundColor,
                         hintText: 'Enter the code sent to your email',
                       ),
                     ),
@@ -135,6 +139,9 @@ class ChangePasswordWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     TextField(
+                      style: AppStyles.textStyle16.copyWith(
+                        color: context.theme.blackColor,
+                      ),
                       controller: newPasswordController,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -143,7 +150,7 @@ class ChangePasswordWidget extends StatelessWidget {
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
-                        fillColor: Colors.grey[100],
+                        fillColor: context.theme.backgroundColor,
                         hintText: 'Enter new password',
                       ),
                     ),
@@ -157,6 +164,9 @@ class ChangePasswordWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     TextField(
+                      style: AppStyles.textStyle16.copyWith(
+                        color: context.theme.blackColor,
+                      ),
                       controller: confirmPasswordController,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -165,7 +175,7 @@ class ChangePasswordWidget extends StatelessWidget {
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
-                        fillColor: Colors.grey[100],
+                        fillColor: context.theme.backgroundColor,
                         hintText: 'Confirm new password',
                       ),
                     ),

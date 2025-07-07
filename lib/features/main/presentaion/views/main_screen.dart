@@ -11,7 +11,11 @@ import 'package:fitfat/features/main/presentaion/widgets/custom_title.dart';
 import 'package:fitfat/features/menu/presentation/views/menu_screen.dart';
 import 'package:fitfat/features/profile/presentation/views/profile_screen.dart';
 import 'package:fitfat/features/suggestions/presentation/views/suggestion_view.dart';
+import 'package:fitfat/features/auth/presentation/views/login_and_register_view.dart';
+import 'package:fitfat/core/api/dio_comsumer.dart';
+import 'package:fitfat/core/utils/auth_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -23,6 +27,50 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
+  bool _isAuthenticated = false;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkAuthentication();
+  }
+
+  Future<void> _checkAuthentication() async {
+    try {
+      final isAuthenticated = await AuthUtils.isAuthenticated();
+
+      if (isAuthenticated) {
+        // User is authenticated
+        setState(() {
+          _isAuthenticated = true;
+          _isLoading = false;
+        });
+      } else {
+        // No valid authentication data
+        _redirectToLogin();
+      }
+    } catch (e) {
+      // Error checking authentication
+      _redirectToLogin();
+    }
+  }
+
+  Future<void> _clearLoginData() async {
+    await AuthUtils.clearAuthData();
+  }
+
+  void _redirectToLogin() {
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+        _isAuthenticated = false;
+      });
+      Get.offAll(() => const LoginSignUp(DioComsumer),
+          transition: Transition.fadeIn,
+          duration: const Duration(milliseconds: 500));
+    }
+  }
 
   void onTapped(int index) {
     setState(() {
@@ -32,6 +80,19 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    if (!_isAuthenticated) {
+      return const SizedBox.shrink(); // Will be redirected to login
+    }
+
     List<Widget> screens = [
       SingleChildScrollView(
         child: Padding(
@@ -94,7 +155,7 @@ class _MainScreenState extends State<MainScreen> {
                         fit: BoxFit.scaleDown,
                         child: Text('See all',
                             style: AppStyles.textStyle16.copyWith(
-                              color: context.theme.greyColor,
+                              color: Colors.grey,
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.039,
                             )),
@@ -115,7 +176,7 @@ class _MainScreenState extends State<MainScreen> {
     ];
 
     return Scaffold(
-        backgroundColor: context.theme.backgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: screens[selectedIndex],
         bottomNavigationBar: CustomBottomNavBar(
           selectedIndex: selectedIndex,

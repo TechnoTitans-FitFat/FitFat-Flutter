@@ -28,7 +28,7 @@ class HealthInfoSection extends StatelessWidget {
         CustomDropdown(
           label: 'Allergies',
           value: selectedAllergy,
-          items: ['None', 'Peanuts', 'Dairy', 'Gluten', 'Shellfish'],
+          items: ['None', 'Peanuts', 'Lactose', 'Wheat', 'Shellfish'],
           onChanged: onAllergyChanged,
         ),
         const SizedBox(height: 16),
