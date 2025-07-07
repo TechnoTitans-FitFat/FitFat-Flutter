@@ -33,8 +33,7 @@ class _SearchPageBodyState extends State<SearchPageBody> {
   }
   
  void _onSearch(String query) {
-  if (query.trim().isEmpty) return;
-  print("Searching for: $query"); 
+  if (query.trim().isEmpty) return; 
   setState(() {
     hasSearched = true;
   });
@@ -61,7 +60,7 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Latest Search', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: AppLightColor.mainColor)),
-                        LatestSearch(),
+                       const LatestSearch(),
                         const SizedBox(height: 25),
                         Text('Meal Dishes', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: AppLightColor.mainColor)),
                         const SizedBox(height: 10),

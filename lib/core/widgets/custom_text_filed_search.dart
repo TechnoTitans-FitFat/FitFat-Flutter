@@ -4,7 +4,6 @@ import 'package:fitfat/features/cart/presentation/views/cart_screen.dart';
 import 'package:fitfat/features/search/presentation/views/search_page.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTextFiledSearch extends StatelessWidget {
   final void Function(String)? onSubmitted;
