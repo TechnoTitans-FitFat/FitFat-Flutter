@@ -7,8 +7,11 @@ class EndPoint {
   static String meal_details = '$baseUrl/api/recipes/';
   static String healthInfo =
       'https://fitfattt.azurewebsites.net/api/healthInfo';
+  static String generalHealth =
+      "https://fitfattt.azurewebsites.net/api/recipes/healthy";
   static String dietInfo = '$baseUrl/api/dietInfo';
-  static String suggestions = 'https://fitfattt.azurewebsites.net/api/recipes/user-preferences';
+  static String suggestions =
+      'https://fitfattt.azurewebsites.net/api/recipes/user-preferences';
   static String favourites = '$baseUrl/api/favorites';
   static String dietview =
       '$baseUrl/api/recipes/healthy?category=diet&rating=5';

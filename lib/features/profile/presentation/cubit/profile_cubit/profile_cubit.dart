@@ -25,7 +25,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
           'Authorization': 'Bearer $token',
         }),
       );
-
+      print(response.data);
       if (response.statusCode == 200) {
         final userProfile = UserProfileModel.fromJson(response.data);
         emit(UserProfileLoaded(userProfile: userProfile));

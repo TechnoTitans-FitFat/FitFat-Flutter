@@ -6,11 +6,9 @@ import 'package:fitfat/core/errors/exceptions.dart';
 import 'package:fitfat/core/utils/auth_utils.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_state.dart';
 import 'package:fitfat/features/auth/data/Cubit/models/sign_in_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit(this.api) : super(LoginInitial());
@@ -29,8 +27,6 @@ class LoginCubit extends Cubit<LoginStates> {
         ApiKey.email: signInEmail.text,
         ApiKey.password: signInPassword.text
       });
-
-      debugPrint("Login response: $response");
       user = SignInModel.fromJson(response);
       if (user?.token == null || user!.token.isEmpty) {
         emit(LoginFailure(errorMessage: "Invalid token received"));
@@ -75,7 +71,6 @@ class LoginCubit extends Cubit<LoginStates> {
     }
   }
 
-  // Check if user is currently logged in
   Future<bool> isLoggedIn() async {
     try {
       final isAuthenticated = await AuthUtils.isAuthenticated();
