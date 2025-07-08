@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fitfat/core/api/end_points.dart';
+import 'package:fitfat/core/utils/auth_utils.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,24 +24,37 @@ class AccountSettingsCubit extends Cubit<AccountSettingsState> {
   Future<void> logout(String token) async {
     try {
       emit(state.copyWith(isLoading: true));
+
+      // Call logout API
       await apiConsumer.post(
         EndPoint.logout,
         options: Options(headers: {
           "Authorization": "Bearer $token",
         }),
       );
+
+      // Clear local authentication data
+      await AuthUtils.clearAuthData();
+
       emit(state.copyWith(
           isLoading: false,
           loggedOut: true,
           successMessage: "Logged out successfully"));
     } on DioException catch (error) {
+      // Even if API call fails, clear local data
+      await AuthUtils.clearAuthData();
       emit(state.copyWith(
           isLoading: false,
-          errorMessage: error.response?.data['message'] ?? 'Logout failed'));
+          loggedOut: true,
+          successMessage: "Logged out successfully"));
       print('Logout error: ${error.message}');
     } catch (error) {
+      // Even if API call fails, clear local data
+      await AuthUtils.clearAuthData();
       emit(state.copyWith(
-          isLoading: false, errorMessage: 'An unexpected error occurred'));
+          isLoading: false,
+          loggedOut: true,
+          successMessage: "Logged out successfully"));
       print('Unexpected error during logout: $error');
     }
   }

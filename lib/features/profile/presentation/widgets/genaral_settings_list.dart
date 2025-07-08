@@ -43,6 +43,9 @@ class GenaralSettingsList extends StatelessWidget {
           title: 'Contact Support',
           trailing: null,
         ),
+        const SizedBox(
+          height: 8,
+        ),
         AccountSettingsItem(
           icon: Icons.settings,
           title: 'Account Settings',

@@ -2,12 +2,14 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import 'package:fitfat/features/profile/data/model/diet_info.dart';
+import 'package:equatable/equatable.dart';
 part 'update_diet_info_state.dart';
 
 class UpdateDietInfoCubit extends Cubit<UpdateDietInfoState> {
   UpdateDietInfoCubit() : super(UpdateDietInfoInitial());
 
+  // Fetch diet information for a user
   Future<void> fetchDietInfo(String id) async {
     try {
       emit(UpdateDietInfoLoading());
@@ -27,6 +29,7 @@ class UpdateDietInfoCubit extends Cubit<UpdateDietInfoState> {
     }
   }
 
+  // Update diet information for a user
   Future<void> updateDietInfo(String id, DietInfo dietInfo) async {
     try {
       emit(UpdateDietInfoLoading());

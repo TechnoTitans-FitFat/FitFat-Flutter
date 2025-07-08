@@ -15,8 +15,10 @@ enum GridType { mainScreen, suggestions, menu }
 
 class CustomSuggestionsGridView extends StatefulWidget {
   final GridType gridType;
+  final isNoneAllergy;
 
-  const CustomSuggestionsGridView({super.key, required this.gridType});
+  const CustomSuggestionsGridView(
+      {super.key, required this.gridType, this.isNoneAllergy});
 
   @override
   State<CustomSuggestionsGridView> createState() =>
@@ -76,7 +78,8 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
                     suggestionsCubit.nextPage();
                   } else {
                     setState(() {
-                      suggestionsCubit.fetchSuggestionsData(context);
+                      suggestionsCubit.fetchSuggestionsData(context,
+                          useGeneralHealthEndpoint: widget.isNoneAllergy);
                     });
                   }
                 },

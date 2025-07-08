@@ -1,8 +1,5 @@
-import 'package:fitfat/features/profile/presentation/views/update_profile_screen.dart';
-import 'package:fitfat/features/profile/presentation/widgets/custom_dropdown.dart'
-    hide CustomDropdown;
-import 'package:fitfat/features/profile/presentation/widgets/custom_text_field.dart'
-    hide CustomTextField;
+import 'package:fitfat/features/profile/presentation/views/custom_dropdown.dart';
+import 'package:fitfat/features/profile/presentation/views/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class NutritionInfoSection extends StatelessWidget {

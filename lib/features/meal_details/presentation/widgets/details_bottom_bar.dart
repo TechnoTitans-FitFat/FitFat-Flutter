@@ -79,7 +79,7 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: const BoxDecoration(color: Color(0xffF5F5F5)),
+      decoration: BoxDecoration(color: context.theme.backgroundColor),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

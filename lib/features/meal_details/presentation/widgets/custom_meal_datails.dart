@@ -7,18 +7,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class CustomMealDatails extends StatefulWidget {
-  const CustomMealDatails({
-    super.key,
-    required this.title,
-    required this.caloreis,
-    required this.rating,
-    required this.cookingTime,
-    required this.id,
-    required this.imagePath,
-    required this.price,
-    required this.carb,
-    required this.healthInfo
-  });
+  const CustomMealDatails(
+      {super.key,
+      required this.title,
+      required this.caloreis,
+      required this.rating,
+      required this.cookingTime,
+      required this.id,
+      required this.imagePath,
+      required this.price,
+      required this.carb,
+      required this.healthInfo});
   final String id;
   final String title;
   final String caloreis;
@@ -44,7 +43,6 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocBuilder<FavouritesCubit, FavouritesState>(
       builder: (context, state) {
         final favouritesCubit = context.watch<FavouritesCubit>();
@@ -109,11 +107,11 @@ class _CustomMealDatailsState extends State<CustomMealDatails> {
                 ],
               ),
             ),
-            
             InsulinCalc(
-              carbValue: widget.carb,  
-              correctionFactor: widget.healthInfo.correctionFactor, 
-              insulinToCarbRatio: widget.healthInfo.insulinToCardRatio.toDouble(),
+              carbValue: widget.carb,
+              correctionFactor: widget.healthInfo.correctionFactor,
+              insulinToCarbRatio:
+                  widget.healthInfo.insulinToCarbRatio.toDouble(),
             )
           ],
         );

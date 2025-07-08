@@ -10,7 +10,7 @@ import '../../../main/presentaion/views/main_screen.dart';
 import '../../data/cubit/diet_info_cubit/diet_info_state.dart';
 import '../../data/cubit/health_info_cubit/health_info_state.dart';
 
-class SkipButton extends StatelessWidget {
+class SkipButton extends StatefulWidget {
   final String userId;
   final int? weight;
   final int? height;
@@ -44,48 +44,77 @@ class SkipButton extends StatelessWidget {
     this.correctionFactor,
   });
 
+  @override
+  State<SkipButton> createState() => _SkipButtonState();
+}
+
+class _SkipButtonState extends State<SkipButton> {
+  bool dietSuccess = false;
+  bool healthSuccess = false;
+  bool isLoading = false;
+
   void _submitInfo(BuildContext context) async {
     try {
       final dietInfoCubit = context.read<DietInfoCubit>();
       final healthInfoCubit = context.read<HealthInfoCubit>();
 
-      // Submit diet information
-      dietInfoCubit.postDietInfo(
-        activityLevel: selectedActivityLevel ?? "Moderately Active",
-        dietType: "Keto",
-        dietaryGoals: selectedDietGoal ?? "Weight loss",
-        macronutrientGoals: {
-          "proteins": 0,
-          "carbs": 0,
-          "fats": 0,
-          "calories": 0,
-        },
-        mealPreferences: selectedMealType ?? "Vegetarian",
-        userId: userId,
-      );
+      final dietState = dietInfoCubit.state;
+      final healthState = healthInfoCubit.state;
+
+      if (!dietSuccess && dietState is! DietInfoSuccess) {
+        dietInfoCubit.postDietInfo(
+          activityLevel: widget.selectedActivityLevel ?? "Moderately Active",
+          dietType: "Keto",
+          dietaryGoals: widget.selectedDietGoal ?? "Weight loss",
+          macronutrientGoals: {
+            "proteins": 0,
+            "carbs": 0,
+            "fats": 0,
+            "calories": 0,
+          },
+          mealPreferences: widget.selectedMealType ?? "Vegetarian",
+          userId: widget.userId,
+        );
+      } else if (dietState is DietInfoSuccess) {
+        dietSuccess = true;
+      }
+
       String? result;
-      if (dateOfBirth != null) {
+      if (widget.dateOfBirth != null) {
         final inputFormat = DateFormat('dd/MM/yyyy');
-        final dateTime = inputFormat.parse(dateOfBirth!);
-        final utcDateTime = dateTime.toUtc();
+        final localDate = inputFormat.parse(widget.dateOfBirth!);
+        final utcDateTime =
+            DateTime.utc(localDate.year, localDate.month, localDate.day);
         final outputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         result = outputFormat.format(utcDateTime);
       }
 
-      await healthInfoCubit.postHealthInfo(
-        foodAllergies: foodAllergies ?? "",
-        diabetes: hasDiabetes ?? false ? 1 : 0,
-        weight: weight ?? 50,
-        height: height ?? 150,
-        dateOfBirth: result ?? "1990-01-01T00:00:00.000Z",
-        gender: gender ?? "Female",
-        targetBloodSugarRange: targetBloodSugarRange ?? {"min": 70, "max": 180},
-        userId: userId,
-        diabetesType: diabetesType ?? "", // Pass diabetesType
-        insulinToCardRatio:
-            insulinToCardRatio ?? 0.0, // Pass insulinToCardRatio
-        correctionfactor: correctionFactor ?? 0.0, // Pass correctionFactor
-      );
+      if (!healthSuccess && healthState is! HealthInfoSuccess) {
+        await healthInfoCubit.postHealthInfo(
+          foodAllergies: widget.foodAllergies ?? "",
+          diabetes: widget.hasDiabetes ?? false ? 1 : 0,
+          weight: widget.weight ?? 50,
+          height: widget.height ?? 150,
+          dateOfBirth: result ?? "1990-01-01T00:00:00.000Z",
+          gender: widget.gender ?? "Female",
+          targetBloodSugarRange:
+              widget.targetBloodSugarRange ?? {"min": 70, "max": 180},
+          userId: widget.userId,
+          diabetesType: widget.diabetesType ?? "",
+          insulinToCardRatio: widget.insulinToCardRatio ?? 0.0,
+          correctionfactor: widget.correctionFactor ?? 0.0,
+        );
+      } else if (healthState is HealthInfoSuccess) {
+        healthSuccess = true;
+      }
+      if (dietSuccess && healthSuccess) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginSignUp(isLoading),
+          ),
+        );
+      }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         customSnackBar(
@@ -100,19 +129,19 @@ class SkipButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dietSuccess = false;
-    bool healthSuccess = false;
-    bool isLoading = false;
-
     return MultiBlocListener(
       listeners: [
         BlocListener<DietInfoCubit, DietInfoState>(
           listener: (context, state) {
             if (state is DietInfoLoading) {
-              isLoading = true;
+              setState(() {
+                isLoading = true;
+              });
             } else if (state is DietInfoSuccess) {
-              isLoading = false;
-              dietSuccess = true;
+              setState(() {
+                isLoading = false;
+                dietSuccess = true;
+              });
               ScaffoldMessenger.of(context).showSnackBar(
                 customSnackBar(
                   context,
@@ -130,8 +159,10 @@ class SkipButton extends StatelessWidget {
                 );
               }
             } else if (state is DietInfoFailure) {
-              isLoading = false;
-              dietSuccess = false;
+              setState(() {
+                isLoading = false;
+                dietSuccess = false;
+              });
               ScaffoldMessenger.of(context).showSnackBar(
                 customSnackBar(
                   context,
@@ -146,10 +177,14 @@ class SkipButton extends StatelessWidget {
         BlocListener<HealthInfoCubit, HealthInfoState>(
           listener: (context, state) {
             if (state is HealthInfoLoading) {
-              isLoading = true;
+              setState(() {
+                isLoading = true;
+              });
             } else if (state is HealthInfoSuccess) {
-              isLoading = false;
-              healthSuccess = true;
+              setState(() {
+                isLoading = false;
+                healthSuccess = true;
+              });
               ScaffoldMessenger.of(context).showSnackBar(
                 customSnackBar(
                   context,
@@ -167,8 +202,10 @@ class SkipButton extends StatelessWidget {
                 );
               }
             } else if (state is HealthInfoFailure) {
-              isLoading = false;
-              healthSuccess = false;
+              setState(() {
+                isLoading = false;
+                healthSuccess = false;
+              });
               ScaffoldMessenger.of(context).showSnackBar(
                 customSnackBar(
                   context,

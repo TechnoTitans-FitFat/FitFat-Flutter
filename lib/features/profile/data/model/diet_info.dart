@@ -1,72 +1,82 @@
-import 'package:fitfat/features/profile/data/model/macronutrient_goals.dart';
+import 'package:equatable/equatable.dart';
 
-class DietInfo {
-  final MacronutrientGoals macronutrientGoals;
-  final String id;
-  final String userId;
+class DietInfo extends Equatable {
   final String dietType;
+  final MacronutrientGoals macronutrientGoals;
   final String dietaryGoals;
   final String activityLevel;
   final String mealPreferences;
-  final int version;
 
-  DietInfo({
-    required this.macronutrientGoals,
-    required this.id,
-    required this.userId,
+  const DietInfo({
     required this.dietType,
+    required this.macronutrientGoals,
     required this.dietaryGoals,
     required this.activityLevel,
     required this.mealPreferences,
-    required this.version,
   });
 
   factory DietInfo.fromJson(Map<String, dynamic> json) {
     return DietInfo(
+      dietType: json['dietType'] as String,
       macronutrientGoals:
-          MacronutrientGoals.fromJson(json['macronutrientGoals'] ?? {}),
-      id: json['_id'] ?? '',
-      userId: json['userId'] ?? '',
-      dietType: json['dietType'] ?? '',
-      dietaryGoals: json['dietaryGoals'] ?? '',
-      activityLevel: json['activityLevel'] ?? '',
-      mealPreferences: json['mealPreferences'] ?? '',
-      version: json['__v'] ?? 0,
+          MacronutrientGoals.fromJson(json['macronutrientGoals']),
+      dietaryGoals: json['dietaryGoals'] as String,
+      activityLevel: json['activityLevel'] as String,
+      mealPreferences: json['mealPreferences'] as String,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'macronutrientGoals': macronutrientGoals.toJson(),
-      '_id': id,
-      'userId': userId,
       'dietType': dietType,
+      'macronutrientGoals': macronutrientGoals.toJson(),
       'dietaryGoals': dietaryGoals,
       'activityLevel': activityLevel,
       'mealPreferences': mealPreferences,
-      '__v': version,
     };
   }
 
-  DietInfo copyWith({
-    MacronutrientGoals? macronutrientGoals,
-    String? id,
-    String? userId,
-    String? dietType,
-    String? dietaryGoals,
-    String? activityLevel,
-    String? mealPreferences,
-    int? version,
-  }) {
-    return DietInfo(
-      macronutrientGoals: macronutrientGoals ?? this.macronutrientGoals,
-      id: id ?? this.id,
-      userId: userId ?? this.userId,
-      dietType: dietType ?? this.dietType,
-      dietaryGoals: dietaryGoals ?? this.dietaryGoals,
-      activityLevel: activityLevel ?? this.activityLevel,
-      mealPreferences: mealPreferences ?? this.mealPreferences,
-      version: version ?? this.version,
+  @override
+  List<Object> get props => [
+        dietType,
+        macronutrientGoals,
+        dietaryGoals,
+        activityLevel,
+        mealPreferences,
+      ];
+}
+
+class MacronutrientGoals extends Equatable {
+  final int proteins;
+  final int carbs;
+  final int fats;
+  final int calories;
+
+  const MacronutrientGoals({
+    required this.proteins,
+    required this.carbs,
+    required this.fats,
+    required this.calories,
+  });
+
+  factory MacronutrientGoals.fromJson(Map<String, dynamic> json) {
+    return MacronutrientGoals(
+      proteins: json['proteins'] as int,
+      carbs: json['carbs'] as int,
+      fats: json['fats'] as int,
+      calories: json['calories'] as int,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'proteins': proteins,
+      'carbs': carbs,
+      'fats': fats,
+      'calories': calories,
+    };
+  }
+
+  @override
+  List<Object> get props => [proteins, carbs, fats, calories];
 }

@@ -1,10 +1,8 @@
-// cubit/user_profile_cubit.dart
-
-import 'package:fitfat/features/profile/presentation/cubit/profile_cubit/profile_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:dio/dio.dart';
-
-import '../../../data/model/profile_model.dart';
+import 'package:fitfat/features/profile/data/model/profile_model.dart';
+import 'package:fitfat/features/profile/presentation/cubit/profile_cubit/profile_state.dart';
 
 class UserProfileCubit extends Cubit<UserProfileState> {
   final Dio _dio;
@@ -12,20 +10,22 @@ class UserProfileCubit extends Cubit<UserProfileState> {
 
   UserProfileCubit({Dio? dio})
       : _dio = dio ?? Dio(),
-        super(const UserProfileInitial());
+        super(UserProfileInitial());
 
-  /// Fetch user profile data
+  // Fetch user profile data
   Future<void> getUserProfile({String? userId, required String token}) async {
     try {
-      emit(const UserProfileLoading());
+      emit(UserProfileLoading());
 
       final String url = userId != null ? '$_baseUrl/$userId' : _baseUrl;
 
-      final response = await _dio.get(url,
-          options: Options(headers: {
-            'Authorization': 'Bearer $token',
-          }));
-
+      final response = await _dio.get(
+        url,
+        options: Options(headers: {
+          'Authorization': 'Bearer $token',
+        }),
+      );
+      print(response.data);
       if (response.statusCode == 200) {
         final userProfile = UserProfileModel.fromJson(response.data);
         emit(UserProfileLoaded(userProfile: userProfile));
@@ -37,7 +37,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
       }
     } on DioException catch (e) {
       emit(UserProfileError(
-        message: e.toString(),
+        message: e.response?.data['message']?.toString() ?? 'Network error',
         errorCode: e.response?.statusCode.toString(),
       ));
     } catch (e) {

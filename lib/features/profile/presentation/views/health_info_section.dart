@@ -1,6 +1,6 @@
+import 'package:fitfat/features/profile/presentation/views/custom_dropdown.dart';
+import 'package:fitfat/features/profile/presentation/views/custom_text_field.dart';
 import 'package:flutter/material.dart';
-import 'custom_dropdown.dart';
-import 'custom_text_field.dart';
 
 class HealthInfoSection extends StatelessWidget {
   final String selectedAllergy;
@@ -28,7 +28,7 @@ class HealthInfoSection extends StatelessWidget {
         CustomDropdown(
           label: 'Allergies',
           value: selectedAllergy,
-          items: ['None', 'Peanuts', 'Dairy', 'Gluten', 'Shellfish'],
+          items: ['None', 'Peanuts', 'Lactose', 'Wheat', 'Shellfish'],
           onChanged: onAllergyChanged,
         ),
         const SizedBox(height: 16),

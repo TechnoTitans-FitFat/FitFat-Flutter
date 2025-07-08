@@ -30,7 +30,9 @@ class ProfileInfoLoaded extends StatelessWidget {
         const SizedBox(height: 20),
         GeneralInfoSection(healthInfo: healthInfo),
         const DividerSection(),
-        HealthInfoSection(healthInfo: healthInfo),
+        HealthInfoSection(
+          healthInfo: healthInfo,
+        ),
         const DividerSection(),
         DietInfoSection(dietInfo: dietInfo)
       ],

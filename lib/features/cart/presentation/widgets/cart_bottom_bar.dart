@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 
 class CartBottomBar extends StatefulWidget {
   final List<CartItem> cartItems;
+  final void Function()? onPressed;
 
-  const CartBottomBar({super.key, required this.cartItems});
+  const CartBottomBar({super.key, required this.cartItems, this.onPressed});
 
   @override
   State<CartBottomBar> createState() => _CartBottomBarState();
@@ -101,6 +102,7 @@ class _CartBottomBarState extends State<CartBottomBar> {
               ),
               Center(
                   child: CustomButtonCart(
+                onPressed: widget.onPressed,
                 color: context.theme.mainColor,
                 text: 'Checkout',
               )),

@@ -8,9 +8,11 @@ class CustomCardCategory extends StatelessWidget {
     super.key,
     required this.text,
     required this.img,
+    this.color,
   });
   final String text;
   final String img;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,6 +42,7 @@ class CustomCardCategory extends StatelessWidget {
                 img,
                 height: 70,
                 width: 70,
+                color: color,
               ),
               const SizedBox(
                 height: 4,

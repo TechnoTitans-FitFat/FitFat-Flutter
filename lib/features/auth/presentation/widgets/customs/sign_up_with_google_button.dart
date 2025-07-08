@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:fitfat/core/extensions/context_color_extension.dart';
+import 'package:fitfat/core/helper/show_snack_bar.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/main/presentaion/views/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -61,9 +64,11 @@ class _SignUpWithGoogleButtonState extends State<SignUpWithGoogleButton> {
       // Show error message to user
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Sign-in failed: ${error.toString()}'),
-            backgroundColor: Colors.red,
+          customSnackBar(
+            context,
+            "Error",
+            "Sign-in failed",
+            SnackBarType.success,
           ),
         );
       }

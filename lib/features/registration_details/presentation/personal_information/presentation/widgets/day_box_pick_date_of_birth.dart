@@ -40,7 +40,7 @@ class _DayBoxPickDateOfBirthState extends State<DayBoxPickDateOfBirth> {
           ),
           hintText: "$_selectedDay",
           dropdownMenuEntries: List.generate(31, (index) {
-            int day = index + 2;
+            int day = index + 1;
             return DropdownMenuEntry(value: day, label: "$day");
           }),
           onSelected: (int? newDay) {
@@ -48,9 +48,8 @@ class _DayBoxPickDateOfBirthState extends State<DayBoxPickDateOfBirth> {
               setState(() {
                 _selectedDay = newDay;
               });
-              widget.onDaySelected(_selectedDay); // Pass the selected day
+              widget.onDaySelected(_selectedDay);
             }
-            print(_selectedDay);
           },
         ),
       ],

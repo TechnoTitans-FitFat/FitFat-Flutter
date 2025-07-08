@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/widgets/custom_card_category.dart';
 import 'package:fitfat/features/menu/chicken/presentation/views/chicken_view.dart';
 import 'package:fitfat/features/menu/sandwich/presentation/views/sandwich_view.dart';
@@ -9,42 +10,45 @@ class CategoriesMenuList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Expanded(
             child: GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChickenView()));
-              },
-              child:const CustomCardCategory(
-                        text: 'Chicken',
-                        img: 'assets/icons/chickenn.svg',
-                      ),
-            )
-        ),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ChickenView()));
+          },
+          child: CustomCardCategory(
+            text: 'Chicken',
+            img: 'assets/icons/chickenn.svg',
+            color: context.theme.blackColor,
+          ),
+        )),
         Expanded(
             child: GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const SandwichView()));
-              },
-              child:const CustomCardCategory(
-                        text: 'Sandwich',
-                        img: 'assets/icons/sandowichh.svg',
-                      ),
-            )
-        ),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SandwichView()));
+          },
+          child: CustomCardCategory(
+            text: 'Sandwich',
+            img: 'assets/icons/sandowichh.svg',
+            color: context.theme.blackColor,
+          ),
+        )),
         Expanded(
             child: GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const SoupView()));
-              },
-              child:const CustomCardCategory(
-                        text: 'Soup',
-                        img: 'assets/icons/soupp.svg',
-                      ),
-            )
-        )
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SoupView()));
+          },
+          child: CustomCardCategory(
+            text: 'Soup',
+            img: 'assets/icons/soupp.svg',
+            color: context.theme.blackColor,
+          ),
+        ))
       ],
     );
   }

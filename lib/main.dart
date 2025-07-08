@@ -50,17 +50,16 @@ import 'package:fitfat/features/registration_details/data/cubit/health_info_cubi
 import 'package:fitfat/features/search/data/search_cubit/search_cubit.dart';
 import 'package:fitfat/features/search/data/search_history/search_history_cubit.dart';
 import 'package:fitfat/features/settings/data/settings_cubit/account_settings_cubit.dart';
+import 'package:fitfat/features/splash/presentation/views/splash_view.dart';
 import 'package:fitfat/features/suggestions/data/suggestions_cubit/suggestions_cubit.dart'
     show SuggestionsCubit;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'core/cache/cache_helper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheHelper.init();
   return runApp(
     DevicePreview(
       enabled: !kReleaseMode,
@@ -121,8 +120,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => MealDetailsCubit(DioComsumer(dio: Dio()))),
         BlocProvider(
-            create: (context) => SuggestionsCubit(DioComsumer(dio: Dio()))
-              ..fetchSuggestionsData(context)),
+            create: (context) => SuggestionsCubit(DioComsumer(dio: Dio()))),
         BlocProvider(
           create: (context) => FavouritesCubit(DioComsumer(dio: Dio())),
         ),
@@ -196,7 +194,7 @@ class MyApp extends StatelessWidget {
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: context.themeCubit.themeMode,
-            home: LoginSignUp(DioComsumer(dio: Dio())),
+            home: const SplashView(),
             getPages: [
               GetPage(name: '/', page: () => const LoginSignUp(DioComsumer)),
               GetPage(
@@ -205,10 +203,7 @@ class MyApp extends StatelessWidget {
                   return const OtpScreen();
                 },
               ),
-              // Add OTP Screen route
-            ]
-            // Define initial route
-            ,
+            ],
           );
         },
       ),

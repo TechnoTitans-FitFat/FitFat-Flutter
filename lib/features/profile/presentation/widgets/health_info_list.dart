@@ -26,7 +26,7 @@ class HealthInfoList extends StatelessWidget {
         ),
         LabelWithValueItem(
           label: 'Insulin-to-Carb Ratio',
-          value: healthInfo?.insulinToCardRatio.toString() ?? 'N/A',
+          value: healthInfo?.insulinToCarbRatio.toString() ?? 'N/A',
         ),
         LabelWithValueItem(
           label: 'Correction Factor',

@@ -27,7 +27,7 @@ class BotChatBubble extends StatelessWidget {
               spreadRadius: 0,
             )
           ],
-          color: context.theme.whiteColor1,
+          color: context.theme.whiteColor,
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
