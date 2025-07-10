@@ -5,7 +5,6 @@ import 'package:fitfat/features/search/data/search_history/search_history_cubit.
 import 'package:fitfat/features/search/presentation/widgets/search_result_item.dart';
 import 'package:fitfat/features/search/presentation/widgets/search_text_filed.dart';
 import 'package:flutter/material.dart';
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/search/presentation/widgets/latest_search.dart';
 import 'package:fitfat/features/search/presentation/widgets/meal_dishes.dart';

@@ -41,12 +41,6 @@ class SenderChatBubble extends StatelessWidget {
                 color: context.theme.secondColor,
               ),
             ),
-            Text(
-              "12:00 AM",
-              style: AppStyles.textStyle12normal.copyWith(
-                color: context.theme.whiteColor,
-              ),
-            )
           ],
         ),
       ),
