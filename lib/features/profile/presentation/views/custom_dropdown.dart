@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropdown extends StatelessWidget {
@@ -23,8 +24,7 @@ class CustomDropdown extends StatelessWidget {
           label,
           style: const TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
+            fontWeight: FontWeight.w500,    
           ),
         ),
         const SizedBox(height: 8),
@@ -32,7 +32,7 @@ class CustomDropdown extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
-            color: const Color(0xFFF5F5F5),
+            color: context.theme.whiteColor,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.grey.shade300),
           ),
@@ -46,7 +46,7 @@ class CustomDropdown extends StatelessWidget {
                   child: Text(
                     item,
                     style: TextStyle(
-                      color: item == label ? Colors.grey : Colors.black,
+                      color: item == label ? context.theme.greyColor : context.theme.blackColor,
                     ),
                   ),
                 );

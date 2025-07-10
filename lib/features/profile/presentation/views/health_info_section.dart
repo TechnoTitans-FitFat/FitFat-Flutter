@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/profile/presentation/views/custom_dropdown.dart';
 import 'package:fitfat/features/profile/presentation/views/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class HealthInfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _buildSection(
+      context,
       'Health Information',
       [
         CustomDropdown(
@@ -40,7 +42,7 @@ class HealthInfoSection extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Colors.black,
+                
               ),
             ),
             const SizedBox(height: 8),
@@ -74,7 +76,7 @@ class HealthInfoSection extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Colors.black,
+                
               ),
             ),
             const SizedBox(height: 8),
@@ -103,7 +105,7 @@ class HealthInfoSection extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Colors.black,
+                
               ),
             ),
             const SizedBox(height: 8),
@@ -130,11 +132,11 @@ class HealthInfoSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(String title, List<Widget> children) {
+  Widget _buildSection(BuildContext context,String title, List<Widget> children) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.theme.whiteColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -153,7 +155,7 @@ class HealthInfoSection extends StatelessWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              
             ),
           ),
           const SizedBox(height: 16),

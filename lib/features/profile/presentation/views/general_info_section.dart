@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:flutter/material.dart';
 import 'custom_dropdown.dart';
 import 'custom_text_field.dart';
@@ -31,6 +32,7 @@ class GeneralInfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _buildSection(
+      context,
       'General Information',
       [
         CustomDropdown(
@@ -48,7 +50,7 @@ class GeneralInfoSection extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Colors.black,
+                
               ),
             ),
             const SizedBox(height: 8),
@@ -124,11 +126,11 @@ class GeneralInfoSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(String title, List<Widget> children) {
+  Widget _buildSection(BuildContext context, title, List<Widget> children) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.theme.whiteColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -146,8 +148,7 @@ class GeneralInfoSection extends StatelessWidget {
             title,
             style: const TextStyle(
               fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+              fontWeight: FontWeight.bold,   
             ),
           ),
           const SizedBox(height: 16),
