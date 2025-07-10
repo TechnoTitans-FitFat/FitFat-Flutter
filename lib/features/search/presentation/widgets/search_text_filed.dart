@@ -26,7 +26,7 @@ class SearchTextFiled extends StatelessWidget {
               hintText: "Search",
               hintStyle: AppStyles.textStyle16.copyWith(
                 fontWeight: FontWeight.w400,
-                color: context.theme.whiteColor,
+                color: context.theme.greyColor,
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),
@@ -48,7 +48,10 @@ class SearchTextFiled extends StatelessWidget {
               ),
               prefixIcon: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Image.asset(Assets.icons.searchNormal.path),
+                child: Image.asset(
+                  Assets.icons.searchNormal.path,
+                  color: context.theme.greyColor,
+                  ),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),

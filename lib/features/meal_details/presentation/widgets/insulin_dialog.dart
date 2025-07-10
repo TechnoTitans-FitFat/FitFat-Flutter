@@ -56,7 +56,7 @@ class _InsulinDialogState extends State<InsulinDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: context.theme.whiteColor1,
+      backgroundColor: context.theme.backgroundColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(31),
       ),
