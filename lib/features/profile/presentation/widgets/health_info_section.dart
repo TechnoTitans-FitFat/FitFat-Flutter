@@ -1,4 +1,3 @@
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/features/profile/data/model/health_info.dart';
 import 'package:fitfat/features/profile/presentation/widgets/health_info_list.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,6 @@ class HealthInfoSection extends StatelessWidget {
           style: GoogleFonts.roboto(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: AppLightColor.blackColor,
           ),
         ),
         HealthInfoList(healthInfo: healthInfo),

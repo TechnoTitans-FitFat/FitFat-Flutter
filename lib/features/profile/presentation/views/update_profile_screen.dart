@@ -1,3 +1,4 @@
+import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -102,7 +103,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ],
       child: Scaffold(
-        backgroundColor: const Color(0xFFF8D7DA),
+        backgroundColor: context.theme.secondColor,
         appBar: _buildAppBar(),
         body: _buildBody(),
       ),
@@ -111,10 +112,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: const Color(0xFFF8D7DA),
+      backgroundColor: context.theme.secondColor,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        icon: const Icon(Icons.arrow_back, ),
         onPressed: () => Navigator.pop(context),
       ),
       title: const Text(
