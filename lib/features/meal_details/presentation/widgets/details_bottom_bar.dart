@@ -38,6 +38,7 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
       .map((e) => e.trim())
       .toList();
 
+
   final mealAllergies =
       widget.meal.allergy.map((e) => e.toLowerCase()).toList();
 
@@ -45,11 +46,15 @@ class _DetailsBottomBarState extends State<DetailsBottomBar> {
 
  
   if (!hasMatch) {
-    final firstUserAllergy = userAllergies.isNotEmpty ? userAllergies.first : '';
-    _showAllergenDialog(context, firstUserAllergy); 
-  } else {
+  if (userAllergies.length == 1 && userAllergies.first.toLowerCase().trim() == 'none') {
     _addToCart(context);
+  } else {
+    final firstUserAllergy = userAllergies.isNotEmpty ? userAllergies.first : '';
+    _showAllergenDialog(context, firstUserAllergy);
   }
+} else {
+  _addToCart(context);
+}
 }
 
   void _addToCart(BuildContext context) {
