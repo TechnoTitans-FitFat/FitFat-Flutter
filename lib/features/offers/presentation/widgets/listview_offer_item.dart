@@ -1,9 +1,11 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:fitfat/features/offers/data/model/offer_model.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListviewOfferItem extends StatelessWidget {
   const ListviewOfferItem({super.key, required this.item});
@@ -125,13 +127,21 @@ class ListviewOfferItem extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Container(
-                          height: 35,
-                          width: 35,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                        GestureDetector(
+                          onTap: () {
+                    context.read<CartCubit>()
+                      ..productId = item.id
+                      ..quantity = 1
+                      ..addCartAndIncrement(context: context);
+                  },
+                          child: Container(
+                            height: 35,
+                            width: 35,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Image.asset(Assets.icons.add.path),
                           ),
-                          child: Image.asset(Assets.icons.add.path),
                         ),
                       ],
                     ),
