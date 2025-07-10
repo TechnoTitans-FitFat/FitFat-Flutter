@@ -1,9 +1,7 @@
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:fitfat/features/search/data/models/search_model.dart';
-import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class SearchResultItem extends StatelessWidget {
@@ -99,14 +97,7 @@ class SearchResultItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Image.asset(Assets.icons.add.path),
-                      ),
+                      
                     ],
                   ),
                 ],

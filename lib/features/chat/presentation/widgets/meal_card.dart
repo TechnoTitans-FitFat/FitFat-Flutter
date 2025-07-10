@@ -1,7 +1,7 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/chat/data/models/chat_bot_model.dart';
-import 'package:fitfat/gen/assets.gen.dart';
+import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
 
 class MealCard extends StatelessWidget {
@@ -15,11 +15,18 @@ class MealCard extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.network(
-            meal.image,
-            height: 150,
-            width: 150,
-            fit: BoxFit.cover,
+          child: GestureDetector(
+            onTap: (){
+              Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailsView(mealId: meal.id,)));
+            },
+            child: Image.network(
+              meal.image,
+              height: 150,
+              width: 150,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         Expanded(
@@ -113,19 +120,7 @@ class MealCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  GestureDetector(
-                    //onTap: onFavouriteTap,
-                    child: Container(
-                      height: 35,
-                      width: 35,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Image.asset(
-                        Assets.icons.add.path,
-                      ),
-                    ),
-                  ),
+                  
                 ],
               ),
             ],
