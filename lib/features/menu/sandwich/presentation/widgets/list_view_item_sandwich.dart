@@ -2,7 +2,6 @@ import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:fitfat/features/menu/sandwich/data/models/sandwich_model.dart';
-import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class ListViewItemSandwich extends StatelessWidget {
@@ -96,14 +95,7 @@ final SandwichModel meal;
                           ),
                         ],
                       ),
-                      Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Image.asset(Assets.icons.add.path),
-                      ),
+                     
                     ],
                   ),
                 ],
