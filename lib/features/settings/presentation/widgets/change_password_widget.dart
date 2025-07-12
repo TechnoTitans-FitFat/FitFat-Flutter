@@ -11,6 +11,7 @@ class ChangePasswordWidget extends StatelessWidget {
   final VoidCallback onSave;
   final VoidCallback onVerifyOTP;
   final VoidCallback onConfirmChange;
+  final VoidCallback? onCancel;
   final bool showOTPField;
   final bool otpVerified;
 
@@ -24,6 +25,7 @@ class ChangePasswordWidget extends StatelessWidget {
     required this.onSave,
     required this.onVerifyOTP,
     required this.onConfirmChange,
+    this.onCancel,
     required this.showOTPField,
     required this.otpVerified,
   }) : super(key: key);
@@ -113,19 +115,38 @@ class ChangePasswordWidget extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: onVerifyOTP,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: onVerifyOTP,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            child: const Text('Verify Code'),
                           ),
                         ),
-                        child: const Text('Verify Code'),
-                      ),
+                        if (onCancel != null) ...[
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: onCancel,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text('Cancel'),
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ],
                   if (showOTPField && otpVerified) ...[
@@ -180,19 +201,38 @@ class ChangePasswordWidget extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: onSave,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: onSave,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            child: const Text('Save Change'),
                           ),
                         ),
-                        child: const Text('Save Change'),
-                      ),
+                        if (onCancel != null) ...[
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: onCancel,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text('Cancel'),
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ],
                   const SizedBox(height: 16),

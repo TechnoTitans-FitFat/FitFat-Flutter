@@ -7,7 +7,6 @@ import 'package:fitfat/features/search/presentation/widgets/search_text_filed.da
 import 'package:flutter/material.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/search/presentation/widgets/latest_search.dart';
-import 'package:fitfat/features/search/presentation/widgets/meal_dishes.dart';
 import 'package:fitfat/features/search/presentation/widgets/most_popular_search.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,25 +20,25 @@ class SearchPageBody extends StatefulWidget {
 class _SearchPageBodyState extends State<SearchPageBody> {
   bool hasSearched = false;
 
- @override
+  @override
   void initState() {
-     super.initState();
+    super.initState();
 
-  final token = context.read<LoginCubit>().user?.token;
+    final token = context.read<LoginCubit>().user?.token;
 
-  if (token != null) {
-    context.read<SearchHistoryCubit>().getLatestSearches(context);
+    if (token != null) {
+      context.read<SearchHistoryCubit>().getLatestSearches(context);
+    }
   }
+
+  void _onSearch(String query) {
+    if (query.trim().isEmpty) return;
+    print("Searching for: $query");
+    setState(() {
+      hasSearched = true;
+    });
+    context.read<SearchCubit>().searchRecipes(query);
   }
-  
- void _onSearch(String query) {
-  if (query.trim().isEmpty) return;
-  print("Searching for: $query"); 
-  setState(() {
-    hasSearched = true;
-  });
-  context.read<SearchCubit>().searchRecipes(query);
-}
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +49,6 @@ class _SearchPageBodyState extends State<SearchPageBody> {
         children: [
           SearchTextFiled(onSubmitted: _onSearch),
           const SizedBox(height: 20),
-
-          
           Expanded(
             child: BlocBuilder<SearchCubit, SearchState>(
               builder: (context, state) {
@@ -60,14 +57,14 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Latest Search', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: context.theme.mainColor)),
+                        Text('Latest Search',
+                            style: AppStyles.textStyle24.copyWith(
+                                fontSize: 20, color: context.theme.mainColor)),
                         LatestSearch(),
                         const SizedBox(height: 25),
-                        Text('Meal Dishes', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: context.theme.mainColor)),
-                        const SizedBox(height: 10),
-                        const MealDishes(),
-                        const SizedBox(height: 25),
-                        Text('Most Popular Search', style: AppStyles.textStyle24.copyWith(fontSize: 20, color: context.theme.mainColor)),
+                        Text('Most Popular Search',
+                            style: AppStyles.textStyle24.copyWith(
+                                fontSize: 20, color: context.theme.mainColor)),
                         const SizedBox(height: 10),
                         MostPopularSearch(onTapItem: _onSearch),
                       ],
@@ -83,10 +80,10 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                     itemCount: state.results.length,
                     itemBuilder: (context, index) {
                       final recipe = state.results[index];
-                       return Padding(
-                         padding: const EdgeInsets.only(bottom: 12),
-                         child: SearchResultItem(recipe: recipe),
-                       );
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: SearchResultItem(recipe: recipe),
+                      );
                     },
                   );
                 } else if (state is SearchFailure) {

@@ -13,14 +13,12 @@ class InputMyDietViewBody extends StatefulWidget {
 
 class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
   final List<String> _dietTypes = [
-    'Balanced',
+    'High-Carb',
     'Low Carb',
     'Keto',
-    'Vegetarian',
     'Vegan',
-    'Paleo'
   ];
-  String _selectedDietType = 'Balanced';
+  String _selectedDietType = 'Low-Carb';
 
   double _proteinPercentage = 30;
   double _carbsPercentage = 40;

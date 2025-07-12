@@ -1,4 +1,3 @@
-import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';

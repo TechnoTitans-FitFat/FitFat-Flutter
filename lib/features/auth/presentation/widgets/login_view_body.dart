@@ -4,7 +4,6 @@ import 'package:fitfat/features/auth/data/Cubit/blocs/auth_bloc/login_state.dart
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_button.dart';
 import 'package:fitfat/features/auth/presentation/widgets/customs/custom_textfield.dart';
 import 'package:fitfat/features/forget_password/presentation/views/forget_password_page.dart';
-import 'package:fitfat/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -119,56 +118,6 @@ class LoginViewBody extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 16),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 80,
-                        child:
-                            Divider(color: context.theme.greyColor, height: 8),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('Or signUp with'),
-                      ),
-                      SizedBox(
-                        width: 80,
-                        child:
-                            Divider(color: context.theme.greyColor, height: 8),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: SizedBox(
-                        width: 25,
-                        child: CircleAvatar(
-                          backgroundColor: context.theme.whiteColor,
-                          child: Assets.icons.google.image(),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.facebook,
-                          color: Colors.blueAccent, size: 30),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.apple_outlined,
-                        size: 40,
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),

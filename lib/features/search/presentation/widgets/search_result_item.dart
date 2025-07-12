@@ -23,17 +23,23 @@ class SearchResultItem extends StatelessWidget {
             Container(
               width: 150,
               height: 150,
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                 color: context.theme.whiteColor,
-                borderRadius:const BorderRadius.all(Radius.circular(15)),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
               ),
               child: GestureDetector(
-                onTap: (){
-                  Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailsView(mealId: recipe.id,)));
-                },
-                child: Image.network(recipe.image, fit: BoxFit.cover)),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsView(
+                          mealId: recipe.id,
+                          isMenu: true,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Image.network(recipe.image, fit: BoxFit.cover)),
             ),
             const SizedBox(width: 20),
             Expanded(
@@ -93,13 +99,9 @@ class SearchResultItem extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 5),
-                          Text(
-                            'EGP',
-                            style: AppStyles.textStyle16
-                          ),
+                          Text('EGP', style: AppStyles.textStyle16),
                         ],
                       ),
-                      
                     ],
                   ),
                 ],

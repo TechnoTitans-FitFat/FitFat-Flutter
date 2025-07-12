@@ -13,6 +13,7 @@ class SuggestionGridViewItem extends StatelessWidget {
     required this.price,
     required this.calories,
     required this.id,
+    required this.isMenu,
   });
 
   final String imageUrl;
@@ -20,6 +21,7 @@ class SuggestionGridViewItem extends StatelessWidget {
   final double price;
   final String calories;
   final String id;
+  final bool isMenu;
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +45,14 @@ class SuggestionGridViewItem extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailsView(
-                              mealId: id,
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailsView(
+                      mealId: id,
+                      isMenu: isMenu,
+                    ),
+                  ),
+                );
               },
               child: Hero(
                 tag: imageUrl,

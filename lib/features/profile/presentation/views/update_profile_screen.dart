@@ -7,17 +7,12 @@ import 'package:fitfat/features/profile/presentation/cubit/health_info_cubit/upd
 import 'package:fitfat/features/profile/presentation/cubit/profile_cubit/profile_cubit.dart';
 import 'package:fitfat/features/profile/presentation/views/health_info_section.dart';
 import 'package:fitfat/features/profile/presentation/widgets/nutrition_info_section.dart';
-import 'package:fitfat/features/profile/data/model/diet_info.dart'
-    hide DietInfo, MacronutrientGoals;
-import 'package:fitfat/features/profile/data/model/health_info.dart'
-    hide HealthInfo, BloodSugarRange;
 import 'general_info_section.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final Map<String, dynamic> initialData;
   final String userId;
-  final String?
-      userToken; // Pass token directly instead of accessing LoginCubit
+  final String? userToken;
 
   const EditProfileScreen({
     Key? key,
@@ -31,7 +26,6 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  // Controllers
   final _heightController = TextEditingController();
   final _weightController = TextEditingController();
   final _insulinCarbController = TextEditingController();
@@ -41,7 +35,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _fatsController = TextEditingController();
   final _caloriesController = TextEditingController();
 
-  // Dropdown values
   String selectedGender = 'Female';
   String selectedMonth = 'January';
   String selectedDay = '1';
@@ -79,16 +72,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _caloriesController.text =
         data['macronutrientGoals']?['calories']?.toString() ?? '1500';
 
-    selectedGender = data['gender'] ?? 'Female';
-    selectedMonth = data['dateOfBirth']?['month'] ?? 'January';
-    selectedDay = data['dateOfBirth']?['day'] ?? '1';
-    selectedYear = data['dateOfBirth']?['year'] ?? '1990';
-    selectedAllergy = data['foodAllergies'] ?? 'None';
-    selectedDietType = data['dietType'] ?? 'Keto';
-    selectedDietaryGoal = data['dietaryGoals'] ?? 'Weight Loss';
-    selectedActivityLevel = data['activityLevel'] ?? 'Moderately Active';
-    selectedMealPreference = data['mealPreferences'] ?? 'Vegetarian';
-    selectedDiabetesType = data['diabetesType'] ?? 'None';
+    selectedGender = data['gender']?.toString() ?? 'Female';
+    selectedMonth = data['dateOfBirth']?['month']?.toString() ?? 'January';
+    selectedDay = data['dateOfBirth']?['day']?.toString() ?? '1';
+    selectedYear = data['dateOfBirth']?['year']?.toString() ?? '1990';
+    selectedAllergy = data['foodAllergies']?.toString() ?? 'None';
+    selectedDietType = data['dietType']?.toString() ?? 'Keto';
+    selectedDietaryGoal = data['dietaryGoals']?.toString() ?? 'Weight Loss';
+    selectedActivityLevel =
+        data['activityLevel']?.toString() ?? 'Moderately Active';
+    selectedMealPreference =
+        data['mealPreferences']?.toString() ?? 'Vegetarian';
+    selectedDiabetesType = data['diabetesType']?.toString() ?? 'None';
   }
 
   @override
@@ -115,7 +110,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       backgroundColor: context.theme.secondColor,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back, ),
+        icon: const Icon(Icons.arrow_back),
         onPressed: () => Navigator.pop(context),
       ),
       title: const Text(
@@ -247,6 +242,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           BlocProvider.of<LoginCubit>(context, listen: false).user?.token;
       if (token != null) {
         BlocProvider.of<UserProfileCubit>(context).getUserProfile(token: token);
+        BlocProvider.of<UserProfileCubit>(context).getUserProfile(token: token);
       }
       context
           .read<UpdateDietInfoCubit>()
@@ -299,7 +295,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     _showSnackBar(message, Colors.green);
 
-    // Refresh profile if token is available
     if (widget.userToken != null) {
       context.read<UserProfileCubit>().getUserProfile(
             token: widget.userToken!,

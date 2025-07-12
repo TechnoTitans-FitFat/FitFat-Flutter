@@ -42,7 +42,7 @@ class NutritionInfoSection extends StatelessWidget {
         CustomDropdown(
           label: 'Diet Type',
           value: selectedDietType,
-          items: ['Keto', 'Paleo', 'Mediterranean', 'Low Carb', 'Balanced'],
+          items: const ['High-Carb', 'Low-Carb', 'Keto', 'Vegan'],
           onChanged: onDietTypeChanged,
         ),
         const SizedBox(height: 16),
@@ -102,11 +102,11 @@ class NutritionInfoSection extends StatelessWidget {
         CustomDropdown(
           label: 'Dietary Goals',
           value: selectedDietaryGoal,
-          items: [
+          items: const [
             'Weight Loss',
             'Weight Gain',
-            'Maintenance',
-            'Muscle Building'
+            'Weight Maintain',
+            'Muscle Gain'
           ],
           onChanged: onDietaryGoalChanged,
         ),
@@ -114,12 +114,11 @@ class NutritionInfoSection extends StatelessWidget {
         CustomDropdown(
           label: 'Activity Level',
           value: selectedActivityLevel,
-          items: [
+          items: const [
             'Sedentary',
             'Lightly Active',
-            'Moderately Active',
-            'Very Active',
-            'Extremely Active'
+            'Moderately Active ',
+            'Very Active'
           ],
           onChanged: onActivityLevelChanged,
         ),
@@ -127,12 +126,11 @@ class NutritionInfoSection extends StatelessWidget {
         CustomDropdown(
           label: 'Meal Preferences',
           value: selectedMealPreference,
-          items: [
+          items: const [
             'Vegetarian',
+            "Gluten-Free",
             'Vegan',
-            'Pescatarian',
-            'Omnivore',
-            'Carnivore'
+            "Keto",
           ],
           onChanged: onMealPreferenceChanged,
         ),
@@ -140,7 +138,8 @@ class NutritionInfoSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(BuildContext context,String title, List<Widget> children) {
+  Widget _buildSection(
+      BuildContext context, String title, List<Widget> children) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(

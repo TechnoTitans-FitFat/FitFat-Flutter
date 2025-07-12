@@ -138,6 +138,7 @@ class _MainScreenState extends State<MainScreen> {
                       );
                     } else if (state is SuggestionsSuccess) {
                       return const CustomSuggestionsGridView(
+                        isMenu: false,
                         gridType: GridType.mainScreen,
                       );
                     } else if (state is SuggestionsFailure) {

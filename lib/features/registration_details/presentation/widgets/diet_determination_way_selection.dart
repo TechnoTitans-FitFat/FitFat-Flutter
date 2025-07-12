@@ -32,7 +32,7 @@ class DietDeterminationWaySelection extends StatelessWidget {
                 widgetColor: AppLightColor.blackColor,
                 background: AppLightColor.whiteColor,
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => InputMyDietView(
@@ -54,7 +54,7 @@ class DietDeterminationWaySelection extends StatelessWidget {
                 widgetColor: AppLightColor.blackColor,
                 background: AppLightColor.whiteColor,
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
+                  Navigator.pushReplacement(context, MaterialPageRoute(
                     builder: (context) {
                       return CalculateDietView(userId: userId);
                     },
