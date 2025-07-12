@@ -12,6 +12,7 @@ import 'package:fitfat/features/settings/presentation/widgets/custom_dialog.dart
 import 'package:fitfat/features/settings/presentation/widgets/custom_list_tile_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fitfat/core/utils/auth_utils.dart';
 
 class AccountSettingsView extends StatelessWidget {
   const AccountSettingsView({super.key});
@@ -44,8 +45,8 @@ class AccountSettingsView extends StatelessWidget {
                 customSnackBar(
                   context,
                   "Error",
-                  "Account Setting faild: ${state.errorMessage}",
-                  SnackBarType.success,
+                  "Account Setting failed: ${state.errorMessage}",
+                  SnackBarType.error,
                 ),
               );
               context.read<AccountSettingsCubit>().clearMessages();
@@ -86,6 +87,8 @@ class AccountSettingsView extends StatelessWidget {
                     SnackBarType.success,
                   ),
                 );
+                // Update AccountSettingsCubit state to show password fields
+                context.read<AccountSettingsCubit>().setOtpVerified(true);
                 break;
               case ForgotPasswordStatus.resetSuccess:
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -96,16 +99,15 @@ class AccountSettingsView extends StatelessWidget {
                     SnackBarType.success,
                   ),
                 );
-                context
-                    .read<AccountSettingsCubit>()
-                    .toggleChangePasswordExpanded();
+                // Reset the change password state
+                context.read<AccountSettingsCubit>().resetChangePasswordState();
                 break;
               case ForgotPasswordStatus.error:
                 ScaffoldMessenger.of(context).showSnackBar(
                   customSnackBar(
                     context,
                     "Error",
-                    'An error occurred',
+                    state.errorMessage ?? 'An error occurred',
                     SnackBarType.error,
                   ),
                 );
@@ -224,12 +226,32 @@ class AccountSettingsView extends StatelessWidget {
                                   .read<ForgotPasswordCubit>()
                                   .verifyOtp(otp);
                             },
+                            onCancel: () {
+                              cubit.cancelPasswordChange();
+                            },
                             showOTPField: state.showOTPField,
                             otpVerified: state.otpVerified,
-                            onConfirmChange: () {
+                            onConfirmChange: () async {
                               cubit.showOTPField();
-                              final email =
-                                  context.read<LoginCubit>().user!.email;
+                              final user = context.read<LoginCubit>().user;
+
+                              // Try to get email from user object first, then from SharedPreferences
+                              String? email = user?.email;
+                              if (email == null || email.isEmpty) {
+                                email = await AuthUtils.getUserEmail();
+                              }
+
+                              if (email == null || email.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  customSnackBar(
+                                    context,
+                                    "Error",
+                                    "Unable to get user email. Please log out and log in again.",
+                                    SnackBarType.error,
+                                  ),
+                                );
+                                return;
+                              }
 
                               context
                                   .read<ForgotPasswordCubit>()

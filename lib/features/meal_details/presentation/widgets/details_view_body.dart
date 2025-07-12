@@ -12,10 +12,12 @@ class DetailsViewBody extends StatefulWidget {
     super.key,
     required this.meal,
     required this.healthInfo,
+    required this.isMenu,
   });
 
   final MealDetailsModel meal;
   final HealthInfo healthInfo;
+  final bool isMenu;
 
   @override
   State<DetailsViewBody> createState() => _DetailsViewBodyState();
@@ -45,6 +47,7 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.isMenu);
     print("Meal Ingredients: ${widget.meal.ingredients}");
     return SingleChildScrollView(
       physics: const NeverScrollableScrollPhysics(),
@@ -114,18 +117,27 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
                             const SizedBox(
                               height: 25,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12),
-                              child: Text(
-                                'Nutrients',
-                                style: AppStyles.textStyle24
-                                    .copyWith(fontSize: 20),
-                              ),
-                            ),
-                            const SizedBox(height: 18),
-                            NutrientsList(
-                              meal: widget.meal,
-                            ),
+                            widget.isMenu != true
+                                ? Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 12),
+                                        child: Text(
+                                          'Nutrients',
+                                          style: AppStyles.textStyle24
+                                              .copyWith(fontSize: 20),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 18),
+                                      NutrientsList(
+                                        meal: widget.meal,
+                                      ),
+                                    ],
+                                  )
+                                : SizedBox(),
                             const SizedBox(
                               height: 25,
                             ),

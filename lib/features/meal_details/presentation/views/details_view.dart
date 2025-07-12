@@ -11,8 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsView extends StatelessWidget {
   final String mealId;
+  final bool isMenu;
 
-  const DetailsView({super.key, required this.mealId});
+  const DetailsView({super.key, required this.mealId, required this.isMenu});
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +42,12 @@ class DetailsView extends StatelessWidget {
 
                   return Column(
                     children: [
-                      Expanded(child: DetailsViewBody(
+                      Expanded(
+                          child: DetailsViewBody(
                         meal: meal,
+                        isMenu: isMenu,
                         healthInfo: healthInfo,
-                        )),
+                      )),
                       DetailsBottomBar(
                         price: meal.price,
                         id: meal.id,

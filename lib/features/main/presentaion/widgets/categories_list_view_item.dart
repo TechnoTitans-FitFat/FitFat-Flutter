@@ -45,9 +45,14 @@ class CategoriesListViewItem extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DetailsView(mealId: id)));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailsView(
+                        mealId: id,
+                        isMenu: true,
+                      ),
+                    ),
+                  );
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),

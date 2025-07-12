@@ -46,6 +46,8 @@ class LoginCubit extends Cubit<LoginStates> {
         final success = await AuthUtils.saveAuthData(
           token: user!.token,
           userId: decodedToken['id'],
+          email: user!.email,
+          name: user!.name,
         );
 
         if (!success) {
@@ -76,16 +78,18 @@ class LoginCubit extends Cubit<LoginStates> {
       final isAuthenticated = await AuthUtils.isAuthenticated();
 
       if (isAuthenticated) {
-        // Update user object with current token
+        // Get stored data from SharedPreferences
         final token = await AuthUtils.getToken();
         final userId = await AuthUtils.getUserId();
+        final email = await AuthUtils.getUserEmail();
+        final name = await AuthUtils.getUserName();
 
         if (token != null && userId != null) {
           user = SignInModel(
             token: token,
             id: userId,
-            name: '', // We don't store name in SharedPreferences
-            email: '', // We don't store email in SharedPreferences
+            name: name ?? '',
+            email: email ?? '',
           );
           return true;
         }

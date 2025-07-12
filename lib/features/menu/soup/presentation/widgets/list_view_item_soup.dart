@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class ListViewItemSoup extends StatelessWidget {
   const ListViewItemSoup({super.key, required this.meal});
-final SoupModel meal;
+  final SoupModel meal;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -21,27 +21,30 @@ final SoupModel meal;
             Container(
               width: 150,
               height: 150,
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                 color: context.theme.whiteColor,
-                borderRadius:const BorderRadius.all(Radius.circular(15)),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
               ),
               child: GestureDetector(
-                onTap: (){
-                  Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailsView(mealId: meal.id,)));
-                },
-                child: Image.network(meal.image, fit: BoxFit.cover)),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsView(
+                          mealId: meal.id,
+                          isMenu: false,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Image.network(meal.image, fit: BoxFit.cover)),
             ),
             const SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    meal.name,
-                    style: AppStyles.textStyle16
-                  ),
+                  Text(meal.name, style: AppStyles.textStyle16),
                   const SizedBox(height: 10),
                   Container(
                     padding: const EdgeInsets.symmetric(
@@ -89,13 +92,9 @@ final SoupModel meal;
                             ),
                           ),
                           const SizedBox(width: 5),
-                          Text(
-                            'EGP',
-                            style: AppStyles.textStyle16
-                          ),
+                          Text('EGP', style: AppStyles.textStyle16),
                         ],
                       ),
-                      
                     ],
                   ),
                 ],

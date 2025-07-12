@@ -1,3 +1,4 @@
+import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fitfat/features/main/presentaion/widgets/custom_card_list_view_item.dart';
 
@@ -16,21 +17,33 @@ class CustomListView extends StatelessWidget {
         final item = items[index];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-          child: CustomCardListViewItem(
-            title: item['title'],
-            imagePath: item['imagePath'],
-            type: item['type'],
-            calories: item['calories'].toString(),
-            showType: item['showType'] ?? true,
-            price: item['price'] is int
-                ? item['price']
-                : int.tryParse(item['price'].toString()) ?? 0,
-            isFavourite: item['favourite'] ?? false,
-            onFavouriteTap: item['onFavouriteTap'], 
-           rating: item['rating'] is double
-        ? item['rating']
-        : double.tryParse(item['rating'].toString()) ?? 0.0,
-            
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailsView(
+                    mealId: item["id"],
+                    isMenu: true,
+                  ),
+                ),
+              );
+            },
+            child: CustomCardListViewItem(
+              title: item['title'],
+              imagePath: item['imagePath'],
+              type: item['type'],
+              calories: item['calories'].toString(),
+              showType: item['showType'] ?? true,
+              price: item['price'] is int
+                  ? item['price']
+                  : int.tryParse(item['price'].toString()) ?? 0,
+              isFavourite: item['favourite'] ?? false,
+              onFavouriteTap: item['onFavouriteTap'],
+              rating: item['rating'] is double
+                  ? item['rating']
+                  : double.tryParse(item['rating'].toString()) ?? 0.0,
+            ),
           ),
         );
       },

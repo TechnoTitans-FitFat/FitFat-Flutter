@@ -43,6 +43,7 @@ class _SuggestionViewState extends State<SuggestionView> {
             children: [
               CustomTextFiledSearch(),
               CustomSuggestionsGridView(
+                isMenu: false,
                 gridType: GridType.suggestions,
               ),
             ],

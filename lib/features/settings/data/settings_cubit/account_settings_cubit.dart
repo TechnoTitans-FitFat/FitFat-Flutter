@@ -65,15 +65,23 @@ class AccountSettingsCubit extends Cubit<AccountSettingsState> {
     // Then request OTP is handled in the view by calling ForgotPasswordCubit
   }
 
+  void setOtpVerified(bool verified) {
+    emit(state.copyWith(otpVerified: verified));
+  }
+
   Future<void> deleteAccount(String token) async {
     try {
       emit(state.copyWith(isLoading: true));
       await apiConsumer.delete(
-        'https://fitfat-backend.up.railway.app/users',
+        EndPoint.profile,
         options: Options(headers: {
           "Authorization": "Bearer $token",
         }),
       );
+
+      // Clear local authentication data after successful deletion
+      await AuthUtils.clearAuthData();
+
       emit(state.copyWith(
           isLoading: false,
           accountDeleted: true,
@@ -94,12 +102,35 @@ class AccountSettingsCubit extends Cubit<AccountSettingsState> {
     }
   }
 
-  void setOtpVerified(bool verified) {
-    emit(state.copyWith(otpVerified: verified));
-  }
-
   void clearMessages() {
     emit(state.copyWith(errorMessage: '', successMessage: ''));
+  }
+
+  void resetChangePasswordState() {
+    // Clear all controllers
+    newPasswordController.clear();
+    confirmPasswordController.clear();
+    otpController.clear();
+
+    // Reset state
+    emit(state.copyWith(
+      changePasswordExpanded: false,
+      showOTPField: false,
+      otpVerified: false,
+    ));
+  }
+
+  void cancelPasswordChange() {
+    // Clear all controllers
+    newPasswordController.clear();
+    confirmPasswordController.clear();
+    otpController.clear();
+
+    // Reset state but keep expanded state as false
+    emit(state.copyWith(
+      showOTPField: false,
+      otpVerified: false,
+    ));
   }
 
   @override

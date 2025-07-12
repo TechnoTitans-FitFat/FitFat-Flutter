@@ -16,10 +16,16 @@ class MealCard extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: GestureDetector(
-            onTap: (){
-              Navigator.push(context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailsView(mealId: meal.id,)));
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailsView(
+                    mealId: meal.id,
+                    isMenu: true,
+                  ),
+                ),
+              );
             },
             child: Image.network(
               meal.image,
@@ -120,7 +126,6 @@ class MealCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  
                 ],
               ),
             ],

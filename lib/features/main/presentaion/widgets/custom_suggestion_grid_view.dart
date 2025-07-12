@@ -16,9 +16,13 @@ enum GridType { mainScreen, suggestions, menu }
 class CustomSuggestionsGridView extends StatefulWidget {
   final GridType gridType;
   final isNoneAllergy;
+  final bool isMenu;
 
   const CustomSuggestionsGridView(
-      {super.key, required this.gridType, this.isNoneAllergy});
+      {super.key,
+      required this.gridType,
+      this.isNoneAllergy,
+      required this.isMenu});
 
   @override
   State<CustomSuggestionsGridView> createState() =>
@@ -153,6 +157,7 @@ class _CustomSuggestionsGridViewState extends State<CustomSuggestionsGridView> {
             calories: item.calories,
             price: item.price,
             id: item.id,
+            isMenu: widget.isMenu,
           );
         },
       );

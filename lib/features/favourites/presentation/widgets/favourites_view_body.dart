@@ -23,9 +23,9 @@ class _FavouritesViewBodyState extends State<FavouritesViewBody> {
   Widget build(BuildContext context) {
     return BlocListener<FavouritesCubit, FavouritesState>(
       listener: (context, state) {
-       if (state is FavouritesSuccess) {
-        setState(() {}); 
-      }
+        if (state is FavouritesSuccess) {
+          setState(() {});
+        }
       },
       child: BlocBuilder<FavouritesCubit, FavouritesState>(
         builder: (context, state) {
@@ -38,6 +38,7 @@ class _FavouritesViewBodyState extends State<FavouritesViewBody> {
           } else if (state is FavouritesSuccess) {
             final items = state.data
                 .map((fav) => {
+                      'id': fav.id,
                       'title': fav.name,
                       'imagePath': fav.image,
                       'calories': fav.calories,
@@ -45,8 +46,10 @@ class _FavouritesViewBodyState extends State<FavouritesViewBody> {
                       'price': fav.price,
                       'rating': fav.rating,
                       'favourite': true,
-                       'onFavouriteTap': () {
-                        context.read<FavouritesCubit>().deleteFromFavourite(context, fav.id); 
+                      'onFavouriteTap': () {
+                        context
+                            .read<FavouritesCubit>()
+                            .deleteFromFavourite(context, fav.id);
                       },
                     })
                 .toList();

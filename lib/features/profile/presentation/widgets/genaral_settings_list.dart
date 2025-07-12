@@ -38,14 +38,6 @@ class GenaralSettingsList extends StatelessWidget {
             );
           },
         ),
-        const AccountSettingsItem(
-          icon: Icons.support_agent,
-          title: 'Contact Support',
-          trailing: null,
-        ),
-        const SizedBox(
-          height: 8,
-        ),
         AccountSettingsItem(
           icon: Icons.settings,
           title: 'Account Settings',

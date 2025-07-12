@@ -22,7 +22,7 @@ class InputMyDietViewBody extends StatefulWidget {
 
 class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
   bool isLoading = false;
-  String _selectedDietType = '';
+  String _selectedDietType = 'none';
   double _proteinPercentage = 30;
   double _carbsPercentage = 40;
   double _fatPercentage = 30;
@@ -44,7 +44,7 @@ class _InputMyDietViewBodyState extends State<InputMyDietViewBody> {
           "fats": _fatPercentage.round(),
           "calories": _caloriesValue.round(),
         },
-        mealPreferences: "Vegetarian",
+        mealPreferences: "none",
         userId: widget.userId,
       );
     } catch (e) {

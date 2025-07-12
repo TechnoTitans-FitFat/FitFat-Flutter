@@ -91,7 +91,7 @@ class _SkipButtonState extends State<SkipButton> {
 
       if (!healthSuccess && healthState is! HealthInfoSuccess) {
         await healthInfoCubit.postHealthInfo(
-          foodAllergies: widget.foodAllergies ?? "",
+          foodAllergies: widget.foodAllergies ?? "None",
           diabetes: widget.hasDiabetes ?? false ? 1 : 0,
           weight: widget.weight ?? 50,
           height: widget.height ?? 150,

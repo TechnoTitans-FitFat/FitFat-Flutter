@@ -68,7 +68,10 @@ class MenuScreen extends StatelessWidget {
                   );
                 }
               }, builder: (context, state) {
-                return const CustomSuggestionsGridView(gridType: GridType.menu);
+                return const CustomSuggestionsGridView(
+                  gridType: GridType.menu,
+                  isMenu: true,
+                );
               }),
             ],
           ),
