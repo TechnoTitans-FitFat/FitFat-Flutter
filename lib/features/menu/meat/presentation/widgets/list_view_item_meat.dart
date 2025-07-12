@@ -1,13 +1,13 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
 import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
-import 'package:fitfat/features/menu/chicken/data/models/chicken_model.dart';
+import 'package:fitfat/features/menu/meat/data/models/meat_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ListViewItemChicken extends StatelessWidget {
-  const ListViewItemChicken({super.key, required this.meal});
-final ChickenModel meal;
+class ListViewItemMeat extends StatelessWidget {
+  const ListViewItemMeat({super.key, required this.meal});
+final MeatModel meal;
   @override
   Widget build(BuildContext context) {
      return Card(

@@ -1,6 +1,6 @@
 import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/widgets/custom_card_category.dart';
-import 'package:fitfat/features/menu/chicken/presentation/views/chicken_view.dart';
+import 'package:fitfat/features/menu/meat/presentation/views/meat_view.dart';
 import 'package:fitfat/features/menu/sandwich/presentation/views/sandwich_view.dart';
 import 'package:fitfat/features/menu/soup/presentation/views/soup_view.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +17,11 @@ class CategoriesMenuList extends StatelessWidget {
             child: GestureDetector(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ChickenView()));
+                MaterialPageRoute(builder: (context) => const MeatView()));
           },
           child: CustomCardCategory(
-            text: 'Chicken',
-            img: 'assets/icons/chickenn.svg',
+            text: 'Meat',
+            img: 'assets/icons/meat.svg',
             color: context.theme.blackColor,
           ),
         )),
