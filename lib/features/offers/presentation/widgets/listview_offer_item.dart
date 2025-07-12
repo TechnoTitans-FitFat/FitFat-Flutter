@@ -30,7 +30,7 @@ class ListviewOfferItem extends StatelessWidget {
           },
           child: Card(
             elevation: 3,
-            shadowColor: context.theme.blackColor,
+            shadowColor: Colors.black,
             color: context.theme.whiteColor,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -44,7 +44,19 @@ class ListviewOfferItem extends StatelessWidget {
                       color: context.theme.whiteColor,
                       borderRadius: const BorderRadius.all(Radius.circular(15)),
                     ),
-                    child: Image.network(item.image, fit: BoxFit.cover),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailsView(
+                                mealId: item.id,
+                                isMenu: true,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Image.network(item.image, fit: BoxFit.cover)),
                   ),
                   const SizedBox(width: 20),
                   Expanded(
@@ -56,6 +68,8 @@ class ListviewOfferItem extends StatelessWidget {
                           style: AppStyles.textStyle16.copyWith(
                             color: context.theme.blackColor,
                           ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
                         const SizedBox(height: 10),
                         Container(

@@ -44,7 +44,12 @@ class ListViewItemSandwich extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(meal.name, style: AppStyles.textStyle16),
+                  Text(
+                    meal.name,
+                    style: AppStyles.textStyle16,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
                   const SizedBox(height: 10),
                   Container(
                     padding: const EdgeInsets.symmetric(

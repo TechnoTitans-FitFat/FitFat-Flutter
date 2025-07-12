@@ -22,7 +22,7 @@ class CustomCardCategory extends StatelessWidget {
           color: context.theme.whiteColor,
           boxShadow: [
             BoxShadow(
-              color: context.theme.blackColor.withOpacity(0.25),
+              color: Colors.black.withOpacity(0.25),
               blurRadius: 3,
               offset: const Offset(0, 3),
             ),

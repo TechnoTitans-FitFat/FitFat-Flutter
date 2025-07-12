@@ -46,7 +46,12 @@ class SearchResultItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(recipe.name, style: AppStyles.textStyle16),
+                  Text(
+                    recipe.name,
+                    style: AppStyles.textStyle16,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
                   const SizedBox(height: 10),
                   Container(
                     padding: const EdgeInsets.symmetric(

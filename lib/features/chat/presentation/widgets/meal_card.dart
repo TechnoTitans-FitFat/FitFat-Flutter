@@ -45,6 +45,8 @@ class MealCard extends StatelessWidget {
                 style: AppStyles.textStyle16.copyWith(
                   color: context.theme.blackColor,
                 ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
               const SizedBox(height: 10),
               Row(
