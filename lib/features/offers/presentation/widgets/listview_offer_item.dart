@@ -18,7 +18,7 @@ class ListviewOfferItem extends StatelessWidget {
       children: [
        Card(
         elevation: 3,
-        shadowColor: context.theme.blackColor,
+        shadowColor: Colors.black,
         color: context.theme.whiteColor,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
