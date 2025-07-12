@@ -69,6 +69,8 @@ class _CartListItemState extends State<CartListItem> {
                         style: AppStyles.textStyle16.copyWith(
                           color: context.theme.blackColor,
                         ),
+                        overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                       ),
                       const SizedBox(height: 10),
                       Container(

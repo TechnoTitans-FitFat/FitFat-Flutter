@@ -41,7 +41,9 @@ final ChickenModel meal;
                 children: [
                   Text(
                     meal.name,
-                    style: AppStyles.textStyle16
+                    style: AppStyles.textStyle16,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                   ),
                   const SizedBox(height: 10),
                   Container(

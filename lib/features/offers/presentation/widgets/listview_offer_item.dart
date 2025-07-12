@@ -1,6 +1,7 @@
 import 'package:fitfat/core/constants/light_colors.dart';
 import 'package:fitfat/core/extensions/context_color_extension.dart';
 import 'package:fitfat/core/utils/app_styles.dart';
+import 'package:fitfat/features/meal_details/presentation/views/details_view.dart';
 import 'package:fitfat/features/menu/data/cart_cubit/cart_cubit.dart';
 import 'package:fitfat/features/offers/data/model/offer_model.dart';
 import 'package:fitfat/gen/assets.gen.dart';
@@ -31,7 +32,13 @@ class ListviewOfferItem extends StatelessWidget {
                   color: context.theme.whiteColor,
                   borderRadius:const BorderRadius.all(Radius.circular(15)),
                 ),
-                child: Image.network(item.image, fit: BoxFit.cover),
+                child: GestureDetector(
+                  onTap: (){
+                  Navigator.push(context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailsView(mealId: item.id,)));
+                },
+                  child: Image.network(item.image, fit: BoxFit.cover)),
               ),
               const SizedBox(width: 20),
               Expanded(
@@ -43,6 +50,8 @@ class ListviewOfferItem extends StatelessWidget {
                       style: AppStyles.textStyle16.copyWith(
                         color: context.theme.blackColor,
                       ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     ),
                     const SizedBox(height: 10),
                     Container(

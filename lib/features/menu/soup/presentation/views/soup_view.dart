@@ -11,7 +11,7 @@ class SoupView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: context.theme.backgroundColor,
-        appBar: const CustomAppBar(title: 'Sandwiches'),
+        appBar: const CustomAppBar(title: 'Soup'),
         body:const Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
