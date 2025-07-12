@@ -63,16 +63,16 @@ class _SkipButtonState extends State<SkipButton> {
 
       if (!dietSuccess && dietState is! DietInfoSuccess) {
         dietInfoCubit.postDietInfo(
-          activityLevel: widget.selectedActivityLevel ?? "Moderately Active",
+          activityLevel: widget.selectedActivityLevel ?? "None",
           dietType: "Keto",
-          dietaryGoals: widget.selectedDietGoal ?? "Weight loss",
+          dietaryGoals: widget.selectedDietGoal ?? "None",
           macronutrientGoals: {
             "proteins": 0,
             "carbs": 0,
             "fats": 0,
             "calories": 0,
           },
-          mealPreferences: widget.selectedMealType ?? "Vegetarian",
+          mealPreferences: widget.selectedMealType ?? "None",
           userId: widget.userId,
         );
       } else if (dietState is DietInfoSuccess) {

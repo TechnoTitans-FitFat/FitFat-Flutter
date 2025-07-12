@@ -42,7 +42,6 @@ class HealthInfoSection extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                
               ),
             ),
             const SizedBox(height: 8),
@@ -76,7 +75,6 @@ class HealthInfoSection extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                
               ),
             ),
             const SizedBox(height: 8),
@@ -105,7 +103,6 @@ class HealthInfoSection extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                
               ),
             ),
             const SizedBox(height: 8),
@@ -132,7 +129,8 @@ class HealthInfoSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(BuildContext context,String title, List<Widget> children) {
+  Widget _buildSection(
+      BuildContext context, String title, List<Widget> children) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -155,7 +153,6 @@ class HealthInfoSection extends StatelessWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              
             ),
           ),
           const SizedBox(height: 16),

@@ -8,8 +8,12 @@ class ProfileInfoCard extends StatelessWidget {
   const ProfileInfoCard({
     super.key,
     required this.state,
+    required this.onEditPressed,
+    required this.initialData,
   });
   final UserProfileState state;
+  final VoidCallback onEditPressed;
+  final Map<String, dynamic> initialData;
 
   @override
   Widget build(BuildContext context) {
@@ -32,85 +36,14 @@ class ProfileInfoCard extends StatelessWidget {
           : state is UserProfileLoaded
               ? ProfileInfoLoaded(
                   state: state as UserProfileLoaded,
-                  initialData: {
-                      'gender': (state as UserProfileLoaded)
-                          .userProfile
-                          .healthInfo[0]
-                          .gender,
-                      "dateOfBirth": {
-                        'month': 'January',
-                        'day': '15',
-                        'year': '1990',
-                      },
-                      'height': (state as UserProfileLoaded)
-                          .userProfile
-                          .healthInfo[0]
-                          .height,
-                      'weight': (state as UserProfileLoaded)
-                          .userProfile
-                          .healthInfo[0]
-                          .weight,
-                      'allergies': (state as UserProfileLoaded)
-                          .userProfile
-                          .healthInfo[0]
-                          .foodAllergies,
-                      'diabetesType': (state as UserProfileLoaded)
-                          .userProfile
-                          .healthInfo[0]
-                          .diabetesType,
-                      'insulinToCarbRatio': 12,
-                      'correctionFactor': (state as UserProfileLoaded)
-                          .userProfile
-                          .healthInfo[0]
-                          .correctionFactor,
-                      'dietType': (state as UserProfileLoaded)
-                          .userProfile
-                          .dietInfo[0]
-                          .dietType,
-                      'macronutrientGoals': {
-                        'proteins': (state as UserProfileLoaded)
-                            .userProfile
-                            .dietInfo[0]
-                            .macronutrientGoals
-                            .proteins,
-                        'carbs': (state as UserProfileLoaded)
-                            .userProfile
-                            .dietInfo[0]
-                            .macronutrientGoals
-                            .carbs,
-                        'fats': (state as UserProfileLoaded)
-                            .userProfile
-                            .dietInfo[0]
-                            .macronutrientGoals
-                            .fats,
-                        'calories': (state as UserProfileLoaded)
-                            .userProfile
-                            .dietInfo[0]
-                            .macronutrientGoals
-                            .calories,
-                      },
-                      'dietaryGoals': (state as UserProfileLoaded)
-                          .userProfile
-                          .dietInfo[0]
-                          .dietaryGoals,
-                      'activityLevel': (state as UserProfileLoaded)
-                          .userProfile
-                          .dietInfo[0]
-                          .activityLevel,
-                      'mealPreferences': (state as UserProfileLoaded)
-                          .userProfile
-                          .dietInfo[0]
-                          .mealPreferences,
-                    })
+                  initialData: initialData,
+                  onEditPressed: onEditPressed,
+                )
               : state is UserProfileError
                   ? Center(
                       child:
                           Text('Error: ${(state as UserProfileError).message}'))
-                  : const Center(
-                      child: Text(
-                        'No profile data',
-                      ),
-                    ),
+                  : const Center(child: Text('No profile data')),
     );
   }
 }

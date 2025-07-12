@@ -50,7 +50,6 @@ class GeneralInfoSection extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                
               ),
             ),
             const SizedBox(height: 8),
@@ -126,7 +125,8 @@ class GeneralInfoSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(BuildContext context, title, List<Widget> children) {
+  Widget _buildSection(
+      BuildContext context, String title, List<Widget> children) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -148,7 +148,7 @@ class GeneralInfoSection extends StatelessWidget {
             title,
             style: const TextStyle(
               fontSize: 18,
-              fontWeight: FontWeight.bold,   
+              fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 16),

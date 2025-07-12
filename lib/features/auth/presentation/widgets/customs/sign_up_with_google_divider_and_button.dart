@@ -15,8 +15,8 @@ class SignUpWithGoogleDividerAndButton extends StatelessWidget {
     return Column(
       spacing: 10,
       children: [
-        const OrSignInWIthRow(),
-        const SignUpWithGoogleButton(),
+        // const OrSignInWIthRow(),
+        //  const SignUpWithGoogleButton(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
