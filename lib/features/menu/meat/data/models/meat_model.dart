@@ -1,6 +1,6 @@
 import 'package:fitfat/core/api/end_points.dart';
 
-class ChickenModel {
+class MeatModel {
   final String image;
   final String name;
   final double price;
@@ -8,7 +8,7 @@ class ChickenModel {
   final String id;
   final double rating;
 
-  ChickenModel({
+  MeatModel({
     required this.image,
     required this.name,
     required this.price,
@@ -17,8 +17,8 @@ class ChickenModel {
     required this.rating,
   });
 
-  factory ChickenModel.fromJson(Map<String, dynamic> jsonData) {
-    return ChickenModel(
+  factory MeatModel.fromJson(Map<String, dynamic> jsonData) {
+    return MeatModel(
       image: jsonData[ApiKey.image]?.toString() ?? '',
       name: jsonData[ApiKey.name]?.toString() ?? '',
       price: _toDouble(jsonData[ApiKey.price]),
